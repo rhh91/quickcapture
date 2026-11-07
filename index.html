@@ -485,6 +485,81 @@
   .icon-btn.live { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
   #tmOv { z-index: 48; }
   #tmTabs { margin-bottom: 12px; }
+  #hhOv { z-index: 39; } #shOv { z-index: 71; }
+  #chatOv { position: fixed; left: 0; right: 0; top: 0; bottom: calc(60px + env(safe-area-inset-bottom)); z-index: 29; background: var(--bg); color: var(--text); display: flex; flex-direction: column; }
+  #chatOv[hidden], #chatOv [hidden] { display: none !important; }
+  #chList, #chRoom { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .ch-head { display: flex; align-items: center; gap: 8px; padding: calc(10px + env(safe-area-inset-top)) 12px 10px; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .ch-head h2 { margin: 0; font-size: 1.2rem; flex: 1; } .ch-as { font-size: .78rem; color: var(--muted); max-width: 55%; text-align: right; overflow-wrap: anywhere; }
+  .ch-t { flex: 1; min-width: 0; } .ch-t b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ch-t small { display: block; color: var(--muted); font-size: .72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ch-hb { min-height: 44px; padding: 0 10px; }
+  #chBack { min-width: 44px; min-height: 44px; font-size: 1.3rem; }
+  .ch-body { flex: 1; overflow-y: auto; padding: 12px; -webkit-overflow-scrolling: touch; }
+  .ch-need { margin-bottom: 12px; padding: 12px; border: 1px dashed var(--accent); border-radius: 14px; }
+  .ch-row-b { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 8px 12px; margin-bottom: 8px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: var(--text); font: inherit; text-align: left; }
+  .ch-row-b .av { flex: 0 0 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-weight: 800; font-size: 1.1rem; }
+  .ch-row-b .tx { flex: 1; min-width: 0; } .ch-row-b b { display: block; overflow-wrap: anywhere; } .ch-row-b small { display: block; color: var(--muted); font-size: .76rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ch-row-b.ai { border-color: #a78bfa; background: linear-gradient(135deg, rgba(167, 139, 250, .16), rgba(96, 165, 250, .12)); } .ch-row-b.ai .av { background: linear-gradient(135deg, #a78bfa, #60a5fa); color: #fff; }
+  .ch-omni { padding: 8px 12px 4px; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .ch-omni input, .ch-gif input { width: 100%; height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; }
+  .ch-chips { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0 6px; scrollbar-width: none; } .ch-chips::-webkit-scrollbar { display: none; }
+  .ch-chips button { flex: 0 0 auto; min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--border); background: none; color: var(--muted); font: inherit; font-size: .84rem; font-weight: 700; white-space: nowrap; }
+  .ch-chips button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .ch-status { margin: 0; padding: 6px 12px; font-size: .78rem; color: var(--muted); background: var(--surface-2); text-align: center; }
+  .ch-msgs { flex: 1; min-height: 0; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; -webkit-overflow-scrolling: touch; }
+  .ch-day { align-self: center; font-size: .7rem; color: var(--muted); margin: 6px 0 2px; text-transform: uppercase; letter-spacing: .05em; }
+  .cm { max-width: 84%; align-self: flex-start; padding: 8px 12px 4px; border-radius: 16px 16px 16px 4px; background: var(--surface-2); }
+  .cm.mine { align-self: flex-end; border-radius: 16px 16px 4px 16px; background: var(--accent); color: var(--on-accent); }
+  .cm.ai { background: linear-gradient(135deg, rgba(167, 139, 250, .22), rgba(96, 165, 250, .18)); border: 1px solid #a78bfa; color: var(--text); }
+  .cm .who { display: block; font-size: .72rem; font-weight: 800; margin-bottom: 2px; color: var(--accent); } .cm.ai .who { color: #a78bfa; }
+  .cm .tx { white-space: pre-wrap; overflow-wrap: anywhere; } .cm .tx a { color: inherit; text-decoration: underline; }
+  .cm img.gif { display: block; max-width: 100%; border-radius: 10px; } .cm audio { display: block; width: 100%; min-width: 200px; max-width: 100%; height: 44px; }
+  .cm .blocked { font-size: .8rem; opacity: .8; }
+  .cm .spo { position: relative; } .cm .spo.on > * { filter: blur(8px); pointer-events: none; user-select: none; } .cm .spo.on::after { content: 'Spoiler · tap to reveal'; position: absolute; inset: 0; display: grid; place-items: center; font-size: .72rem; font-weight: 800; text-shadow: 0 0 6px rgba(0, 0, 0, .8); color: #fff; cursor: pointer; }
+  .cm .meta { display: flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: .66rem; opacity: .85; }
+  .cm .star { min-width: 44px; min-height: 44px; margin: -12px -10px -12px 0; border: 0; background: none; color: inherit; font-size: 1.15rem; opacity: .7; } .cm .star[aria-pressed="true"] { color: #f5b301; opacity: 1; }
+  .ch-empty { margin: auto; color: var(--muted); text-align: center; padding: 20px; }
+  .ch-tray { padding: 8px 12px calc(8px); border-top: 1px solid var(--border); background: var(--surface); }
+  .ch-row { display: flex; gap: 8px; } .ch-row input { flex: 1; min-width: 0; height: 46px; padding: 0 14px; border-radius: 23px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; } .ch-send { min-height: 46px; padding: 0 16px; }
+  .ch-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+  .ch-tools button { min-height: 44px; border-radius: 12px; border: 1px solid var(--border); background: none; color: var(--text); font: inherit; font-size: .84rem; font-weight: 700; }
+  .ch-tools button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); } #chMic[aria-pressed="true"] { border-color: var(--danger); color: var(--danger); background: rgba(255, 107, 107, .12); }
+  .ch-gif { padding: 8px 12px; border-top: 1px solid var(--border); background: var(--surface); }
+  .ch-gifgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; max-height: 32vh; overflow-y: auto; margin-top: 8px; } .ch-gifgrid button { padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: var(--surface-2); min-height: 64px; } .ch-gifgrid img { display: block; width: 100%; height: 80px; object-fit: cover; } .ch-gifgrid p { grid-column: 1 / -1; margin: 6px 0; color: var(--muted); font-size: .84rem; text-align: center; }
+  .ch-pow { display: block; text-align: right; color: var(--muted); font-size: .66rem; margin-top: 4px; }
+  .wstars { display: flex; align-items: center; gap: 0; margin-top: 8px; flex-wrap: wrap; }
+  .wstar { width: 31px; height: 44px; padding: 0; border: 0; background: none; font-size: 1.7rem; line-height: 1; color: var(--border); cursor: pointer; }
+  .wstar.on { color: #f5b301; } .wstar:active { transform: scale(.9); }
+  .wrec { flex: 1 0 100%; min-height: 44px; margin-top: 4px; }
+  .wrecby { margin-top: 6px; padding: 6px 10px; border-radius: 10px; background: var(--accent-soft); color: var(--text); font-size: .82rem; }
+  .wrecby b { display: block; color: var(--accent); } .wrecby span { display: block; color: var(--muted); font-style: italic; overflow-wrap: anywhere; }
+  .hh-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .hh-chips button { min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px dashed var(--accent); background: none; color: var(--accent); font: inherit; font-weight: 700; }
+  .hh-grp { margin: 12px 0 6px; font-size: .78rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .hh-row { display: flex; align-items: center; gap: 6px; padding: 6px 8px 6px 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); margin-bottom: 6px; }
+  .hh-row .nm { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
+  .hh-seg { display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .hh-seg button { min-width: 52px; min-height: 44px; border: 0; background: none; color: var(--muted); font: inherit; font-size: .82rem; font-weight: 700; }
+  .hh-seg button[aria-pressed="true"].need { background: #f59e0b; color: #1a1200; } .hh-seg button[aria-pressed="true"].have { background: #22a06b; color: #fff; }
+  .hh-row .x { min-width: 44px; min-height: 44px; border: 0; background: none; color: var(--muted); font-size: 1.2rem; }
+  .cir-acts { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; margin-top: 6px; }
+  .cir-item { flex-wrap: wrap; } .cir-acts button { flex: 1 0 auto; }
+  .cir-acts button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  #cirOv { z-index: 47; } #cirPick { z-index: 70; } #cirInvite { z-index: 92; }
+  .cir-sec { margin-bottom: 8px; } .cir-row { display: flex; gap: 8px; align-items: center; } .cir-row .tm-field { margin-top: 0; flex: 1; min-width: 0; } .cir-row .btn { min-height: 46px; }
+  #cirShare { margin-top: 12px; } #cirShare svg { width: 20px; height: 20px; margin-right: 8px; vertical-align: -4px; }
+  .cir-share { margin-top: 12px; text-align: center; } .cir-qr { width: min(100%, 260px); margin: 0 auto; border-radius: 12px; overflow: hidden; border: 6px solid #fff; background: #fff; } .cir-qr svg { display: block; width: 100%; height: auto; stroke: none; }
+  @media (max-width: 360px) { .card .actions { flex-wrap: wrap; } .card .actions .act { flex: 1 0 22%; min-width: 0; } }
+  .cir-link { margin: 10px 0; font-size: .72rem; color: var(--muted); word-break: break-all; user-select: all; }
+  .cir-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .cir-btns.two { grid-template-columns: 1fr 1fr; } .cir-btns .btn { min-height: 44px; padding: 0 6px; }
+  .cir-form { display: grid; gap: 0; } .cir-form .cir-btns { margin-top: 12px; }
+  .cir-item { display: flex; align-items: center; gap: 6px; padding: 8px 8px 8px 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); }
+  .cir-item .ci { flex: 1; min-width: 0; } .cir-item .ci b { display: block; overflow-wrap: anywhere; } .cir-item .ci small { display: block; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cir-item button { min-width: 44px; min-height: 44px; border-radius: 12px; border: 1px solid var(--border); background: none; color: var(--text); font: inherit; font-size: .78rem; font-weight: 700; padding: 0 8px; }
+  .cir-item button.del { color: var(--danger); }
+  .cir-pick-b { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 56px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); color: var(--text); font: inherit; text-align: left; }
+  .cir-pick-b small { display: block; color: var(--muted); }
+  .tmdb-credit { font-size: .78rem; }
   .set-key { display: grid; gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .set-key label b { display: block; } .set-key label small { display: block; color: var(--muted); }
   .set-key input { width: 100%; height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: .9rem; }
@@ -1642,6 +1717,8 @@
   <div class="tgrid" id="toolGrid">
     <button class="tcard" id="tcHabit" type="button" data-kw="habit tracker daily reminders"><span class="ti" id="tcHabitI"></span><b>Habit Tracker</b><small id="tcHabitS">Daily micro-habits</small></button>
     <button class="tcard" id="tcTimer" type="button" data-kw="timers alarms alarm clock multi countdown"><span class="ti" id="tcTimerI"></span><b>Timers &amp; Alarms</b><small id="tcTimerS">Timers, alarms, run several</small></button>
+    <button class="tcard" id="tcCircle" type="button" data-kw="my circle friends family share contacts qr invite"><span class="ti" id="tcCircleI"></span><b>My Circle</b><small id="tcCircleS">Friends &amp; family</small></button>
+    <button class="tcard" id="tcHouse" type="button" data-kw="my household family pantry groceries weekly menu members"><span class="ti" id="tcHouseI"></span><b>My Household</b><small id="tcHouseS">Pantry, menu &amp; family</small></button>
     <button class="tcard" id="tcCalc" type="button" data-kw="calculator math solver photo"><span class="ti" id="tcCalcI"></span><b>Calculator &amp; Solver</b><small>Keypad and photo math</small></button>
     <button class="tcard" id="tcWx" type="button" data-kw="weather forecast temperature"><span class="ti" id="tcWxI"></span><b>Weather</b><small id="tcWxS">Tap to set a city</small></button>
   </div>
@@ -1655,6 +1732,7 @@
   <button id="tabWatch" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🎬</span><span class="dl">Watchlist</span><span class="dbadge" id="watchCount" hidden title="Titles you haven't watched yet">0</span></button>
   <button id="tabHub" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🗂️</span><span class="dl">Hub</span><span class="dbadge warn" id="hubBadge" hidden>0</span></button>
   <button id="tabTools" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">⚡</span><span class="dl">Tools</span></button>
+  <button id="tabChat" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">💬</span><span class="dl">Chat</span></button>
 </nav>
 
 <button class="fab" id="fab" aria-label="New note"></button>
@@ -2233,9 +2311,18 @@
       <button class="icon-btn" id="bkClose" type="button" aria-label="Close"></button>
     </div>
     <div class="set-row"><div><b>Appearance</b><small>Switch between dark and light</small></div><button class="icon-btn" id="themeBtn" aria-label="Toggle light / dark theme" title="Toggle theme"></button></div>
+    <div class="set-row"><div><b>My Circle</b><small>Friends &amp; family, share via QR or text</small></div><button class="btn" id="bkCircle" type="button">Open</button></div>
     <div class="set-key"><label for="tmdbKey"><b>TMDB API Key</b><small>Used for Watchlist search. Leave empty to use the built-in key.</small></label>
       <input id="tmdbKey" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="64" aria-label="TMDB API key">
       <div class="set-key-btns"><button class="btn" id="tmdbSave" type="button">Save key</button><button class="btn" id="tmdbReset" type="button">Use default</button></div></div>
+    <div class="set-key"><label for="actProf"><b>Active Profile</b><small>Who you post as in Chat on this device</small></label>
+      <select id="actProf" aria-label="Active profile"></select></div>
+    <div class="set-key"><label for="gemKey"><b>Gemini API Key</b><small>For @Gemini in Chat. Stored only on this device.</small></label>
+      <input id="gemKey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="100" aria-label="Gemini API key">
+      <div class="set-key-btns"><button class="btn" id="gemSave" type="button">Save key</button><button class="btn" id="gemClear" type="button">Remove key</button></div></div>
+    <div class="set-key"><label for="gifKey"><b>GIF search key (Giphy)</b><small>Optional. Leave empty to use Giphy's public demo key.</small></label>
+      <input id="gifKey" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="64" aria-label="Giphy API key">
+      <div class="set-key-btns"><button class="btn" id="gifSave" type="button">Save key</button><button class="btn" id="gifReset" type="button">Use default</button></div></div>
     <div class="gauge" id="gauge">
       <div class="gauge-top"><b id="gaugeText">Storage: ~0 KB used</b><span id="gaugePct"></span></div>
       <div class="gauge-bar" role="meter" aria-label="Storage used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="gaugeBar"><i id="gaugeFill"></i></div>
@@ -2249,7 +2336,139 @@
       <input type="file" id="bkFile" accept=".json,application/json" hidden>
     </div>
     <p class="bk-msg" id="bkMsg" role="status" hidden></p>
+    <p class="bk-foot tmdb-credit">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
     <p class="bk-foot">Everything is stored only in this browser. Export a backup now and then, and before clearing browser data. Photos take the most space.</p>
+  </div>
+</div>
+
+<!-- My Circle -->
+<div class="overlay" id="cirOv" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cirTitle">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="cirTitle">My Circle</h2><button class="icon-btn" id="cirClose" type="button" aria-label="Close"></button></div>
+    <section class="cir-sec" aria-labelledby="cirH1">
+      <h3 class="tm-h" id="cirH1">Your profile</h3>
+      <label class="al-l" for="cirName">Display name</label>
+      <div class="cir-row"><input class="tm-field" id="cirName" type="text" maxlength="40" autocomplete="name" placeholder="How friends will see you"><button class="btn" id="cirNameSave" type="button">Save</button></div>
+      <button class="btn primary big" id="cirShare" type="button"><span id="cirShareI"></span>Share My Contact</button>
+      <div class="cir-share" id="cirSharePanel" hidden>
+        <div class="cir-qr" id="cirQr" role="img" aria-label="QR code for your contact invite"></div>
+        <p class="cir-link" id="cirLink"></p>
+        <div class="cir-btns"><button class="btn" id="cirSms" type="button">Send via Text</button><button class="btn" id="cirNative" type="button">Share…</button><button class="btn" id="cirCopy" type="button">Copy link</button></div>
+      </div>
+    </section>
+    <section class="cir-sec" aria-labelledby="cirH2">
+      <h3 class="tm-h" id="cirH2">Your circle <span id="cirCount"></span></h3>
+      <div class="tm-list" id="cirList"></div>
+      <button class="btn big" id="cirHouse" type="button" style="margin-top:10px"><span id="cirHouseI"></span>Open My Household</button>
+    </section>
+    <section class="cir-sec" aria-labelledby="cirH3">
+      <h3 class="tm-h" id="cirH3">Add someone</h3>
+      <form class="cir-form" id="cirForm" novalidate>
+        <input class="tm-field" id="cfName" type="text" maxlength="40" placeholder="Name" autocomplete="off" aria-label="Contact name">
+        <input class="tm-field" id="cfPhone" type="tel" maxlength="24" placeholder="Phone (optional)" autocomplete="off" aria-label="Phone number">
+        <input class="tm-field" id="cfEmail" type="email" maxlength="80" placeholder="Email (optional)" autocomplete="off" aria-label="Email address">
+        <div class="cir-btns two"><button class="btn primary" id="cfSave" type="submit">Add to Circle</button><button class="btn" id="cfCancel" type="button" hidden>Cancel</button></div>
+      </form>
+    </section>
+    <p class="bk-foot">Your circle is stored only on this device. An invite link holds just your name and a random ID: no phone number or email.</p>
+  </div>
+</div>
+<div class="overlay center" id="cirInvite" hidden>
+  <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="cirInvT">
+    <h3 id="cirInvT">Add to your Circle?</h3>
+    <p id="cirInvM"></p>
+    <div class="btns"><button class="btn" id="cirInvNo" type="button">Not now</button><button class="btn primary" id="cirInvYes" type="button">Add</button></div>
+  </div>
+</div>
+<div class="overlay" id="cirPick" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cirPickT">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="cirPickT">Share with…</h2><button class="icon-btn" id="cirPickClose" type="button" aria-label="Close"></button></div>
+    <p class="tm-ctx" id="cirPickPrev"></p>
+    <div class="tm-list" id="cirPickList"></div>
+  </div>
+</div>
+
+<!-- Chat -->
+<section id="chatOv" hidden aria-label="Chat">
+  <div id="chList">
+    <header class="ch-head"><h2>Chats</h2><span class="ch-as" id="chAs"></span></header>
+    <div class="ch-body">
+      <form class="ch-need" id="chNeed" hidden>
+        <label for="chNeedName"><b>Pick a display name to start chatting</b></label>
+        <div class="cir-row"><input class="tm-field" id="chNeedName" type="text" maxlength="40" placeholder="Your name" autocomplete="name"><button class="btn primary" type="submit">Save</button></div>
+      </form>
+      <div class="ch-rows" id="chRows"></div>
+      <h3 class="tm-h">New group chat</h3>
+      <form class="cir-row" id="chGroupForm" novalidate><input class="tm-field" id="chGroupName" type="text" maxlength="40" placeholder="Group name (e.g. Household)" autocomplete="off" aria-label="Group chat name"><button class="btn primary" type="submit">Create</button></form>
+      <p class="bk-foot">Chats sync through Firebase. Anyone who has a chat's link can read and post in it, so only share links with people you trust.</p>
+    </div>
+  </div>
+  <div id="chRoom" hidden>
+    <header class="ch-head">
+      <button class="icon-btn" id="chBack" type="button" aria-label="Back to chats">←</button>
+      <div class="ch-t"><b id="chTitle"></b><small id="chSub"></small></div>
+      <button class="btn ch-hb" id="chInvite" type="button" hidden>Invite</button>
+      <button class="btn ch-hb" id="chClear" type="button" hidden>Clear</button>
+    </header>
+    <div class="ch-omni">
+      <input id="chQ" type="search" placeholder="Search this chat" autocomplete="off" aria-label="Search this chat">
+      <div class="ch-chips" id="chChips" role="group" aria-label="Filter messages">
+        <button type="button" data-cf="all" aria-pressed="true">All</button><button type="button" data-cf="starred" aria-pressed="false">★ Starred</button><button type="button" data-cf="voice" aria-pressed="false">🎙️ Voice</button><button type="button" data-cf="media" aria-pressed="false">🖼️ Images/GIFs</button><button type="button" data-cf="links" aria-pressed="false">🔗 Links</button>
+      </div>
+    </div>
+    <p class="ch-status" id="chStatus" role="status" hidden></p>
+    <div class="ch-msgs" id="chMsgs" role="log" aria-live="polite"></div>
+    <div class="ch-gif" id="chGif" hidden>
+      <input id="chGifQ" type="search" placeholder="Search GIFs" autocomplete="off" aria-label="Search GIFs">
+      <div class="ch-gifgrid" id="chGifGrid"></div>
+      <small class="ch-pow">Powered by GIPHY</small>
+    </div>
+    <form class="ch-tray" id="chTray" novalidate>
+      <div class="ch-row"><input id="chText" type="text" maxlength="2000" placeholder="Message" autocomplete="off" aria-label="Message"><button class="btn primary ch-send" id="chSend" type="submit" aria-label="Send">Send</button></div>
+      <div class="ch-tools" id="chTools">
+        <button type="button" id="chSpoiler" aria-pressed="false">🫥 Spoiler</button>
+        <button type="button" id="chGifBtn" aria-pressed="false">GIF</button>
+        <button type="button" id="chMic" aria-pressed="false">🎙️ Voice</button>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- Share a link (QR / text) -->
+<div class="overlay" id="shOv" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="shTitle">Share</h2><button class="icon-btn" id="shClose" type="button" aria-label="Close"></button></div>
+    <p class="tm-ctx" id="shSub"></p>
+    <div class="cir-qr" id="shQr" hidden role="img" aria-label="QR code for this share link"></div>
+    <p class="cir-link" id="shLink"></p>
+    <p class="tm-msg" id="shNote"></p>
+    <div class="cir-btns"><button class="btn" id="shSms" type="button">Send via Text</button><button class="btn" id="shNative" type="button">Share…</button><button class="btn" id="shCopy" type="button">Copy link</button></div>
+  </div>
+</div>
+<!-- My Household -->
+<div class="overlay" id="hhOv" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="hhTitle">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="hhTitle">My Household</h2><button class="icon-btn" id="hhClose" type="button" aria-label="Close"></button></div>
+    <button class="btn primary big" id="hhShare" type="button"><span id="hhShareI"></span>Share Household Board</button>
+    <section class="cir-sec" aria-labelledby="hhH1">
+      <h3 class="tm-h" id="hhH1">Members <span id="hhMCount"></span></h3>
+      <div class="tm-list" id="hhMembers"></div>
+      <div class="hh-chips" id="hhAddM" aria-label="Add from your Circle"></div>
+    </section>
+    <section class="cir-sec" aria-labelledby="hhH2">
+      <h3 class="tm-h" id="hhH2">Pantry &amp; grocery checklist</h3>
+      <form class="cir-row" id="hhForm" novalidate><input class="tm-field" id="hhAdd" type="text" maxlength="60" autocomplete="off" placeholder="+ Add item (milk, rice, soap…)" aria-label="Add a pantry item"><button class="btn primary" type="submit">Add</button></form>
+      <div id="hhPantry"></div>
+    </section>
+    <section class="cir-sec" aria-labelledby="hhH3">
+      <h3 class="tm-h" id="hhH3">Weekly menu</h3>
+      <div class="km-list" id="hhMenu"></div>
+      <button class="btn big" id="hhMenuEdit" type="button">Plan the week</button>
+    </section>
+    <p class="bk-foot">Everything here stays on this device until you share it. Sharing sends your pantry list and weekly menu text only.</p>
   </div>
 </div>
 
@@ -2274,12 +2493,20 @@
 
 <div id="toastHost"></div>
 
+<script id="qrlib">
+/* qrcode-generator 1.4.4, MIT License, Copyright (c) 2009 Kazuhiko Arase. 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. */
+var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1})},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});
+
+</script>
 <script>
-(() => {
+(async () => {
   'use strict';
 
   /* ---------- Icons ---------- */
   const I = {
+    share:  '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>',
+    home:   '<svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg>',
+    users:  '<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>',
     bolt:   '<svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
     film:   '<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></svg>',
     eye:    '<svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>',
@@ -2358,10 +2585,73 @@
   const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 9));
   const uniq = (a) => [...new Set(a)];
 
+  /* ---------- Storage: IndexedDB with a synchronous in-memory cache ---------- */
+  // Everything lives in one IndexedDB object store ("kv": key -> string). The whole store is read into memory once at launch, so the rest
+  // of the app keeps its simple synchronous store.get / store.set, while every write goes to IndexedDB in the background. If IndexedDB is
+  // unavailable (some private modes), the app silently falls back to localStorage exactly as before.
+  const idb = (() => {
+    const DB = 'quickcapture', ST = 'kv';
+    let db = null;
+    const req = (r) => new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+    const done = (tx) => new Promise((res, rej) => { tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || new Error('aborted')); });
+    return {
+      open() {
+        return new Promise((res, rej) => {
+          if (!window.indexedDB) { rej(new Error('no indexedDB')); return; }
+          const t = setTimeout(() => rej(new Error('IndexedDB timed out')), 6000);
+          let r; try { r = indexedDB.open(DB, 1); } catch (e) { clearTimeout(t); rej(e); return; }
+          r.onupgradeneeded = () => { if (!r.result.objectStoreNames.contains(ST)) r.result.createObjectStore(ST); };
+          r.onsuccess = () => { clearTimeout(t); db = r.result; db.onversionchange = () => db.close(); res(db); };
+          r.onerror = () => { clearTimeout(t); rej(r.error); };
+          r.onblocked = () => { clearTimeout(t); rej(new Error('blocked')); };
+        });
+      },
+      get(k) { return req(db.transaction(ST).objectStore(ST).get(k)); },
+      set(k, v) { const tx = db.transaction(ST, 'readwrite'); tx.objectStore(ST).put(v, k); return done(tx); },
+      delete(k) { const tx = db.transaction(ST, 'readwrite'); tx.objectStore(ST).delete(k); return done(tx); },
+      clear() { const tx = db.transaction(ST, 'readwrite'); tx.objectStore(ST).clear(); return done(tx); },
+      async all() { const s2 = db.transaction(ST).objectStore(ST), [ks, vs] = await Promise.all([req(s2.getAllKeys()), req(s2.getAll())]); return ks.map((k, i) => [k, vs[i]]); }
+    };
+  })();
+  const mem = new Map();
+  let storeMode = 'ls', idbWarned = false, bc = null;
+  const lsGet = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+  const lsSet = (k, v) => { try { localStorage.setItem(k, v); return true; } catch { return false; } };
   const store = {
-    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } }
+    get(k) { return storeMode === 'idb' ? (mem.has(k) ? mem.get(k) : null) : lsGet(k); },
+    set(k, v) {
+      if (storeMode !== 'idb') return lsSet(k, v);
+      v = String(v); mem.set(k, v);
+      idb.set(k, v).then(() => { try { if (bc) bc.postMessage({ k }); } catch { /* ignore */ } }).catch(() => {
+        lsSet(k, v);                                         // keep the data somewhere rather than lose it
+        if (!idbWarned) { idbWarned = true; try { toast("Couldn't write to the database; saved a temporary copy"); } catch { /* ignore */ } }
+      });
+      return true;
+    },
+    del(k) { if (storeMode !== 'idb') { try { localStorage.removeItem(k); } catch { /* ignore */ } return; } mem.delete(k); idb.delete(k).catch(() => {}); },
+    keys() { if (storeMode === 'idb') return [...mem.keys()]; const o = []; try { for (let i = 0; i < localStorage.length; i++) o.push(localStorage.key(i)); } catch { /* ignore */ } return o; }
   };
+  async function initStorage() {
+    try {
+      await idb.open();
+      const rows = await idb.all();
+      rows.forEach(([k, v]) => { if (typeof v === 'string') mem.set(k, v); });
+      // One-time migration: copy every QuickCapture key from localStorage into IndexedDB. Existing database values win.
+      if (!mem.has('__migrated_v1')) {
+        const ks = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^quickcapture/.test(k)) ks.push(k); } } catch { /* ignore */ }
+        for (const k of ks) { if (mem.has(k)) continue; const v = lsGet(k); if (v != null) { await idb.set(k, v); mem.set(k, v); } }
+        await idb.set('__migrated_v1', String(Date.now())); mem.set('__migrated_v1', '1');
+        // the old localStorage copies are left untouched as a safety net; they are never read again
+      }
+      storeMode = 'idb';
+      try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch { /* optional */ }
+      try {
+        bc = new BroadcastChannel('quickcapture-store');       // other open tabs: refresh the changed key and tell the app
+        bc.onmessage = (e) => { const k = e.data && e.data.k; if (!k) return; idb.get(k).then((v) => { if (typeof v === 'string') mem.set(k, v); else mem.delete(k); window.dispatchEvent(new StorageEvent('storage', { key: k })); }).catch(() => {}); };
+      } catch { /* no BroadcastChannel */ }
+    } catch { storeMode = 'ls'; }
+  }
+  await initStorage();
   const KEY_NOTES = 'quickcapture.notes.v1';
   const KEY_THEME = 'quickcapture.theme.v1';
   const KEY_RECIPES = 'quickcapture_recipes';
@@ -2691,6 +2981,7 @@
       h('div', { class: 'actions' },
         pinBtn,
         act('copy', I.copy, 'Copy'),
+        act('share', I.share, 'Share'),
         act('edit', I.edit, 'Edit'),
         act('voice', I.wave, n.audio ? 'Re-record' : 'Voice Memo'),
         act('archive', n.archived ? I.unarch : I.archive, n.archived ? 'Restore' : 'Archive'),
@@ -3322,6 +3613,7 @@
         view ? null : act('open', I.expand, 'Open'),
         act('copy', I.copy, 'Copy Text'),
         r.ingredients.length ? act('groc', I.cart, 'Add to Groceries') : null,
+        act('share', I.share, 'Share'),
         view ? act('print', I.printer, 'Print') : null,
         act('delete', I.trash, 'Delete', 'del')));
   }
@@ -3332,11 +3624,14 @@
       h('p', { text: filtering ? 'Try a different search, or pick another chip above.' : 'Paste a recipe link above and tap Extract Recipe.' }));
   }
 
-  const recipeFilterMatch = (r, f) => f === 'all' || (f === 'fav' ? isFav(r) : f.startsWith('tag:') ? r.tags.includes(f.slice(4)) : f.startsWith('by:') ? r.favoritedBy.includes(f.slice(3)) : true);
+  const circleNames = () => new Set(circle.map((c) => c.name.toLowerCase()));
+  const isCircleFav = (r, set) => r.favoritedBy.some((n) => set.has(String(n).toLowerCase()));
+  const recipeFilterMatch = (r, f) => f === 'all' || (f === 'circle' ? isCircleFav(r, circleNames()) : f === 'fav' ? isFav(r) : f.startsWith('tag:') ? r.tags.includes(f.slice(4)) : f.startsWith('by:') ? r.favoritedBy.includes(f.slice(3)) : true);
   function renderRecipeChips() {
     const tagCounts = new Map(), people = new Map();
     recipes.forEach((r) => { r.tags.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1)); r.favoritedBy.forEach((n) => people.set(n, (people.get(n) || 0) + 1)); });
     const chips = [['all', 'All', recipes.length, ''], ['fav', '#favorites', recipes.filter(isFav).length, 'fav']];
+    if (circle.length) chips.push(['circle', 'Circle Favorites', recipes.filter((r) => isCircleFav(r, circleNames())).length, 'soc']);
     [...people.entries()].sort((a, b) => (a[0] === favs.me ? -1 : b[0] === favs.me ? 1 : b[1] - a[1] || a[0].localeCompare(b[0])))
       .forEach(([n, c]) => chips.push(['by:' + n, '#' + n + "'s Favorite", c, 'soc']));
     [...tagCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).forEach(([t, c]) => chips.push(['tag:' + t, '#' + t, c, '']));
@@ -3425,6 +3720,7 @@
       case 'timer': startBadge(t); break;
       case 'ctimer': openTimerDrawer({ si: Number(t.dataset.step), title: r.title }); break;
       case 'print': askPrint(r); break;
+      case 'share': shareRecipe(r); break;
       case 'copy': copyText(recipeText(r)).then((ok) => toast(ok ? 'Recipe copied' : 'Copy failed')); break;
       case 'delete': askDeleteRecipe(r); break;
     }
@@ -3539,6 +3835,7 @@
   function setView(v, o) {
     o = o || {};
     if (!VIEWS.includes(v)) v = 'notes';
+    if (typeof chatIsOpen === 'function' && chatIsOpen()) closeChat(true);
     const prev = state.view, i = VIEWS.indexOf(v);
     state.view = v; store.set(KEY_VIEW, v);
     VIEWS.forEach((x) => { const pg = document.querySelector('.page[data-page="' + x + '"]'); if (pg) pg.inert = x !== v; });
@@ -4215,6 +4512,7 @@
       case 'copy':
         if (!n.text && !n.trip) { toast('No text to copy'); break; }
         toast((await copyText(n.trip ? ['🧳 ' + (n.trip.dest || 'Packing list') + (n.trip.when ? ' · ' + n.trip.when : ''), n.text].join('\n') : n.text)) ? 'Copied to clipboard' : 'Copy failed'); break;
+      case 'share': circleShareNote(n); break;
       case 'zoom':
         if (n.image) openLightbox(n.image); break;
       case 'draw': openDraw(n); break;
@@ -4365,7 +4663,9 @@
       year: Number(w.year) > 1800 ? Number(w.year) : '', type: w.type === 'tv' ? 'tv' : 'movie', poster: posterOk(w.poster),
       summary: typeof w.summary === 'string' ? w.summary.slice(0, 1200) : '', genre: typeof w.genre === 'string' ? w.genre.slice(0, 60) : '',
       addedAt: added, watched: !!w.watched, watchedAt: w.watched ? (Number(w.watchedAt) || added) : null,
-      rating: halfPoint(w.rating), note: typeof w.note === 'string' ? w.note.slice(0, 600) : '', updatedAt: Number(w.updatedAt) || added
+      rating: halfPoint(w.rating), note: typeof w.note === 'string' ? w.note.slice(0, 600) : '', updatedAt: Number(w.updatedAt) || added,
+      recBy: typeof w.recBy === 'string' ? w.recBy.replace(/[<>\u0000-\u001f]/g, '').trim().slice(0, 40) : '', recRating: halfPoint(w.recRating),
+      recNote: typeof w.recNote === 'string' ? w.recNote.slice(0, 300) : ''
     };
   };
   function loadWatch() {
@@ -4416,7 +4716,7 @@
   }
   function watchCardEl(w) {
     const img = w.poster ? h('img', { src: w.poster, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer', onerror: (e) => e.target.replaceWith(posterFallback()) }) : posterFallback();
-    const note = h('textarea', { class: 'wnote', rows: '1', maxlength: '600', placeholder: 'Quick note (e.g. Great finale, slow start)', 'aria-label': 'Note for ' + w.title, 'data-wact': 'note', text: w.note });
+    const note = h('textarea', { class: 'wnote', rows: '1', maxlength: '600', placeholder: 'Your verdict (e.g. Great finale, slow start)', 'aria-label': 'Note for ' + w.title, 'data-wact': 'note', text: w.note });
     return h('article', { class: 'card wcard' + (w.watched ? ' watched' : ''), 'data-wid': w.id },
       h('div', { class: 'wtop' },
         h('div', { class: 'wposter' }, img, w.watched && w.rating !== null ? h('span', { class: 'wbadge', text: '★ ' + w.rating.toFixed(1) }) : null),
@@ -4426,6 +4726,11 @@
             w.year ? h('span', { text: String(w.year) }) : null, w.genre ? h('span', { text: '· ' + w.genre }) : null),
           w.summary ? h('button', { class: 'wsum', type: 'button', 'data-wact': 'sum', 'aria-expanded': 'false', title: 'Tap to expand', text: w.summary }) : null,
           h('a', { class: 'wwhere', href: whereUrl(w.title), target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Where to watch ' + w.title + ' (opens JustWatch in a new tab)', html: I.tv + '<span>Where to Watch</span>' }),
+          w.recBy ? h('div', { class: 'wrecby' }, h('b', { text: 'Recommended by ' + w.recBy + (w.recRating !== null ? ' · ★ ' + String(Math.round(w.recRating) / 2) : '') }), w.recNote ? h('span', { text: '“' + w.recNote + '”' }) : null) : null,
+          h('div', { class: 'wstars', role: 'radiogroup', 'aria-label': 'Your rating for ' + w.title }, [1, 2, 3, 4, 5].map((n) => h('button', {
+            type: 'button', class: 'wstar' + (w.rating !== null && Math.round(w.rating / 2) >= n ? ' on' : ''), role: 'radio', 'data-wact': 'star', 'data-n': String(n),
+            'aria-checked': String(w.rating !== null && Math.round(w.rating / 2) === n), 'aria-label': n + (n === 1 ? ' star' : ' stars'), text: '★' })),
+            h('button', { class: 'wbtn wrec', type: 'button', 'data-wact': 'rec', 'aria-label': 'Recommend ' + w.title + ' to your circle', html: I.share + '<span>Recommend</span>' })),
           h('div', { class: 'wrow' },
             h('button', { class: 'wbtn', type: 'button', 'data-wact': 'watch', 'aria-pressed': String(w.watched),
               html: (w.watched ? I.check : I.eye) + '<span>' + (w.watched ? 'Watched · ' + watchDate(w.watchedAt) : 'Mark Watched') + '</span>' }),
@@ -4467,6 +4772,7 @@
         rg.setAttribute('aria-valuetext', w.rating === null ? 'Unrated' : w.rating.toFixed(1) + ' out of 10');
         box.querySelector('.wr-clear').hidden = w.rating === null;
       }
+      card.querySelectorAll('.wstar').forEach((b) => { const n = Number(b.dataset.n); b.classList.toggle('on', w.rating !== null && Math.round(w.rating / 2) >= n); b.setAttribute('aria-checked', String(w.rating !== null && Math.round(w.rating / 2) === n)); });
       const poster = card.querySelector('.wposter'), old = poster.querySelector('.wbadge');
       if (old) old.remove();
       if (w.watched && w.rating !== null) poster.append(h('span', { class: 'wbadge', text: '★ ' + w.rating.toFixed(1) }));
@@ -4482,6 +4788,8 @@
     const card = t && t.closest('.wcard'), w = card && watch.find((x) => x.id === card.dataset.wid);
     if (!w) return;
     switch (t.dataset.wact) {
+      case 'star': { const n = Number(t.dataset.n), cur = w.rating === null ? 0 : Math.round(w.rating / 2); setRating(w, cur === n ? null : n * 2); break; }
+      case 'rec': shareMovie(w); break;
       case 'sum': { const open = t.getAttribute('aria-expanded') !== 'true'; t.setAttribute('aria-expanded', String(open)); t.title = open ? 'Tap to collapse' : 'Tap to expand'; break; }
       case 'watch':
         w.watched = !w.watched; w.watchedAt = w.watched ? Date.now() : null; w.updatedAt = Date.now();
@@ -5348,6 +5656,710 @@
   $('#tmClose').addEventListener('click', closeTimerDrawer);
   tmOv.addEventListener('mousedown', (e) => { if (e.target === tmOv) closeTimerDrawer(); });
   $('#timerBtn').addEventListener('click', () => openTimerDrawer());
+
+
+  /* ---------- My Circle (friends & family, client-side) ---------- */
+  const KEY_PROFILE = 'quickcapture_user_profile', KEY_CIRCLE = 'quickcapture_circle_contacts';
+  const CIRCLE_BASE = 'https://rhh91.github.io/quickcapture/';
+  const cirOv = $('#cirOv'), cirInvite = $('#cirInvite'), cirPick = $('#cirPick');
+  const CID_RE = /^[A-Za-z0-9_-]{8,64}$/;
+  const cleanName = (v) => String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40);
+  let profile = { name: '', id: '' }, circle = [], cirEdit = null, cirPrev = '', pickText = '', pickNote = null;
+  function circleLoad() {
+    try { const p = JSON.parse(store.get(KEY_PROFILE) || 'null'); if (p && typeof p === 'object') profile = { name: cleanName(p.name), id: CID_RE.test(p.id || '') ? p.id : '' }; } catch { /* keep blank */ }
+    try {
+      const a = JSON.parse(store.get(KEY_CIRCLE) || '[]');
+      circle = (Array.isArray(a) ? a : []).filter((c) => c && typeof c === 'object' && cleanName(c.name)).slice(0, 300).map((c) => ({
+        id: String(c.id || uid()).slice(0, 64), name: cleanName(c.name), phone: String(c.phone || '').replace(/[^\d+()\-.\s]/g, '').trim().slice(0, 24),
+        email: String(c.email || '').trim().slice(0, 80), addedAt: +c.addedAt || Date.now(), isHousehold: c.isHousehold === true, linked: c.linked === true }));
+    } catch { circle = []; }
+  }
+  const profSave = () => store.set(KEY_PROFILE, JSON.stringify(profile));
+  const circSave = () => store.set(KEY_CIRCLE, JSON.stringify(circle));
+  function inviteUrl() {
+    if (!profile.id) { profile.id = uid(); profSave(); }
+    return CIRCLE_BASE + '?circle_add=1&name=' + encodeURIComponent(profile.name) + '&id=' + encodeURIComponent(profile.id);
+  }
+  function qrSvg(text) {
+    for (const lvl of ['M', 'L']) {
+      try {
+        const q = qrcode(0, lvl); q.addData(text); q.make();
+        const n = q.getModuleCount(), m = 2; let d = '';
+        for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += 'M' + (c + m) + ' ' + (r + m) + 'h1v1h-1z';
+        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (n + 2 * m) + ' ' + (n + 2 * m) + '" shape-rendering="crispEdges"><rect width="100%" height="100%" style="fill:#fff;stroke:none"/><path d="' + d + '" style="fill:#000;stroke:none"/></svg>';
+      } catch { /* too long for this level; try the next */ }
+    }
+    return '';
+  }
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function smsHref(phone, body) { return 'sms:' + String(phone || '').replace(/[^\d+]/g, '') + (isIOS ? '&' : '?') + 'body=' + encodeURIComponent(body); }
+  function openHref(href) { const a = h('a', { href, rel: 'noopener' }); document.body.append(a); a.click(); a.remove(); }
+  async function sendTo(c, text, title) {
+    if (c && c.phone) { openHref(smsHref(c.phone, text)); return; }
+    if (c && c.email) { openHref('mailto:' + encodeURIComponent(c.email).replace(/%40/g, '@') + '?subject=' + encodeURIComponent(title || 'From QuickCapture') + '&body=' + encodeURIComponent(text)); return; }
+    await shareAny(text, title, c);
+  }
+  async function shareAny(text, title, c) {
+    if (navigator.share) { try { await navigator.share({ title: title || 'QuickCapture', text }); } catch { /* cancelled */ } return; }
+    toast((await copyText(text)) ? 'Copied' + (c ? ': paste it to ' + c.name : '') : 'Could not share or copy');
+  }
+  function cirOpen(el) { if (el.hidden && !el.dataset.prev) { el.dataset.prev = document.body.style.overflow || '-'; document.body.style.overflow = 'hidden'; } el.hidden = false; }
+  function cirClose(el) { if (el.hidden) return; el.hidden = true; if (el.dataset.prev) { document.body.style.overflow = el.dataset.prev === '-' ? '' : el.dataset.prev; delete el.dataset.prev; } }
+  function cirRender() {
+    $('#cirName').value !== profile.name && document.activeElement !== $('#cirName') && ($('#cirName').value = profile.name);
+    $('#cirCount').textContent = circle.length ? '(' + circle.length + ')' : '';
+    $('#cirList').replaceChildren(...(circle.length ? circle.map((c) => h('div', { class: 'cir-item' },
+      h('div', { class: 'ci' }, h('b', { text: c.name }), h('small', { text: [c.phone, c.email].filter(Boolean).join(' · ') || 'No phone or email yet' })),
+      h('div', { class: 'cir-acts' },
+        h('button', { type: 'button', 'data-cshare': c.id, 'aria-label': 'Send my contact to ' + c.name, text: 'Send' }),
+        h('button', { type: 'button', 'data-cedit': c.id, 'aria-label': 'Edit ' + c.name, text: 'Edit' }),
+        h('button', { type: 'button', 'data-chh': c.id, 'aria-pressed': String(c.isHousehold), 'aria-label': c.name + (c.isHousehold ? ' is in My Household. Tap to remove' : ': add to My Household'), text: c.isHousehold ? '🏠 Household ✓' : '🏠 Household' }),
+        h('button', { type: 'button', class: 'del', 'data-cdel': c.id, 'aria-label': 'Remove ' + c.name, text: 'Remove' }))))
+      : [h('p', { class: 'tm-empty', text: 'Nobody yet. Share your QR code or add someone below.' })]));
+    $('#tcCircleS').textContent = circle.length ? circle.length + ' in your circle' : 'Friends & family';
+  }
+  function cirOpenHub() { circleLoad(); cirEdit = null; cirFormReset(); $('#cirSharePanel').hidden = true; cirRender(); cirOpen(cirOv); cirOv.querySelector('.sheet').scrollTop = 0; }
+  function cirFormReset() { $('#cfName').value = ''; $('#cfPhone').value = ''; $('#cfEmail').value = ''; $('#cfSave').textContent = 'Add to Circle'; $('#cfCancel').hidden = true; cirEdit = null; }
+  $('#cirClose').addEventListener('click', () => cirClose(cirOv));
+  cirOv.addEventListener('mousedown', (e) => { if (e.target === cirOv) cirClose(cirOv); });
+  $('#tcCircle').addEventListener('click', cirOpenHub);
+  $('#bkCircle').addEventListener('click', () => { closeBackup(); cirOpenHub(); });
+  $('#cirNameSave').addEventListener('click', () => {
+    const v = cleanName($('#cirName').value); if (!v) { toast('Enter a display name'); $('#cirName').focus(); return; }
+    profile.name = v; if (!profile.id) profile.id = uid(); profSave(); $('#cirName').value = v; toast('Name saved');
+    if (!$('#cirSharePanel').hidden) cirShowShare();
+  });
+  function cirShowShare() {
+    const url = inviteUrl(); $('#cirQr').innerHTML = qrSvg(url); $('#cirLink').textContent = url; $('#cirSharePanel').hidden = false;
+    $('#cirNative').hidden = !navigator.share;
+  }
+  $('#cirShare').addEventListener('click', () => {
+    const v = cleanName($('#cirName').value);
+    if (!v) { toast('Enter your display name first'); $('#cirName').focus(); return; }
+    if (v !== profile.name) { profile.name = v; if (!profile.id) profile.id = uid(); profSave(); }
+    cirShowShare(); $('#cirSharePanel').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+  const inviteText = () => profile.name + ' invited you to their QuickCapture Circle. Tap to add them: ' + inviteUrl();
+  $('#cirSms').addEventListener('click', () => openHref('sms:' + (isIOS ? '&' : '?') + 'body=' + encodeURIComponent(inviteText())));
+  $('#cirNative').addEventListener('click', () => shareAny(inviteText(), 'Join my QuickCapture Circle'));
+  $('#cirCopy').addEventListener('click', async () => toast((await copyText(inviteUrl())) ? 'Link copied' : 'Copy failed'));
+  $('#cirList').addEventListener('click', (e) => {
+    const sh = e.target.closest('[data-cshare]'), ed = e.target.closest('[data-cedit]'), dl = e.target.closest('[data-cdel]'), hh = e.target.closest('[data-chh]');
+    if (hh) {
+      const c = circle.find((x) => x.id === hh.dataset.chh); if (!c) return;
+      c.isHousehold = !c.isHousehold; circSave(); cirRender(); toast(c.isHousehold ? c.name + ' added to My Household' : c.name + ' removed from My Household');
+    } else if (sh) {
+      if (!profile.name) { toast('Save your display name first'); $('#cirName').focus(); return; }
+      const c = circle.find((x) => x.id === sh.dataset.cshare); if (c) sendTo(c, inviteText(), 'Join my QuickCapture Circle');
+    } else if (ed) {
+      const c = circle.find((x) => x.id === ed.dataset.cedit); if (!c) return;
+      cirEdit = c.id; $('#cfName').value = c.name; $('#cfPhone').value = c.phone; $('#cfEmail').value = c.email;
+      $('#cfSave').textContent = 'Save changes'; $('#cfCancel').hidden = false; $('#cfName').focus(); $('#cfName').scrollIntoView({ block: 'center', behavior: 'smooth' });
+    } else if (dl) {
+      const c = circle.find((x) => x.id === dl.dataset.cdel); if (!c) return;
+      circle = circle.filter((x) => x !== c); circSave(); cirRender(); toast('Removed ' + c.name, 'Undo', () => { circle.push(c); circSave(); cirRender(); });
+    }
+  });
+  $('#cfCancel').addEventListener('click', cirFormReset);
+  $('#cirForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = cleanName($('#cfName').value); if (!name) { toast('Enter a name'); $('#cfName').focus(); return; }
+    const phone = $('#cfPhone').value.replace(/[^\d+()\-.\s]/g, '').trim().slice(0, 24), email = $('#cfEmail').value.trim().slice(0, 80);
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast('That email does not look right'); $('#cfEmail').focus(); return; }
+    const ex = cirEdit && circle.find((x) => x.id === cirEdit);
+    if (ex) Object.assign(ex, { name, phone, email }); else circle.push({ id: uid(), name, phone, email, addedAt: Date.now(), isHousehold: false, linked: false });
+    circSave(); cirFormReset(); cirRender(); toast(ex ? 'Saved' : 'Added ' + name);
+  });
+  // sharing a note or list with someone in the circle
+  function noteShareText(n) {
+    const head = n.trip ? '🧳 ' + (n.trip.dest || 'Packing list') + (n.trip.when ? ' · ' + n.trip.when : '') + '\n' : '';
+    const body = String(n.text || '').split('\n').map((l) => l.replace(/^(\s*)[-*]\s\[( )\]\s?/, '$1☐ ').replace(/^(\s*)[-*]\s\[[xX]\]\s?/, '$1☑ ')).join('\n').trim();
+    return (head + body).trim().slice(0, 1500);
+  }
+  function circleShareNote(n) {
+    const text = noteShareText(n);
+    if (!text) { toast('This note has no text to share'); return; }
+    circleLoad(); pickText = text; pickNote = n;
+    $('#cirPickPrev').textContent = text.length > 140 ? text.slice(0, 140) + '…' : text;
+    const rows = circle.map((c) => h('button', { class: 'cir-pick-b', type: 'button', 'data-pc': c.id }, h('div', {}, h('b', { text: c.name }), h('small', { text: c.phone ? 'Text ' + c.phone : c.email ? 'Email ' + c.email : 'Choose an app to send' }))));
+    rows.unshift(h('button', { class: 'cir-pick-b', type: 'button', 'data-pc': '#link' }, h('div', {}, h('b', { text: 'Send as an import link or QR' }), h('small', { text: 'They get a prompt to accept the note' }))));
+    rows.push(h('button', { class: 'cir-pick-b', type: 'button', 'data-pc': '*' }, h('div', {}, h('b', { text: 'Other apps…' }), h('small', { text: navigator.share ? 'Open the share sheet' : 'Copy to the clipboard' }))));
+    if (!circle.length) rows.unshift(h('p', { class: 'tm-empty', text: 'Your Circle is empty. Add people in My Circle, or share to any app below.' }));
+    $('#cirPickList').replaceChildren(...rows); cirOpen(cirPick);
+  }
+  $('#cirPickList').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-pc]'); if (!b) return;
+    if (b.dataset.pc === '#link') { const n = pickNote; cirClose(cirPick); if (n) shareNoteLink(n); return; }
+    const c = b.dataset.pc === '*' ? null : circle.find((x) => x.id === b.dataset.pc), t = pickText;
+    cirClose(cirPick); sendTo(c, t, 'Note from QuickCapture');
+  });
+  $('#cirPickClose').addEventListener('click', () => cirClose(cirPick));
+  cirPick.addEventListener('mousedown', (e) => { if (e.target === cirPick) cirClose(cirPick); });
+  // incoming invite link: ?circle_add=1&name=...&id=...
+  let invitePending = null, approveFn = null;
+  function askApprove(title, msg, yes, fn) {
+    approveFn = fn; $('#cirInvT').textContent = title; $('#cirInvM').textContent = msg; $('#cirInvYes').textContent = yes || 'Accept'; $('#cirInvNo').textContent = 'Decline';
+    cirOpen(cirInvite); $('#cirInvYes').focus();
+  }
+  function circleInviteCheck() {
+    let q; try { q = new URLSearchParams(location.search); } catch { return; }
+    if (q.get('circle_add') !== '1') return;
+    const name = cleanName(q.get('name')), id = String(q.get('id') || '');
+    try { history.replaceState(null, '', location.pathname + (location.hash || '')); } catch { /* file or sandboxed */ }
+    if (!name || !CID_RE.test(id)) { toast('That invite link looks invalid'); return; }
+    if (id === profile.id) { toast('That is your own invite link'); return; }
+    invitePending = { id, name };
+    askApprove('Add ' + name + '?', 'Add ' + name + ' to your QuickCapture Circle?', 'Add', null);
+  }
+  $('#cirInvYes').addEventListener('click', () => {
+    const fn = approveFn; approveFn = null;
+    if (fn) { cirClose(cirInvite); fn(); return; }
+    const p = invitePending; invitePending = null; cirClose(cirInvite); if (!p) return;
+    const ex = circle.find((c) => c.id === p.id);
+    if (ex) { ex.name = p.name; ex.linked = true; toast(p.name + ' is already in your Circle'); } else { circle.push({ id: p.id, name: p.name, phone: '', email: '', addedAt: Date.now(), isHousehold: false, linked: true }); toast('Added ' + p.name + ' to your Circle'); }
+    circSave(); cirRender();
+  });
+  $('#cirInvNo').addEventListener('click', () => { invitePending = null; approveFn = null; cirClose(cirInvite); });
+  document.addEventListener('keydown', (e) => {
+    const top = !cirInvite.hidden ? cirInvite : !$('#shOv').hidden ? $('#shOv') : !cirPick.hidden ? cirPick : !hhOv.hidden ? hhOv : !cirOv.hidden ? cirOv : null;
+    if (!top) return;
+    if (e.key === 'Escape') { e.stopImmediatePropagation(); e.preventDefault(); if (top === cirInvite) { invitePending = null; approveFn = null; } cirClose(top); }
+    else if (e.key.length === 1 && !/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(document.activeElement.tagName)) e.stopImmediatePropagation();   // no app shortcuts behind the sheet
+  }, true);
+  circleLoad();
+
+
+  /* ---------- Share links: encode / decode, share sheet, approval-based import ---------- */
+  const b64uEnc = (u8) => { let b = ''; for (let i = 0; i < u8.length; i += 0x8000) b += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(b).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+  const b64uDec = (t) => { const b = atob(String(t).replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((String(t).length + 3) % 4)); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; };
+  async function packPayload(obj) {
+    const bytes = new TextEncoder().encode(JSON.stringify(obj));
+    if (window.CompressionStream) {
+      try { const z = new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer()); if (z.length < bytes.length) return 'z' + b64uEnc(z); } catch { /* send uncompressed */ }
+    }
+    return 'j' + b64uEnc(bytes);
+  }
+  async function unpackPayload(str) {
+    if (!str || str.length > 24000) throw new Error('too big');
+    const kind = str[0], raw = b64uDec(str.slice(1));
+    let bytes = raw;
+    if (kind === 'z') {
+      if (!window.DecompressionStream) throw new Error('unsupported');
+      const rd = new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader(), parts = []; let total = 0;
+      for (;;) { const { done, value } = await rd.read(); if (done) break; total += value.length; if (total > 400000) { try { await rd.cancel(); } catch { /* ignore */ } throw new Error('too big'); } parts.push(value); }
+      bytes = new Uint8Array(total); let o = 0; parts.forEach((p) => { bytes.set(p, o); o += p.length; });
+    } else if (kind !== 'j') throw new Error('bad');
+    const obj = JSON.parse(new TextDecoder().decode(bytes));
+    if (!obj || typeof obj !== 'object' || obj.v !== 1) throw new Error('bad');
+    return obj;
+  }
+  const importLink = async (type, payload) => CIRCLE_BASE + '?import=' + type + '&d=' + (await packPayload(Object.assign({ v: 1, t: type, from: profile.name || '' }, payload)));
+  const shS = { link: '', text: '' };
+  const shOv = $('#shOv');
+  function openShareLink(title, sub, link, text) {
+    shS.link = link; shS.text = text;
+    $('#shTitle').textContent = title; $('#shSub').textContent = sub;
+    const svg = qrSvg(link);
+    $('#shQr').hidden = !svg; $('#shQr').innerHTML = svg;
+    $('#shLink').textContent = link.length > 110 ? link.slice(0, 100) + '… (' + link.length + ' characters)' : link;
+    $('#shNote').textContent = svg ? 'Have them scan this with their camera, or send the link.' : 'Too big for a QR code, so send it as a text or copy the link.';
+    $('#shNative').hidden = !navigator.share;
+    cirOpen(shOv); shOv.querySelector('.sheet').scrollTop = 0;
+  }
+  $('#shClose').addEventListener('click', () => cirClose(shOv));
+  shOv.addEventListener('mousedown', (e) => { if (e.target === shOv) cirClose(shOv); });
+  $('#shSms').addEventListener('click', () => openHref('sms:' + (isIOS ? '&' : '?') + 'body=' + encodeURIComponent(shS.text + ' ' + shS.link)));
+  $('#shNative').addEventListener('click', () => shareAny(shS.text + ' ' + shS.link, $('#shTitle').textContent));
+  $('#shCopy').addEventListener('click', async () => toast((await copyText(shS.link)) ? 'Link copied' : 'Copy failed'));
+  const sender = () => profile.name || 'A friend';
+  const clip = (v, n) => String(v == null ? '' : v).slice(0, n);
+  async function shareNoteLink(n) {
+    const text = clip(n.text, 4000), first = (text.split('\n').find((l) => l.trim()) || 'Note').replace(/^[-*#\s>[\]xX]+/, '').trim().slice(0, 60) || 'Note';
+    const link = await importLink('note', { title: first, text, trip: n.trip ? { dest: clip(n.trip.dest, 60), when: clip(n.trip.when, 40) } : undefined });
+    openShareLink('Share note', 'They will be asked to accept “' + first + '” before it is added.', link, sender() + ' shared a note with you on QuickCapture:');
+  }
+  async function shareRecipe(r) {
+    const link = await importLink('recipe', { r: { title: clip(r.title, 150), description: clip(r.description, 400), prep: clip(r.prep, 30), cook: clip(r.cook, 30), total: clip(r.total, 30), yield: clip(r.yield, 40),
+      url: r.url || '', ingredients: r.ingredients.slice(0, 80).map((x) => clip(x, 200)), steps: r.steps.slice(0, 60).map((x) => clip(x, 600)), tags: r.tags.slice(0, 10) } });
+    openShareLink('Share recipe', 'They will be asked before “' + clip(r.title, 60) + '” is added to their Kitchen.', link, sender() + ' shared a recipe with you on QuickCapture:');
+  }
+  async function shareMovie(w) {
+    const link = await importLink('movie', { m: { title: clip(w.title, 150), year: w.year || '', type: w.type, poster: /^https:\/\/image\.tmdb\.org\//.test(w.poster) ? w.poster : '', summary: clip(w.summary, 300), genre: clip(w.genre, 40), rating: w.rating, note: clip(w.note, 300) } });
+    openShareLink('Recommend to Circle', 'They will be asked before “' + clip(w.title, 60) + '” is added to their Watchlist.', link, sender() + ' recommends ' + clip(w.title, 60) + (w.rating !== null ? ' (' + String(Math.round(w.rating) / 2) + '/5 stars)' : '') + ' on QuickCapture:');
+  }
+  async function shareHousehold() {
+    const slots = {}; Object.entries(menu.slots).forEach(([k, sl]) => { slots[k] = { t: 't', text: clip(sl.t === 'r' ? sl.title : sl.text, 80) }; });
+    const link = await importLink('household', { menu: { v: 1, show: menu.show, slots }, pantry: pantry.slice(0, 200).map((x) => ({ n: clip(x.name, 60), need: x.need })) });
+    openShareLink('Share Household Board', 'Family members can update their pantry and weekly menu to match yours.', link, sender() + ' shared their household board (pantry + weekly menu) on QuickCapture:');
+  }
+  // ----- incoming imports (always shown to the person for approval first; nothing is added silently)
+  const safeTmdbPoster = (u) => (typeof u === 'string' && /^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/[\w.-]+$/.test(u) ? u : '');
+  async function importCheck() {
+    let q; try { q = new URLSearchParams(location.search); } catch { return; }
+    const type = q.get('import'), d = q.get('d');
+    if (!type) return;
+    try { history.replaceState(null, '', location.pathname + (location.hash || '')); } catch { /* ignore */ }
+    let p; try { p = await unpackPayload(d); if (p.t !== type) throw new Error('mismatch'); } catch { toast("That shared link couldn't be read"); return; }
+    const from = cleanName(p.from) || 'a friend', now = Date.now();
+    if (type === 'note') {
+      const text = clip(p.text, 4000).trim(), title = clip(p.title, 60) || 'Note'; if (!text) { toast("That shared link couldn't be read"); return; }
+      askApprove('Import note?', "Import note '" + title + "' from " + from + '?', 'Accept', () => {
+        const note = normNote({ id: uid(), text, tags: extractTags(text), createdAt: now, trip: p.trip && typeof p.trip === 'object' ? p.trip : undefined });
+        state.notes.unshift(note); persist(); render(); toast('Imported “' + title + '” from ' + from);
+      });
+    } else if (type === 'recipe') {
+      const r = p.r; if (!r || typeof r.title !== 'string' || !r.title.trim()) { toast("That shared link couldn't be read"); return; }
+      const arr = (a, n, m) => (Array.isArray(a) ? a.slice(0, n).map((x) => clip(x, m)).filter((x) => x.trim()) : []);
+      askApprove('Add recipe?', "Add recipe '" + clip(r.title, 60) + "' from " + from + ' to your Kitchen?', 'Accept', () => {
+        const rec = normRecipe({ id: uid(), title: clip(r.title, 150), description: clip(r.description, 400), prep: clip(r.prep, 30), cook: clip(r.cook, 30), total: clip(r.total, 30), yield: clip(r.yield, 40),
+          url: clip(r.url, 400), source: 'Shared by ' + from, ingredients: arr(r.ingredients, 80, 200), steps: arr(r.steps, 60, 600), tags: cleanTags(r.tags), favoritedBy: [from.slice(0, 24)], createdAt: now });
+        recipes.unshift(rec); persistRecipes(); renderRecipes(); toast('Added “' + clip(r.title, 40) + '” to your Kitchen');
+      });
+    } else if (type === 'movie') {
+      const m = p.m; if (!m || typeof m.title !== 'string' || !m.title.trim()) { toast("That shared link couldn't be read"); return; }
+      askApprove('Add to Watchlist?', "Add '" + clip(m.title, 60) + "' recommended by " + from + ' to your Watchlist?', 'Accept', () => {
+        const title = clip(m.title, 150), type2 = m.type === 'tv' ? 'tv' : 'movie', y = Number(m.year) > 1800 ? Number(m.year) : '';
+        const rec = { recBy: from, recRating: halfPoint(m.rating), recNote: clip(m.note, 300), updatedAt: now };
+        const ex = watch.find((w) => w.type === type2 && w.title.toLowerCase() === title.toLowerCase() && w.year === y);
+        if (ex) Object.assign(ex, rec);
+        else watch.unshift(normWatch(Object.assign({ id: uid(), itunesId: '', title, year: y, type: type2, poster: safeTmdbPoster(m.poster), summary: clip(m.summary, 300), genre: clip(m.genre, 40), addedAt: now }, rec)));
+        persistWatch(true); wLinger.clear(); renderWatch(); toast('Added “' + clip(m.title, 40) + '” from ' + from);
+      });
+    } else if (type === 'household') {
+      if (!Array.isArray(p.pantry) && !p.menu) { toast("That shared link couldn't be read"); return; }
+      askApprove('Update household board?', 'Replace your Weekly Menu and Pantry list with ' + from + "'s? Your current ones will be replaced (you can undo right after).", 'Update', () => {
+        const prevMenu = JSON.stringify(menu), prevPantry = JSON.stringify(pantry);
+        if (p.menu) { menu = normMenu(p.menu); persistMenu(true); }
+        if (Array.isArray(p.pantry)) { pantry = normPantry(p.pantry.map((x) => ({ name: x && x.n, need: x && x.need }))); pantrySave(); }
+        try { renderKMenu(); mnRender(); } catch { /* views not ready */ } hhRender();
+        toast('Household board updated from ' + from, 'Undo', () => { menu = normMenu(JSON.parse(prevMenu)); persistMenu(true); pantry = normPantry(JSON.parse(prevPantry)); pantrySave(); try { renderKMenu(); mnRender(); } catch { /* ignore */ } hhRender(); });
+      });
+    } else toast("That shared link couldn't be read");
+  }
+
+  /* ---------- My Household: members, pantry checklist, weekly menu ---------- */
+  const KEY_PANTRY = 'quickcapture_household_pantry';
+  const hhOv = $('#hhOv');
+  let pantry = [];
+  function normPantry(a) {
+    const seen = new Set(), out = [];
+    (Array.isArray(a) ? a : []).forEach((x) => {
+      if (!x || typeof x !== 'object') return;
+      const name = cleanName(x.name).slice(0, 60), k = name.toLowerCase(); if (!name || seen.has(k)) return; seen.add(k);
+      out.push({ id: String(x.id || uid()).slice(0, 64), name, need: x.need !== false, at: +x.at || Date.now() });
+    });
+    return out.slice(0, 300);
+  }
+  function pantryLoad() { try { pantry = normPantry(JSON.parse(store.get(KEY_PANTRY) || '[]')); } catch { pantry = []; } }
+  const pantrySave = () => store.set(KEY_PANTRY, JSON.stringify(pantry));
+  function hhRender() {
+    const members = circle.filter((c) => c.isHousehold), others = circle.filter((c) => !c.isHousehold);
+    $('#hhMCount').textContent = members.length ? '(' + members.length + ')' : '';
+    $('#hhMembers').replaceChildren(...(members.length ? members.map((c) => h('div', { class: 'cir-item' },
+      h('div', { class: 'ci' }, h('b', { text: c.name }), h('small', { text: [c.phone, c.email].filter(Boolean).join(' · ') || 'No phone or email yet' })),
+      h('button', { type: 'button', class: 'del', 'data-hmx': c.id, 'aria-label': 'Remove ' + c.name + ' from My Household', text: 'Remove' })))
+      : [h('p', { class: 'tm-empty', text: circle.length ? 'No one in your household yet. Add people from your Circle below.' : 'Add people to My Circle first, then mark them as household.' })]));
+    $('#hhAddM').replaceChildren(...others.map((c) => h('button', { type: 'button', 'data-hma': c.id, 'aria-label': 'Add ' + c.name + ' to My Household', text: '+ ' + c.name })));
+    const need = pantry.filter((x) => x.need), have = pantry.filter((x) => !x.need);
+    const row = (x) => h('div', { class: 'hh-row' }, h('span', { class: 'nm', text: x.name }),
+      h('div', { class: 'hh-seg', role: 'group', 'aria-label': x.name + ' status' },
+        h('button', { type: 'button', class: 'need', 'data-hp': x.id, 'data-v': 'need', 'aria-pressed': String(x.need), text: 'Need' }),
+        h('button', { type: 'button', class: 'have', 'data-hp': x.id, 'data-v': 'have', 'aria-pressed': String(!x.need), text: 'Have' })),
+      h('button', { type: 'button', class: 'x', 'data-hpx': x.id, 'aria-label': 'Delete ' + x.name, text: '×' }));
+    $('#hhPantry').replaceChildren(...(pantry.length ? [
+      need.length ? h('div', { class: 'hh-grp', text: 'Need to buy (' + need.length + ')' }) : null, ...need.map(row),
+      have.length ? h('div', { class: 'hh-grp', text: 'Have (' + have.length + ')' }) : null, ...have.map(row)].filter(Boolean)
+      : [h('p', { class: 'tm-empty', text: 'Nothing here yet. Add staples and groceries above.' })]));
+    // weekly menu summary (the same menu as the Kitchen tab)
+    const meals = MN_MEALS.filter(([m]) => menu.show[m]), today = mnTodayIdx();
+    $('#hhMenu').replaceChildren(...MN_DAYS.map((d, di) => {
+      const items = meals.map(([m, label]) => { const sl = menu.slots[di + '-' + m]; return sl ? h('li', {}, h('span', { text: label }), sl.t === 'r' ? sl.title : sl.text) : null; }).filter(Boolean);
+      return h('div', { class: 'km-day' + (di === today ? ' today' : '') }, h('b', {}, d, di === today ? h('em', { text: 'Today' }) : null), h('ul', {}, items.length ? items : [h('li', { class: 'none', text: 'Nothing planned' })]));
+    }));
+    $('#tcHouseS').textContent = members.length || need.length ? (members.length ? members.length + ' member' + (members.length === 1 ? '' : 's') : '') + (members.length && need.length ? ' · ' : '') + (need.length ? need.length + ' to buy' : '') : 'Pantry, menu & family';
+  }
+  function hhOpen() { cirClose(cirOv); circleLoad(); pantryLoad(); hhRender(); cirOpen(hhOv); hhOv.querySelector('.sheet').scrollTop = 0; }
+  $('#tcHouse').addEventListener('click', hhOpen);
+  $('#cirHouse').addEventListener('click', hhOpen);
+  $('#hhClose').addEventListener('click', () => cirClose(hhOv));
+  hhOv.addEventListener('mousedown', (e) => { if (e.target === hhOv) cirClose(hhOv); });
+  $('#hhMenuEdit').addEventListener('click', () => openMenu());
+  $('#hhShare').addEventListener('click', () => shareHousehold());
+  $('#hhForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = cleanName($('#hhAdd').value).slice(0, 60); if (!name) { $('#hhAdd').focus(); return; }
+    const ex = pantry.find((x) => x.name.toLowerCase() === name.toLowerCase());
+    if (ex) { ex.need = true; toast(ex.name + ' is already listed: marked as Need'); } else pantry.unshift({ id: uid(), name, need: true, at: Date.now() });
+    pantrySave(); $('#hhAdd').value = ''; hhRender(); $('#hhAdd').focus();
+  });
+  hhOv.addEventListener('click', (e) => {
+    const hp = e.target.closest('[data-hp]'), hx = e.target.closest('[data-hpx]'), hm = e.target.closest('[data-hmx]'), ha = e.target.closest('[data-hma]');
+    if (hp) { const x = pantry.find((y) => y.id === hp.dataset.hp); if (x) { x.need = hp.dataset.v === 'need'; pantrySave(); hhRender(); } }
+    else if (hx) { const x = pantry.find((y) => y.id === hx.dataset.hpx); if (x) { pantry = pantry.filter((y) => y !== x); pantrySave(); hhRender(); toast('Deleted ' + x.name, 'Undo', () => { pantry.unshift(x); pantrySave(); hhRender(); }); } }
+    else if (hm) { const c = circle.find((y) => y.id === hm.dataset.hmx); if (c) { c.isHousehold = false; circSave(); hhRender(); cirRender(); } }
+    else if (ha) { const c = circle.find((y) => y.id === ha.dataset.hma); if (c) { c.isHousehold = true; circSave(); hhRender(); cirRender(); } }
+  });
+  pantryLoad();
+
+
+  /* ---------- Chat: Firebase Firestore rooms, Gemini, voice, GIFs ---------- */
+  const FB_CONFIG = {
+    apiKey: 'AIzaSyCrZhEUwDktf7UU7SDwLqLm7q6QNIr_7G0', authDomain: 'quickcapture-chat.firebaseapp.com', projectId: 'quickcapture-chat',
+    storageBucket: 'quickcapture-chat.firebasestorage.app', messagingSenderId: '858267661493', appId: '1:858267661493:web:5956e59d6766b8a685fafc'
+  };
+  const FB_APP_URL = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js', FB_FS_URL = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  const KEY_ACTIVE = 'quickcapture_active_profile', KEY_GEMINI = 'quickcapture_gemini_key', KEY_GIPHY = 'quickcapture_giphy_key';
+  const KEY_GROUPS = 'quickcapture_chat_groups', KEY_GCHAT = 'quickcapture_gemini_chat', KEY_CCACHE = 'quickcapture_chatcache_';
+  const GIPHY_DEFAULT = 'dc6zaTOxFJmzC';
+  const chatOv = $('#chatOv');
+  let fb = null, fbP = null, groups = [], room = null, unsub = null, chMsgsData = [], chFilter = 'all', chQuery = '', chSpoilerOn = false, chRevealed = new Set(), gemChat = [], gemBusy = false;
+  const chRec = { mr: null, stream: null, chunks: [], t0: 0, tick: 0, cancel: false };
+  const chatIsOpen = () => !chatOv.hidden;
+  function fbLoad() {
+    if (fbP) return fbP;
+    fbP = (async () => {
+      const [a, f] = await Promise.all([import(FB_APP_URL), import(FB_FS_URL)]);
+      const app = a.initializeApp(FB_CONFIG), db = f.getFirestore(app);
+      fb = { db, f }; return fb;
+    })().catch((e) => { fbP = null; throw e; });
+    return fbP;
+  }
+  function normGroups(a) {
+    const seen = new Set(), out = [];
+    (Array.isArray(a) ? a : []).forEach((g) => { if (!g || typeof g !== 'object' || !CID_RE.test(g.id || '') || seen.has(g.id)) return; const name = cleanName(g.name); if (!name) return; seen.add(g.id); out.push({ id: g.id, name, at: +g.at || Date.now() }); });
+    return out.slice(0, 50);
+  }
+  function groupsLoad() { try { groups = normGroups(JSON.parse(store.get(KEY_GROUPS) || '[]')); } catch { groups = []; } }
+  const groupsSave = () => store.set(KEY_GROUPS, JSON.stringify(groups));
+  function ensureProfile() { if (!profile.id) { profile.id = uid(); profSave(); } }
+  function who() {
+    const k = store.get(KEY_ACTIVE) || '';
+    if (k) { const c = circle.find((x) => x.id === k); if (c) return { id: c.id, name: c.name, contact: true }; }
+    ensureProfile(); return { id: profile.id, name: profile.name || 'Me', contact: false };
+  }
+  const dmId = (a, b) => 'dm_' + [a, b].sort().join('_');
+  const initial = (n) => (String(n).trim()[0] || '?').toUpperCase();
+  // ----- settings: active profile, Gemini key, GIF key
+  function cfgRender() {
+    circleLoad();
+    const sel = $('#actProf'), cur = store.get(KEY_ACTIVE) || '';
+    sel.replaceChildren(h('option', { value: '', text: 'Me' + (profile.name ? ' (' + profile.name + ')' : '') }), ...circle.map((c) => h('option', { value: c.id, text: c.name })));
+    sel.value = circle.some((c) => c.id === cur) ? cur : '';
+    $('#gemKey').value = store.get(KEY_GEMINI) || ''; $('#gifKey').value = store.get(KEY_GIPHY) || '';
+  }
+  $('#actProf').addEventListener('change', (e) => { store.set(KEY_ACTIVE, e.target.value); toast('Posting as ' + who().name); if (chatIsOpen()) { if (room) closeRoom(); chListRender(); } });
+  $('#gemSave').addEventListener('click', () => {
+    const v = $('#gemKey').value.trim();
+    if (!v) { toast('Paste your Gemini API key first'); return; }
+    if (!/^[\w-]{20,100}$/.test(v)) { toast('That does not look like a Gemini API key'); return; }
+    store.set(KEY_GEMINI, v); toast('Gemini key saved');
+  });
+  $('#gemClear').addEventListener('click', () => { store.set(KEY_GEMINI, ''); $('#gemKey').value = ''; toast('Gemini key removed'); });
+  $('#gifSave').addEventListener('click', () => {
+    const v = $('#gifKey').value.trim();
+    if (v && !/^[\w-]{8,64}$/.test(v)) { toast('That does not look like a Giphy key'); return; }
+    store.set(KEY_GIPHY, v === GIPHY_DEFAULT ? '' : v); toast('GIF key saved');
+  });
+  $('#gifReset').addEventListener('click', () => { store.set(KEY_GIPHY, ''); $('#gifKey').value = ''; toast('Using the default GIF key'); });
+  const geminiKey = () => (store.get(KEY_GEMINI) || '').trim();
+  // ----- Gemini REST
+  async function geminiAsk(history) {
+    const key = geminiKey(); if (!key) throw new Error('nokey');
+    const body = { systemInstruction: { parts: [{ text: 'You are Gemini, chatting inside the QuickCapture app on a phone. Keep answers short and friendly, in plain text.' }] },
+      contents: history.map((m) => ({ role: m.role === 'model' ? 'model' : 'user', parts: [{ text: String(m.text).slice(0, 4000) }] })) };
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
+    try {
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(key), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: ctl.signal });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const j = await res.json();
+      const txt = ((j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || []).map((p) => p.text || '').join('').trim();
+      if (!txt) throw new Error('empty');
+      return txt.slice(0, 3000);
+    } finally { clearTimeout(t); }
+  }
+  function geminiErr(e) {
+    const m = String((e && e.message) || '');
+    if (m === 'nokey') return 'Add your Gemini API key in Settings first.';
+    if (/HTTP (400|401|403)/.test(m)) return 'Gemini rejected the API key. Check it in Settings.';
+    if (/HTTP 429/.test(m)) return 'Gemini is rate-limited right now. Try again in a minute.';
+    if (e && e.name === 'AbortError') return 'Gemini took too long to answer.';
+    return "Gemini couldn't answer. Check your connection.";
+  }
+  // ----- chat list
+  function chListRender() {
+    const me = who(); circleLoad(); groupsLoad();
+    $('#chAs').textContent = 'Posting as ' + me.name;
+    $('#chNeed').hidden = !!profile.name;
+    const row = (cls, av, title, sub, data) => h('button', Object.assign({ class: 'ch-row-b ' + cls, type: 'button' }, data), h('span', { class: 'av', text: av }), h('span', { class: 'tx' }, h('b', { text: title }), h('small', { text: sub })));
+    const rows = [row('ai', '✦', 'Gemini', geminiKey() ? 'Ask anything. Your chat stays on this device.' : 'Add your API key in Settings to chat', { 'data-room': 'gemini' })];
+    groups.forEach((g) => rows.push(row('', '👥', g.name, 'Group chat · tap to open', { 'data-room': 'g:' + g.id })));
+    const targets = circle.filter((c) => c.id !== me.id);
+    if (me.contact && profile.id) targets.unshift({ id: profile.id, name: profile.name || 'Me', phone: '', linked: true });
+    targets.forEach((c) => rows.push(row('', initial(c.name), c.name, c.linked ? 'Direct chat' : 'Direct chat · needs their invite link', { 'data-room': 'd:' + c.id })));
+    if (!targets.length && !groups.length) rows.push(h('p', { class: 'tm-empty', text: 'Add people to My Circle (Tools) to message them, or create a group below.' }));
+    $('#chRows').replaceChildren(...rows);
+  }
+  function dockSync() {
+    const i = VIEWS.indexOf(state.view), open = chatIsOpen();
+    ['#tabNotes', '#tabCook', '#tabWatch', '#tabHub', '#tabTools'].forEach((sel, j) => { const b = $(sel), on = !open && j === i; b.setAttribute('aria-selected', String(on)); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    $('#tabChat').setAttribute('aria-selected', String(open));
+  }
+  function openChat() {
+    cirClose(cirOv); cirClose(hhOv);
+    chatOv.hidden = false; $('#chList').hidden = false; $('#chRoom').hidden = true; room = null;
+    chListRender(); dockSync();
+  }
+  function closeChat(quiet) {
+    if (chatOv.hidden) return;
+    closeRoom(); chatOv.hidden = true; $('#tabChat').setAttribute('aria-selected', 'false');
+    if (!quiet) dockSync();
+  }
+  $('#tabChat').addEventListener('click', () => { unlockAudio(); if (chatIsOpen()) closeChat(); else openChat(); });
+  $('#chNeed').addEventListener('submit', (e) => {
+    e.preventDefault(); const v = cleanName($('#chNeedName').value); if (!v) { $('#chNeedName').focus(); return; }
+    profile.name = v; ensureProfile(); profSave(); cirRender(); chListRender(); toast('Name saved');
+  });
+  $('#chGroupForm').addEventListener('submit', (e) => {
+    e.preventDefault(); const name = cleanName($('#chGroupName').value); if (!name) { $('#chGroupName').focus(); return; }
+    if (groups.length >= 50) { toast('That is the maximum of 50 groups'); return; }
+    const g = { id: 'g' + uid().replace(/-/g, ''), name, at: Date.now() }; groups.unshift(g); groupsSave(); $('#chGroupName').value = ''; chListRender();
+    toast('Created “' + name + '”. Tap Invite inside it to add people.'); openRoom({ kind: 'group', id: g.id, title: name });
+  });
+  $('#chRows').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-room]'); if (!b) return;
+    const [k, id] = b.dataset.room === 'gemini' ? ['gemini', ''] : [b.dataset.room.slice(0, 1), b.dataset.room.slice(2)];
+    if (k === 'gemini') return openRoom({ kind: 'gemini', id: 'gemini', title: 'Gemini' });
+    if (!profile.name) { toast('Pick a display name first'); $('#chNeedName').focus(); return; }
+    if (k === 'g') { const g = groups.find((x) => x.id === id); if (g) openRoom({ kind: 'group', id: g.id, title: g.name }); }
+    else { const c = id === profile.id ? { id, name: profile.name, linked: true } : circle.find((x) => x.id === id); if (c) openRoom({ kind: 'dm', id: dmId(who().id, c.id), title: c.name, linked: c.linked !== false }); }
+  });
+  // ----- room
+  const URL_RE = /https?:\/\/[^\s<]+/gi;
+  const okGifHost = (u) => /^https:\/\/(media\d*\.giphy\.com|i\.giphy\.com|media\d*\.tenor\.com|c\.tenor\.com)\//i.test(u || '');
+  const okAudio = (u) => typeof u === 'string' && /^data:audio\/[\w.+-]+(;codecs=[\w.,-]+)?;base64,[A-Za-z0-9+/=]+$/.test(u) && u.length < 900000;
+  function normMsg(id, d) {
+    const type = d.type === 'voice' || d.type === 'gif' ? d.type : 'text';
+    let ts = Date.now(); try { if (d.timestamp && d.timestamp.toMillis) ts = d.timestamp.toMillis(); else if (typeof d.ts === 'number') ts = d.ts; } catch { /* pending server time */ }
+    return { id: String(id).slice(0, 80), senderId: String(d.senderId || '').slice(0, 80), senderName: cleanName(d.senderName) || 'Someone', text: String(d.text || '').slice(0, 2000), type,
+      mediaUrl: type === 'voice' ? (okAudio(d.mediaUrl) ? d.mediaUrl : '') : type === 'gif' ? (okGifHost(d.mediaUrl) ? d.mediaUrl : '') : '', ts, isSpoiler: d.isSpoiler === true, starred: d.starred === true };
+  }
+  function chStatus(msg) { const el = $('#chStatus'); el.hidden = !msg; el.textContent = msg || ''; }
+  function cacheSave() {
+    if (!room || room.kind === 'gemini') return;
+    let list = chMsgsData.slice(-80).map((m) => ({ id: m.id, senderId: m.senderId, senderName: m.senderName, text: m.text, type: m.type, mediaUrl: m.mediaUrl, ts: m.ts, isSpoiler: m.isSpoiler, starred: m.starred }));
+    let json = JSON.stringify(list);
+    while (json.length > 2.5e6 && list.some((m) => m.mediaUrl)) { const i = list.findIndex((m) => m.mediaUrl); list[i].mediaUrl = ''; json = JSON.stringify(list); }
+    store.set(KEY_CCACHE + room.id, json);
+  }
+  function cacheLoad(id) { try { const a = JSON.parse(store.get(KEY_CCACHE + id) || '[]'); return (Array.isArray(a) ? a : []).map((m) => normMsg(m.id, m)); } catch { return []; } }
+  function msgMatches(m) {
+    if (chFilter === 'starred' && !m.starred) return false;
+    if (chFilter === 'voice' && m.type !== 'voice') return false;
+    if (chFilter === 'media' && m.type !== 'gif') return false;
+    if (chFilter === 'links' && !/https?:\/\//i.test(m.text)) return false;
+    const q = chQuery.trim().toLowerCase();
+    return !q || m.text.toLowerCase().includes(q) || m.senderName.toLowerCase().includes(q);
+  }
+  function linkify(text) {
+    const out = []; let last = 0; text.replace(URL_RE, (u, off) => {
+      out.push(text.slice(last, off)); const clean = u.replace(/[.,;:!?)\]'"]+$/, ''); let ok = false; try { ok = /^https?:$/.test(new URL(clean).protocol); } catch { /* not a URL */ }
+      out.push(ok ? h('a', { href: clean, target: '_blank', rel: 'noopener noreferrer', text: clean }) : clean); last = off + clean.length; return u;
+    }); out.push(text.slice(last)); return out.filter((x) => x !== '');
+  }
+  function msgEl(m, me) {
+    const mine = m.senderId === me.id, ai = m.senderId === 'gemini';
+    let body = null;
+    if (m.type === 'gif') body = m.mediaUrl ? h('img', { class: 'gif', src: m.mediaUrl, alt: m.text || 'GIF', loading: 'lazy', referrerpolicy: 'no-referrer' }) : h('span', { class: 'blocked', text: 'GIF from an unsupported source was not loaded.' });
+    else if (m.type === 'voice') body = m.mediaUrl ? h('audio', { controls: true, preload: 'none', src: m.mediaUrl, 'aria-label': 'Voice message from ' + m.senderName }) : h('span', { class: 'blocked', text: 'Voice message unavailable offline.' });
+    else body = h('div', { class: 'tx' }, linkify(m.text));
+    const spo = m.isSpoiler && !chRevealed.has(m.id);
+    const wrap = h('div', { class: 'spo' + (spo ? ' on' : ''), 'data-spo': m.isSpoiler ? m.id : null }, body);
+    return h('div', { class: 'cm' + (mine ? ' mine' : '') + (ai ? ' ai' : ''), 'data-mid': m.id },
+      !mine || ai ? h('span', { class: 'who', text: ai ? '✦ Gemini' : m.senderName }) : null, wrap,
+      h('div', { class: 'meta' }, h('span', { text: new Date(m.ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) }),
+        h('button', { class: 'star', type: 'button', 'data-star': m.id, 'aria-pressed': String(m.starred), 'aria-label': m.starred ? 'Unstar message' : 'Star message', text: m.starred ? '★' : '☆' })));
+  }
+  function msgsRender(stick) {
+    const box = $('#chMsgs'), me = who(), near = box.scrollHeight - box.scrollTop - box.clientHeight < 90;
+    const list = chMsgsData.filter(msgMatches); let lastDay = '';
+    const kids = [];
+    list.forEach((m) => { const d = alDay(m.ts); if (d !== lastDay) { lastDay = d; kids.push(h('div', { class: 'ch-day', text: d })); } kids.push(msgEl(m, me)); });
+    if (!kids.length) kids.push(h('p', { class: 'ch-empty', text: chMsgsData.length ? 'No messages match.' : room && room.kind === 'gemini' ? 'Say hi to Gemini.' : 'No messages yet. Say hello.' }));
+    box.replaceChildren(...kids);
+    if (stick || near) box.scrollTop = box.scrollHeight;
+  }
+  function closeRoom() {
+    if (unsub) { try { unsub(); } catch { /* ignore */ } unsub = null; }
+    chRecStop(true); $('#chGif').hidden = true; $('#chGifBtn').setAttribute('aria-pressed', 'false');
+    room = null; chMsgsData = [];
+  }
+  async function openRoom(r) {
+    closeRoom(); room = r; chFilter = 'all'; chQuery = ''; chSpoilerOn = false; chRevealed = new Set();
+    $('#chQ').value = ''; $('#chChips').querySelectorAll('[data-cf]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cf === 'all')));
+    $('#chSpoiler').setAttribute('aria-pressed', 'false'); $('#chText').value = '';
+    $('#chList').hidden = true; $('#chRoom').hidden = false;
+    $('#chTitle').textContent = r.title; $('#chInvite').hidden = r.kind !== 'group'; $('#chClear').hidden = r.kind !== 'gemini';
+    const gem = r.kind === 'gemini';
+    $('#chSub').textContent = gem ? 'AI assistant · private to this device' : r.kind === 'group' ? 'Group chat' : r.linked === false ? 'Direct chat · ask them to share their invite so you both join' : 'Direct chat';
+    $('#chSpoiler').hidden = gem; $('#chGifBtn').hidden = gem; $('#chMic').hidden = gem; $('#chTools').style.display = gem ? 'none' : '';
+    $('#chText').placeholder = gem ? 'Ask Gemini…' : r.kind === 'group' ? 'Message (type @gemini to ask the AI)' : 'Message';
+    if (gem) {
+      try { const a = JSON.parse(store.get(KEY_GCHAT) || '[]'); gemChat = (Array.isArray(a) ? a : []).filter((m) => m && (m.role === 'user' || m.role === 'model') && typeof m.text === 'string').slice(-100); } catch { gemChat = []; }
+      chMsgsData = gemChat.map((m, i) => ({ id: 'gm' + i, senderId: m.role === 'model' ? 'gemini' : who().id, senderName: m.role === 'model' ? 'Gemini' : who().name, text: m.text, type: 'text', mediaUrl: '', ts: m.ts || Date.now(), isSpoiler: false, starred: m.starred === true }));
+      chStatus(geminiKey() ? '' : 'Add your Gemini API key in Settings to chat.'); msgsRender(true); return;
+    }
+    chMsgsData = cacheLoad(r.id); msgsRender(true); chStatus(navigator.onLine === false ? 'Offline: showing saved messages' : 'Connecting…');
+    subscribe(r);
+  }
+  async function subscribe(r) {
+    try {
+      const { db, f } = await fbLoad();
+      if (room !== r) return;
+      const q = f.query(f.collection(db, 'chats', r.id, 'messages'), f.orderBy('timestamp', 'asc'), f.limitToLast(200));
+      unsub = f.onSnapshot(q, (snap) => {
+        if (room !== r) return;
+        chMsgsData = snap.docs.map((d) => normMsg(d.id, d.data({ serverTimestamps: 'estimate' })));
+        chStatus(''); msgsRender(false); cacheSave();
+      }, () => { if (room === r) chStatus('Offline: showing saved messages'); });
+    } catch { if (room === r) chStatus('Offline: showing saved messages'); }
+  }
+  window.addEventListener('online', () => { if (room && room.kind !== 'gemini' && !unsub) { chStatus('Reconnecting…'); subscribe(room); } });
+  window.addEventListener('offline', () => { if (room && room.kind !== 'gemini') chStatus('Offline: showing saved messages'); });
+  $('#chBack').addEventListener('click', () => { closeRoom(); $('#chRoom').hidden = true; $('#chList').hidden = false; chListRender(); });
+  $('#chInvite').addEventListener('click', () => {
+    if (!room || room.kind !== 'group') return;
+    const link = CIRCLE_BASE + '?chat_join=' + encodeURIComponent(room.id) + '&name=' + encodeURIComponent(room.title);
+    openShareLink('Invite to ' + room.title, 'Anyone with this link can join and read the group, so send it only to people you trust.', link, (profile.name || 'A friend') + ' invited you to the group chat “' + room.title + '” on QuickCapture:');
+  });
+  $('#chClear').addEventListener('click', () => { gemChat = []; store.set(KEY_GCHAT, '[]'); chMsgsData = []; msgsRender(true); toast('Conversation cleared'); });
+  $('#chQ').addEventListener('input', (e) => { chQuery = e.target.value; msgsRender(true); });
+  $('#chChips').addEventListener('click', (e) => { const b = e.target.closest('[data-cf]'); if (!b) return; chFilter = b.dataset.cf; $('#chChips').querySelectorAll('[data-cf]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); msgsRender(true); });
+  $('#chMsgs').addEventListener('click', async (e) => {
+    const sp = e.target.closest('.spo.on'); if (sp) { chRevealed.add(sp.dataset.spo); sp.classList.remove('on'); return; }
+    const st = e.target.closest('[data-star]'); if (!st || !room) return;
+    const m = chMsgsData.find((x) => x.id === st.dataset.star); if (!m) return;
+    const next = !m.starred;
+    if (room.kind === 'gemini') { const i = Number(m.id.slice(2)); if (gemChat[i]) { gemChat[i].starred = next; store.set(KEY_GCHAT, JSON.stringify(gemChat)); } m.starred = next; msgsRender(false); return; }
+    try { const { db, f } = await fbLoad(); await f.updateDoc(f.doc(db, 'chats', room.id, 'messages', m.id), { starred: next }); }
+    catch { toast("Couldn't update the star. Check your connection."); }
+  });
+  // ----- sending
+  async function postMessage(fields) {
+    const me = who(), cur = room; if (!cur) return false;
+    try {
+      const { db, f } = await fbLoad();
+      await Promise.race([f.addDoc(f.collection(db, 'chats', cur.id, 'messages'), Object.assign({ senderId: me.id, senderName: me.name, text: '', type: 'text', mediaUrl: '', timestamp: f.serverTimestamp(), isSpoiler: false, starred: false }, fields)), new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 15000))]);
+      return true;
+    } catch { toast("Couldn't send. You may be offline."); return false; }
+  }
+  async function postGemini(cur, text, db, f) {
+    try {
+      const ans = await geminiAsk([{ role: 'user', text }]);
+      await f.addDoc(f.collection(db, 'chats', cur.id, 'messages'), { senderId: 'gemini', senderName: 'Gemini', text: ans, type: 'text', mediaUrl: '', timestamp: f.serverTimestamp(), isSpoiler: false, starred: false });
+    } catch (e) { toast(geminiErr(e)); }
+  }
+  $('#chTray').addEventListener('submit', async (e) => {
+    e.preventDefault(); if (!room) return;
+    const inp = $('#chText'), text = inp.value.trim().slice(0, 2000); if (!text) return;
+    if (room.kind === 'gemini') {
+      if (gemBusy) return;
+      inp.value = ''; gemBusy = true; const now = Date.now();
+      gemChat.push({ role: 'user', text, ts: now }); chMsgsData.push({ id: 'gm' + (gemChat.length - 1), senderId: who().id, senderName: who().name, text, type: 'text', mediaUrl: '', ts: now, isSpoiler: false, starred: false });
+      msgsRender(true); chStatus('Gemini is thinking…');
+      try {
+        const ans = await geminiAsk(gemChat.slice(-20).map((m) => ({ role: m.role, text: m.text })));
+        gemChat.push({ role: 'model', text: ans, ts: Date.now() }); chStatus('');
+      } catch (er) { gemChat.pop(); inp.value = text; chStatus(geminiErr(er)); }
+      gemChat = gemChat.slice(-100); store.set(KEY_GCHAT, JSON.stringify(gemChat)); gemBusy = false;
+      if (room && room.kind === 'gemini') { chMsgsData = gemChat.map((m, i) => ({ id: 'gm' + i, senderId: m.role === 'model' ? 'gemini' : who().id, senderName: m.role === 'model' ? 'Gemini' : who().name, text: m.text, type: 'text', mediaUrl: '', ts: m.ts || Date.now(), isSpoiler: false, starred: m.starred === true })); msgsRender(true); }
+      return;
+    }
+    const spo = chSpoilerOn, cur = room; inp.value = '';
+    const ok = await postMessage({ text, isSpoiler: spo });
+    if (!ok) { inp.value = text; return; }
+    chSpoilerOn = false; $('#chSpoiler').setAttribute('aria-pressed', 'false');
+    if (cur.kind === 'group' && /(^|\s)@gemini\b/i.test(text)) {
+      const prompt = text.replace(/@gemini\b/gi, '').trim() || 'Say hello to the group.';
+      if (!geminiKey()) { toast('Add your Gemini API key in Settings to use @gemini'); return; }
+      chStatus('Gemini is thinking…');
+      try { const { db, f } = await fbLoad(); await postGemini(cur, prompt, db, f); } finally { if (room === cur) chStatus(''); }
+    }
+  });
+  $('#chSpoiler').addEventListener('click', () => { chSpoilerOn = !chSpoilerOn; $('#chSpoiler').setAttribute('aria-pressed', String(chSpoilerOn)); toast(chSpoilerOn ? 'Next message will be a spoiler' : 'Spoiler off'); });
+  // ----- voice notes
+  const CH_VMAX = 60;
+  function chRecUI(on, secs) { const b = $('#chMic'); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? '⏹ ' + fmtSec(secs || 0) : '🎙️ Voice'; b.setAttribute('aria-label', on ? 'Stop and send voice message' : 'Record a voice message'); }
+  function chRecStop(cancel) {
+    if (!chRec.mr) return;
+    chRec.cancel = !!cancel; try { if (chRec.mr.state !== 'inactive') chRec.mr.stop(); } catch { /* already stopped */ }
+  }
+  $('#chMic').addEventListener('click', async () => {
+    if (chRec.mr) { chRecStop(false); return; }
+    if (!room || room.kind === 'gemini') return;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) { toast("Voice messages aren't supported in this browser"); return; }
+    let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { toast(e && e.name === 'NotFoundError' ? 'No microphone found' : 'Microphone access is blocked'); return; }
+    const mime = vmMime(); let mr;
+    try { mr = new MediaRecorder(stream, Object.assign({ audioBitsPerSecond: 24000 }, mime ? { mimeType: mime } : {})); } catch { stream.getTracks().forEach((t) => t.stop()); toast("Couldn't start recording"); return; }
+    const cur = room, spo = chSpoilerOn;
+    chRec.mr = mr; chRec.stream = stream; chRec.chunks = []; chRec.cancel = false; chRec.t0 = Date.now();
+    mr.ondataavailable = (e) => { if (e.data && e.data.size) chRec.chunks.push(e.data); };
+    mr.onstop = async () => {
+      clearInterval(chRec.tick); stream.getTracks().forEach((t) => t.stop());
+      const chunks = chRec.chunks, drop = chRec.cancel, type = mr.mimeType || mime || 'audio/webm'; chRec.mr = null; chRecUI(false);
+      if (drop || !chunks.length || room !== cur) return;
+      try {
+        const url = await blobToDataUrl(new Blob(chunks, { type }));
+        if (!okAudio(url)) { toast('That voice message is too long to send'); return; }
+        if (await postMessage({ type: 'voice', mediaUrl: url, text: '', isSpoiler: spo })) { chSpoilerOn = false; $('#chSpoiler').setAttribute('aria-pressed', 'false'); }
+      } catch { toast("Couldn't send that recording"); }
+    };
+    mr.start(1000); chRecUI(true, 0);
+    chRec.tick = setInterval(() => { const sec = (Date.now() - chRec.t0) / 1000; chRecUI(true, sec); if (sec >= CH_VMAX) { toast('Reached the ' + CH_VMAX + '-second limit'); chRecStop(false); } }, 250);
+  });
+  // ----- GIF drawer (Giphy)
+  let gifT = 0, gifTok = 0;
+  const gifKey = () => (store.get(KEY_GIPHY) || '').trim() || GIPHY_DEFAULT;
+  async function gifLoad(q) {
+    const tok = ++gifTok, grid = $('#chGifGrid');
+    grid.replaceChildren(h('p', { text: 'Loading…' }));
+    try {
+      const base = q ? 'https://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(q) + '&' : 'https://api.giphy.com/v1/gifs/trending?';
+      const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
+      let j; try { const res = await fetch(base + 'api_key=' + encodeURIComponent(gifKey()) + '&limit=24&rating=pg', { signal: ctl.signal }); if (!res.ok) throw new Error('HTTP ' + res.status); j = await res.json(); } finally { clearTimeout(t); }
+      if (tok !== gifTok) return;
+      const items = ((j && j.data) || []).map((g) => ({ id: String(g.id || ''), title: String(g.title || 'GIF').slice(0, 80), thumb: g.images && g.images.fixed_height_small && g.images.fixed_height_small.url, full: g.images && (g.images.fixed_height && g.images.fixed_height.url) })).filter((g) => okGifHost(g.thumb) && okGifHost(g.full));
+      grid.replaceChildren(...(items.length ? items.map((g) => h('button', { type: 'button', 'data-gif': g.full, 'data-t': g.title, 'aria-label': 'Send GIF: ' + g.title }, h('img', { src: g.thumb, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }))) : [h('p', { text: 'No GIFs found.' })]));
+    } catch { if (tok === gifTok) grid.replaceChildren(h('p', { text: 'GIFs are unavailable right now (offline, or the key was rejected).' })); }
+  }
+  $('#chGifBtn').addEventListener('click', () => {
+    const on = $('#chGif').hidden; $('#chGif').hidden = !on; $('#chGifBtn').setAttribute('aria-pressed', String(on));
+    if (on) { $('#chGifQ').value = ''; gifLoad(''); }
+  });
+  $('#chGifQ').addEventListener('input', (e) => { clearTimeout(gifT); const q = e.target.value.trim(); gifT = setTimeout(() => gifLoad(q), 400); });
+  $('#chGifGrid').addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-gif]'); if (!b || !room) return;
+    const spo = chSpoilerOn;
+    if (await postMessage({ type: 'gif', mediaUrl: b.dataset.gif, text: b.dataset.t || '', isSpoiler: spo })) { $('#chGif').hidden = true; $('#chGifBtn').setAttribute('aria-pressed', 'false'); chSpoilerOn = false; $('#chSpoiler').setAttribute('aria-pressed', 'false'); }
+  });
+  // ----- keyboard: Escape steps back out of chat
+  document.addEventListener('keydown', (e) => {
+    if (!chatIsOpen() || e.key !== 'Escape') return;
+    if (!cirInvite.hidden || !$('#shOv').hidden || !cirPick.hidden || !hhOv.hidden || !cirOv.hidden) return;
+    e.stopImmediatePropagation(); e.preventDefault();
+    if (!$('#chGif').hidden) { $('#chGif').hidden = true; $('#chGifBtn').setAttribute('aria-pressed', 'false'); }
+    else if (room) $('#chBack').click(); else closeChat();
+  }, true);
+  // ----- joining a group from a link: ?chat_join=ID&name=NAME
+  function chatJoinCheck() {
+    let q; try { q = new URLSearchParams(location.search); } catch { return; }
+    const id = q.get('chat_join'); if (!id) return;
+    const name = cleanName(q.get('name')) || 'Group';
+    try { history.replaceState(null, '', location.pathname + (location.hash || '')); } catch { /* ignore */ }
+    if (!CID_RE.test(id)) { toast('That invite link looks invalid'); return; }
+    if (groups.some((g) => g.id === id)) { toast('You are already in “' + name + '”'); return; }
+    askApprove('Join group chat?', "Join the group chat '" + name + "'? Everyone with the link can read and post in it.", 'Join', () => { groups.unshift({ id, name, at: Date.now() }); groupsSave(); toast('Joined “' + name + '”'); if (chatIsOpen()) chListRender(); });
+  }
+  groupsLoad();
 
   /* ---------- Alarms ---------- */
   const KEY_ALARMS = 'quickcapture_alarms';
@@ -6598,7 +7610,7 @@
     mnOv.hidden = false; document.body.style.overflow = 'hidden';
     mnRender(); mnOv.querySelector('.sheet').scrollTop = 0;
   }
-  function closeMenu() { closeMnPick(); if (mnOv.hidden) return; mnOv.hidden = true; document.body.style.overflow = mnui.prevOverflow; }
+  function closeMenu() { closeMnPick(); if (mnOv.hidden) return; mnOv.hidden = true; document.body.style.overflow = mnui.prevOverflow; if (!hhOv.hidden) hhRender(); }
   $('#menuBtn').addEventListener('click', openMenu);
   $('#mnClose').addEventListener('click', closeMenu);
   mnOv.addEventListener('mousedown', (e) => { if (e.target === mnOv) closeMenu(); });
@@ -7542,26 +8554,31 @@
 
   /* ---------- Backup & restore ---------- */
   const bOv = $('#backupOv');
-  const MB = 1048576, QUOTA = 5 * MB;               // most browsers allow roughly 5 MB of localStorage per site
+  const MB = 1048576;
+  let QUOTA = 5 * MB;                               // localStorage fallback: roughly 5 MB; with IndexedDB the browser's own quota is used
+  function quotaRefresh() {
+    if (storeMode !== 'idb' || !(navigator.storage && navigator.storage.estimate)) return;
+    navigator.storage.estimate().then((e) => { if (e && e.quota > 0 && e.quota !== QUOTA) { QUOTA = e.quota; if (!bOv.hidden) updateGauge(true); } }).catch(() => {});
+  }
   const fmtSize = (b) => (b <= 0 ? '0 KB' : b < 1024 ? '<1 KB' : b < 0.1 * MB ? Math.round(b / 1024) + ' KB' : (b / MB).toFixed(1) + ' MB');
 
   function storageUsage() {
     const u = { total: 0, notes: 0, recipes: 0, watch: 0, food: 0, habits: 0, menu: 0, contacts: 0 };
     try {
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
+      for (const k of store.keys()) {
         if (!k || !/^quickcapture/.test(k)) continue;
-        const n = k.length + (localStorage.getItem(k) || '').length;
+        const n = k.length + (store.get(k) || '').length;
         u.total += n;
         if (k === KEY_NOTES) u.notes = n; else if (k === KEY_RECIPES || k === KEY_RFAV) u.recipes += n; else if (k === KEY_WATCH) u.watch = n; else if (k === KEY_REST) u.food = n; else if (k === KEY_HABITS) u.habits = n; else if (k === KEY_MENU) u.menu = n; else if (k === KEY_CONTACTS) u.contacts = n;
       }
     } catch { /* storage unavailable */ }
     return u;
   }
-  function updateGauge() {
+  function updateGauge(again) {
+    if (!again) quotaRefresh();
     const u = storageUsage(), pct = Math.min(100, Math.round(u.total / QUOTA * 100));
     $('#gaugeText').textContent = 'Storage: ~' + fmtSize(u.total) + ' used';
-    $('#gaugePct').textContent = pct + '% of ~5 MB';
+    $('#gaugePct').textContent = (u.total && pct < 1 ? '<1' : pct) + '% of ~' + (QUOTA >= 1024 * MB ? (QUOTA / 1024 / MB).toFixed(QUOTA >= 10 * 1024 * MB ? 0 : 1) + ' GB' : Math.round(QUOTA / MB) + ' MB');
     $('#gaugeFill').style.width = Math.max(u.total ? 2 : 0, pct) + '%';
     $('#gaugeBar').setAttribute('aria-valuenow', String(pct));
     $('#gauge').classList.toggle('warn', pct >= 70 && pct < 90);
@@ -7574,7 +8591,7 @@
     m.hidden = !text; m.textContent = text || ''; m.classList.toggle('err', !!err);
   }
   function openBackup() {
-    updateGauge(); bkMessage('');
+    updateGauge(); bkMessage(''); cfgRender();
     const notes = state.notes.filter((n) => !n.archived).length;
     $('#bkExpSub').textContent = notes + ' note' + (notes === 1 ? '' : 's') + ', ' + (state.notes.length - notes) + ' archived, ' + recipes.length + ' recipe' + (recipes.length === 1 ? '' : 's') + ', ' + watch.length + ' title' + (watch.length === 1 ? '' : 's');
     bOv.hidden = false;
@@ -7597,11 +8614,14 @@
     const mnk = (() => { try { return normMenu(JSON.parse(store.get(KEY_MENU) || 'null')); } catch { return normMenu(menu); } })();
     const hbk = (() => { try { return normHabits(JSON.parse(store.get(KEY_HABITS) || 'null')); } catch { return normHabits(hab); } })();
     const cts = readList(KEY_CONTACTS, contacts).filter((c) => c && typeof c === 'object');
+    const circ = readList(KEY_CIRCLE, circle).filter((c) => c && typeof c === 'object');
+    const pant = readList(KEY_PANTRY, pantry).filter((c) => c && typeof c === 'object');
     const active = notes.filter((n) => !n.archived), archived = notes.filter((n) => n.archived);
     return {
       app: 'QuickCapture', format: 1, exportedAt: new Date().toISOString(),
-      counts: { notes: active.length, archivedNotes: archived.length, recipes: recs.length, watchlist: wl.length, mathHistory: mh.length, restaurants: rst.length, habits: hbk.habits.length, contacts: cts.length },
-      notes: active, archivedNotes: archived, recipes: recs, watchlist: wl, mathHistory: mh, restaurants: rst, habits: hbk, recipeFavorites: rfv, weeklyMenu: mnk, contacts: cts
+      counts: { notes: active.length, archivedNotes: archived.length, recipes: recs.length, watchlist: wl.length, mathHistory: mh.length, restaurants: rst.length, habits: hbk.habits.length, contacts: cts.length, circle: circ.length, pantry: pant.length, chatGroups: groups.length },
+      notes: active, archivedNotes: archived, recipes: recs, watchlist: wl, mathHistory: mh, restaurants: rst, habits: hbk, recipeFavorites: rfv, weeklyMenu: mnk, contacts: cts,
+      circle: circ, userProfile: { name: profile.name, id: profile.id }, householdPantry: pant, chatGroups: normGroups(groups)
     };
   }
   const dateStamp = () => { const d = new Date(), p = (n) => String(n).padStart(2, '0'); return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); };
@@ -7630,9 +8650,9 @@
   // Returns { notes, recipes, skipped } with normalized items, or { error }.
   function validateBackup(data) {
     if (!data || typeof data !== 'object' || Array.isArray(data)) return { error: "That file isn't a QuickCapture backup." };
-    const hasLists = ['notes', 'archivedNotes', 'recipes', 'watchlist', 'mathHistory', 'restaurants', 'habits', 'contacts'].some((k) => k in data);
+    const hasLists = ['notes', 'archivedNotes', 'recipes', 'watchlist', 'mathHistory', 'restaurants', 'habits', 'contacts', 'circle', 'householdPantry'].some((k) => k in data);
     if (!hasLists) return { error: "That file isn't a QuickCapture backup (no notes, recipes or watchlist found)." };
-    for (const k of ['notes', 'archivedNotes', 'recipes', 'watchlist', 'mathHistory', 'restaurants', 'contacts']) if (k in data && !Array.isArray(data[k])) return { error: 'The backup is damaged: "' + k + '" should be a list.' };
+    for (const k of ['notes', 'archivedNotes', 'recipes', 'watchlist', 'mathHistory', 'restaurants', 'contacts', 'circle', 'householdPantry']) if (k in data && !Array.isArray(data[k])) return { error: 'The backup is damaged: "' + k + '" should be a list.' };
     if ('recipeFavorites' in data && (!data.recipeFavorites || typeof data.recipeFavorites !== 'object')) return { error: 'The backup is damaged: "recipeFavorites" is not readable.' };
     if ('weeklyMenu' in data && (!data.weeklyMenu || typeof data.weeklyMenu !== 'object' || Array.isArray(data.weeklyMenu))) return { error: 'The backup is damaged: "weeklyMenu" is not readable.' };
     if ('habits' in data && (!data.habits || typeof data.habits !== 'object' || Array.isArray(data.habits))) return { error: 'The backup is damaged: "habits" is not readable.' };
@@ -7646,9 +8666,14 @@
     const rst = (data.restaurants || []).filter((r) => { const ok = restOk(r); if (!ok) skipped++; return ok; }).map(normRest);
     const cts = (data.contacts || []).filter((c) => { const ok = contactOk(c); if (!ok) skipped++; return ok; }).map(normContact);
     const habits = 'habits' in data ? normHabits(data.habits) : null;
+    const circ = (data.circle || []).filter((c) => { const ok = c && typeof c === 'object' && cleanName(c.name); if (!ok) skipped++; return ok; }).slice(0, 300).map((c) => ({
+      id: String(c.id || uid()).slice(0, 64), name: cleanName(c.name), phone: String(c.phone || '').replace(/[^\d+()\-.\s]/g, '').trim().slice(0, 24), email: String(c.email || '').trim().slice(0, 80), addedAt: +c.addedAt || Date.now(), isHousehold: c.isHousehold === true, linked: c.linked === true }));
+    const pant = normPantry(data.householdPantry);
+    const grp = normGroups(data.chatGroups);
+    const prof = data.userProfile && typeof data.userProfile === 'object' ? { name: cleanName(data.userProfile.name), id: CID_RE.test(data.userProfile.id || '') ? data.userProfile.id : '' } : null;
     const weeklyMenu = 'weeklyMenu' in data ? normMenu(data.weeklyMenu) : null;
     const recipeFavorites = 'recipeFavorites' in data ? normFavs(data.recipeFavorites) : null;
-    return { notes, recipes: recs, watchlist: wl, mathHistory: mh, restaurants: rst, habits, recipeFavorites, weeklyMenu, contacts: cts, skipped };
+    return { notes, recipes: recs, watchlist: wl, mathHistory: mh, restaurants: rst, habits, recipeFavorites, weeklyMenu, contacts: cts, circle: circ, pantry: pant, groups: grp, profile: prof, skipped };
   }
 
   async function importBackup(file) {
@@ -7662,6 +8687,7 @@
 
     flushWatch();
     const prevN = JSON.stringify(state.notes), prevR = JSON.stringify(recipes), prevW = JSON.stringify(watch), prevM = JSON.stringify(mathHist), prevS = JSON.stringify(rests), prevH = JSON.stringify(hab), prevF = JSON.stringify(favs), prevMn = JSON.stringify(menu), prevC = JSON.stringify(contacts);
+    const prevCirc = JSON.stringify(circle), prevPant = JSON.stringify(pantry), prevProf = JSON.stringify(profile), prevGrp = JSON.stringify(groups);
     let addedN = 0, updatedN = 0, addedR = 0, addedW = 0, updatedW = 0, addedM = 0, addedS = 0, updatedS = 0, addedH = 0, updR = 0, addedMn = 0, addedC = 0, updatedC = 0;
     const byId = new Map(state.notes.map((n) => [n.id, n]));
     for (const n of v.notes) {
@@ -7717,22 +8743,34 @@
       if (!hab.reminders.enabled) { hab.reminders.interval = b.reminders.interval; hab.reminders.start = b.reminders.start; hab.reminders.end = b.reminders.end; }   // notification permission is per-browser, so "enabled" is never restored
     }
 
+    let addedCi = 0, updCi = 0, addedPa = 0, profAdopt = 0;
+    const ciById = new Map(circle.map((c) => [c.id, c]));
+    for (const c of v.circle) {
+      const ex = ciById.get(c.id);
+      if (!ex) { circle.push(c); ciById.set(c.id, c); addedCi++; }
+      else if ((!ex.phone && c.phone) || (!ex.email && c.email) || (c.isHousehold && !ex.isHousehold)) { ex.phone = ex.phone || c.phone; ex.email = ex.email || c.email; ex.isHousehold = ex.isHousehold || c.isHousehold; updCi++; }
+    }
+    const paKeys = new Set(pantry.map((x) => x.name.toLowerCase()));
+    for (const x of v.pantry) if (!paKeys.has(x.name.toLowerCase())) { pantry.push(x); paKeys.add(x.name.toLowerCase()); addedPa++; }
+    let addedG = 0; const gIds = new Set(groups.map((g) => g.id)); for (const g of v.groups) if (!gIds.has(g.id)) { groups.push(g); gIds.add(g.id); addedG++; }
+    if (v.profile) { if (!profile.name && v.profile.name) { profile.name = v.profile.name; profAdopt++; } if (!profile.id && v.profile.id) { profile.id = v.profile.id; profAdopt++; } }
+
     const nCount = addedN + updatedN;
-    if (!nCount && !addedR && !wCountR && !addedM && !sCount && !addedH && !updR && !addedMn && !cCount) {
+    if (!nCount && !addedCi && !updCi && !addedPa && !addedG && !profAdopt && !addedR && !wCountR && !addedM && !sCount && !addedH && !updR && !addedMn && !cCount) {
       bkMessage('Nothing new: everything in that backup is already here.' + (v.skipped ? ' (' + v.skipped + ' unreadable item' + (v.skipped === 1 ? '' : 's') + ' skipped.)' : ''));
       return;
     }
-    if (!(persist(true) && persistRecipes(true) && persistWatch(true) && persistMath(true) && persistRests(true) && hbSave(true) && persistFavs(true) && persistMenu(true) && persistContacts(true))) {            // out of space: put everything back exactly as it was
+    if (!(persist(true) && persistRecipes(true) && persistWatch(true) && persistMath(true) && persistRests(true) && hbSave(true) && persistFavs(true) && persistMenu(true) && persistContacts(true) && circSave() && pantrySave() && profSave() && groupsSave())) {            // out of space: put everything back exactly as it was
       state.notes = JSON.parse(prevN); recipes = JSON.parse(prevR); watch = JSON.parse(prevW); mathHist = JSON.parse(prevM); rests = JSON.parse(prevS); hab = JSON.parse(prevH); favs = JSON.parse(prevF); menu = JSON.parse(prevMn); contacts = JSON.parse(prevC);
-      persist(true); persistRecipes(true); persistWatch(true); persistMath(true); persistRests(true); hbSave(true); persistFavs(true); persistMenu(true); persistContacts(true);
+      persist(true); persistRecipes(true); persistWatch(true); persistMath(true); persistRests(true); hbSave(true); persistFavs(true); circle = JSON.parse(prevCirc); pantry = JSON.parse(prevPant); profile = JSON.parse(prevProf); groups = JSON.parse(prevGrp); groupsSave(); persistMenu(true); persistContacts(true); circSave(); pantrySave(); profSave();
       bkMessage('Not enough storage space to restore that backup, so nothing was changed. Export a backup and free some space first.', true);
       updateGauge();
       return;
     }
-    render(); renderRecipes(); renderWatch(); renderRests(); hbRender(); hbRemRender(); mnRender(); renderDir(); dirBadge(); updateGauge();
+    render(); renderRecipes(); renderWatch(); renderRests(); hbRender(); hbRemRender(); mnRender(); renderDir(); dirBadge(); cirRender(); hhRender(); updateGauge();
     closeBackup();
     const rn = nCount + ' note' + (nCount === 1 ? '' : 's'), rr = addedR + ' recipe' + (addedR === 1 ? '' : 's');
-    const extra = (wCountR ? ', ' + wCountR + ' title' + (wCountR === 1 ? '' : 's') : '') + (addedM ? ', ' + addedM + ' math entr' + (addedM === 1 ? 'y' : 'ies') : '') + (sCount ? ', ' + sCount + ' restaurant' + (sCount === 1 ? '' : 's') : '') + (addedH ? ', habit data' : '') + (cCount ? ', ' + cCount + ' contact' + (cCount === 1 ? '' : 's') : '') + (updR ? ', ' + updR + ' recipe update' + (updR === 1 ? '' : 's') : '') + (addedMn ? ', ' + addedMn + ' menu meal' + (addedMn === 1 ? '' : 's') : '');
+    const extra = (wCountR ? ', ' + wCountR + ' title' + (wCountR === 1 ? '' : 's') : '') + (addedM ? ', ' + addedM + ' math entr' + (addedM === 1 ? 'y' : 'ies') : '') + (sCount ? ', ' + sCount + ' restaurant' + (sCount === 1 ? '' : 's') : '') + (addedH ? ', habit data' : '') + (cCount ? ', ' + cCount + ' contact' + (cCount === 1 ? '' : 's') : '') + (addedCi ? ', ' + addedCi + ' circle member' + (addedCi === 1 ? '' : 's') : '') + (addedPa ? ', ' + addedPa + ' pantry item' + (addedPa === 1 ? '' : 's') : '') + (updR ? ', ' + updR + ' recipe update' + (updR === 1 ? '' : 's') : '') + (addedMn ? ', ' + addedMn + ' menu meal' + (addedMn === 1 ? '' : 's') : '');
     toast('Restored ' + (rn + ', ' + rr + extra).replace(/, ([^,]*)$/, ' and $1') + '!');
   }
 
@@ -7860,9 +8898,10 @@
   initHabits();
   initMenu();
   initKitchenTools();
-  try { localStorage.removeItem('quickcapture_ledger'); } catch { /* storage unavailable */ }   // the Pocket Ledger was retired
+  cirRender(); hhRender(); circleInviteCheck(); importCheck(); chatJoinCheck();
+  store.del('quickcapture_ledger');   // the Pocket Ledger was retired
   I_init: {
-    $('#tcHabitI').innerHTML = I.target; $('#tcTimerI').innerHTML = I.hourglass; $('#tcCalcI').innerHTML = I.calc; $('#tcWxI').innerHTML = I.cloudsun;
+    $('#tcCircleI').innerHTML = I.users; $('#tcHouseI').innerHTML = I.home; $('#hhShareI').innerHTML = I.share; $('#hhClose').innerHTML = I.x; $('#shClose').innerHTML = I.x; $('#cirHouseI').innerHTML = I.home; $('#cirShareI').innerHTML = I.share; $('#cirClose').innerHTML = I.x; $('#cirPickClose').innerHTML = I.x; $('#tcHabitI').innerHTML = I.target; $('#tcTimerI').innerHTML = I.hourglass; $('#tcCalcI').innerHTML = I.calc; $('#tcWxI').innerHTML = I.cloudsun;
     $('#kcConvI').innerHTML = I.convert; $('#kcTimersI').innerHTML = I.hourglass; $('#kcRestI').innerHTML = I.clock; $('#kcGrocI').innerHTML = I.cart;
     $('#hcFoodI').innerHTML = I.utensils; $('#hcEatI').innerHTML = I.dice;
   }
