@@ -98,6 +98,15 @@
   body .fab { bottom: calc(76px + env(safe-area-inset-bottom)); }
   body .timers { bottom: calc(146px + env(safe-area-inset-bottom)); }
   body .toast { bottom: calc(144px + env(safe-area-inset-bottom) + var(--tray-h, 0px)); }
+  .mcustom { width: 100%; margin-top: 10px; min-height: 48px; }
+  .mcform { display: grid; gap: 8px; margin-top: 10px; }
+  .mcform input, .mcform select, .mcform textarea { width: 100%; min-height: 44px; border-radius: 10px; border: 1px solid var(--line, #444); background: transparent; color: inherit; font: inherit; padding: 8px 10px; }
+  .mcrow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mcrow .btn { min-height: 44px; }
+  #recBtn.paused { border-color: var(--accent, #888); color: inherit; }
+  .seg.s4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .seg.s4 button { line-height: 1.15; padding: 4px 6px; font-size: .9rem; min-height: 48px; }
+  @media (min-width: 560px) { .seg.s4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .seg.s3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .seg.s3 button { line-height: 1.15; padding: 4px 6px; font-size: .9rem; min-height: 48px; }
   @media (max-width: 360px) { .seg.s3 button { font-size: .8rem; padding: 4px 3px; } .dock .dl { font-size: .62rem; } }
@@ -1490,9 +1499,10 @@
 </div></section>
 
 <section class="page" id="pgCook" data-page="cookbook" aria-label="Kitchen"><div class="wrap">
-  <div class="seg s3" id="kSeg" role="tablist" aria-label="Kitchen sections">
+  <div class="seg s4" id="kSeg" role="tablist" aria-label="Kitchen sections">
     <button id="ksRecipes" type="button" role="tab" aria-selected="true" data-ks="recipes">Recipes</button>
     <button id="ksMenu" type="button" role="tab" aria-selected="false" data-ks="menu">Weekly Menu</button>
+    <button id="ksMeat" type="button" role="tab" aria-selected="false" data-ks="meat">Meat Rest &amp; Defrost</button>
     <button id="ksTools" type="button" role="tab" aria-selected="false" data-ks="tools">Converter &amp; Timers</button>
   </div>
   <div id="kRecipes">
@@ -1538,6 +1548,27 @@
     <div class="cb-head"><h2>This week</h2><span class="count-badge" id="kmCount">0</span></div>
     <div class="km-list" id="kmList"></div>
     <div class="km-btns"><button class="btn primary big" id="kmOpen" type="button"></button><button class="btn big" id="kmGroc" type="button"></button></div>
+  </div>
+  <div id="kMeat" hidden>
+    <div class="cb-head"><h2>Meat Rest &amp; Defrost</h2></div>
+      <section class="mt-sec" aria-labelledby="mtH1">
+        <h3 class="mt-h" id="mtH1">Rest Timer</h3>
+        <div class="mt-chips" id="mtCuts" role="radiogroup" aria-label="Cut of meat"></div>
+        <div id="mtThick" class="mt-in"><span class="mt-l">Thickness</span><div class="mt-chips" id="mtThickChips" role="radiogroup" aria-label="Thickness"></div></div>
+        <div id="mtWt" class="mt-in" hidden><label class="mt-l" for="mtLb">Weight (lb)</label>
+          <div class="hb-step"><button type="button" id="mtLbM" aria-label="Less weight">−</button><input class="hb-in" id="mtLb" inputmode="decimal" maxlength="5" aria-label="Weight in pounds"><button type="button" id="mtLbP" aria-label="More weight">+</button></div></div>
+        <p class="mt-out" id="mtOut" role="status"></p>
+        <p class="mt-note" id="mtNote"></p>
+        <button class="btn primary big" id="mtStart" type="button"><span id="mtStartIco"></span>Start Rest Timer</button>
+      </section>
+      <section class="mt-sec" aria-labelledby="mtH2">
+        <h3 class="mt-h" id="mtH2">Fridge Thaw Estimator</h3>
+        <div class="mt-chips" id="mtThawTypes" role="radiogroup" aria-label="What are you thawing"></div>
+        <div class="mt-in"><label class="mt-l" for="mtTLb">Weight (lb)</label>
+          <div class="hb-step"><button type="button" id="mtTLbM" aria-label="Less weight">−</button><input class="hb-in" id="mtTLb" inputmode="decimal" maxlength="5" aria-label="Weight in pounds"><button type="button" id="mtTLbP" aria-label="More weight">+</button></div></div>
+        <p class="mt-out" id="mtTOut" role="status"></p>
+        <p class="mt-note" id="mtTNote"></p>
+      </section>
   </div>
   <div id="kTools" hidden>
     <div class="cb-head"><h2>Kitchen tools</h2></div>
@@ -1634,9 +1665,9 @@
     <div class="draw-panel" id="drawPanel" hidden></div>
     <div class="tools">
       <button class="tool-btn" id="imgBtn" type="button" aria-label="Add image"><span class="cam-ico" id="camIco"></span><span>Add Image</span></button>
-      <button class="tool-btn" id="micBtn" type="button" aria-pressed="false" aria-label="Dictate with microphone"><span class="mic-ico" id="micIco"></span><span class="dot"></span><span id="micLabel">Dictate</span></button>
       <button class="tool-btn" id="drawBtn" type="button" aria-label="Draw a sketch"><span id="drawIco"></span><span>Draw</span></button>
-      <button class="tool-btn" id="recBtn" type="button" aria-pressed="false" aria-label="Record a voice memo"><span class="vm-ico"><span id="recIco"></span><span class="vm-wave" id="recWave"></span></span><span class="dot"></span><span id="recLabel">Voice Memo</span></button>
+      <button class="tool-btn" id="recBtn" type="button" aria-pressed="false" aria-label="Record a voice memo"><span class="vm-ico"><span id="recIco"></span><span class="vm-wave" id="recWave"></span></span><span class="dot"></span><span id="recLabel">Record Voice Memo</span></button>
+      <button class="tool-btn" id="vmPause" type="button" aria-pressed="false" aria-label="Pause recording" hidden><span id="vmPauseL">Pause</span></button>
       <input type="file" id="fileInput" accept="image/*" hidden>
     </div>
     <div class="att" id="att" hidden></div>
@@ -1815,10 +1846,6 @@
     <div class="grab"></div>
     <div class="sheet-head"><h2 id="tmTitle">Timers</h2><button class="icon-btn" id="tmClose" type="button" aria-label="Close"></button></div>
     <p class="tm-ctx" id="tmCtx" hidden></p>
-    <div class="seg" id="tmTabs" role="tablist" aria-label="Timer tools">
-      <button id="tmTabT" type="button" role="tab" aria-selected="true">Timers</button>
-      <button id="tmTabM" type="button" role="tab" aria-selected="false">Meat Rest &amp; Defrost</button>
-    </div>
     <div id="tmPaneA">
     <div class="tm-presets" role="group" aria-label="Quick add time">
       <button type="button" data-add="60">+1m</button><button type="button" data-add="300">+5m</button><button type="button" data-add="900">+15m</button><button type="button" data-add="1800">+30m</button><button type="button" data-add="3600">+1h</button>
@@ -1833,26 +1860,6 @@
     <input class="tm-field" id="tmLabel" type="text" maxlength="40" placeholder="Label (e.g. Oven Roast, Laundry, Study)" autocomplete="off" aria-label="Timer label">
     <div class="tm-row"><button class="btn primary big" id="tmStart" type="button"><span id="tmStartIco"></span>Start Timer</button><button class="btn big" id="tmClear" type="button">Clear</button></div>
     <p class="tm-msg" id="tmMsg" role="status"></p>
-    </div>
-    <div id="tmPaneB" hidden>
-      <section class="mt-sec" aria-labelledby="mtH1">
-        <h3 class="mt-h" id="mtH1">Rest Timer</h3>
-        <div class="mt-chips" id="mtCuts" role="radiogroup" aria-label="Cut of meat"></div>
-        <div id="mtThick" class="mt-in"><span class="mt-l">Thickness</span><div class="mt-chips" id="mtThickChips" role="radiogroup" aria-label="Thickness"></div></div>
-        <div id="mtWt" class="mt-in" hidden><label class="mt-l" for="mtLb">Weight (lb)</label>
-          <div class="hb-step"><button type="button" id="mtLbM" aria-label="Less weight">−</button><input class="hb-in" id="mtLb" inputmode="decimal" maxlength="5" aria-label="Weight in pounds"><button type="button" id="mtLbP" aria-label="More weight">+</button></div></div>
-        <p class="mt-out" id="mtOut" role="status"></p>
-        <p class="mt-note" id="mtNote"></p>
-        <button class="btn primary big" id="mtStart" type="button"><span id="mtStartIco"></span>Start Rest Timer</button>
-      </section>
-      <section class="mt-sec" aria-labelledby="mtH2">
-        <h3 class="mt-h" id="mtH2">Fridge Thaw Estimator</h3>
-        <div class="mt-chips" id="mtThawTypes" role="radiogroup" aria-label="What are you thawing"></div>
-        <div class="mt-in"><label class="mt-l" for="mtTLb">Weight (lb)</label>
-          <div class="hb-step"><button type="button" id="mtTLbM" aria-label="Less weight">−</button><input class="hb-in" id="mtTLb" inputmode="decimal" maxlength="5" aria-label="Weight in pounds"><button type="button" id="mtTLbP" aria-label="More weight">+</button></div></div>
-        <p class="mt-out" id="mtTOut" role="status"></p>
-        <p class="mt-note" id="mtTNote"></p>
-      </section>
     </div>
     <h3 class="tm-h">Your timers</h3>
     <div class="tm-list" id="tmList" aria-live="off"></div>
@@ -1885,7 +1892,7 @@
         <button class="switch" id="phSw" type="button" role="switch" aria-checked="true" aria-labelledby="phSwLab"><i></i></button>
       </div>
       <button class="btn primary big ph-scan" id="phScan" type="button"><span id="phScanIco"></span>Scan Problem</button>
-      <input type="file" id="phFile" accept="image/*" hidden>
+      <input type="file" id="phFile" accept="image/*" capture="environment" hidden>
       <div class="ph-status" id="phStatus" hidden role="status"><span class="spin"></span><span id="phMsg"></span></div>
       <div class="ph-cands" id="phCands" hidden role="group" aria-label="Problems found in the photo"></div>
       <div class="ph-thumb" id="phThumb" hidden><img alt="Scanned problem"></div>
@@ -2720,7 +2727,7 @@
     const inline = note ? extractTags(note.text) : [];
     draftTags = note ? note.tags.filter((t) => !inline.includes(t)) : [];
     tagInput.value = '';
-    stopDictation(true); vmStop(true);
+    vmStop(true);
     imgToken++; imgPending = null;
     draftImage = note && note.image ? note.image : null;
     draftAudio = note && note.audio ? { url: note.audio.url, dur: note.audio.dur } : null;
@@ -2735,7 +2742,7 @@
   }
 
   function closeSheet() {
-    stopDictation(true); vmStop(true);
+    vmStop(true);
     imgToken++; imgPending = null;
     ov.hidden = true;
     document.body.style.overflow = '';
@@ -2745,7 +2752,6 @@
   async function submitSheet() {
     if (saving) return;
     saving = true;
-    stopDictation(true);
     if (imgPending) { try { await imgPending; } catch { /* already reported */ } }
     await vmStop(false);                              // finish a recording that is still running so it gets saved
     if (ov.hidden) { saving = false; return; }
@@ -3017,73 +3023,6 @@
       }
       inp.focus();
     }
-  }
-
-  /* ---------- Voice dictation ---------- */
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const micBtn = $('#micBtn');
-  let rec = null, wantListening = false, micFatal = false, micHeard = false, sessionAt = 0, sessionGot = false;
-
-  function setMicUI(on) {
-    micBtn.classList.toggle('rec', on);
-    micBtn.setAttribute('aria-pressed', String(on));
-    $('#micLabel').textContent = on ? 'Listening…' : 'Dictate';
-  }
-
-  function startSession() {
-    const r = new SR();
-    r.lang = navigator.language || 'en-US';
-    r.interimResults = true;
-    r.continuous = !/Android/i.test(navigator.userAgent);   // Android Chrome duplicates text in continuous mode
-    const start = ta.selectionStart == null ? ta.value.length : ta.selectionStart;
-    const end = ta.selectionEnd == null ? start : ta.selectionEnd;
-    const before = ta.value.slice(0, start), after = ta.value.slice(end);
-    sessionAt = Date.now(); sessionGot = false;
-
-    r.onresult = (e) => {
-      if (r.ignore) return;
-      let fin = '', interim = '';
-      for (let i = 0; i < e.results.length; i++) {
-        const t = e.results[i][0].transcript;
-        if (e.results[i].isFinal) fin += t; else interim += t;
-      }
-      const said = (fin + interim).replace(/^\s+/, '');
-      if (!said) return;
-      sessionGot = micHeard = true;
-      const pre = before + (before && !/\s$/.test(before) ? ' ' : '');
-      const post = after && !/^\s/.test(after) ? ' ' + after : after;
-      ta.value = pre + said + post;
-      const caret = (pre + said).length;
-      ta.setSelectionRange(caret, caret);
-      ta.dispatchEvent(new Event('input'));
-    };
-    r.onerror = (e) => {
-      if (e.error === 'aborted') return;
-      micFatal = true;
-      const msgs = {
-        'not-allowed': 'Microphone access is blocked', 'service-not-allowed': 'Microphone access is blocked',
-        'audio-capture': 'No microphone found', 'network': 'Speech service unavailable',
-        'no-speech': micHeard ? '' : "Didn't catch anything"
-      };
-      if (msgs[e.error]) toast(msgs[e.error]);
-    };
-    r.onend = () => {
-      if (rec !== r) return;
-      // the browser ends sessions on silence/timeouts; keep going while the user wants to dictate
-      if (wantListening && !micFatal && (sessionGot || Date.now() - sessionAt > 1500)) {
-        try { startSession(); return; } catch { /* fall through to stop */ }
-      }
-      stopDictation(true);
-    };
-    rec = r;
-    r.start();
-  }
-
-  function stopDictation(abort) {
-    wantListening = false;
-    const r = rec; rec = null;
-    if (r) { r.ignore = !!abort; try { if (abort) r.abort(); else r.stop(); } catch { /* already stopped */ } }
-    setMicUI(false);
   }
 
   /* ---------- Lightbox ---------- */
@@ -3578,12 +3517,12 @@
 
   /* Kitchen sub-navigation */
   function setKitchenSeg(seg) {
-    if (!['recipes', 'menu', 'tools'].includes(seg)) seg = 'recipes';
+    if (!['recipes', 'menu', 'meat', 'tools'].includes(seg)) seg = 'recipes';
     state.ks = seg;
-    $('#kRecipes').hidden = seg !== 'recipes'; $('#kMenu').hidden = seg !== 'menu'; $('#kTools').hidden = seg !== 'tools';
+    $('#kRecipes').hidden = seg !== 'recipes'; $('#kMenu').hidden = seg !== 'menu'; $('#kMeat').hidden = seg !== 'meat'; $('#kTools').hidden = seg !== 'tools';
     $('#kSeg').querySelectorAll('[data-ks]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.ks === seg)));
     tagBar.hidden = !(state.view === 'cookbook' && seg === 'recipes');
-    if (seg === 'recipes') renderRecipes(); else if (seg === 'menu') renderKMenu(); else syncToolCards();
+    if (seg === 'recipes') renderRecipes(); else if (seg === 'menu') renderKMenu(); else if (seg === 'meat') mtRender(); else syncToolCards();
     pageTop();
   }
   $('#kSeg').addEventListener('click', (e) => { const b = e.target.closest('[data-ks]'); if (b) setKitchenSeg(b.dataset.ks); });
@@ -3605,7 +3544,7 @@
   $('#kmGroc').addEventListener('click', () => menuToGroceries());
   $('#kcConv').addEventListener('click', () => openConv());
   $('#kcTimers').addEventListener('click', () => openTimerDrawer());
-  $('#kcRest').addEventListener('click', () => { openTimerDrawer(); tmTab('M'); });
+  $('#kcRest').addEventListener('click', () => setKitchenSeg('meat'));
   $('#kcGroc').addEventListener('click', () => {
     if (!state.notes.some((n) => !n.archived && n.tags.includes('groceries'))) { toast('No grocery list yet. Add a recipe or menu to Groceries.'); return; }
     state.archived = false; state.tag = 'groceries'; setView('notes'); render();
@@ -4306,7 +4245,6 @@
   ov.addEventListener('mousedown', (e) => { if (e.target === ov && !ta.value.trim()) closeSheet(); });
   saveBtn.addEventListener('click', submitSheet);
   ta.addEventListener('input', (e) => {
-    if (e.isTrusted && rec) stopDictation(true);   // user started typing: hand control back
     renderChips();
   });
 
@@ -4327,14 +4265,6 @@
     }
   });
 
-  micBtn.addEventListener('click', () => {
-    if (!SR) return;
-    if (vm.mr) { toast('Stop the voice memo first'); return; }
-    if (rec) { stopDictation(false); return; }
-    wantListening = true; micFatal = false; micHeard = false;
-    try { startSession(); setMicUI(true); }
-    catch { stopDictation(true); toast('Voice input is unavailable'); }
-  });
 
   lb.addEventListener('click', closeLightbox);
   ta.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); submitSheet(); } });
@@ -4565,9 +4495,34 @@
     mRes.hidden = false;
     mRes.replaceChildren(h('div', { class: 'mres-h' }, h('span', { text: head || '' }), h('button', { type: 'button', 'data-mclose': '1', 'aria-label': 'Close results', html: I.x })), inner);
   }
+  const normT = (x) => String(x || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9 ]+/g, ' ').replace(/\b(the|a|an)\b/g, ' ').replace(/\s+/g, ' ').trim();
+  // Exact title first, then titles that start with the query, then containing it, then word overlap; the original film (earliest year) beats later remakes and spin-offs.
+  function rankMedia(items, q) {
+    const nq = normT(q), words = nq.split(' ').filter(Boolean);
+    const score = (it) => {
+      const nt = normT(it.title); let sc = 0;
+      if (nt === nq) sc += 1000;
+      else if (nt.startsWith(nq)) sc += 600 - Math.min(200, nt.length - nq.length);
+      else if (nt.includes(nq)) sc += 400 - Math.min(200, nt.length - nq.length);
+      else sc += 100 * (words.filter((w) => nt.split(' ').includes(w)).length / Math.max(1, words.length));
+      if (it.type === 'movie') sc += 20;
+      if (nt === nq && it.year) sc += Math.max(0, 2030 - it.year) / 5;                // classics ahead of same-named remakes
+      return sc;
+    };
+    return items.map((it, i) => [it, score(it), i]).sort((a, b) => b[1] - a[1] || a[2] - b[2]).map((x) => x[0]);
+  }
+  function customBtn(q) { return h('button', { class: 'btn big mcustom', type: 'button', 'data-mcustom': q || '', text: '+ Add Custom Title' }); }
+  function customForm(q) {
+    const yr = h('input', { id: 'mcY', type: 'text', inputmode: 'numeric', maxlength: 4, placeholder: 'Year', 'aria-label': 'Year' });
+    const ttl = h('input', { id: 'mcT', type: 'text', maxlength: 200, placeholder: 'Title', 'aria-label': 'Title' }); ttl.value = q || '';
+    const nt = h('textarea', { id: 'mcN', rows: 2, maxlength: 600, placeholder: 'Notes (optional)', 'aria-label': 'Notes' });
+    const kind = h('select', { id: 'mcK', 'aria-label': 'Type' }, h('option', { value: 'movie', text: 'Movie' }), h('option', { value: 'tv', text: 'TV Show' }));
+    return h('form', { class: 'mcform', 'data-mcform': '1', novalidate: true }, ttl, h('div', { class: 'mcrow' }, yr, kind), nt,
+      h('div', { class: 'mcrow' }, h('button', { class: 'btn primary', type: 'submit', text: 'Add to Watchlist' }), h('button', { class: 'btn', type: 'button', 'data-mcancel': '1', text: 'Cancel' })));
+  }
   function renderResults(q) {
     const head = 'Results for “' + q.slice(0, 40) + '”';
-    if (!mItems.length) { resultsMsg(h('div', { class: 'mmsg', text: 'No matches for “' + q.slice(0, 40) + '”. Try another title.' }), head); return; }
+    if (!mItems.length) { resultsMsg(h('div', {}, h('div', { class: 'mmsg', text: 'No matches for “' + q.slice(0, 40) + '”. Try another title or add it yourself.' }), customBtn(q)), head); return; }
     const row = (it, i) => {
       const added = inList(it);
       return h('button', { class: 'mrow' + (added ? ' added' : ''), type: 'button', 'data-mi': String(i), 'aria-label': (added ? 'On your list: ' : 'Add ') + it.title },
@@ -4582,6 +4537,7 @@
       const rows = mItems.map((it, i) => [it, i]).filter(([it]) => it.type === type);
       if (rows.length) parts.push(h('h4', { class: 'mgroup', text: label }), ...rows.map(([it, i]) => row(it, i)));
     });
+    parts.push(customBtn(q));
     resultsMsg(h('div', {}, parts), head);
   }
   function syncResultRows() {
@@ -4597,24 +4553,27 @@
     if (q.length < 2) { mToken++; mRes.hidden = true; return; }
     const token = ++mToken, enc = encodeURIComponent(q);
     resultsMsg(h('div', { class: 'mmsg' }, h('span', { class: 'spin' }), 'Searching…'), '');
-    const [mv, tv] = await Promise.allSettled([
-      itunesGet('https://itunes.apple.com/search?term=' + enc + '&media=movie&entity=movie,tvShow&limit=8'),
-      itunesGet('https://itunes.apple.com/search?term=' + enc + '&media=tvShow&entity=tvSeason&limit=8')
+    const base = 'https://itunes.apple.com/search?term=' + enc + '&limit=20';
+    const [mv, tv, al] = await Promise.allSettled([
+      itunesGet(base + '&media=movie&entity=movie'),
+      itunesGet(base + '&media=tvShow&entity=tvSeason'),
+      itunesGet(base + '&media=all&attribute=movieTerm&entity=movie')
     ]);
     if (token !== mToken) return;
-    if (mv.status === 'rejected' && tv.status === 'rejected') {
-      resultsMsg(h('div', { class: 'mmsg', text: "Couldn't search right now. Check your connection." }), '');
+    if ([mv, tv, al].every((x) => x.status === 'rejected')) {
+      mItems = [];
+      resultsMsg(h('div', {}, h('div', { class: 'mmsg', text: "Couldn't search right now. Check your connection." }), customBtn(q)), '');
       toast("Couldn't search right now. Check your connection.");
       return;
     }
-    const raw = [].concat(mv.status === 'fulfilled' ? (mv.value.results || []) : [], tv.status === 'fulfilled' ? (tv.value.results || []) : []);
+    const got = (x) => (x.status === 'fulfilled' && x.value && x.value.results) || [];
     const seen = new Map();
-    raw.map(mapItunes).filter(Boolean).forEach((it) => {
+    [].concat(got(mv), got(al), got(tv)).map(mapItunes).filter(Boolean).forEach((it) => {
       const k = it.type + '|' + (it.type === 'tv' ? it.title.toLowerCase() : it.itunesId);
       const ex = seen.get(k);
       if (!ex || (it.year && (!ex.year || it.year < ex.year))) seen.set(k, it);        // one entry per show: its earliest season
     });
-    mItems = [...seen.values()];
+    mItems = rankMedia([...seen.values()], q).slice(0, 20);
     renderResults(q);
   }
   function addFromResult(i) {
@@ -4631,8 +4590,25 @@
   $('#mediaForm').addEventListener('submit', (e) => { e.preventDefault(); searchMedia(mQ.value); });
   mQ.addEventListener('input', () => { clearTimeout(mTimer); const q = mQ.value.trim(); if (q.length < 2) { mToken++; mRes.hidden = true; return; } mTimer = setTimeout(() => searchMedia(q), 400); });
   mQ.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !mRes.hidden) { e.stopPropagation(); mRes.hidden = true; } });
+  mRes.addEventListener('submit', (e) => {
+    const f = e.target.closest('[data-mcform]'); if (!f) return;
+    e.preventDefault();
+    const title = f.querySelector('#mcT').value.trim();
+    if (!title) { toast('Enter a title first'); f.querySelector('#mcT').focus(); return; }
+    const y = parseInt(f.querySelector('#mcY').value, 10), type = f.querySelector('#mcK').value === 'tv' ? 'tv' : 'movie', now = Date.now();
+    const dup = watch.some((w) => w.type === type && w.title.toLowerCase() === title.toLowerCase() && (type === 'tv' || w.year === (y > 1800 ? y : '')));
+    if (dup) { toast('Already on your watchlist'); return; }
+    const w = normWatch({ id: uid(), itunesId: '', title: title.slice(0, 200), year: y > 1800 && y < 2200 ? y : '', type, poster: '', summary: f.querySelector('#mcN').value.trim().slice(0, 1200), genre: '', addedAt: now, updatedAt: now });
+    watch.unshift(w);
+    if (!persistWatch(true)) { watch.shift(); toast('Storage is full: could not save that title'); return; }
+    wLinger.clear(); renderWatch(); mRes.hidden = true;
+    toast('Added “' + title.slice(0, 40) + '” to your Watchlist');
+  });
   mRes.addEventListener('click', (e) => {
     if (e.target.closest('[data-mclose]')) { mRes.hidden = true; return; }
+    const cb = e.target.closest('[data-mcustom]');
+    if (cb) { const f = customForm(cb.dataset.mcustom); cb.replaceWith(f); const t = f.querySelector('#mcT'); t.focus({ preventScroll: true }); return; }
+    if (e.target.closest('[data-mcancel]')) { const f = e.target.closest('[data-mcform]'); f.replaceWith(customBtn(mQ.value.trim())); return; }
     const r = e.target.closest('.mrow');
     if (r) addFromResult(Number(r.dataset.mi));
   });
@@ -5288,7 +5264,6 @@
     if (tmCtx) c.textContent = 'Step ' + (tmCtx.si + 1) + ' · ' + tmCtx.title;
     setDial(0); $('#tmLabel').value = ''; tmMsg('');
     if (tmOv.hidden) { tmPrevOverflow = document.body.style.overflow; }
-    tmTab('T');
     tmOv.hidden = false;
     document.body.classList.add('tm-open');
     document.body.style.overflow = 'hidden';
@@ -5807,6 +5782,28 @@
     const i = Number(b.dataset.ci);
     phIn.value = ph.cands[i]; ph.id = null; phCandsRender(i); phRun(true);
   });
+  // Handwriting-friendly pre-processing: grayscale, contrast stretch, then a global (Otsu) threshold on a canvas.
+  async function phPrep(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = () => rej(new Error('Could not read that image.')); im.src = url; });
+      const sc = Math.min(1, 1800 / Math.max(img.naturalWidth, img.naturalHeight)), w = Math.max(1, Math.round(img.naturalWidth * sc)), hh = Math.max(1, Math.round(img.naturalHeight * sc));
+      const cv2 = document.createElement('canvas'); cv2.width = w; cv2.height = hh;
+      const cx = cv2.getContext('2d', { willReadFrequently: true }); cx.fillStyle = '#fff'; cx.fillRect(0, 0, w, hh); cx.drawImage(img, 0, 0, w, hh);
+      const d = cx.getImageData(0, 0, w, hh), px = d.data, g = new Uint8Array(w * hh), hist = new Array(256).fill(0);
+      for (let i = 0, k = 0; i < px.length; i += 4, k++) { const v = Math.round(0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2]); g[k] = v; hist[v]++; }
+      const tot = g.length; let sum = 0; for (let t = 0; t < 256; t++) sum += t * hist[t];
+      let wB = 0, sB = 0, best = 0, thr = 128;
+      for (let t = 0; t < 256; t++) { wB += hist[t]; if (!wB) continue; const wF = tot - wB; if (!wF) break; sB += t * hist[t]; const mB = sB / wB, mF = (sum - sB) / wF, bt = wB * wF * (mB - mF) * (mB - mF); if (bt > best) { best = bt; thr = t; } }
+      for (let i = 0, k = 0; i < px.length; i += 4, k++) { const v = g[k] > thr ? 255 : 0; px[i] = px[i + 1] = px[i + 2] = v; px[i + 3] = 255; }
+      cx.putImageData(d, 0, 0);
+      return cv2.toDataURL('image/png');
+    } finally { URL.revokeObjectURL(url); }
+  }
+  // Fix common OCR misreads in handwritten maths: x/X -> *, t -> +, l/I -> 1, o/O -> 0.
+  function phSanitize(t) {
+    return String(t || '').replace(/[\r\n]+/g, ' ').replace(/[xX×]/g, '*').replace(/t/g, '+').replace(/[lI|]/g, '1').replace(/[oO]/g, '0').replace(/\s+/g, ' ').trim();
+  }
   async function phScan(file) {
     if (ph.busy) return;
     if (!file || !/^image\//.test(file.type)) { toast('Choose an image file to scan'); return; }
@@ -5815,7 +5812,7 @@
     phStatus('Preparing photo…', false, true);
     let raw = '', ok = false;
     try {
-      const [ocrImg, thumb] = await Promise.all([fileToJpeg(file, 2200, 0.9), fileToJpeg(file, 320, 0.55).catch(() => '')]);
+      const [ocrImg, thumb] = await Promise.all([phPrep(file).catch(() => fileToJpeg(file, 2200, 0.9)), fileToJpeg(file, 320, 0.55).catch(() => '')]);
       ph.thumb = thumb; phThumbPaint();
       phStatus('Loading text engine…', false, true);
       await loadTesseract();
@@ -5831,17 +5828,12 @@
       phStatus("Couldn't scan that photo. " + String((err && err.message) || 'Something went wrong.').slice(0, 140).replace(/[.!?\s]*$/, '.') + ' You can type the equation below instead.', true);
     } finally { ph.busy = false; $('#phScan').disabled = false; }
     if (!ok) return;
-    ph.cands = MX.candidates(raw, calcPref.deg);
-    if (!ph.cands.length) {
-      const first = MX.tidy(raw.split(/\r?\n/).find((l) => l.trim()) || '');
-      phIn.value = first; phCandsRender(-1);
-      phStatus(raw ? "We couldn't find a clear equation. Check the text below, fix any misread symbols and tap Solve." : 'No text was recognized. Try a sharper, well-lit photo, or type the equation below.', true);
-      ph.result = null; phRenderOut();
-      return;
-    }
-    phStatus('');
-    phIn.value = ph.cands[0]; phCandsRender(0); phRun(true);
-    if (ph.cands.length > 1) phStatus('Found ' + ph.cands.length + ' problems. Tap one above to switch.');
+    const clean = phSanitize(raw);
+    ph.cands = [];
+    phCandsRender(-1);
+    phIn.value = clean; ph.result = null; ph.id = null; phRenderOut();
+    if (clean) { phStatus('Review scanned equation, then tap Solve'); try { phIn.focus({ preventScroll: true }); } catch { /* ignore */ } }
+    else phStatus('No text was recognized. Try a sharper, well-lit photo, or type the equation below.', true);
   }
   $('#phScan').addEventListener('click', () => $('#phFile').click());
   $('#phFile').addEventListener('change', (e) => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) phScan(f); });
@@ -6867,13 +6859,14 @@
 
   /* ---------- Voice memo recording (MediaRecorder) ---------- */
   const VM_MAX = 90;                                   // seconds: keeps a memo around 300 KB so notes stay light
-  const vm = { mr: null, stream: null, chunks: [], t0: 0, tick: 0, done: null, discard: false };
+  const vm = { mr: null, stream: null, chunks: [], t0: 0, tick: 0, done: null, discard: false, paused: false, pAt: 0, pMs: 0 };
   const recBtn = $('#recBtn');
   const vmMime = () => (window.MediaRecorder && ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find((t) => MediaRecorder.isTypeSupported(t))) || '';
   const blobToDataUrl = (blob) => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result)); fr.onerror = () => rej(fr.error); fr.readAsDataURL(blob); });
   function vmUI(on, secs) {
     recBtn.classList.toggle('rec', on); recBtn.setAttribute('aria-pressed', String(on));
-    $('#recLabel').textContent = on ? 'Stop · ' + fmtSec(secs || 0) : draftAudio ? 'Re-record' : 'Voice Memo';
+    $('#recLabel').textContent = on ? 'Stop · ' + fmtSec(secs || 0) : draftAudio ? 'Re-record Voice Memo' : 'Record Voice Memo';
+    $('#vmPause').hidden = !on; if (!on) { $('#vmPause').setAttribute('aria-pressed', 'false'); $('#vmPauseL').textContent = 'Pause'; }
     recBtn.setAttribute('aria-label', on ? 'Stop recording' : 'Record a voice memo');
   }
   function renderVmAtt() {
@@ -6882,10 +6875,20 @@
     box.hidden = false; box.classList.add('au-att');
     box.replaceChildren(audioEl(draftAudio), h('button', { class: 'btn', type: 'button', text: 'Remove', 'aria-label': 'Remove voice memo', onclick: () => { draftAudio = null; renderVmAtt(); vmUI(false); } }));
   }
+  const vmElapsed = () => (Date.now() - vm.t0 - vm.pMs - (vm.paused ? Date.now() - vm.pAt : 0)) / 1000;
+  function vmTogglePause() {
+    if (!vm.mr) return;
+    try {
+      if (!vm.paused && vm.mr.state === 'recording') { vm.mr.pause(); vm.paused = true; vm.pAt = Date.now(); }
+      else if (vm.paused && vm.mr.state === 'paused') { vm.mr.resume(); vm.pMs += Date.now() - vm.pAt; vm.paused = false; }
+    } catch { return; }
+    $('#vmPause').setAttribute('aria-pressed', String(vm.paused)); $('#vmPauseL').textContent = vm.paused ? 'Resume' : 'Pause';
+    $('#vmPause').setAttribute('aria-label', vm.paused ? 'Resume recording' : 'Pause recording');
+    $('#recBtn').classList.toggle('paused', vm.paused);
+  }
   async function vmStart() {
     if (vm.mr) return;
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) { toast("Voice memos aren't supported in this browser"); return; }
-    if (rec) stopDictation(true);                      // speech recognition and the recorder compete for the microphone
     if (vmPlaying) vmPlaying.pause();
     let stream;
     try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
@@ -6895,12 +6898,12 @@
     let mr;
     try { mr = new MediaRecorder(stream, Object.assign({ audioBitsPerSecond: 24000 }, mime ? { mimeType: mime } : {})); }
     catch { stream.getTracks().forEach((t) => t.stop()); toast("Couldn't start recording"); return; }
-    vm.mr = mr; vm.stream = stream; vm.chunks = []; vm.discard = false; vm.t0 = Date.now();
+    vm.mr = mr; vm.stream = stream; vm.chunks = []; vm.discard = false; vm.t0 = Date.now(); vm.paused = false; vm.pMs = 0; vm.pAt = 0;
     mr.ondataavailable = (e) => { if (e.data && e.data.size) vm.chunks.push(e.data); };
     vm.done = new Promise((resolve) => {
       mr.onstop = async () => {
         clearInterval(vm.tick); stream.getTracks().forEach((t) => t.stop());
-        const secs = Math.max(1, Math.round((Date.now() - vm.t0) / 1000)), chunks = vm.chunks, type = mr.mimeType || mime || 'audio/webm', drop = vm.discard;
+        const secs = Math.max(1, Math.round(vmElapsed())), chunks = vm.chunks, type = mr.mimeType || mime || 'audio/webm', drop = vm.discard;
         vm.mr = null; vm.stream = null;
         if (!drop && chunks.length) {
           try {
@@ -6915,7 +6918,7 @@
     mr.onerror = () => { toast('Recording stopped unexpectedly'); vmStop(true); };
     mr.start(1000);
     vmUI(true, 0);
-    vm.tick = setInterval(() => { const sec = (Date.now() - vm.t0) / 1000; vmUI(true, sec); if (sec >= VM_MAX) { toast('Reached the ' + VM_MAX + '-second limit'); vmStop(false); } }, 250);
+    vm.tick = setInterval(() => { if (vm.paused) return; const sec = vmElapsed(); vmUI(true, sec); if (sec >= VM_MAX) { toast('Reached the ' + VM_MAX + '-second limit'); vmStop(false); } }, 250);
   }
   function vmStop(discard) {
     if (!vm.mr) return Promise.resolve();
@@ -6925,6 +6928,7 @@
     return p;
   }
   recBtn.addEventListener('click', () => { if (vm.mr) vmStop(false); else vmStart(); });
+  $('#vmPause').addEventListener('click', vmTogglePause);
   window.addEventListener('pagehide', () => vmStop(true));
 
   /* ---------- Kitchen converter ---------- */
@@ -7003,7 +7007,7 @@
   $('#cvClose').addEventListener('click', closeConv);
   cvOv.addEventListener('mousedown', (e) => { if (e.target === cvOv) closeConv(); });
 
-  /* ---------- Meat rest & fridge thaw (Multi-Timer drawer tab) ---------- */
+  /* ---------- Meat rest & fridge thaw (Kitchen tab) ---------- */
   const MT_CUTS = [['steak', 'Steak'], ['pork', 'Pork Chops'], ['brisket', 'Brisket'], ['chicken', 'Whole Chicken']];
   const MT_THICK = [[0.75, '¾"'], [1, '1"'], [1.5, '1½"'], [2, '2"']];
   const MT_THAW = [['poultry', 'Whole Poultry / Roast', 8, 12], ['parts', 'Chicken Parts', 12, 24], ['ground', 'Ground Meat', 12, 24], ['steaks', 'Steaks & Chops', 8, 24], ['fish', 'Fish & Shellfish', 6, 12]];
@@ -7054,14 +7058,6 @@
     toast('Rest timer started: ' + fmtMins(m));
     tmList.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   });
-  function tmTab(w) {
-    const m = w === 'M';
-    $('#tmTabT').setAttribute('aria-selected', String(!m)); $('#tmTabM').setAttribute('aria-selected', String(m));
-    $('#tmPaneA').hidden = m; $('#tmPaneB').hidden = !m;
-    if (m) mtRender();
-  }
-  $('#tmTabT').addEventListener('click', () => tmTab('T'));
-  $('#tmTabM').addEventListener('click', () => tmTab('M'));
 
   /* ---------- Print (recipes and the weekly menu) ---------- */
   const prRoot = $('#printRoot'), prOv = $('#prOv');
@@ -7648,9 +7644,7 @@
   $('#drawIco').innerHTML = I.edit;
   $('#fab').innerHTML = I.plus;
   $('#camIco').innerHTML = I.camera;
-  $('#micIco').innerHTML = I.mic;
   $('#lbClose').innerHTML = I.x;
-  if (!SR) micBtn.hidden = true;   // no Web Speech API: hide the mic quietly
   $('#plusIco').style.display = 'inline-flex';
 
   /* ---------- Home-screen app polish ---------- */
