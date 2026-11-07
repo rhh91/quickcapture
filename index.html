@@ -93,8 +93,6 @@
   .dock button[aria-selected="true"] .dl { font-weight: 800; }
   .dock button[aria-selected="true"]::before { width: 28px; }
   .dock button:active .di { transform: scale(.9); }
-  .dbadge { position: absolute; top: 5px; left: calc(50% + 8px); min-width: 17px; height: 17px; padding: 0 5px; border-radius: 9px; background: var(--accent); color: var(--on-accent); font-size: .65rem; font-weight: 800; display: grid; place-items: center; }
-  .dbadge.warn { background: #f59e0b; color: #1a1200; }
   body .fab { bottom: calc(76px + env(safe-area-inset-bottom)); }
   body .timers { bottom: calc(146px + env(safe-area-inset-bottom)); }
   body .toast { bottom: calc(144px + env(safe-area-inset-bottom) + var(--tray-h, 0px)); }
@@ -1728,9 +1726,9 @@
 
 <nav class="dock" id="dock" role="tablist" aria-label="Main navigation">
   <button id="tabNotes" role="tab" aria-selected="true" type="button"><span class="di" aria-hidden="true">📝</span><span class="dl">Notes</span></button>
-  <button id="tabCook" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🍳</span><span class="dl">Kitchen</span><span class="dbadge" id="tabCount" hidden>0</span></button>
-  <button id="tabWatch" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🎬</span><span class="dl">Watchlist</span><span class="dbadge" id="watchCount" hidden title="Titles you haven't watched yet">0</span></button>
-  <button id="tabHub" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🗂️</span><span class="dl">Hub</span><span class="dbadge warn" id="hubBadge" hidden>0</span></button>
+  <button id="tabCook" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🍳</span><span class="dl">Kitchen</span></button>
+  <button id="tabWatch" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🎬</span><span class="dl">Watchlist</span></button>
+  <button id="tabHub" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">🗂️</span><span class="dl">Hub</span></button>
   <button id="tabTools" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">⚡</span><span class="dl">Tools</span></button>
   <button id="tabChat" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true">💬</span><span class="dl">Chat</span></button>
 </nav>
@@ -3655,7 +3653,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     recipeFeed.replaceChildren(...(list.length ? list.map((r) => recipeCardEl(r)) : [recipeEmpty(!!q || state.rf !== 'all')]));
     refreshBadges();
     $('#rCount').textContent = recipes.length;
-    $('#tabCount').textContent = recipes.length;
     $('#clearQ').hidden = !state.rq;
   }
 
@@ -3930,8 +3927,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     $('#toolGrid').querySelectorAll('.tcard').forEach((c) => { const ok = !q || (c.textContent + ' ' + (c.dataset.kw || '')).toLowerCase().includes(q); c.hidden = !ok; if (ok) n++; });
     $('#toolNone').hidden = n > 0;
   }
-  // badges on the dock only show when there is something to count
-  [['#tabCount'], ['#watchCount']].forEach(([sel]) => { const el = $(sel); const sync = () => { el.hidden = !(+el.textContent > 0); }; new MutationObserver(sync).observe(el, { childList: true, characterData: true, subtree: true }); sync(); });
 
   $('#recipeClose').innerHTML = I.x;
   $('#tabNotes').addEventListener('click', () => setView('notes'));
@@ -4683,9 +4678,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   function flushWatch() { if (wSaveT) { clearTimeout(wSaveT); wSaveT = 0; persistWatch(true); } }
   window.addEventListener('pagehide', flushWatch);
   document.addEventListener('visibilitychange', () => { if (document.hidden) flushWatch(); });
-  window.addEventListener('storage', (e) => { if (e.key === KEY_WATCH) { loadWatch(); if (state.view === 'watch') renderWatch(); else updateWatchBadge(); } });
+  window.addEventListener('storage', (e) => { if (e.key === KEY_WATCH) { loadWatch(); if (state.view === 'watch') renderWatch(); } });
 
-  const updateWatchBadge = () => { $('#watchCount').textContent = watch.filter((w) => !w.watched).length; };
   const WFILTERS = [['all', 'All'], ['unwatched', 'Unwatched'], ['watched', 'Watched'], ['top', 'Top Rated'], ['movie', 'Movies'], ['tv', 'TV Shows']];
   const wMatch = {
     all: () => true, unwatched: (w) => !w.watched, watched: (w) => w.watched,
@@ -4744,7 +4738,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       label, h('span', { class: 'count', text: watch.filter(wMatch[k]).length }))));
   }
   function renderWatch() {
-    updateWatchBadge(); renderWatchFilters();
+    renderWatchFilters();
     $('#wCount').textContent = watch.length;
     const list = watchVisible();
     if (!list.length) {
@@ -4793,7 +4787,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       case 'sum': { const open = t.getAttribute('aria-expanded') !== 'true'; t.setAttribute('aria-expanded', String(open)); t.title = open ? 'Tap to collapse' : 'Tap to expand'; break; }
       case 'watch':
         w.watched = !w.watched; w.watchedAt = w.watched ? Date.now() : null; w.updatedAt = Date.now();
-        wLinger.add(w.id); persistWatch(); updateWatchBadge(); renderWatchFilters(); replaceWatchCard(w);
+        wLinger.add(w.id); persistWatch(); renderWatchFilters(); replaceWatchCard(w);
         if (w.watched) toast('Marked as watched. How was it?');
         break;
       case 'del': pendingDelete = null; pendingRecipe = null; pendingDiscard = false; pendingWatch = w.id; showConfirm({ title: 'Remove from Watchlist?', msg: DEL_MSG, preview: w.title + (w.year ? ' (' + w.year + ')' : ''), ok: 'Remove' }); break;
@@ -8372,7 +8366,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const n = upcoming().filter((e) => e.days <= 7).length, b = $('#dirBtn .badge');
     if (!b) return;
     b.hidden = !n; b.textContent = n; b.style.background = '#f59e0b'; b.style.color = '#1a1200';
-    const hb = $('#hubBadge'); if (hb) { hb.hidden = !n; hb.textContent = n; }
     $('#dirBtn').setAttribute('aria-label', 'Household Directory' + (n ? ', ' + n + ' date' + (n === 1 ? '' : 's') + ' this week' : ''));
   }
   function renderUp() { upPaint('#drStrip', '#drUpSub'); upPaint('#hdStrip', '#hdUpSub'); }
