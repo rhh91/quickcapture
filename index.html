@@ -293,7 +293,10 @@
   .link-chip span.host { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
   /* ---------- Capture tools ---------- */
-  .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+  .tools .tool-btn { justify-content: center; padding-left: 6px; padding-right: 6px; gap: 5px; white-space: nowrap; min-width: 0; }
+  .tools #vmPause { grid-column: 1 / -1; }
+  .tools #vmPause[hidden] { display: none; }
   .tool-btn {
     display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
     border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
@@ -481,6 +484,23 @@
   .icon-btn svg { width: 20px; height: 20px; }
   .icon-btn.live { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
   #tmOv { z-index: 48; }
+  #tmTabs { margin-bottom: 12px; }
+  #alRing { z-index: 95; background: rgba(0, 0, 0, .8); }
+  .al-ring { text-align: center; padding: 28px 20px calc(24px + env(safe-area-inset-bottom)); }
+  .al-bell { font-size: 3.4rem; line-height: 1; animation: alShake .6s ease-in-out infinite; }
+  @keyframes alShake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-14deg); } 75% { transform: rotate(14deg); } }
+  @media (prefers-reduced-motion: reduce) { .al-bell { animation: none; } }
+  .al-time { margin: 4px 0; font-size: 2.4rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .al-sub { margin: 0 0 18px; color: var(--muted); font-size: 1.05rem; overflow-wrap: anywhere; }
+  .al-btns { display: grid; gap: 10px; }
+  .al-l { display: block; margin-top: 4px; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .al-time-in, #alTime { font-size: 1.6rem; font-weight: 800; height: 56px; text-align: center; }
+  .al-presets { grid-template-columns: repeat(3, 1fr); }
+  .al-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); }
+  .al-item .al-when { font-size: 1.35rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .al-item .al-info { flex: 1; min-width: 0; }
+  .al-item .al-info small { display: block; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .al-item button { min-width: 44px; min-height: 44px; border-radius: 12px; border: 1px solid var(--border); background: none; color: var(--text); font: inherit; font-weight: 700; }
   body.tm-open .timers { display: none !important; }
   .tm-ctx { margin: 0 0 8px; padding: 8px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: .86rem; font-weight: 600; overflow-wrap: anywhere; }
   .tm-presets { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 6px 0 14px; }
@@ -1574,7 +1594,7 @@
     <div class="cb-head"><h2>Kitchen tools</h2></div>
     <div class="tgrid">
       <button class="tcard" id="kcConv" type="button" data-kw="unit converter cups grams tablespoon temperature yeast"><span class="ti" id="kcConvI"></span><b>Unit Converter</b><small>Cups, grams, °F/°C, yeast</small></button>
-      <button class="tcard" id="kcTimers" type="button" data-kw="multi timers countdown"><span class="ti" id="kcTimersI"></span><b>Multi-Timers</b><small id="kcTimersS">Run several at once</small></button>
+      <button class="tcard" id="kcTimers" type="button" data-kw="timers alarms alarm clock multi countdown"><span class="ti" id="kcTimersI"></span><b>Timers &amp; Alarms</b><small id="kcTimersS">Timers, alarms, run several</small></button>
       <button class="tcard" id="kcRest" type="button" data-kw="meat rest thaw defrost"><span class="ti" id="kcRestI"></span><b>Meat Rest &amp; Thaw</b><small>Rest after cooking, fridge thaw</small></button>
       <button class="tcard" id="kcGroc" type="button" data-kw="aisle groceries shopping list"><span class="ti" id="kcGrocI"></span><b>Aisle Groceries</b><small id="kcGrocS">Your sorted shopping list</small></button>
     </div>
@@ -1617,7 +1637,7 @@
   <div class="cb-head"><h2>Tools</h2></div>
   <div class="tgrid" id="toolGrid">
     <button class="tcard" id="tcHabit" type="button" data-kw="habit tracker daily reminders"><span class="ti" id="tcHabitI"></span><b>Habit Tracker</b><small id="tcHabitS">Daily micro-habits</small></button>
-    <button class="tcard" id="tcTimer" type="button" data-kw="timers multi countdown"><span class="ti" id="tcTimerI"></span><b>Multi-Timers</b><small id="tcTimerS">Run several at once</small></button>
+    <button class="tcard" id="tcTimer" type="button" data-kw="timers alarms alarm clock multi countdown"><span class="ti" id="tcTimerI"></span><b>Timers &amp; Alarms</b><small id="tcTimerS">Timers, alarms, run several</small></button>
     <button class="tcard" id="tcCalc" type="button" data-kw="calculator math solver photo"><span class="ti" id="tcCalcI"></span><b>Calculator &amp; Solver</b><small>Keypad and photo math</small></button>
     <button class="tcard" id="tcWx" type="button" data-kw="weather forecast temperature"><span class="ti" id="tcWxI"></span><b>Weather</b><small id="tcWxS">Tap to set a city</small></button>
   </div>
@@ -1646,8 +1666,6 @@
     <div class="tpl-bar" id="tplBar" role="group" aria-label="Note template">
       <button type="button" data-tpl="text" aria-pressed="true"><span aria-hidden="true">📝</span>Text</button>
       <button type="button" data-tpl="list" aria-pressed="false"><span aria-hidden="true">☑️</span>List</button>
-      <button type="button" data-tpl="image" aria-pressed="false"><span aria-hidden="true">📷</span>Image</button>
-      <button type="button" data-tpl="audio" aria-pressed="false"><span aria-hidden="true">🎙️</span>Audio</button>
       <button type="button" data-tpl="drawing" aria-pressed="false"><span aria-hidden="true">🎨</span>Drawing</button>
       <button type="button" data-tpl="trip" aria-pressed="false"><span aria-hidden="true">🧳</span>Packing &amp; Trip</button>
     </div>
@@ -1666,7 +1684,7 @@
     <div class="tools">
       <button class="tool-btn" id="imgBtn" type="button" aria-label="Add image"><span class="cam-ico" id="camIco"></span><span>Add Image</span></button>
       <button class="tool-btn" id="drawBtn" type="button" aria-label="Draw a sketch"><span id="drawIco"></span><span>Draw</span></button>
-      <button class="tool-btn" id="recBtn" type="button" aria-pressed="false" aria-label="Record a voice memo"><span class="vm-ico"><span id="recIco"></span><span class="vm-wave" id="recWave"></span></span><span class="dot"></span><span id="recLabel">Record Voice Memo</span></button>
+      <button class="tool-btn" id="recBtn" type="button" aria-pressed="false" aria-label="Record a voice memo"><span class="vm-ico"><span id="recIco"></span><span class="vm-wave" id="recWave"></span></span><span class="dot"></span><span id="recLabel">Voice Memo</span></button>
       <button class="tool-btn" id="vmPause" type="button" aria-pressed="false" aria-label="Pause recording" hidden><span id="vmPauseL">Pause</span></button>
       <input type="file" id="fileInput" accept="image/*" hidden>
     </div>
@@ -1840,12 +1858,26 @@
   </div>
 </div>
 
+<!-- Alarm ringing -->
+<div class="overlay center" id="alRing" hidden>
+  <div class="sheet al-ring" role="alertdialog" aria-modal="true" aria-labelledby="alRingT" aria-describedby="alRingS">
+    <div class="al-bell" aria-hidden="true">⏰</div>
+    <h2 id="alRingT">Alarm</h2>
+    <p class="al-time" id="alRingTime"></p>
+    <p id="alRingS" class="al-sub"></p>
+    <div class="al-btns"><button class="btn primary big" id="alSnooze" type="button">Snooze 5m</button><button class="btn big" id="alDismiss" type="button">Dismiss</button></div>
+  </div>
+</div>
 <!-- Universal timer drawer -->
 <div class="overlay" id="tmOv" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="tmTitle">
     <div class="grab"></div>
-    <div class="sheet-head"><h2 id="tmTitle">Timers</h2><button class="icon-btn" id="tmClose" type="button" aria-label="Close"></button></div>
+    <div class="sheet-head"><h2 id="tmTitle">Timers &amp; Alarms</h2><button class="icon-btn" id="tmClose" type="button" aria-label="Close"></button></div>
     <p class="tm-ctx" id="tmCtx" hidden></p>
+    <div class="seg" id="tmTabs" role="tablist" aria-label="Timers and alarms">
+      <button id="tmTabT" type="button" role="tab" aria-selected="true">Timers</button>
+      <button id="tmTabAl" type="button" role="tab" aria-selected="false">Alarms <span id="alCount"></span></button>
+    </div>
     <div id="tmPaneA">
     <div class="tm-presets" role="group" aria-label="Quick add time">
       <button type="button" data-add="60">+1m</button><button type="button" data-add="300">+5m</button><button type="button" data-add="900">+15m</button><button type="button" data-add="1800">+30m</button><button type="button" data-add="3600">+1h</button>
@@ -1861,8 +1893,22 @@
     <div class="tm-row"><button class="btn primary big" id="tmStart" type="button"><span id="tmStartIco"></span>Start Timer</button><button class="btn big" id="tmClear" type="button">Clear</button></div>
     <p class="tm-msg" id="tmMsg" role="status"></p>
     </div>
+    <div id="tmPaneA2">
     <h3 class="tm-h">Your timers</h3>
     <div class="tm-list" id="tmList" aria-live="off"></div>
+    </div>
+    <div id="alPane" hidden>
+      <div class="tm-presets al-presets" role="group" aria-label="Set an alarm from now">
+        <button type="button" data-aadd="15">+15 min</button><button type="button" data-aadd="30">+30 min</button><button type="button" data-aadd="60">+1 hr</button>
+      </div>
+      <label class="al-l" for="alTime">Alarm time</label>
+      <input class="tm-field al-time" id="alTime" type="time" aria-label="Alarm time">
+      <input class="tm-field" id="alLabel" type="text" maxlength="40" placeholder="Label (e.g. Check oven, Pick up son)" autocomplete="off" aria-label="Alarm label">
+      <div class="tm-row"><button class="btn primary big" id="alSet" type="button">Set Alarm</button></div>
+      <p class="tm-msg" id="alMsg" role="status"></p>
+      <h3 class="tm-h">Your alarms</h3>
+      <div class="tm-list" id="alList"></div>
+    </div>
   </div>
 </div>
 
@@ -5258,7 +5304,8 @@
   function openTimerDrawer(ctx) {
     tmCtx = ctx || null;
     unlockAudio();
-    $('#tmTitle').textContent = tmCtx ? 'Custom Timer' : 'Timers';
+    $('#tmTitle').textContent = tmCtx ? 'Custom Timer' : 'Timers & Alarms';
+    $('#tmTabs').hidden = !!tmCtx; alTab('T');
     const c = $('#tmCtx');
     c.hidden = !tmCtx;
     if (tmCtx) c.textContent = 'Step ' + (tmCtx.si + 1) + ' · ' + tmCtx.title;
@@ -5292,6 +5339,105 @@
   $('#tmClose').addEventListener('click', closeTimerDrawer);
   tmOv.addEventListener('mousedown', (e) => { if (e.target === tmOv) closeTimerDrawer(); });
   $('#timerBtn').addEventListener('click', () => openTimerDrawer());
+
+  /* ---------- Alarms ---------- */
+  const KEY_ALARMS = 'quickcapture_alarms';
+  let alarms = [], alRinging = [], alLoop = 0, alTick = 0, alTimeBefore = '';
+  const alRingEl = $('#alRing'), alList = $('#alList'), alMsgEl = $('#alMsg');
+  const alFmt = (ms) => new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  const alDay = (ms) => { const d = new Date(ms), n = new Date(); const sd = (x) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime(); const diff = Math.round((sd(d) - sd(n)) / 864e5); return diff <= 0 ? 'Today' : diff === 1 ? 'Tomorrow' : d.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' }); };
+  function alLoad() {
+    try {
+      const a = JSON.parse(store.get(KEY_ALARMS) || '[]');
+      alarms = (Array.isArray(a) ? a : []).filter((x) => x && typeof x === 'object' && +x.at > 0).slice(0, 50).map((x) => ({ id: String(x.id || uid()), at: +x.at, label: String(x.label || '').slice(0, 40) }));
+    } catch { alarms = []; }
+  }
+  const alSave = () => { try { store.set(KEY_ALARMS, JSON.stringify(alarms)); } catch { /* storage unavailable */ } };
+  function alMsgSet(m, err) { alMsgEl.textContent = m || ''; alMsgEl.classList.toggle('err', !!err); }
+  function alRender() {
+    const list = alarms.filter((a) => !alRinging.includes(a.id)).sort((a, b) => a.at - b.at);
+    alList.replaceChildren(...(list.length ? list.map((a) => h('div', { class: 'al-item' },
+      h('div', { class: 'al-info' }, h('div', { class: 'al-when', text: alFmt(a.at) }), h('small', { text: alDay(a.at) + (a.label ? ' · ' + a.label : '') })),
+      h('button', { type: 'button', 'data-adel': a.id, 'aria-label': 'Delete alarm ' + alFmt(a.at) + (a.label ? ' ' + a.label : ''), text: 'Delete' })))
+      : [h('p', { class: 'tm-empty', text: 'No alarms yet. Pick a time above.' })]));
+    $('#alCount').textContent = alarms.length ? '(' + alarms.length + ')' : '';
+  }
+  function alTab(w) {
+    const al = w === 'A';
+    $('#tmTabT').setAttribute('aria-selected', String(!al)); $('#tmTabAl').setAttribute('aria-selected', String(al));
+    $('#tmPaneA').hidden = al; $('#tmPaneA2').hidden = al; $('#alPane').hidden = !al;
+    if (al) { alRender(); alMsgSet(''); const d = new Date(Date.now() + 36e5); $('#alTime').value = pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+  }
+  $('#tmTabT').addEventListener('click', () => alTab('T'));
+  $('#tmTabAl').addEventListener('click', () => { unlockAudio(); alTab('A'); });
+  function alAdd(at, label) {
+    if (alarms.length >= 50) { alMsgSet('That is the maximum of 50 alarms.', true); return; }
+    alarms.push({ id: uid(), at, label: String(label || '').trim().slice(0, 40) });
+    alSave(); alRender(); alEnsure();
+    alMsgSet('Alarm set for ' + alDay(at).toLowerCase() + ' at ' + alFmt(at) + '.');
+    $('#alLabel').value = '';
+    try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch { /* optional */ }
+  }
+  $('#alSet').addEventListener('click', () => {
+    unlockAudio();
+    const v = $('#alTime').value;
+    if (!/^\d{1,2}:\d{2}$/.test(v)) { alMsgSet('Choose a time first.', true); $('#alTime').focus(); return; }
+    const [hh, mm] = v.split(':').map(Number), d = new Date(); d.setHours(hh, mm, 0, 0);
+    if (d.getTime() <= Date.now()) d.setDate(d.getDate() + 1);
+    alAdd(d.getTime(), $('#alLabel').value);
+  });
+  $('#alPane').addEventListener('click', (e) => {
+    const p = e.target.closest('[data-aadd]'), dl = e.target.closest('[data-adel]');
+    if (p) { unlockAudio(); const d = new Date(Date.now() + Number(p.dataset.aadd) * 60000); d.setSeconds(0, 0); $('#alTime').value = pad2(d.getHours()) + ':' + pad2(d.getMinutes()); alAdd(d.getTime(), $('#alLabel').value); }
+    else if (dl) { alarms = alarms.filter((a) => a.id !== dl.dataset.adel); alSave(); alRender(); alMsgSet('Alarm deleted.'); }
+  });
+  $('#alLabel').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); $('#alSet').click(); } });
+  function alEnsure() { if (!alTick) alTick = setInterval(alCheck, 1000); }
+  function alCheck() {
+    const now = Date.now();
+    alarms.filter((a) => a.at <= now && !alRinging.includes(a.id)).forEach((a) => { alRinging.push(a.id); alNotify(a, now); });
+    if (alRinging.length && alRingEl.hidden) alShow();
+    if (!alarms.length && !alRinging.length) { clearInterval(alTick); alTick = 0; }
+  }
+  function alNotify(a, now) {
+    try {
+      if (document.hidden && 'Notification' in window && Notification.permission === 'granted')
+        new Notification('QuickCapture Alarm', { body: (a.label || 'Alarm') + ' · ' + alFmt(a.at), tag: 'qc-alarm-' + a.id, requireInteraction: true });
+    } catch { /* some mobile browsers only allow service-worker notifications */ }
+  }
+  const alCur = () => alarms.find((a) => a.id === alRinging[0]);
+  function alRingSound() {
+    chime();
+    try { if (navigator.vibrate) navigator.vibrate([500, 200, 500, 200, 900]); } catch { /* unsupported */ }
+  }
+  function alShow() {
+    const a = alCur();
+    if (!a) { alRingEl.hidden = true; return; }
+    const late = Date.now() - a.at > 90000;
+    $('#alRingT').textContent = a.label || 'Alarm';
+    $('#alRingTime').textContent = alFmt(a.at);
+    $('#alRingS').textContent = (late ? 'Missed alarm · ' : '') + (alRinging.length > 1 ? alRinging.length + ' alarms ringing' : alDay(a.at));
+    if (alRingEl.hidden) { alRingEl.dataset.prev = document.body.style.overflow; document.body.style.overflow = 'hidden'; }
+    alRingEl.hidden = false;
+    clearInterval(alLoop); let n = 0; alRingSound();
+    alLoop = setInterval(() => { if (++n > 30) { clearInterval(alLoop); return; } alRingSound(); }, 4000);   // rings for about two minutes
+    try { $('#alDismiss').focus({ preventScroll: true }); } catch { /* ignore */ }
+  }
+  function alStop(remove) {
+    const a = alCur(); clearInterval(alLoop); alLoop = 0;
+    try { if (navigator.vibrate) navigator.vibrate(0); } catch { /* unsupported */ }
+    return a;
+  }
+  function alAfter() {
+    alRinging.shift(); alSave(); alRender();
+    if (alRinging.length) alShow();
+    else { alRingEl.hidden = true; document.body.style.overflow = alRingEl.dataset.prev || ''; }
+  }
+  $('#alDismiss').addEventListener('click', () => { const a = alStop(); if (a) alarms = alarms.filter((x) => x.id !== a.id); alAfter(); });
+  $('#alSnooze').addEventListener('click', () => { const a = alStop(); if (a) { a.at = Date.now() + 5 * 60000; toast('Snoozed 5 minutes'); } alAfter(); alEnsure(); });
+  document.addEventListener('keydown', (e) => { if (!alRingEl.hidden && e.key !== 'Tab') { e.stopImmediatePropagation(); if (e.key === 'Escape') e.preventDefault(); } }, true);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && alarms.length) alCheck(); });
+  alLoad(); alRender(); if (alarms.length) { alEnsure(); alCheck(); }
 
   /* ---------- Math engine (runs entirely in the browser, no eval) ---------- */
   const MX = (() => {
@@ -6865,7 +7011,7 @@
   const blobToDataUrl = (blob) => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result)); fr.onerror = () => rej(fr.error); fr.readAsDataURL(blob); });
   function vmUI(on, secs) {
     recBtn.classList.toggle('rec', on); recBtn.setAttribute('aria-pressed', String(on));
-    $('#recLabel').textContent = on ? 'Stop · ' + fmtSec(secs || 0) : draftAudio ? 'Re-record Voice Memo' : 'Record Voice Memo';
+    $('#recLabel').textContent = on ? 'Stop · ' + fmtSec(secs || 0) : draftAudio ? 'Re-record' : 'Voice Memo';
     $('#vmPause').hidden = !on; if (!on) { $('#vmPause').setAttribute('aria-pressed', 'false'); $('#vmPauseL').textContent = 'Pause'; }
     recBtn.setAttribute('aria-label', on ? 'Stop recording' : 'Record a voice memo');
   }
@@ -7646,6 +7792,24 @@
   $('#camIco').innerHTML = I.camera;
   $('#lbClose').innerHTML = I.x;
   $('#plusIco').style.display = 'inline-flex';
+
+  /* ---------- App version / cache refresh ---------- */
+  // QuickCapture is one self-contained file, so there is no service worker of its own to version. Bumping this name makes the next
+  // launch delete every older cache and any old service worker, then reload once so the new code is what runs.
+  (function refreshCaches() {
+    const VER = 'quickcapture-v24';
+    try {
+      const seen = store.get('quickcapture_app_version');
+      if (typeof caches !== 'undefined' && caches.keys) caches.keys().then((ks) => Promise.all(ks.filter((k) => /^quickcapture/i.test(k) && k !== VER).map((k) => caches.delete(k)))).catch(() => {});
+      if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations && /^https?:$/.test(location.protocol)) {
+        navigator.serviceWorker.getRegistrations().then((rs) => { rs.forEach((r) => { r.update().catch(() => {}); if (seen !== VER) r.unregister(); }); }).catch(() => {});
+      }
+      store.set('quickcapture_app_version', VER);
+      if (seen && seen !== VER && /^https?:$/.test(location.protocol) && !sessionStorage.getItem('qc_reloaded_' + VER)) {
+        sessionStorage.setItem('qc_reloaded_' + VER, '1'); location.reload();
+      }
+    } catch { /* storage or caches unavailable */ }
+  })();
 
   /* ---------- Home-screen app polish ---------- */
   // iOS ignores SVG touch icons, so render the embedded icon to a PNG; where the page is served over http(s), also give the
