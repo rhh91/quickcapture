@@ -485,6 +485,10 @@
   .icon-btn.live { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
   #tmOv { z-index: 48; }
   #tmTabs { margin-bottom: 12px; }
+  .set-key { display: grid; gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .set-key label b { display: block; } .set-key label small { display: block; color: var(--muted); }
+  .set-key input { width: 100%; height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: .9rem; }
+  .set-key-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .set-key-btns .btn { min-height: 44px; }
   #alRing { z-index: 95; background: rgba(0, 0, 0, .8); }
   .al-ring { text-align: center; padding: 28px 20px calc(24px + env(safe-area-inset-bottom)); }
   .al-bell { font-size: 3.4rem; line-height: 1; animation: alShake .6s ease-in-out infinite; }
@@ -2229,6 +2233,9 @@
       <button class="icon-btn" id="bkClose" type="button" aria-label="Close"></button>
     </div>
     <div class="set-row"><div><b>Appearance</b><small>Switch between dark and light</small></div><button class="icon-btn" id="themeBtn" aria-label="Toggle light / dark theme" title="Toggle theme"></button></div>
+    <div class="set-key"><label for="tmdbKey"><b>TMDB API Key</b><small>Used for Watchlist search. Leave empty to use the built-in key.</small></label>
+      <input id="tmdbKey" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="64" aria-label="TMDB API key">
+      <div class="set-key-btns"><button class="btn" id="tmdbSave" type="button">Save key</button><button class="btn" id="tmdbReset" type="button">Use default</button></div></div>
     <div class="gauge" id="gauge">
       <div class="gauge-top"><b id="gaugeText">Storage: ~0 KB used</b><span id="gaugePct"></span></div>
       <div class="gauge-bar" role="meter" aria-label="Storage used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="gaugeBar"><i id="gaugeFill"></i></div>
@@ -4515,20 +4522,18 @@
   /* --- search --- */
   let mToken = 0, mTimer = 0, mItems = [];
   const resizeArt = (u, w, hgt) => String(u || '').replace(/\/\d+x\d+(?:bb|sr)?\.(jpg|png|webp)(\?.*)?$/i, '/' + w + 'x' + hgt + 'bb.$1');
-  function mapItunes(r) {
-    if (!r || typeof r !== 'object') return null;
-    const movie = r.kind === 'feature-movie' || (r.wrapperType === 'track' && /movie/i.test(r.kind || ''));
-    const tv = r.collectionType === 'TV Season';
-    if (!movie && !tv) return null;
-    const raw = movie ? r.trackName : (r.collectionName || r.artistName);
-    if (!raw) return null;
-    const title = movie ? String(raw) : (String(raw).replace(/,?\s*[([]?(?:season|series|volume|vol\.?|part|book|chapter)\s*\d+.*$/i, '').trim() || String(raw));
-    const y = parseInt(String(r.releaseDate || '').slice(0, 4), 10);
-    const art = r.artworkUrl100 || r.artworkUrl60 || '';
+  const TMDB_DEFAULT = '31d94e7c10ccfdcfed3df07e5f80194c', KEY_TMDB = 'quickcapture_tmdb_key';
+  const tmdbKey = () => { const k = (store.get(KEY_TMDB) || '').trim(); return k || TMDB_DEFAULT; };
+  function mapTmdb(r) {
+    if (!r || typeof r !== 'object' || (r.media_type !== 'movie' && r.media_type !== 'tv')) return null;
+    const tv = r.media_type === 'tv', title = String(r.title || r.name || '').trim();
+    if (!title) return null;
+    const m = String(tv ? r.first_air_date || r.release_date || '' : r.release_date || r.first_air_date || '').match(/^(\d{4})/), y = m ? parseInt(m[1], 10) : 0;
+    const pp = typeof r.poster_path === 'string' && /^\/[\w.-]+$/.test(r.poster_path) ? r.poster_path : '';
     return {
-      itunesId: String(movie ? r.trackId : r.collectionId), type: tv ? 'tv' : 'movie', title: title.slice(0, 200), year: y > 1800 ? y : '',
-      poster: posterOk(resizeArt(art, 400, 600)), thumb: posterOk(resizeArt(art, 160, 240)),
-      summary: String(r.longDescription || r.shortDescription || r.description || '').slice(0, 1200), genre: String(r.primaryGenreName || '').slice(0, 60)
+      itunesId: 'tmdb' + (tv ? 'tv' : 'mv') + r.id, type: tv ? 'tv' : 'movie', title: title.slice(0, 200), year: y > 1800 ? y : '',
+      poster: pp ? posterOk('https://image.tmdb.org/t/p/w500' + pp) : '', thumb: pp ? posterOk('https://image.tmdb.org/t/p/w200' + pp) : '',
+      summary: String(r.overview || '').slice(0, 1200), genre: '', pop: Number(r.popularity) || 0
     };
   }
   async function itunesGet(url) {
@@ -4552,6 +4557,7 @@
       else if (nt.includes(nq)) sc += 400 - Math.min(200, nt.length - nq.length);
       else sc += 100 * (words.filter((w) => nt.split(' ').includes(w)).length / Math.max(1, words.length));
       if (it.type === 'movie') sc += 20;
+      sc += Math.min(60, Math.log10(1 + (it.pop || 0)) * 20);                          // popular hits first
       if (nt === nq && it.year) sc += Math.max(0, 2030 - it.year) / 5;                // classics ahead of same-named remakes
       return sc;
     };
@@ -4599,26 +4605,20 @@
     if (q.length < 2) { mToken++; mRes.hidden = true; return; }
     const token = ++mToken, enc = encodeURIComponent(q);
     resultsMsg(h('div', { class: 'mmsg' }, h('span', { class: 'spin' }), 'Searching…'), '');
-    const base = 'https://itunes.apple.com/search?term=' + enc + '&limit=20';
-    const [mv, tv, al] = await Promise.allSettled([
-      itunesGet(base + '&media=movie&entity=movie'),
-      itunesGet(base + '&media=tvShow&entity=tvSeason'),
-      itunesGet(base + '&media=all&attribute=movieTerm&entity=movie')
-    ]);
-    if (token !== mToken) return;
-    if ([mv, tv, al].every((x) => x.status === 'rejected')) {
+    let data;
+    try { data = await itunesGet('https://api.themoviedb.org/3/search/multi?api_key=' + encodeURIComponent(tmdbKey()) + '&query=' + enc + '&include_adult=false'); }
+    catch (err) {
+      if (token !== mToken) return;
       mItems = [];
-      resultsMsg(h('div', {}, h('div', { class: 'mmsg', text: "Couldn't search right now. Check your connection." }), customBtn(q)), '');
-      toast("Couldn't search right now. Check your connection.");
+      const bad = /HTTP 401/.test(String(err && err.message));
+      const msg = bad ? 'TMDB rejected the API key. Check it in Settings.' : "Couldn't search right now. Check your connection.";
+      resultsMsg(h('div', {}, h('div', { class: 'mmsg', text: msg }), customBtn(q)), '');
+      toast(msg);
       return;
     }
-    const got = (x) => (x.status === 'fulfilled' && x.value && x.value.results) || [];
+    if (token !== mToken) return;
     const seen = new Map();
-    [].concat(got(mv), got(al), got(tv)).map(mapItunes).filter(Boolean).forEach((it) => {
-      const k = it.type + '|' + (it.type === 'tv' ? it.title.toLowerCase() : it.itunesId);
-      const ex = seen.get(k);
-      if (!ex || (it.year && (!ex.year || it.year < ex.year))) seen.set(k, it);        // one entry per show: its earliest season
-    });
+    ((data && data.results) || []).map(mapTmdb).filter(Boolean).forEach((it) => { if (!seen.has(it.itunesId)) seen.set(it.itunesId, it); });
     mItems = rankMedia([...seen.values()], q).slice(0, 20);
     renderResults(q);
   }
@@ -4632,6 +4632,15 @@
     wLinger.clear(); renderWatch(); syncResultRows();
     toast('Added “' + it.title.slice(0, 40) + '” to your Watchlist');
   }
+  const tmdbIn = $('#tmdbKey');
+  tmdbIn.value = tmdbKey();
+  $('#tmdbSave').addEventListener('click', () => {
+    const v = tmdbIn.value.trim();
+    if (v && !/^[A-Za-z0-9]{16,64}$/.test(v)) { toast('That does not look like a TMDB v3 API key'); return; }
+    if (!v || v === TMDB_DEFAULT) store.set(KEY_TMDB, ''); else store.set(KEY_TMDB, v);
+    tmdbIn.value = tmdbKey(); toast('TMDB key saved');
+  });
+  $('#tmdbReset').addEventListener('click', () => { store.set(KEY_TMDB, ''); tmdbIn.value = TMDB_DEFAULT; toast('Using the default TMDB key'); });
   $('#mediaIco').innerHTML = I.search; $('#mediaGo').innerHTML = I.search;
   $('#mediaForm').addEventListener('submit', (e) => { e.preventDefault(); searchMedia(mQ.value); });
   mQ.addEventListener('input', () => { clearTimeout(mTimer); const q = mQ.value.trim(); if (q.length < 2) { mToken++; mRes.hidden = true; return; } mTimer = setTimeout(() => searchMedia(q), 400); });
@@ -7797,7 +7806,7 @@
   // QuickCapture is one self-contained file, so there is no service worker of its own to version. Bumping this name makes the next
   // launch delete every older cache and any old service worker, then reload once so the new code is what runs.
   (function refreshCaches() {
-    const VER = 'quickcapture-v24';
+    const VER = 'quickcapture-v25';
     try {
       const seen = store.get('quickcapture_app_version');
       if (typeof caches !== 'undefined' && caches.keys) caches.keys().then((ks) => Promise.all(ks.filter((k) => /^quickcapture/i.test(k) && k !== VER).map((k) => caches.delete(k)))).catch(() => {});
