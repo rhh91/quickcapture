@@ -264,25 +264,11 @@ window.QC_THEMES = [
   }
   .search .clear svg { position: static; transform: none; width: 16px; height: 16px; }
 
-  /* ---------- List / Board switcher + Kanban ---------- */
+  /* ---------- List / Calendar switcher ---------- */
   .lay { display: flex; gap: 2px; padding: 4px; margin: 0 0 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; width: max-content; max-width: 100%; }
   .lay button { border: 0; background: none; color: var(--muted); font: inherit; font-weight: 700; font-size: .9rem; min-height: 44px; padding: 0 12px; border-radius: 6px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
   .lay button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
-  .feed.board { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; padding: 2px 2px 12px; align-items: flex-start; scrollbar-width: thin; }
-  .kcol { flex: 0 0 min(84vw, 310px); scroll-snap-align: start; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; display: grid; gap: 10px; min-width: 0; }
-  .kcol > h3 { margin: 2px 4px 0; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .kcol > h3 .kn { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 1px 9px; font-size: .78rem; font-weight: 700; letter-spacing: 0; }
-  .kcol[data-col="done"] .card { opacity: .78; }
   .kempty { border: 1.5px dashed var(--border); border-radius: 8px; color: var(--muted); font-size: .85rem; text-align: center; padding: 18px 8px; }
-  .kcol .card { min-width: 0; }
-  .feed.board .card .actions { flex-wrap: wrap; }
-  .feed.board .card .actions .act { flex: 1 0 22%; min-width: 0; }
-  .mv { display: flex; gap: 6px; align-items: center; margin-top: 8px; }
-  .mv button, .mv select { min-height: 44px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 8px; font: inherit; font-weight: 600; font-size: .88rem; cursor: pointer; }
-  .mv button { width: 44px; flex: 0 0 44px; display: grid; place-items: center; font-size: 1.1rem; }
-  .mv button:disabled { opacity: .35; cursor: default; }
-  .mv select { flex: 1; min-width: 0; padding: 0 10px; }
-  @media (min-width: 1000px) { .kcol { flex: 1 1 0; } }
 
   /* ---------- Calendar ---------- */
   .feed.cal { display: block; }
@@ -360,10 +346,10 @@ window.QC_THEMES = [
   }
   .pill:active { transform: scale(.94); }
   .pill:hover { background: color-mix(in srgb, var(--accent) 26%, transparent); }
-  .card .actions { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .card .actions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 4px; margin-top: 8px; padding-top: 4px; border-top: 1px solid var(--border); }
   .act {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: 1;
-    min-height: 44px; padding: 0 6px; border: 0; background: none; color: var(--muted);
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: 0 0 auto;
+    min-width: 44px; min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--muted);
     border-radius: 6px; font-size: .8rem; font-weight: 500;
     transition: background .15s, color .15s, transform .08s;
   }
@@ -625,12 +611,19 @@ window.QC_THEMES = [
   .cm.ai { background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--accent); color: var(--text); }
   .cm .who { display: block; font-size: .72rem; font-weight: 800; margin-bottom: 2px; color: var(--accent); } .cm.ai .who { color: var(--accent); }
   .cm .tx { white-space: pre-wrap; overflow-wrap: anywhere; } .cm .tx a { color: inherit; text-decoration: underline; }
-  .cm img.gif { display: block; max-width: 100%; border-radius: 6px; } .cm audio { display: block; width: 100%; min-width: 200px; max-width: 100%; height: 44px; }
+  /* a viewport-based width (not a % of the shrink-to-fit bubble) so the bubble can never collapse around a not-yet-loaded GIF */
+  .cm img.gif { display: block; width: min(260px, 70vw); max-width: 100%; height: auto; max-height: 340px; object-fit: cover; border-radius: 6px; background: var(--surface); } .cm audio { display: block; width: 100%; min-width: 200px; max-width: 100%; height: 44px; }
   .cm .blocked { font-size: .8rem; opacity: .8; }
-  .cm .spo { position: relative; } .cm .spo.on > * { filter: blur(8px); pointer-events: none; user-select: none; } .cm .spo.on::after { content: 'Spoiler · tap to reveal'; position: absolute; inset: 0; display: grid; place-items: center; font-size: .72rem; font-weight: 800; text-shadow: 0 0 6px rgba(0, 0, 0, .8); color: #fff; cursor: pointer; }
+  /* spoilers: the content itself is frosted and blurred; tap to reveal */
+  .chat-spoiler { filter: blur(6px); transition: filter .2s ease, background-color .2s ease; user-select: none; -webkit-user-select: none; cursor: pointer; background: rgba(255, 255, 255, .12); background: color-mix(in srgb, currentColor 14%, transparent); padding: 1px 6px; border-radius: 4px; display: inline-block; }
+  .chat-spoiler.revealed { filter: blur(0); user-select: text; -webkit-user-select: text; background: transparent; cursor: auto; }
+  .chat-spoiler:not(.revealed) * { pointer-events: none; }
+  .chat-spoiler.media { display: block; padding: 0; background: none; border-radius: 6px; overflow: hidden; filter: blur(14px); }
+  .chat-spoiler.media.revealed { filter: blur(0); }
+  .chat-spoiler:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .cm .savebtn { min-height: 44px; border: 0; background: var(--accent-soft); color: var(--accent); border-radius: 6px; font: inherit; font-weight: 700; font-size: .78rem; padding: 0 10px; margin: 2px 0; cursor: pointer; }
   .cm.mine .savebtn { background: rgba(255,255,255,.18); color: inherit; }
-  .cm .qimg { display: block; max-width: 100%; max-height: 260px; border-radius: 8px; }
+  .cm .qimg { display: block; width: min(260px, 70vw); max-width: 100%; height: auto; max-height: 260px; object-fit: cover; border-radius: 6px; }
   .cm .meta { display: flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: .66rem; opacity: .85; }
   .cm .star { min-width: 44px; min-height: 44px; margin: -12px -10px -12px 0; border: 0; background: none; color: inherit; font-size: 1.15rem; opacity: .7; } .cm .star[aria-pressed="true"] { color: #f5b301; opacity: 1; }
   .ch-empty { margin: auto; color: var(--muted); text-align: center; padding: 20px; }
@@ -664,7 +657,6 @@ window.QC_THEMES = [
   .cir-sec { margin-bottom: 8px; } .cir-row { display: flex; gap: 8px; align-items: center; } .cir-row .tm-field { margin-top: 0; flex: 1; min-width: 0; } .cir-row .btn { min-height: 46px; }
   #cirShare { margin-top: 12px; } #cirShare svg { width: 20px; height: 20px; margin-right: 8px; vertical-align: -4px; }
   .cir-share { margin-top: 12px; text-align: center; } .cir-qr { width: min(100%, 260px); margin: 0 auto; border-radius: 8px; overflow: hidden; border: 6px solid #fff; background: #fff; } .cir-qr svg { display: block; width: 100%; height: auto; stroke: none; }
-  @media (max-width: 360px) { .card .actions { flex-wrap: wrap; } .card .actions .act { flex: 1 0 22%; min-width: 0; } }
   .cir-link { margin: 10px 0; font-size: .72rem; color: var(--muted); word-break: break-all; user-select: all; }
   .cir-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .cir-btns.two { grid-template-columns: 1fr 1fr; } .cir-btns .btn { min-height: 44px; padding: 0 6px; }
   .cir-form { display: grid; gap: 0; } .cir-form .cir-btns { margin-top: 12px; }
@@ -1674,7 +1666,7 @@ window.QC_THEMES = [
   body { font-family: var(--font-family-base); text-shadow: var(--text-glow); font-size: 15px; line-height: 1.4; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
   @media (pointer: coarse) { input, select, textarea { font-size: 16px !important; } }          /* stops iOS zoom-on-focus */
   h1, h2, h3, h4, .brand, .pg-t, .wtitle, .sheet-head h2, .tcard b { letter-spacing: -0.02em; font-weight: 600; }
-  .card .time, .count, .kn, .cal-day, .cal-head h3, .agenda h4, input[type="time"], input[type="date"], input[type="number"] { font-variant-numeric: tabular-nums; }
+  .card .time, .count, .cal-day, .cal-head h3, .agenda h4, input[type="time"], input[type="date"], input[type="number"] { font-variant-numeric: tabular-nums; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .btn.primary, .fab, .tag-btn.active, .seg button[aria-selected="true"], .lay button[aria-pressed="true"], .cal-day.sel, .cm.mine { box-shadow: none; }
 
@@ -1726,11 +1718,7 @@ window.QC_THEMES = [
   .banner { padding: 8px 12px; margin-bottom: 8px; border-radius: 8px; }
   .lay { margin: 0 0 8px; padding: 3px; border-radius: 8px; gap: 2px; }
   .lay button { border-radius: 6px; font-size: .86rem; font-weight: 600; }
-  .kcol { padding: 8px; gap: 8px; border-radius: 8px; flex-basis: min(82vw, 300px); }
-  .kcol > h3 { font-size: .74rem; letter-spacing: .08em; margin: 0 2px; }
   .kempty { padding: 12px 8px; border-radius: 6px; }
-  .mv { margin-top: 4px; }
-  .mv button, .mv select { border-radius: 6px; }
   .cal-grid { gap: 2px; padding: 6px 4px; border-radius: 8px; }
   .cal-day { min-height: 44px; border-radius: 6px; border-width: 1px; font-size: .88rem; gap: 2px; }
   .cal-blank { min-height: 44px; }
@@ -1792,10 +1780,10 @@ window.QC_THEMES = [
   }
 
   html[data-theme="blueprint"] :is(.pg-t, .brand .bn, .wtitle, .tcard b, .cal-head h3) { color: var(--text-primary); }
-  html[data-theme="blueprint"] :is(.card, .tcard, .kcol, .cal-grid, .ch-row-b, .wcard) { border-radius: 4px; }
-  html[data-theme="crt-green"] :is(.card, .tcard, .kcol, .cal-grid, .ch-row-b, .wcard, .btn, .icon-btn, .search input, .tag-btn, .sheet, .dialog), html[data-theme="crt-amber"] :is(.card, .tcard, .kcol, .cal-grid, .ch-row-b, .wcard, .btn, .icon-btn, .search input, .tag-btn, .sheet, .dialog) { border-radius: 2px; }
+  html[data-theme="blueprint"] :is(.card, .tcard, .cal-grid, .ch-row-b, .wcard) { border-radius: 4px; }
+  html[data-theme="crt-green"] :is(.card, .tcard, .cal-grid, .ch-row-b, .wcard, .btn, .icon-btn, .search input, .tag-btn, .sheet, .dialog), html[data-theme="crt-amber"] :is(.card, .tcard, .cal-grid, .ch-row-b, .wcard, .btn, .icon-btn, .search input, .tag-btn, .sheet, .dialog) { border-radius: 2px; }
   html[data-theme="crt-green"] .dock .dl, html[data-theme="crt-amber"] .dock .dl { font-size: 9px; letter-spacing: 0; }
-  html[data-theme="wabi-sabi"] :is(.card, .tcard, .kcol, .wcard, .ch-row-b) { border-radius: 4px; }
+  html[data-theme="wabi-sabi"] :is(.card, .tcard, .wcard, .ch-row-b) { border-radius: 4px; }
   html[data-theme="wabi-sabi"] .btn.primary, html[data-theme="wabi-sabi"] .fab { border-radius: 4px; }
 
   /* Appearance & Themes (Settings) */
@@ -1852,7 +1840,6 @@ window.QC_THEMES = [
     </div>
     <div class="lay" id="layoutSeg" role="group" aria-label="Notes layout">
       <button type="button" data-layout="list" aria-pressed="true">☰ List</button>
-      <button type="button" data-layout="board" aria-pressed="false">▦ Board</button>
       <button type="button" data-layout="calendar" aria-pressed="false">📅 Calendar</button>
     </div>
     <section class="feed" id="feed" aria-live="polite"></section>
@@ -3005,7 +2992,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
 
   /* ---------- State ---------- */
-  const state = { notes: [], tag: 'all', q: '', archived: false, theme: 'dark', rq: '', rf: 'all', wq: '', layout: (() => { try { const v = localStorage.getItem('quickcapture_notes_layout'); return v === 'board' || v === 'calendar' ? v : 'list'; } catch { return 'list'; } })(), calSel: '', calMonth: null, view: ['cookbook', 'watch', 'hub', 'tools'].includes(store.get(KEY_VIEW)) ? store.get(KEY_VIEW) : 'notes', ks: 'recipes' };
+  const state = { notes: [], tag: 'all', q: '', archived: false, theme: 'dark', rq: '', rf: 'all', wq: '', layout: (() => { try { const v = localStorage.getItem('quickcapture_notes_layout'); if (v === 'board') localStorage.setItem('quickcapture_notes_layout', 'list'); return v === 'calendar' ? 'calendar' : 'list'; } catch { return 'list'; } })(), calSel: '', calMonth: null, view: ['cookbook', 'watch', 'hub', 'tools'].includes(store.get(KEY_VIEW)) ? store.get(KEY_VIEW) : 'notes', ks: 'recipes' };
 
   function seed() {
     const now = Date.now(), m = 60000, hr = 3600000, day = 86400000;
@@ -3020,11 +3007,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     ].map((n) => ({ id: uid(), text: n.text, tags: n.tags, createdAt: n.at, pinned: !!n.pinned, archived: false }));
   }
 
-  const COLS = [['inbox', 'Inbox'], ['todo', 'To Do'], ['doing', 'Doing'], ['done', 'Done']];
-  const colOf = (n) => (COLS.some((c) => c[0] === n.column) ? n.column : 'inbox');
-
   const normNote = (n) => ({
-    id: n.id || uid(), column: colOf(n), due: /^\d{4}-\d{2}-\d{2}$/.test(n.due) ? n.due : undefined, text: n.text, tags: Array.isArray(n.tags) ? n.tags.map(String) : extractTags(n.text),
+    id: n.id || uid(), column: n.column, due: /^\d{4}-\d{2}-\d{2}$/.test(n.due) ? n.due : undefined, text: n.text, tags: Array.isArray(n.tags) ? n.tags.map(String) : extractTags(n.text),
     createdAt: Number(n.createdAt) || Date.now(), editedAt: n.editedAt, pinned: !!n.pinned, archived: !!n.archived,
     image: typeof n.image === 'string' && n.image.startsWith('data:image/') ? n.image : undefined,
     audio: n.audio && typeof n.audio.url === 'string' && /^data:audio\//.test(n.audio.url) && n.audio.url.length < 3e6 ? { url: n.audio.url, dur: Math.max(0, Math.min(3600, Number(n.audio.dur) || 0)) } : undefined,
@@ -3265,8 +3249,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         act('edit', I.edit, 'Edit'),
         act('voice', I.wave, n.audio ? 'Re-record' : 'Voice Memo'),
         act('archive', n.archived ? I.unarch : I.archive, n.archived ? 'Restore' : 'Archive'),
-        act('delete', I.trash, 'Delete', 'del')),
-      state.layout === 'board' ? moveRow(n) : null);
+        act('delete', I.trash, 'Delete', 'del')));
   }
 
   /* ---------- Calendar ---------- */
@@ -3319,26 +3302,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     render();
   }
 
-  function moveRow(n) {
-    const i = COLS.findIndex((c) => c[0] === colOf(n));
-    const sel = h('select', { 'data-mvsel': '1', 'aria-label': 'Move to column' },
-      h('option', { value: '', text: 'Move to…', selected: true, disabled: true }),
-      ...COLS.map(([k, label]) => h('option', { value: k, text: label + (k === colOf(n) ? ' (here)' : '') })));
-    return h('div', { class: 'mv' },
-      h('button', { type: 'button', 'data-act': 'mvprev', disabled: i === 0, 'aria-label': 'Move to ' + (COLS[i - 1] || ['', ''])[1], title: 'Previous column', text: '‹' }),
-      sel,
-      h('button', { type: 'button', 'data-act': 'mvnext', disabled: i === COLS.length - 1, 'aria-label': 'Move to ' + (COLS[i + 1] || ['', ''])[1], title: 'Next column', text: '›' }));
-  }
-
-  function moveNote(n, col) {
-    if (!n || !COLS.some((c) => c[0] === col) || colOf(n) === col) return;
-    const was = colOf(n);
-    n.column = col; persist(); render();
-    toast('Moved to ' + COLS.find((c) => c[0] === col)[1], 'Undo', () => { n.column = was; persist(); render(); });
-  }
-
   function setLayout(l) {
-    state.layout = l === 'board' || l === 'calendar' ? l : 'list';
+    state.layout = l === 'calendar' ? 'calendar' : 'list';
     try { localStorage.setItem('quickcapture_notes_layout', state.layout); } catch {}
     render();
   }
@@ -3366,20 +3331,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       .filter((n) => !q || n.text.toLowerCase().includes(q) || n.tags.some((t) => t.includes(q)) || (n.trip && n.trip.dest.toLowerCase().includes(q)))
       .sort((a, b) => (b.pinned - a.pinned) || (b.createdAt - a.createdAt));
 
-    const keepX = feed.scrollLeft;
-    const board = state.layout === 'board' && list.length > 0;
-    feed.classList.toggle('board', board);
     feed.classList.toggle('cal', state.layout === 'calendar');
     if (state.layout === 'calendar') feed.replaceChildren(calEl(list));
-    else if (board) {
-      feed.replaceChildren(...COLS.map(([k, label]) => {
-        const items = list.filter((n) => colOf(n) === k);
-        return h('section', { class: 'kcol', 'data-col': k, 'aria-label': label + ', ' + items.length + ' notes' },
-          h('h3', {}, h('span', { text: label }), h('span', { class: 'kn', text: items.length })),
-          ...(items.length ? items.map(cardEl) : [h('div', { class: 'kempty', text: 'Nothing here' })]));
-      }));
-      feed.scrollLeft = keepX;
-    } else feed.replaceChildren(...(list.length ? list.map(cardEl) : [emptyEl(inView.length)]));
+    else feed.replaceChildren(...(list.length ? list.map(cardEl) : [emptyEl(inView.length)]));
     $('#layoutSeg').querySelectorAll('[data-layout]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.layout === state.layout)));
 
     // chrome
@@ -4897,11 +4851,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       }
       case 'delete':
         askDelete(n); break;
-      case 'mvprev': case 'mvnext': {
-        const i = COLS.findIndex((c) => c[0] === colOf(n)) + (act === 'mvnext' ? 1 : -1);
-        if (COLS[i]) moveNote(n, COLS[i][0]);
-        break;
-      }
       case 'new': openSheet(); break;
       case 'voice': openSheet(n); vmStart(); break;
       case 'reset': state.q = ''; state.tag = 'all'; $('#q').value = ''; render(); break;
@@ -4942,13 +4891,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     }
   });
 
-  feed.addEventListener('change', (e) => {
-    const sel = e.target.closest('[data-mvsel]');
-    if (!sel) return;
-    const card = sel.closest('.card');
-    const n = card && state.notes.find((x) => x.id === card.dataset.id);
-    if (n && sel.value) moveNote(n, sel.value); else sel.value = '';
-  });
   feed.addEventListener('click', calClick);
   $('#dueClr').addEventListener('click', () => { $('#dueInput').value = ''; });
   $('#layoutSeg').addEventListener('click', (e) => {
@@ -6564,15 +6506,36 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       out.push(ok ? h('a', { href: clean, target: '_blank', rel: 'noopener noreferrer', text: clean }) : clean); last = off + clean.length; return u;
     }); out.push(text.slice(last)); return out.filter((x) => x !== '');
   }
+  // a message that is just a GIF link (Giphy page, direct .gif, Tenor media) renders as the animation itself
+  function gifLink(text) {
+    const t = String(text || '').trim();
+    if (!t || /\s/.test(t) || !/^https:\/\//i.test(t)) return '';
+    const pg = /^https:\/\/(?:www\.)?giphy\.com\/(?:gifs|stickers)\/(?:[^/?#]*-)?([A-Za-z0-9]+)\/?(?:[?#].*)?$/i.exec(t);
+    if (pg) return 'https://i.giphy.com/media/' + pg[1] + '/giphy.gif';
+    return okGifHost(t) ? t : '';
+  }
+  function gifImg(url, alt) {
+    const img = h('img', { class: 'gif', src: url, alt: alt || 'GIF', decoding: 'async', referrerpolicy: 'no-referrer' });
+    img.addEventListener('error', () => img.replaceWith(h('span', { class: 'blocked' }, 'This GIF could not load. ', h('a', { href: url, target: '_blank', rel: 'noopener noreferrer', text: 'Open link' }))), { once: true });
+    return img;
+  }
   function msgEl(m, me) {
     const mine = m.senderId === me.id, ai = m.senderId === 'gemini';
     let body = null;
-    if (m.type === 'gif') body = m.mediaUrl ? h('img', { class: 'gif', src: m.mediaUrl, alt: m.text || 'GIF', loading: 'lazy', referrerpolicy: 'no-referrer' }) : h('span', { class: 'blocked', text: 'GIF from an unsupported source was not loaded.' });
-    else if (m.type === 'image') body = m.mediaUrl ? h('img', { class: 'qimg', src: m.mediaUrl, alt: 'Photo', loading: 'lazy' }) : h('span', { class: 'blocked', text: 'Photo unavailable.' });
+    const gl = m.type === 'text' ? gifLink(m.text) : '';
+    if (m.type === 'gif') body = m.mediaUrl ? gifImg(m.mediaUrl, m.text) : h('span', { class: 'blocked', text: 'GIF from an unsupported source was not loaded.' });
+    else if (gl) body = gifImg(gl, m.text);
+    else if (m.type === 'image') body = m.mediaUrl ? h('img', { class: 'qimg', src: m.mediaUrl, alt: 'Photo', decoding: 'async' }) : h('span', { class: 'blocked', text: 'Photo unavailable.' });
     else if (m.type === 'voice') body = m.mediaUrl ? h('audio', { controls: true, preload: 'none', src: m.mediaUrl, 'aria-label': 'Voice message from ' + m.senderName }) : h('span', { class: 'blocked', text: 'Voice message unavailable offline.' });
     else body = h('div', { class: 'tx' }, linkify(m.text));
-    const spo = m.isSpoiler && !chRevealed.has(m.id);
-    const wrap = h('div', { class: 'spo' + (spo ? ' on' : ''), 'data-spo': m.isSpoiler ? m.id : null }, body);
+    let wrap = body;
+    if (m.isSpoiler) {
+      const rev = chRevealed.has(m.id), isTx = body.classList && body.classList.contains('tx');
+      const attrs = { class: 'chat-spoiler' + (isTx ? '' : ' media') + (rev ? ' revealed' : ''), 'data-spo': m.id };
+      if (!rev) Object.assign(attrs, { role: 'button', tabindex: '0', 'aria-label': 'Spoiler. Tap to reveal.' });
+      if (isTx) { body.replaceChildren(h('span', attrs, ...linkify(m.text))); wrap = body; }      // text: the words themselves are frosted
+      else wrap = h('div', attrs, body);                                                          // media: the picture / player is frosted
+    }
     return h('div', { class: 'cm' + (mine ? ' mine' : '') + (ai ? ' ai' : ''), 'data-mid': m.id },
       !mine || ai ? h('span', { class: 'who', text: ai ? '✦ Gemini' : m.senderName }) : null, wrap,
       room && room.kind === 'quickdrop' ? h('button', { class: 'savebtn', type: 'button', 'data-savenote': m.id, text: '📌 Save to Notes' }) : null,
@@ -6639,7 +6602,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   function saveMsgToNotes(m) {
     const gif = m.type === 'gif' && m.mediaUrl;
     const text = [m.text, gif ? m.mediaUrl : ''].filter(Boolean).join('\n').trim();
-    const note = { id: uid(), text, tags: uniq(['quickdrop', ...extractTags(text)]), createdAt: Date.now(), pinned: false, archived: false, column: 'inbox' };
+    const note = { id: uid(), text, tags: uniq(['quickdrop', ...extractTags(text)]), createdAt: Date.now(), pinned: false, archived: false };
     if (m.type === 'image' && m.mediaUrl) note.image = m.mediaUrl;
     if (m.type === 'voice' && m.mediaUrl) note.audio = { url: m.mediaUrl, dur: 0 };
     if (!note.text && !note.image && !note.audio) { toast('Nothing to save from that message'); return; }
@@ -6671,10 +6634,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     try { const url = await chImgPrep(f); if (await postMessage({ type: 'image', mediaUrl: url, text: '' })) toast('Photo dropped'); }
     catch { toast("Couldn't use that photo"); }
   });
+  $('#chMsgs').addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.chat-spoiler:not(.revealed)')) { e.preventDefault(); e.target.click(); } });
   $('#chMsgs').addEventListener('click', async (e) => {
     const sv = e.target.closest('[data-savenote]');
     if (sv) { const m = chMsgsData.find((x) => x.id === sv.dataset.savenote); if (m) saveMsgToNotes(m); return; }
-    const sp = e.target.closest('.spo.on'); if (sp) { chRevealed.add(sp.dataset.spo); sp.classList.remove('on'); return; }
+    const sp = e.target.closest('.chat-spoiler:not(.revealed)'); if (sp) { e.preventDefault(); chRevealed.add(sp.dataset.spo); sp.classList.add('revealed'); sp.removeAttribute('role'); sp.removeAttribute('tabindex'); sp.removeAttribute('aria-label'); return; }
     const st = e.target.closest('[data-star]'); if (!st || !room) return;
     const m = chMsgsData.find((x) => x.id === st.dataset.star); if (!m) return;
     const next = !m.starred;
@@ -6766,7 +6730,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
       let j; try { const res = await fetch(base + 'api_key=' + encodeURIComponent(gifKey()) + '&limit=24&rating=pg', { signal: ctl.signal }); if (!res.ok) throw new Error('HTTP ' + res.status); j = await res.json(); } finally { clearTimeout(t); }
       if (tok !== gifTok) return;
-      const items = ((j && j.data) || []).map((g) => ({ id: String(g.id || ''), title: String(g.title || 'GIF').slice(0, 80), thumb: g.images && g.images.fixed_height_small && g.images.fixed_height_small.url, full: g.images && (g.images.fixed_height && g.images.fixed_height.url) })).filter((g) => okGifHost(g.thumb) && okGifHost(g.full));
+      const items = ((j && j.data) || []).map((g) => ({ id: String(g.id || ''), title: String(g.title || 'GIF').slice(0, 80), thumb: g.images && g.images.fixed_height_small && g.images.fixed_height_small.url, full: g.images && ((g.images.fixed_height && g.images.fixed_height.url) || (g.images.downsized && g.images.downsized.url) || (g.images.original && g.images.original.url)) })).filter((g) => okGifHost(g.thumb) && okGifHost(g.full));
       grid.replaceChildren(...(items.length ? items.map((g) => h('button', { type: 'button', 'data-gif': g.full, 'data-t': g.title, 'aria-label': 'Send GIF: ' + g.title }, h('img', { src: g.thumb, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }))) : [h('p', { text: 'No GIFs found.' })]));
     } catch { if (tok === gifTok) grid.replaceChildren(h('p', { text: 'GIFs are unavailable right now (offline, or the key was rejected).' })); }
   }
