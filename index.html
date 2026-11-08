@@ -170,6 +170,10 @@ window.QC_THEMES = [
   .seg.s4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .seg.s4 button { line-height: 1.15; padding: 4px 6px; font-size: .9rem; min-height: 48px; }
   @media (min-width: 560px) { .seg.s4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .seg.s5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .seg.s5 button { grid-column: span 2; line-height: 1.15; padding: 4px 6px; font-size: .9rem; min-height: 48px; }
+  .seg.s5 button:nth-child(n+4) { grid-column: span 3; }
+  @media (min-width: 560px) { .seg.s5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } .seg.s5 button, .seg.s5 button:nth-child(n+4) { grid-column: auto; } }
   .seg.s3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .seg.s3 button { line-height: 1.15; padding: 4px 6px; font-size: .9rem; min-height: 48px; }
   @media (max-width: 360px) { .seg.s3 button { font-size: .8rem; padding: 4px 3px; } .dock .dl { font-size: .62rem; } }
@@ -1798,6 +1802,73 @@ window.QC_THEMES = [
   .th-opt b { font-size: .84rem; line-height: 1.2; overflow-wrap: anywhere; }
   .th-opt small { color: var(--muted); font-size: .7rem; line-height: 1.2; }
   @media (max-width: 280px) { .th-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ===== Hub accordion, Food switcher & Hub settings (Phase 1) ===== */
+  .hb-top { display: grid; gap: 8px; margin: 0 0 10px; }
+  .hb-card { position: sticky; top: 6px; z-index: 6; display: grid; gap: 8px; padding: 12px; border-radius: 8px; border: 1px solid var(--accent-primary); border-left-width: 4px; background: var(--surface-card); box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+  .hb-card h3 { margin: 0; font-size: 1rem; line-height: 1.3; }
+  .hb-card p { margin: 0; line-height: 1.45; }
+  .hb-card small { color: var(--text-muted); }
+  .hb-card .hb-row { margin: 0; }
+  .hb-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 0; }
+  .hb-row .btn, .hb-card a.btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+  .hb-pin { display: grid; gap: 6px; margin: 0 0 10px; }
+  .hb-pin:empty { display: none; }
+  .hb-note, .hb-none { margin: 6px 0 0; font-size: .82rem; color: var(--text-muted); line-height: 1.4; }
+  .acc { margin: 0 0 8px; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--surface-card); overflow: hidden; }
+  .acc[hidden] { display: none; }
+  .acc-h { display: grid; grid-template-columns: 14px minmax(0, 1fr); grid-template-areas: "c t" ". b"; column-gap: 10px; row-gap: 4px; align-items: center; width: 100%; min-height: 56px; padding: 8px 12px; text-align: left; background: none; border: 0; color: var(--text-primary); font: inherit; touch-action: manipulation; }
+  .ac-c { grid-area: c; font-size: .7rem; color: var(--text-muted); transition: transform .15s; }
+  .acc-h[aria-expanded="true"] .ac-c { transform: rotate(90deg); }
+  .ac-t { grid-area: t; font-weight: 700; }
+  .ac-b { grid-area: b; justify-self: start; max-width: 100%; padding: 2px 8px; border-radius: 6px; background: #0a0a0c; border: 1px solid #27272a; color: #d4d4d8; font: 600 .76rem/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .02em; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .acc-bd { padding: 4px 12px 12px; border-top: 1px solid var(--border-subtle); }
+  .acc-bd .wfilters { margin: 0 0 12px; padding: 0; }
+  .acc-bd .wfilters .tag-btn { min-height: 44px; }
+  .acc-bd .cb-head { flex-wrap: wrap; }
+  .eat-inline { margin: 0 0 14px; padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--surface-card); }
+  .eat-inline[hidden] { display: none; }
+  .eat-inline .cb-head { margin-top: 0; justify-content: space-between; }
+  body > .eat-win { position: fixed; z-index: 80; }
+  .hb-row .btn[hidden] { display: none; }
+  .led-r.g .led-s { white-space: nowrap; }
+  .acc-bd #watch .import-card { margin-top: 8px; }
+  .hb-tf, .hs-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+  .hb-tf button, .hs-chips button { min-height: 44px; min-width: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--surface-card); color: var(--text-primary); font: inherit; font-size: .88rem; font-variant-numeric: tabular-nums; }
+  .hb-tf button[aria-checked="true"], .hs-chips button[aria-checked="true"], .hs-chips button[aria-pressed="true"] { border-color: var(--accent-primary); background: var(--accent-soft); color: var(--accent-text, var(--accent-primary)); font-weight: 800; }
+  .led { margin: 8px 0 0; padding: 4px 10px; border-radius: 8px; background: #0a0a0c; border: 1px solid #27272a; color: #d4d4d8; font: 600 .86rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+  .led-r { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 2px 12px; align-items: center; min-height: 44px; padding: 4px 0; border-bottom: 1px solid #1f1f23; }
+  .led-r:last-child { border-bottom: 0; }
+  .led-r.g { grid-template-columns: minmax(0, 1fr) auto; }
+  .led-s { color: #fbbf24; font-weight: 800; }
+  .led-p { text-align: right; }
+  .led-c.up, .led-y.up { color: #4ade80; } .led-c.dn, .led-y.dn { color: #f87171; } .led-c.fl { color: #a1a1aa; }
+  .led-y { grid-column: 1 / -1; font-size: .78rem; font-weight: 600; }
+  .led-t { text-align: right; color: #a1a1aa; }
+  .led-t.live { color: #4ade80; }
+  .led-e { padding: 12px 0; color: #a1a1aa; }
+  .live-dot { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: #22c55e; animation: hbPulse 1.4s ease-out infinite; vertical-align: middle; }
+  @keyframes hbPulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,.7); } 100% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } }
+  @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+  .hb-pin .led { margin: 0; }
+  .nw-h { margin: 12px 0 2px; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
+  .nw { display: grid; gap: 2px; min-height: 44px; padding: 8px 0; border-bottom: 1px solid var(--border-subtle); color: var(--text-primary); text-decoration: none; }
+  .nw:last-child { border-bottom: 0; }
+  .nw-t { line-height: 1.35; font-weight: 600; overflow-wrap: anywhere; }
+  .nw small { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .nw-s { display: inline-block; margin-right: 6px; padding: 0 5px; border-radius: 4px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-muted); font-size: .72rem; font-weight: 800; vertical-align: 1px; }
+  .hs-card { display: grid; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border-subtle); }
+  .hs-card > small { color: var(--text-muted); margin-top: -6px; }
+  .hs-l { margin-top: 4px; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
+  .hs-f { display: grid; gap: 2px; font-size: .85rem; font-weight: 700; }
+  .hs-f em { font-weight: 500; color: var(--text-muted); }
+  .hs-f .tm-field { margin-top: 4px; }
+  .hs-checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  @media (max-width: 340px) { .hs-checks { grid-template-columns: minmax(0, 1fr); } }
+  .hs-ck { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--surface-card); }
+  .hs-ck input { width: 20px; height: 20px; flex: none; accent-color: var(--accent-primary); }
+  .hs-ck span { font-size: .88rem; } .hs-ck small { display: block; color: var(--text-muted); font-weight: 500; }
+  .hs-sw { align-items: flex-start; } .hs-sw input { margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -1846,12 +1917,13 @@ window.QC_THEMES = [
   </div>
 </div></section>
 
-<section class="page" id="pgCook" data-page="cookbook" aria-label="Kitchen"><div class="wrap">
-  <div class="seg s4" id="kSeg" role="tablist" aria-label="Kitchen sections">
-    <button id="ksRecipes" type="button" role="tab" aria-selected="true" data-ks="recipes">Recipes</button>
-    <button id="ksMenu" type="button" role="tab" aria-selected="false" data-ks="menu">Weekly Menu</button>
-    <button id="ksMeat" type="button" role="tab" aria-selected="false" data-ks="meat">Meat Rest &amp; Defrost</button>
-    <button id="ksTools" type="button" role="tab" aria-selected="false" data-ks="tools">Converter &amp; Timers</button>
+<section class="page" id="pgCook" data-page="cookbook" aria-label="Food"><div class="wrap">
+  <div class="seg s5" id="kSeg" role="tablist" aria-label="Food sections">
+    <button id="ksRecipes" type="button" role="tab" aria-selected="true" data-ks="recipes">📖 Cookbook</button>
+    <button id="ksMenu" type="button" role="tab" aria-selected="false" data-ks="menu">📅 Weekly Menu</button>
+    <button id="ksPantry" type="button" role="tab" aria-selected="false" data-ks="pantry">🥫 Pantry</button>
+    <button id="ksRest" type="button" role="tab" aria-selected="false" data-ks="rest">🍽️ Restaurants</button>
+    <button id="ksMeat" type="button" role="tab" aria-selected="false" data-ks="meat">🥩 Defrost &amp; Timers</button>
   </div>
   <div id="kRecipes">
   <section id="cookbook">
@@ -1897,6 +1969,36 @@ window.QC_THEMES = [
     <div class="km-list" id="kmList"></div>
     <div class="km-btns"><button class="btn primary big" id="kmOpen" type="button"></button><button class="btn big" id="kmGroc" type="button"></button></div>
   </div>
+  <div id="kPantry" hidden>
+    <div class="cb-head"><h2>Shared pantry</h2><span class="count-badge" id="fpCount">0</span></div>
+    <form class="cir-row" id="fpForm" novalidate><input class="tm-field" id="fpAdd" type="text" maxlength="60" autocomplete="off" placeholder="+ Add item (milk, rice, soap…)" aria-label="Add a pantry item"><button class="btn primary" type="submit">Add</button></form>
+    <div id="fpList"></div>
+    <div class="km-btns"><button class="btn primary big" id="fpGroc" type="button"></button><button class="btn big" id="fpShare" type="button">Share household board</button></div>
+  </div>
+  <div id="kRest" hidden>
+    <div class="rs-top-acts">
+      <button class="btn primary big" id="rsEat" type="button"></button>
+      <button class="btn big" id="rsAdd" type="button"></button>
+    </div>
+    <section class="eat-inline" id="eatOv" hidden aria-labelledby="eatTitle">
+      <div class="eat-sheet">
+        <div class="cb-head"><h2 id="eatTitle">Where Should We Eat?</h2><button class="icon-btn" id="eatClose" type="button" aria-label="Close the wheel"></button></div>
+        <nav class="rs-filters" id="eatFilters" aria-label="Only spin among a cuisine"></nav>
+        <div class="eat-wheelbox" id="eatBox">
+          <div class="eat-ptr" aria-hidden="true"></div>
+          <canvas id="eatCanvas" role="img" aria-label="Prize wheel of your selected restaurants"></canvas>
+          <button class="eat-spin" id="eatSpin" type="button">SPIN</button>
+        </div>
+        <p class="eat-hint" id="eatHint" role="status"></p>
+        <div class="eat-selhead"><b id="eatCount"></b><button class="linkbtn" id="eatAll" type="button"></button></div>
+        <div class="eat-list" id="eatList"></div>
+      </div>
+    </section>
+    <div class="cb-head"><h2>Saved restaurants</h2><span class="count-badge" id="hdRc">0</span></div>
+    <label class="rs-search"><span id="rsSearchIco"></span><input id="rsQ" type="search" placeholder="Search name, cuisine, city or order…" autocomplete="off" aria-label="Search restaurants"></label>
+    <nav class="rs-filters" id="rsFilters" aria-label="Filter by cuisine"></nav>
+    <div class="rs-list" id="rsList"></div>
+  </div>
   <div id="kMeat" hidden>
     <div class="cb-head"><h2>Meat Rest &amp; Defrost</h2></div>
       <section class="mt-sec" aria-labelledby="mtH1">
@@ -1929,8 +2031,31 @@ window.QC_THEMES = [
   </div>
 </div></section>
 
-<section class="page" id="pgWatch" data-page="watch" aria-label="Watchlist"><div class="wrap">
-  <section id="watch">
+<section class="page" id="pgHub" data-page="hub" aria-label="Hub"><div class="wrap">
+  <div class="hb-top"><button class="btn primary big" id="hbBright" type="button" aria-expanded="false" aria-controls="hbCard">✨ Brighten My Day</button>
+    <div class="hb-card" id="hbCard" role="region" aria-live="polite" aria-label="A bit of good news" hidden></div></div>
+  <div class="hb-pin" id="hbPin" aria-label="Live games"></div>
+  <p class="hb-none" id="hbEmpty" hidden>All Hub sections are switched off. Turn some on in Settings → Hub &amp; News Configuration.</p>
+  <div id="hbAccs">
+  <section class="acc" data-sec="economy" id="acc-economy">
+    <button class="acc-h" type="button" id="acc-economy-h" aria-expanded="false" aria-controls="acc-economy-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">📈</span> Economy &amp; Rates</span><span class="ac-b" id="hbB-economy">Tap to load</span></button>
+    <div class="acc-bd" id="acc-economy-b" role="region" aria-labelledby="acc-economy-h" hidden><div class="hb-tf" id="hbTf" role="radiogroup" aria-label="Timeframe"><button type="button" role="radio" aria-checked="false" data-tf="24H">24H</button><button type="button" role="radio" aria-checked="false" data-tf="1W">1W</button><button type="button" role="radio" aria-checked="false" data-tf="1M">1M</button><button type="button" role="radio" aria-checked="false" data-tf="YTD">YTD</button><button type="button" role="radio" aria-checked="false" data-tf="ALL">ALL</button></div><div class="led" id="hbEco" aria-live="polite"></div><p class="hb-note" id="hbEcoNote"></p></div>
+  </section>
+  <section class="acc" data-sec="sports" id="acc-sports">
+    <button class="acc-h" type="button" id="acc-sports-h" aria-expanded="false" aria-controls="acc-sports-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">🏈</span> Sports Ticker</span><span class="ac-b" id="hbB-sports">Tap to load</span></button>
+    <div class="acc-bd" id="acc-sports-b" role="region" aria-labelledby="acc-sports-h" hidden><div class="led" id="hbSp" aria-live="polite"></div><div class="hb-row"><button class="btn" id="hbSpAll" type="button" hidden></button></div><p class="hb-note" id="hbSpNote"></p></div>
+  </section>
+  <section class="acc" data-sec="local" id="acc-local">
+    <button class="acc-h" type="button" id="acc-local-h" aria-expanded="false" aria-controls="acc-local-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">📰</span> Local News</span><span class="ac-b" id="hbB-local">Tap to load</span></button>
+    <div class="acc-bd" id="acc-local-b" role="region" aria-labelledby="acc-local-h" hidden><div id="hbLoc"></div></div>
+  </section>
+  <section class="acc" data-sec="politics" id="acc-politics">
+    <button class="acc-h" type="button" id="acc-politics-h" aria-expanded="false" aria-controls="acc-politics-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">🏛️</span> Politics</span><span class="ac-b" id="hbB-politics">Tap to load</span></button>
+    <div class="acc-bd" id="acc-politics-b" role="region" aria-labelledby="acc-politics-h" hidden><div id="hbPol"></div></div>
+  </section>
+  <section class="acc" data-sec="movies" id="acc-movies">
+    <button class="acc-h" type="button" id="acc-movies-h" aria-expanded="false" aria-controls="acc-movies-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">🍿</span> Movies &amp; TV</span><span class="ac-b" id="hbB-movies">Watchlist • Top News</span></button>
+    <div class="acc-bd" id="acc-movies-b" role="region" aria-labelledby="acc-movies-h" hidden><section id="watch">
     <form class="import-card" id="mediaForm" role="search" novalidate>
       <label for="mediaQ" class="imp-title">Add a movie or show</label>
       <div class="msearch">
@@ -1943,22 +2068,13 @@ window.QC_THEMES = [
     <nav class="wfilters" id="wFilters" aria-label="Filter your watchlist"></nav>
     <div class="cb-head"><h2>Your watchlist</h2><span class="count-badge" id="wCount">0</span><button class="btn pick-btn" id="pickBtn" type="button"><span id="pickIco"></span>Pick for Me</button></div>
     <div class="wgrid" id="wGrid" aria-live="polite"></div>
+  </section></div>
   </section>
-</div></section>
-
-<section class="page" id="pgHub" data-page="hub" aria-label="Hub"><div class="wrap">
-  <div class="cb-head"><h2>Restaurants</h2><span class="count-badge" id="hdRc">0</span></div>
-  <div class="tgrid">
-    <button class="tcard" id="hcFood" type="button"><span class="ti" id="hcFoodI"></span><b>Restaurant Directory</b><small id="hcFoodS">Favorites &amp; My Order</small></button>
-    <button class="tcard" id="hcEat" type="button"><span class="ti" id="hcEatI"></span><b>Where to Eat?</b><small>Spin the decider wheel</small></button>
+  <section class="acc" data-sec="hope" id="acc-hope">
+    <button class="acc-h" type="button" id="acc-hope-h" aria-expanded="false" aria-controls="acc-hope-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">✨</span> Hope-Scrolling</span><span class="ac-b" id="hbB-hope">Endless Uplifting Feed</span></button>
+    <div class="acc-bd" id="acc-hope-b" role="region" aria-labelledby="acc-hope-h" hidden><div id="hbHope"></div><div class="hb-row"><button class="btn" id="hbHopeMore" type="button" hidden>Show more</button></div></div>
+  </section>
   </div>
-  <section class="dr-up hd-up" aria-labelledby="hdUpT">
-    <div class="dr-uph"><b id="hdUpT">Upcoming Dates</b><small id="hdUpSub"></small></div>
-    <div class="dr-strip" id="hdStrip" role="list"></div>
-  </section>
-  <div class="cb-head"><h2>Household Directory</h2><span class="count-badge" id="hdCc">0</span><button class="btn pick-btn" id="hdAdd" type="button"></button></div>
-  <nav class="rs-filters" id="hdFilters" aria-label="Filter contacts by relationship"></nav>
-  <div class="rs-list" id="hdList"></div>
 </div></section>
 
 <section class="page" id="pgTools" data-page="tools" aria-label="Tools"><div class="wrap">
@@ -1972,14 +2088,20 @@ window.QC_THEMES = [
     <button class="tcard" id="tcWx" type="button" data-kw="weather forecast temperature"><span class="ti" id="tcWxI"></span><b>Weather</b><small id="tcWxS">Tap to set a city</small></button>
   </div>
   <p class="tg-none" id="toolNone" hidden>No tools match that search.</p>
+  <section class="dr-up hd-up" aria-labelledby="hdUpT">
+    <div class="dr-uph"><b id="hdUpT">Upcoming Dates</b><small id="hdUpSub"></small></div>
+    <div class="dr-strip" id="hdStrip" role="list"></div>
+  </section>
+  <div class="cb-head"><h2>Household Directory</h2><span class="count-badge" id="hdCc">0</span><button class="btn pick-btn" id="hdAdd" type="button"></button></div>
+  <nav class="rs-filters" id="hdFilters" aria-label="Filter contacts by relationship"></nav>
+  <div class="rs-list" id="hdList"></div>
 </div></section>
 </main>
 
 <nav class="dock" id="dock" role="tablist" aria-label="Main navigation">
   <button id="tabNotes" role="tab" aria-selected="true" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span class="dl">Notes</span></button>
-  <button id="tabCook" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v7a2 2 0 0 0 2 2v9M9 3v7a2 2 0 0 1-2 2M7 3v9"/><path d="M17 21V3c-2 1-3.5 3.5-3.5 7 0 2 1 3 3.5 3"/></svg></span><span class="dl">Kitchen</span></button>
-  <button id="tabWatch" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></span><span class="dl">Watchlist</span></button>
-  <button id="tabHub" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="dl">Hub</span></button>
+  <button id="tabCook" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v7a2 2 0 0 0 2 2v9M9 3v7a2 2 0 0 1-2 2M7 3v9"/><path d="M17 21V3c-2 1-3.5 3.5-3.5 7 0 2 1 3 3.5 3"/></svg></span><span class="dl">Food</span></button>
+  <button id="tabHub" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h12a1 1 0 0 1 1 1v13H6a2 2 0 0 1-2-2z"/><path d="M17 9h2a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2h-1"/><path d="M7 9h7M7 13h7M7 16h4"/></svg></span><span class="dl">Hub</span></button>
   <button id="tabTools" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><span class="dl">Tools</span></button>
   <button id="tabChat" role="tab" aria-selected="false" type="button"><span class="di" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span class="dl">Chat</span></button>
 </nav>
@@ -2442,20 +2564,6 @@ window.QC_THEMES = [
 </div>
 
 <!-- Restaurant hub -->
-<div class="overlay" id="restOv" hidden>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="rsTitle">
-    <div class="grab"></div>
-    <div class="sheet-head"><h2 id="rsTitle">Restaurants</h2><button class="icon-btn" id="rsClose" type="button" aria-label="Close"></button></div>
-    <div class="rs-top-acts">
-      <button class="btn primary big" id="rsEat" type="button"></button>
-      <button class="btn big" id="rsAdd" type="button"></button>
-    </div>
-    <label class="rs-search"><span id="rsSearchIco"></span><input id="rsQ" type="search" placeholder="Search name, cuisine, city or order…" autocomplete="off" aria-label="Search restaurants"></label>
-    <nav class="rs-filters" id="rsFilters" aria-label="Filter by cuisine"></nav>
-    <div class="rs-list" id="rsList"></div>
-  </div>
-</div>
-
 <!-- Add / edit restaurant -->
 <div class="overlay" id="rsFormOv" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="rfmTitle">
@@ -2530,24 +2638,9 @@ window.QC_THEMES = [
 </div>
 
 <!-- Where should we eat -->
-<div class="overlay" id="eatOv" hidden>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="eatTitle">
-    <div class="grab"></div>
-    <div class="sheet-head"><h2 id="eatTitle">Where Should We Eat?</h2><button class="icon-btn" id="eatClose" type="button" aria-label="Close"></button></div>
-    <nav class="rs-filters" id="eatFilters" aria-label="Only spin among a cuisine"></nav>
-    <div class="eat-wheelbox" id="eatBox">
-      <div class="eat-ptr" aria-hidden="true"></div>
-      <canvas id="eatCanvas" role="img" aria-label="Prize wheel of your selected restaurants"></canvas>
-      <button class="eat-spin" id="eatSpin" type="button">SPIN</button>
-    </div>
-    <p class="eat-hint" id="eatHint" role="status"></p>
-    <div class="eat-selhead"><b id="eatCount"></b><button class="linkbtn" id="eatAll" type="button"></button></div>
-    <div class="eat-list" id="eatList"></div>
-  </div>
-  <div class="eat-win" id="eatWin" hidden role="dialog" aria-modal="true" aria-labelledby="eatWinName">
-    <canvas class="eat-conf" id="eatConf" aria-hidden="true"></canvas>
-    <div class="eat-wincard" id="eatWinCard"></div>
-  </div>
+<div class="eat-win" id="eatWin" hidden role="dialog" aria-modal="true" aria-labelledby="eatWinName">
+  <canvas class="eat-conf" id="eatConf" aria-hidden="true"></canvas>
+  <div class="eat-wincard" id="eatWinCard"></div>
 </div>
 
 <div class="timers" id="timerTray" hidden aria-live="polite" aria-label="Timers"></div>
@@ -2562,6 +2655,32 @@ window.QC_THEMES = [
     </div>
     <div class="th-sec" id="themeSec"><b id="themeLbl">Appearance &amp; Themes</b><small>Pick a look. It applies instantly and is remembered on this device.</small>
       <div class="th-grid" id="themeGrid" role="radiogroup" aria-labelledby="themeLbl"></div></div>
+    <section class="hs-card" id="hsCard" aria-labelledby="hsT"><b id="hsT">Hub &amp; News Configuration</b><small>Choose what shows in the Hub. Saved on this device.</small>
+      <div class="hs-l">Sections</div>
+      <div class="hs-checks" id="hsSecs">
+        <label class="hs-ck"><input type="checkbox" data-hsec="economy"><span>📈 Economy &amp; Rates</span></label>
+        <label class="hs-ck"><input type="checkbox" data-hsec="sports"><span>🏈 Sports Ticker</span></label>
+        <label class="hs-ck"><input type="checkbox" data-hsec="local"><span>📰 Local News</span></label>
+        <label class="hs-ck"><input type="checkbox" data-hsec="politics"><span>🏛️ Politics</span></label>
+        <label class="hs-ck"><input type="checkbox" data-hsec="movies"><span>🍿 Movies &amp; TV</span></label>
+        <label class="hs-ck"><input type="checkbox" data-hsec="hope"><span>✨ Hope-Scrolling</span></label>
+      </div>
+      <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsPure"><span><b>Pure Hope-Scrolling Mode</b><small>Merge all enabled news feeds into one stream of only positive news</small></span></label>
+      <div class="hs-l">Economy</div>
+      <label class="hs-f"><span>Watchlist symbols (comma-separated)</span><input class="tm-field" id="hsSym" type="text" maxlength="160" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="AAPL, BTC-USD, ETH-USD, ^TNX"></label>
+      <label class="hs-f"><span>My Cost Basis <em>optional</em></span><input class="tm-field" id="hsBasis" type="text" maxlength="160" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ETH-USD:3200, AAPL:210"></label>
+      <div class="hs-f"><span>Default timeframe</span><div class="hs-chips" id="hsTf" role="radiogroup" aria-label="Default timeframe"><button type="button" role="radio" aria-checked="false" data-tf="24H">24H</button><button type="button" role="radio" aria-checked="false" data-tf="1W">1W</button><button type="button" role="radio" aria-checked="false" data-tf="1M">1M</button><button type="button" role="radio" aria-checked="false" data-tf="YTD">YTD</button><button type="button" role="radio" aria-checked="false" data-tf="ALL">ALL</button></div></div>
+      <div class="hs-l">Sports</div>
+      <div class="hs-f"><span>Leagues</span><div class="hs-chips" id="hsLg" role="group" aria-label="Leagues"><button type="button" aria-pressed="false" data-lg="NFL">NFL</button><button type="button" aria-pressed="false" data-lg="NBA">NBA</button><button type="button" aria-pressed="false" data-lg="MLB">MLB</button><button type="button" aria-pressed="false" data-lg="NHL">NHL</button><button type="button" aria-pressed="false" data-lg="MLS">MLS</button></div></div>
+      <label class="hs-f"><span>Favorite Teams</span><input class="tm-field" id="hsTeams" type="text" maxlength="160" autocomplete="off" spellcheck="false" placeholder="Bengals, Browns, Astros"></label>
+      <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsPin"><span><b>Pin Live In-Game Games</b><small>Live games stay at the top of the Hub</small></span></label>
+      <div class="hs-l">Politics</div>
+      <div class="hs-f"><span>Lean</span><div class="hs-chips" id="hsLean" role="radiogroup" aria-label="Lean"><button type="button" role="radio" aria-checked="false" data-lean="left">Left-leaning</button><button type="button" role="radio" aria-checked="false" data-lean="right">Right-leaning</button><button type="button" role="radio" aria-checked="false" data-lean="both">Both (Balanced)</button></div></div>
+      <div class="hs-f"><span>Region</span><div class="hs-chips" id="hsRg" role="radiogroup" aria-label="Region"><button type="button" role="radio" aria-checked="false" data-rg="us">American</button><button type="button" role="radio" aria-checked="false" data-rg="ca">Canadian</button><button type="button" role="radio" aria-checked="false" data-rg="both">Both</button></div></div>
+      <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsBadges"><span><b>Source badges</b><small>Show [AP], [Reuters], [CBC], [The Hill] on stories</small></span></label>
+      <div class="hs-l">Local News</div>
+      <label class="hs-f"><span>Locations (separate with semicolons)</span><input class="tm-field" id="hsLocs" type="text" maxlength="160" autocomplete="off" spellcheck="false" placeholder="Houston, TX; Calgary, AB"></label>
+    </section>
     <div class="set-row"><div><b>My Circle</b><small>Friends &amp; family, share via QR or text</small></div><button class="btn" id="bkCircle" type="button">Open</button></div>
     <div class="set-key"><label for="tmdbKey"><b>TMDB API Key</b><small>Used for Watchlist search. Leave empty to use the built-in key.</small></label>
       <input id="tmdbKey" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="64" aria-label="TMDB API key">
@@ -3715,7 +3834,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const CF_RE = /just a moment\.\.\.|cf-browser-verification|challenge-platform|_cf_chl_opt|cf-chl-|attention required!? ?\|? ?cloudflare|checking your browser before accessing|enable javascript and cookies to continue/i;
   const isChallenge = (html) => CF_RE.test(String(html).slice(0, 300000));
 
-  function curQ() { return state.view === 'cookbook' ? state.rq : state.view === 'watch' ? state.wq : state.view === 'hub' ? drv.q : state.view === 'tools' ? toolQ : state.q; }
+  function curQ() { return state.view === 'cookbook' ? state.rq : state.view === 'hub' ? state.wq : state.view === 'tools' ? toolQ : state.q; }
   function safeHttp(u, base) {
     try { const x = new URL(String(u), base); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch { return ''; }
   }
@@ -4154,8 +4273,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     toast('Recipe deleted');
   }
 
-  const VIEWS = ['notes', 'cookbook', 'watch', 'hub', 'tools'];
-  const PH = { notes: ['Search notes and tags…', 'Search notes'], cookbook: ['Search recipes, ingredients and #tags…', 'Search recipes'], watch: ['Filter your watchlist…', 'Filter your watchlist'], hub: ['Search name, role or city…', 'Search contacts'], tools: ['Find a tool…', 'Find a tool'] };
+  const VIEWS = ['notes', 'cookbook', 'hub', 'tools'];
+  const PH = { notes: ['Search notes and tags…', 'Search notes'], cookbook: ['Search recipes, ingredients and #tags…', 'Search recipes'], hub: ['Filter your watchlist…', 'Filter your watchlist'], tools: ['Find a tool…', 'Find a tool'] };
   let toolQ = '', pgLock = 0, pgLockT = 0;
   const pagerEl = $('#pager');
   function pageTop(smooth) { const pg = document.querySelector('.page[data-page="' + state.view + '"]'); if (pg) pg.scrollTo({ top: 0, behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' }); }
@@ -4166,13 +4285,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const prev = state.view, i = VIEWS.indexOf(v);
     state.view = v; store.set(KEY_VIEW, v);
     VIEWS.forEach((x) => { const pg = document.querySelector('.page[data-page="' + x + '"]'); if (pg) pg.inert = x !== v; });
-    ['#tabNotes', '#tabCook', '#tabWatch', '#tabHub', '#tabTools'].forEach((sel, j) => { const b = $(sel); b.setAttribute('aria-selected', String(j === i)); if (j === i) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    ['#tabNotes', '#tabCook', '#tabHub', '#tabTools'].forEach((sel, j) => { const b = $(sel); b.setAttribute('aria-selected', String(j === i)); if (j === i) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     tagBar.hidden = !(v === 'notes' || (v === 'cookbook' && state.ks === 'recipes'));
     $('#fab').hidden = v !== 'notes';
     const q = $('#q');
     q.value = curQ(); q.placeholder = PH[v][0]; q.setAttribute('aria-label', PH[v][1]);
     $('#clearQ').hidden = !q.value;
-    if (v === 'cookbook') renderRecipes(); else if (v === 'watch') { wLinger.clear(); renderWatch(); } else if (v === 'notes') render(); else if (v === 'hub') renderHubPage(); else syncToolCards();
+    if (v === 'cookbook') setKitchenSeg(state.ks || 'recipes', true); else if (v === 'notes') render(); else if (v === 'hub') renderHubPage(); else { syncToolCards(); renderDir(); }
     if (o.fromScroll) return;
     if (prev === v && !o.instant) { pageTop(true); return; }
     const w = pagerEl.clientWidth, instant = o.instant || matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4193,14 +4312,15 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   window.addEventListener('resize', () => { pagerEl.scrollTo({ left: VIEWS.indexOf(state.view) * pagerEl.clientWidth, behavior: 'auto' }); });
 
   /* Kitchen sub-navigation */
-  function setKitchenSeg(seg) {
-    if (!['recipes', 'menu', 'meat', 'tools'].includes(seg)) seg = 'recipes';
+  function setKitchenSeg(seg, keep) {
+    if (seg === 'tools') seg = 'meat';
+    if (!['recipes', 'menu', 'pantry', 'rest', 'meat'].includes(seg)) seg = 'recipes';
     state.ks = seg;
-    $('#kRecipes').hidden = seg !== 'recipes'; $('#kMenu').hidden = seg !== 'menu'; $('#kMeat').hidden = seg !== 'meat'; $('#kTools').hidden = seg !== 'tools';
+    $('#kRecipes').hidden = seg !== 'recipes'; $('#kMenu').hidden = seg !== 'menu'; $('#kPantry').hidden = seg !== 'pantry'; $('#kRest').hidden = seg !== 'rest'; if (seg !== 'rest' && typeof closeEat === 'function') closeEat(); $('#kMeat').hidden = seg !== 'meat'; $('#kTools').hidden = seg !== 'meat';
     $('#kSeg').querySelectorAll('[data-ks]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.ks === seg)));
     tagBar.hidden = !(state.view === 'cookbook' && seg === 'recipes');
-    if (seg === 'recipes') renderRecipes(); else if (seg === 'menu') renderKMenu(); else if (seg === 'meat') mtRender(); else syncToolCards();
-    pageTop();
+    if (seg === 'recipes') renderRecipes(); else if (seg === 'menu') renderKMenu(); else if (seg === 'pantry') { pantryLoad(); pantryRender(); } else if (seg === 'rest') renderRests(); else { mtRender(); syncToolCards(); }
+    if (!keep) pageTop();
   }
   $('#kSeg').addEventListener('click', (e) => { const b = e.target.closest('[data-ks]'); if (b) setKitchenSeg(b.dataset.ks); });
   function renderKMenu() {
@@ -4228,9 +4348,318 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   });
 
   /* Hub + Tools pages */
-  function renderHubPage() { renderDir(); $('#hdRc').textContent = rests.length; $('#hdCc').textContent = contacts.length; $('#hcFoodS').textContent = rests.length ? rests.length + ' saved · My Order' : 'Favorites & My Order'; }
-  $('#hcFood').addEventListener('click', () => openHub());
-  $('#hcEat').addEventListener('click', () => openEat());
+  /* ---------- Hub: accordion panels, settings, live data ---------- */
+  const KEY_HUBSET = 'quickcapture_hub_settings', KEY_HUBCACHE = 'quickcapture_hub_cache';
+  const HB_IDS = ['economy', 'sports', 'local', 'politics', 'movies', 'hope'];
+  const HB_LG = { NFL: ['football/nfl', 'Q'], NBA: ['basketball/nba', 'Q'], MLB: ['baseball/mlb', ''], NHL: ['hockey/nhl', 'P'], MLS: ['soccer/usa.1', ''] };
+  const HB_TFS = { '24H': ['1d', '5m', 1], '1W': ['5d', '30m', 7], '1M': ['1mo', '1d', 30], YTD: ['ytd', '1d', 365], ALL: ['max', '1mo', 'max'] };
+  const CG_IDS = { 'BTC-USD': 'bitcoin', 'ETH-USD': 'ethereum', 'SOL-USD': 'solana', 'DOGE-USD': 'dogecoin', 'XRP-USD': 'ripple', 'ADA-USD': 'cardano', 'LTC-USD': 'litecoin' };
+  const RATE_LBL = { '^TNX': '10Y', '^FVX': '5Y', '^TYX': '30Y', '^IRX': '13W' };
+  const HB_DEF = { enabled: { economy: true, sports: true, local: true, politics: true, movies: true, hope: true }, pure: false, symbols: 'AAPL, BTC-USD, ETH-USD, ^TNX', basis: '', tf: '24H', leagues: ['NFL'], teams: '', pinLive: true, lean: 'both', region: 'both', badges: true, locations: 'Houston, TX; Calgary, AB' };
+  const strOr = (v, d, n) => (typeof v === 'string' ? v.slice(0, n || 160) : d);
+  function normHub(j) {
+    j = j && typeof j === 'object' ? j : {};
+    const en = {}; HB_IDS.forEach((k) => { en[k] = j.enabled && typeof j.enabled[k] === 'boolean' ? j.enabled[k] : true; });
+    const lg = (Array.isArray(j.leagues) ? j.leagues : HB_DEF.leagues).filter((x) => HB_LG[x]);
+    return {
+      enabled: en, pure: j.pure === true, symbols: strOr(j.symbols, HB_DEF.symbols), basis: strOr(j.basis, ''), tf: HB_TFS[j.tf] ? j.tf : '24H',
+      leagues: lg.length ? lg : ['NFL'], teams: strOr(j.teams, ''), pinLive: j.pinLive !== false, lean: ['left', 'right', 'both'].includes(j.lean) ? j.lean : 'both',
+      region: ['us', 'ca', 'both'].includes(j.region) ? j.region : 'both', badges: j.badges !== false, locations: strOr(j.locations, HB_DEF.locations)
+    };
+  }
+  let hbs; try { hbs = normHub(JSON.parse(localStorage.getItem(KEY_HUBSET) || '{}')); } catch { hbs = normHub({}); }
+  let hbCache = {}; try { hbCache = JSON.parse(localStorage.getItem(KEY_HUBCACHE) || '{}') || {}; } catch { hbCache = {}; }
+  const hbSaveCache = () => { try { const ks = Object.keys(hbCache); if (ks.length > 60) ks.sort((a, b) => (hbCache[a].t || 0) - (hbCache[b].t || 0)).slice(0, ks.length - 60).forEach((k) => delete hbCache[k]); localStorage.setItem(KEY_HUBCACHE, JSON.stringify(hbCache)); } catch { /* cache is optional */ } };
+  const hbPut = (k, v) => { hbCache[k] = { t: Date.now(), v }; hbSaveCache(); };
+  const hbGet = (k, ttl) => { const c = hbCache[k]; return c && Date.now() - c.t < ttl ? c.v : null; };
+  const hbOld = (k) => (hbCache[k] ? hbCache[k].v : null);
+  const hbSyms = () => [...new Set(hbs.symbols.split(/[\s,;]+/).map((x) => x.trim().toUpperCase().replace(/[^A-Z0-9.^=\-]/g, '')).filter(Boolean))].slice(0, 12);
+  const hbBasisMap = () => { const o = {}; hbs.basis.split(/[,;]+/).forEach((x) => { const m = x.trim().toUpperCase().match(/^([A-Z0-9.^=\-]+)\s*[:=]\s*\$?([0-9]*\.?[0-9]+)$/); if (m && +m[2] > 0) o[m[1]] = +m[2]; }); return o; };
+  const hbTeams = () => hbs.teams.split(/[,;]+/).map((x) => x.trim().toLowerCase()).filter(Boolean).slice(0, 12);
+  const hbLocs = () => hbs.locations.split(/;/).map((x) => x.trim()).filter(Boolean).slice(0, 3);
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function hbJson(url, ms) {
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms || 12000);
+    try { const r = await fetch(url, { signal: ctl.signal, credentials: 'omit' }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); } finally { clearTimeout(t); }
+  }
+  const hbBadge = (id, t) => { const el = $('#hbB-' + id); if (el) el.textContent = t; };
+  const hvFmt = (n, d) => Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const hbPrice = (n) => '$' + (n >= 1000 ? hvFmt(n, 0) : n >= 1 ? hvFmt(n, 2) : hvFmt(n, 4));
+  const hvPct = (n) => (n >= 0 ? '▲ ' : '▼ ') + hvFmt(Math.abs(n), 1) + '%';
+
+  /* Economy */
+  async function hbQuote(sym, tf) {
+    const ck = 'q:' + sym + ':' + tf, c = hbGet(ck, 120000); if (c) return c;
+    const rg = HB_TFS[tf]; let out = null;
+    try {
+      const j = await hbJson('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(sym) + '?range=' + rg[0] + '&interval=' + rg[1]);
+      const r = j.chart.result[0], cl = (r.indicators.quote[0].close || []).filter((n) => n != null), p = r.meta.regularMarketPrice != null ? r.meta.regularMarketPrice : cl[cl.length - 1];
+      const first = tf === '24H' && r.meta.chartPreviousClose ? r.meta.chartPreviousClose : cl[0];
+      if (p != null && first) out = { p, d: p - first, ch: (p / first - 1) * 100 };
+    } catch { /* try the fallback */ }
+    if (!out && CG_IDS[sym]) {
+      try {
+        const j = await hbJson('https://api.coingecko.com/api/v3/coins/' + CG_IDS[sym] + '/market_chart?vs_currency=usd&days=' + rg[2]), pr = j.prices || [];
+        if (pr.length) { const f = pr[0][1], p = pr[pr.length - 1][1]; out = { p, d: p - f, ch: (p / f - 1) * 100 }; }
+      } catch { /* offline or rate limited */ }
+    }
+    if (out) { hbPut(ck, out); return out; }
+    const old = hbOld(ck); return old ? Object.assign({ stale: true }, old) : null;
+  }
+  let hbEcoSeq = 0, hbEcoRows = [];
+  function hbEcoPaint() {
+    const el = $('#hbEco'); if (!el) return; const basis = hbBasisMap();
+    if (!hbEcoRows.length) { el.replaceChildren(h('div', { class: 'led-e', text: 'Add ticker symbols in Settings → Hub & News Configuration.' })); return; }
+    el.replaceChildren(...hbEcoRows.map(({ s: sym, q }) => {
+      const rate = RATE_LBL[sym], lbl = rate ? rate + ' YIELD' : sym;
+      if (!q) return h('div', { class: 'led-r' }, h('b', { class: 'led-s', text: lbl }), h('span', { class: 'led-p', text: '—' }), h('span', { class: 'led-c fl', text: '—' }));
+      const up = q.ch >= 0, cl = Math.abs(q.ch) < 0.005 ? 'fl' : up ? 'up' : 'dn';
+      const kids = [h('b', { class: 'led-s', text: lbl + (q.stale ? ' ·old' : '') }), h('span', { class: 'led-p', text: rate ? hvFmt(q.p, 2) + '%' : hbPrice(q.p) }),
+        h('span', { class: 'led-c ' + cl, text: rate ? (q.d >= 0 ? '▲ ' : '▼ ') + hvFmt(Math.abs(q.d), 2) + ' pts' : hvPct(q.ch) })];
+      if (basis[sym] && !rate) { const g = (q.p / basis[sym] - 1) * 100, gd = q.p - basis[sym]; kids.push(h('span', { class: 'led-y ' + (g >= 0 ? 'up' : 'dn'), text: 'You ' + (g >= 0 ? '+' : '−') + hvFmt(Math.abs(g), 1) + '% · ' + (gd >= 0 ? '+' : '−') + hbPrice(Math.abs(gd)) + '/unit (cost ' + hbPrice(basis[sym]) + ')' })); }
+      return h('div', { class: 'led-r' }, ...kids);
+    }));
+    const a = hbEcoRows.find((r) => r.q && !RATE_LBL[r.s]), b = hbEcoRows.find((r) => r.q && RATE_LBL[r.s]), parts = [];
+    if (a) parts.push(a.s + ' ' + hbPrice(a.q.p) + ' ' + hvPct(a.q.ch)); if (b) parts.push(RATE_LBL[b.s] + ': ' + hvFmt(b.q.p, 2) + '%');
+    hbBadge('economy', parts.length ? parts.join(' • ') : hbEcoRows.some((r) => r.q) ? 'Rates only' : 'Unavailable offline');
+    $('#hbEcoNote').textContent = hbEcoRows.some((r) => !r.q) ? 'Some quotes couldn’t be loaded (offline or the data source blocked the request). Shown as —; nothing is estimated.' : 'Market data is delayed and for information only.';
+  }
+  async function hbEco() {
+    const syms = hbSyms(), seq = ++hbEcoSeq;
+    if (!hbEcoRows.length || hbEcoRows.map((r) => r.s).join() !== syms.join()) hbEcoRows = syms.map((s) => ({ s, q: hbOld('q:' + s + ':' + hbs.tf) }));
+    hbEcoPaint();
+    if (!syms.length) { hbBadge('economy', 'No symbols set'); return; }
+    const rows = await Promise.all(syms.map((s) => hbQuote(s, hbs.tf).then((q) => ({ s, q }))));
+    if (seq !== hbEcoSeq) return; hbEcoRows = rows; hbEcoPaint();
+  }
+
+  /* Sports (ESPN public scoreboards) */
+  let hbGames = [], hbSpAll = false, hbSpSeq = 0, hbSpErr = false;
+  const hbFav = (g) => { const t = hbTeams(); return t.length && [g.a, g.h].some((x) => t.some((f) => x.ab.toLowerCase() === f || x.nm.includes(f))); };
+  function hbParseGame(lg, e) {
+    const c = (e.competitions || [])[0]; if (!c) return null;
+    const cs = c.competitors || [], H = cs.find((x) => x.homeAway === 'home'), A = cs.find((x) => x.homeAway === 'away'); if (!H || !A) return null;
+    const side = (x) => ({ ab: (x.team && x.team.abbreviation) || '', nm: ((x.team && x.team.displayName) || '').toLowerCase() + ' ' + ((x.team && x.team.shortDisplayName) || '').toLowerCase(), sc: x.score != null ? String(x.score) : '0' });
+    const st = e.status || c.status || {}, ty = st.type || {}, state = ty.state || 'pre', per = st.period || 0;
+    let tag = '';
+    if (state === 'in') { const suf = HB_LG[lg][1]; tag = suf ? (per > (suf === 'P' ? 3 : 4) ? 'OT' : per + suf) : String(ty.shortDetail || 'LIVE').replace(/\s+/g, ' ').slice(0, 12); if (st.displayClock && suf && ty.shortDetail && !/final/i.test(ty.shortDetail)) tag += ' ' + st.displayClock; }
+    else if (state === 'post') tag = /OT/i.test(ty.shortDetail || '') ? 'F/OT' : 'F';
+    else { const d = new Date(e.date); tag = isNaN(d) ? 'TBD' : d.toLocaleString([], { weekday: 'short', hour: 'numeric', minute: '2-digit' }); }
+    return { id: lg + (e.id || ''), lg, a: side(A), h: side(H), state, tag, at: +new Date(e.date) || 0 };
+  }
+  async function hbLoadGames() {
+    const seq = ++hbSpSeq; hbSpErr = false;
+    const res = await Promise.all(hbs.leagues.map(async (lg) => {
+      const ck = 'sp:' + lg, c = hbGet(ck, 20000); if (c) return c;
+      try { const j = await hbJson('https://site.api.espn.com/apis/site/v2/sports/' + HB_LG[lg][0] + '/scoreboard'); const v = (j.events || []).map((e) => hbParseGame(lg, e)).filter(Boolean); hbPut(ck, v); return v; }
+      catch { hbSpErr = true; return hbOld(ck) || []; }
+    }));
+    if (seq !== hbSpSeq) return;
+    hbGames = res.flat(); hbSpPaint(); hbPinPaint();
+  }
+  const hbRank = (g) => (g.state === 'in' ? 0 : g.state === 'pre' ? 1 : 2);
+  const hbSorted = (l) => l.slice().sort((x, y) => (hbFav(y) ? 1 : 0) - (hbFav(x) ? 1 : 0) || hbRank(x) - hbRank(y) || x.at - y.at);
+  const hbScore = (g) => g.a.ab + ' ' + g.a.sc + ' - ' + g.h.ab + ' ' + g.h.sc;
+  function hbGameRow(g) {
+    const live = g.state === 'in', pre = g.state === 'pre';
+    return h('div', { class: 'led-r g' }, h('span', { class: 'led-s' }, live ? h('i', { class: 'live-dot', role: 'img', 'aria-label': 'Live' }) : null, pre ? g.a.ab + ' @ ' + g.h.ab : hbScore(g), h('span', { class: 'led-t', text: ' ' + g.lg, style: 'margin-left:6px' })),
+      h('span', { class: 'led-t' + (live ? ' live' : ''), text: g.tag }));
+  }
+  function hbSpPaint() {
+    const el = $('#hbSp'); if (!el) return; const fav = hbTeams().length > 0, favG = hbGames.filter(hbFav), list = hbSorted(fav && !hbSpAll ? favG : hbGames).slice(0, 24);
+    const btn = $('#hbSpAll'); btn.hidden = !fav; btn.textContent = hbSpAll ? 'Favorites only' : 'Show all games';
+    el.replaceChildren(...(list.length ? list.map(hbGameRow) : [h('div', { class: 'led-e', text: hbSpErr && !hbGames.length ? 'Scores unavailable right now.' : fav && !hbSpAll ? 'No games for your favorite teams today.' : 'No games scheduled right now.' })]));
+    const best = hbSorted(hbGames).find((g) => hbFav(g) && g.state === 'in') || hbSorted(hbGames).find(hbFav) || hbSorted(hbGames).find((g) => g.state === 'in') || hbSorted(hbGames)[0];
+    hbBadge('sports', best ? hbScore(best) + (best.state === 'pre' ? ' · ' : ' ') + best.tag : hbSpErr ? 'Scores unavailable' : 'No games · ' + hbs.leagues.join('/'));
+    $('#hbSpNote').textContent = hbSpErr ? 'Some leagues couldn’t be reached; showing the last saved scores.' : 'Scores from ESPN, refreshed while this tab is open.';
+  }
+  function hbPinPaint() {
+    const host = $('#hbPin'); if (!host) return;
+    const live = hbs.enabled.sports && hbs.pinLive ? hbSorted(hbGames.filter((g) => g.state === 'in' && (!hbTeams().length || hbFav(g)))).slice(0, 6) : [];
+    host.replaceChildren(...(live.length ? [h('div', { class: 'led', role: 'status', 'aria-label': 'Live games' }, ...live.map(hbGameRow))] : []));
+  }
+
+  /* News (GDELT DOC 2.0, queued to respect its 1-request-per-5-seconds limit) */
+  let gdChain = Promise.resolve(), gdLast = 0;
+  function gdelt(q, n, span, sort) {
+    const ck = 'gd:' + q + '|' + n + '|' + span + '|' + sort, c = hbGet(ck, 15 * 60000); if (c) return Promise.resolve(c);
+    const run = async () => {
+      const wait = gdLast + 5300 - Date.now(); if (wait > 0) await sleep(wait); gdLast = Date.now();
+      const j = await hbJson('https://api.gdeltproject.org/api/v2/doc/doc?mode=artlist&format=json&maxrecords=' + n + '&timespan=' + span + '&sort=' + sort + '&query=' + encodeURIComponent(q), 20000);
+      const seen = new Set(), arts = (j.articles || []).map((a) => ({ t: String(a.title || '').replace(/\s+/g, ' ').trim().slice(0, 170), u: safeHttp(a.url), d: String(a.domain || '').replace(/^www\./, ''), at: String(a.seendate || '') }))
+        .filter((a) => a.t && a.u && !seen.has(a.u) && seen.add(a.u));
+      hbPut(ck, arts); return arts;
+    };
+    const p = gdChain.catch(() => {}).then(run); gdChain = p;
+    return p.catch(() => hbOld(ck) || Promise.reject(new Error('offline')));
+  }
+  const BADGES = { 'apnews.com': 'AP', 'reuters.com': 'Reuters', 'cbc.ca': 'CBC', 'thehill.com': 'The Hill' };
+  function hbAgo(sd) {
+    const m = /^(\d{4})(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)/.exec(sd); if (!m) return '';
+    const t = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6]), mins = Math.max(0, Math.round((Date.now() - t) / 60000));
+    return mins < 60 ? mins + 'm ago' : mins < 1440 ? Math.round(mins / 60) + 'h ago' : Math.round(mins / 1440) + 'd ago';
+  }
+  function hbNewsEl(a) {
+    const b = hbs.badges && BADGES[a.d];
+    return h('a', { class: 'nw', href: a.u, target: '_blank', rel: 'noopener noreferrer' }, h('span', { class: 'nw-t' }, b ? h('span', { class: 'nw-s', text: '[' + b + ']' }) : null, a.t), h('small', { text: [a.d, hbAgo(a.at)].filter(Boolean).join(' · ') }));
+  }
+  const hbPlace = (l) => { const p = l.split(',').map((x) => x.trim()); return { city: p[0], full: l }; };
+  const hbCity = (l) => hbPlace(l).city.replace(/"/g, '');
+  const POL = {
+    both: { us: ['apnews.com', 'reuters.com', 'thehill.com'], ca: ['apnews.com', 'reuters.com', 'cbc.ca'] },
+    left: { us: ['theguardian.com', 'msnbc.com', 'huffpost.com', 'vox.com'], ca: ['cbc.ca', 'thestar.com', 'theguardian.com'] },
+    right: { us: ['foxnews.com', 'washingtonexaminer.com', 'nypost.com', 'dailywire.com'], ca: ['nationalpost.com', 'torontosun.com', 'foxnews.com'] }
+  };
+  const polQuery = (rg, tone) => '(' + (rg === 'us' ? 'politics OR Congress OR "White House"' : 'Canada (politics OR Parliament OR "Prime Minister")') + ') (' + POL[hbs.lean][rg].map((d) => 'domain:' + d).join(' OR ') + ') sourcelang:english' + (tone ? ' tone>' + tone : '');
+  const polRegions = () => (hbs.region === 'both' ? ['us', 'ca'] : [hbs.region]);
+  const HOPE_SETS = ['(inspiring OR heartwarming OR kindness OR "good news")', '(rescued OR reunited OR survivor OR recovery)', '(breakthrough OR cure OR discovery OR innovation)', '(volunteers OR donated OR charity OR community)', '(celebrates OR milestone OR record OR wins)'];
+  const hopeQ = (i, tone) => HOPE_SETS[i % HOPE_SETS.length] + ' sourcelang:english tone>' + (tone || 5);
+  const listOrMsg = (arts, none) => (arts.length ? arts.map(hbNewsEl) : [h('p', { class: 'hb-none', text: none })]);
+  const hbOffline = 'Couldn’t load stories right now. Check your connection and try again.';
+  let hbNews = { local: null, politics: null, hope: [] }, hbHopeShown = 10, hbHopeSet = 0, hbBusy = {};
+  async function hbLocal() {
+    const locs = hbLocs(), host = $('#hbLoc');
+    if (!locs.length) { host.replaceChildren(h('p', { class: 'hb-none', text: 'Add a location in Settings → Hub & News Configuration.' })); hbBadge('local', 'No location set'); return; }
+    if (!hbNews.local) host.replaceChildren(h('p', { class: 'hb-none', text: 'Loading local stories…' }));
+    const out = []; let n = 0, failed = 0;
+    for (const l of locs) { try { const a = (await gdelt('"' + hbCity(l) + '" sourcelang:english', 8, '3d', 'datedesc')).slice(0, 5); out.push([l, a]); n += a.length; } catch { out.push([l, null]); failed++; } }
+    hbNews.local = out;
+    host.replaceChildren(...out.flatMap(([l, a]) => [h('div', { class: 'nw-h', text: l }), ...(a ? listOrMsg(a, 'No recent stories found.') : [h('p', { class: 'hb-none', text: hbOffline })])]));
+    hbBadge('local', hbCity(locs[0]) + (locs.length > 1 ? ' +' + (locs.length - 1) : '') + ' • ' + (failed === locs.length ? 'unavailable' : n + ' stor' + (n === 1 ? 'y' : 'ies')));
+  }
+  async function hbPolitics() {
+    const host = $('#hbPol'), lab = { us: 'US', ca: 'CA', both: 'US & CA' }[hbs.region] + ' ' + { left: 'Left-leaning', right: 'Right-leaning', both: 'Balanced' }[hbs.lean];
+    if (!hbNews.politics) host.replaceChildren(h('p', { class: 'hb-none', text: 'Loading headlines…' }));
+    const out = []; let failed = 0;
+    for (const rg of polRegions()) { try { out.push([rg, (await gdelt(polQuery(rg), 8, '2d', 'datedesc')).slice(0, 6)]); } catch { out.push([rg, null]); failed++; } }
+    hbNews.politics = out;
+    host.replaceChildren(...out.flatMap(([rg, a]) => [out.length > 1 ? h('div', { class: 'nw-h', text: rg === 'us' ? 'American' : 'Canadian' }) : null, ...(a ? listOrMsg(a, 'No recent stories found.') : [h('p', { class: 'hb-none', text: hbOffline })])]).filter(Boolean),
+      h('p', { class: 'hb-note', text: 'Outlets are grouped by commonly cited lean and are only an approximation. Stories come from GDELT’s public index.' }));
+    hbBadge('politics', failed === out.length ? lab + ' • unavailable' : lab);
+  }
+  const hbMerge = (lists) => { const seen = new Set(), out = []; for (let i = 0; lists.some((l) => i < l.length); i++) lists.forEach((l) => { const a = l[i]; if (a && !seen.has(a.u)) { seen.add(a.u); out.push(a); } }); return out; };
+  function hbHopePaint() {
+    const host = $('#hbHope'), list = hbNews.hope;
+    host.replaceChildren(...(list.length ? list.slice(0, hbHopeShown).map(hbNewsEl) : [h('p', { class: 'hb-none', text: hbBusy.hope ? 'Looking for good news…' : hbOffline })]));
+    $('#hbHopeMore').hidden = !list.length;
+    hbBadge('hope', hbs.pure ? 'Pure Hope' + (list.length ? ' • ' + list.length + ' stories' : '') + ' • merged' : 'Endless Uplifting Feed');
+  }
+  async function hbHope(more) {
+    if (more) hbHopeSet++; else { hbHopeSet = 0; hbHopeShown = 10; }
+    hbBusy.hope = 1; if (!hbNews.hope.length) hbHopePaint();
+    const lists = [];
+    try {
+      if (hbs.pure && !more) {
+        for (const l of hbLocs()) if (hbs.enabled.local) { try { lists.push((await gdelt('"' + hbCity(l) + '" sourcelang:english tone>3', 10, '3d', 'datedesc'))); } catch { /* skip */ } }
+        if (hbs.enabled.politics) for (const rg of polRegions()) { try { lists.push((await gdelt(polQuery(rg, 3), 10, '2d', 'datedesc'))); } catch { /* skip */ } }
+      }
+      try { lists.push(await gdelt(hopeQ(hbHopeSet), 30, '7d', 'hybridrel')); } catch { /* skip */ }
+      const fresh = hbMerge(lists), have = new Set(more ? hbNews.hope.map((a) => a.u) : []);
+      hbNews.hope = (more ? hbNews.hope : []).concat(fresh.filter((a) => !have.has(a.u)));
+      if (more) hbHopeShown += 10;
+    } finally { hbBusy.hope = 0; }
+    hbHopePaint();
+  }
+
+  /* Brighten My Day */
+  let hbBri = { list: null, i: 0, seq: 0 };
+  const TRUST = ['apnews.com', 'reuters.com', 'bbc.com', 'npr.org', 'cbc.ca', 'goodnewsnetwork.org', 'positive.news'];
+  async function hbBrighten(next) {
+    const card = $('#hbCard'), seq = ++hbBri.seq; card.hidden = false; $('#hbBright').setAttribute('aria-expanded', 'true');
+    card.replaceChildren(h('p', { text: 'Finding something good…' }));
+    try {
+      if (!hbBri.list || !hbBri.list.length) hbBri.list = await gdelt('(heartwarming OR inspiring OR rescued OR breakthrough OR volunteers OR donated OR recovery OR reunited) tone>6 sourcelang:english (' + TRUST.map((d) => 'domain:' + d).join(' OR ') + ')', 25, '7d', 'hybridrel');
+      if (seq !== hbBri.seq) return;
+      if (!hbBri.list.length) throw new Error('none');
+      if (next) hbBri.i++; const a = hbBri.list[hbBri.i % hbBri.list.length];
+      let sum = 'Reported by ' + a.d + (hbAgo(a.at) ? ', ' + hbAgo(a.at) : '') + '. Open the story for the full details.';
+      const base = a.t.replace(/[.!?]+$/, '') + '. ';
+      if (geminiKey()) { try { const g = await geminiAsk([{ role: 'user', text: 'Headline: "' + a.t + '" (source: ' + a.d + '). Write exactly two short sentences that restate only what this headline says. Do not add any names, numbers, places or details that are not in the headline. Plain text.' }]); if (seq === hbBri.seq && g) sum = g.replace(/\s+/g, ' ').trim(); } catch { /* keep the plain summary */ } }
+      else sum = base + sum;
+      if (seq !== hbBri.seq) return;
+      card.replaceChildren(h('h3', { text: '✨ ' + a.t }), h('p', { text: sum }), h('small', { text: 'From ' + a.d + ' · picked for positive tone, not fact-checked by this app' }),
+        h('div', { class: 'hb-row' }, h('a', { class: 'btn primary', href: a.u, target: '_blank', rel: 'noopener noreferrer', text: 'Read story' }), h('button', { class: 'btn', type: 'button', 'data-bri': 'next', text: 'Another' }), h('button', { class: 'btn', type: 'button', 'data-bri': 'close', text: 'Close' })));
+    } catch {
+      if (seq !== hbBri.seq) return;
+      card.replaceChildren(h('p', { text: 'Couldn’t find a good-news story right now. Check your connection and try again.' }), h('div', { class: 'hb-row' }, h('button', { class: 'btn', type: 'button', 'data-bri': 'retry', text: 'Try again' }), h('button', { class: 'btn', type: 'button', 'data-bri': 'close', text: 'Close' })));
+    }
+  }
+  $('#hbBright').addEventListener('click', () => { const c = $('#hbCard'); if (!c.hidden) { c.hidden = true; $('#hbBright').setAttribute('aria-expanded', 'false'); hbBri.seq++; } else hbBrighten(false); });
+  $('#hbCard').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-bri]'); if (!b) return;
+    if (b.dataset.bri === 'close') { $('#hbCard').hidden = true; $('#hbBright').setAttribute('aria-expanded', 'false'); hbBri.seq++; $('#hbBright').focus(); } else hbBrighten(b.dataset.bri === 'next');
+  });
+
+  /* Accordion + page */
+  const hbLoaded = {};
+  function hbLoad(id, force) {
+    if (!hbs.enabled[id]) return; if (id === 'local' && hbs.pure) return; if (id === 'politics' && hbs.pure) return;
+    if (id === 'movies') { wLinger.clear(); renderWatch(); hbBadge('movies', 'Watchlist (' + watch.length + ') • Top News'); return; }
+    if (!force && hbLoaded[id] && Date.now() - hbLoaded[id] < 60000) return;
+    hbLoaded[id] = Date.now();
+    if (id === 'economy') hbEco(); else if (id === 'sports') hbLoadGames(); else if (id === 'local') hbLocal(); else if (id === 'politics') hbPolitics(); else if (id === 'hope') hbHope(false);
+  }
+  function hbOpen(id, on) {
+    const hd = $('#acc-' + id + '-h'), bd = $('#acc-' + id + '-b'); if (!hd) return;
+    const open = on === undefined ? hd.getAttribute('aria-expanded') !== 'true' : !!on;
+    hd.setAttribute('aria-expanded', String(open)); bd.hidden = !open;
+    if (open) { if (id === 'movies') { wLinger.clear(); renderWatch(); } else hbLoad(id); }
+  }
+  $('#hbAccs').addEventListener('click', (e) => { const b = e.target.closest('.acc-h'); if (b) hbOpen(b.closest('.acc').dataset.sec); });
+  $('#hbSpAll').addEventListener('click', () => { hbSpAll = !hbSpAll; hbSpPaint(); });
+  $('#hbHopeMore').addEventListener('click', () => { if (hbHopeShown < hbNews.hope.length) { hbHopeShown += 10; hbHopePaint(); } else hbHope(true); });
+  function hbSyncTf() { document.querySelectorAll('#hbTf [data-tf], #hsTf [data-tf]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.tf === hbs.tf))); }
+  $('#hbTf').addEventListener('click', (e) => { const b = e.target.closest('[data-tf]'); if (!b) return; hbs.tf = b.dataset.tf; hvSave(true); hbSyncTf(); hbEco(); });
+  function hbApply() {
+    let any = false;
+    HB_IDS.forEach((id) => { const on = hbs.enabled[id] && !(hbs.pure && (id === 'local' || id === 'politics')); $('#acc-' + id).hidden = !on; if (on) any = true; if (!on) { const hd = $('#acc-' + id + '-h'); hd.setAttribute('aria-expanded', 'false'); $('#acc-' + id + '-b').hidden = true; } });
+    $('#hbEmpty').hidden = any; hbSyncTf();
+  }
+  function renderHubPage(force) {
+    hbApply(); hbPinPaint(); hbBadge('movies', 'Watchlist (' + watch.length + ') • Top News');
+    const sy = hbSyms(); if (hbEcoRows.length === 0 && sy.length) hbEcoRows = sy.map((s) => ({ s, q: hbOld('q:' + s + ':' + hbs.tf) })); if (hbEcoRows.some((r) => r.q)) hbEcoPaint();
+    if (hbGames.length) hbSpPaint(); else if (hbs.enabled.sports) hbSpPaint();
+    if (hbNews.local) hbLocal(); if (hbNews.politics) hbPolitics();
+    ['economy', 'sports', 'local', 'politics', 'hope'].forEach((id) => hbLoad(id, !!force));
+    if ($('#acc-movies-h').getAttribute('aria-expanded') === 'true') { wLinger.clear(); renderWatch(); }
+  }
+  setInterval(() => {
+    if (state.view !== 'hub' || document.hidden) return;
+    if (hbs.enabled.sports && (hbs.pinLive || $('#acc-sports-h').getAttribute('aria-expanded') === 'true')) hbLoadGames();
+    if (hbs.enabled.economy && $('#acc-economy-h').getAttribute('aria-expanded') === 'true') hbEco();
+  }, 30000);
+
+  /* Settings card */
+  let hbSaveT = 0;
+  function hvSave(now) {
+    try { localStorage.setItem(KEY_HUBSET, JSON.stringify(hbs)); } catch { /* storage full or blocked */ }
+    clearTimeout(hbSaveT); hbSaveT = setTimeout(() => { hbEcoRows = []; Object.keys(hbLoaded).forEach((k) => delete hbLoaded[k]); hbNews.local = hbNews.politics = null; hbBri.list = null; if (state.view === 'hub') renderHubPage(true); else hbApply(); }, now ? 0 : 500);
+  }
+  function hsRender() {
+    const c = $('#hsCard'); c.querySelectorAll('[data-hsec]').forEach((i) => { i.checked = !!hbs.enabled[i.dataset.hsec]; });
+    $('#hsPure').checked = hbs.pure; $('#hsPin').checked = hbs.pinLive; $('#hsBadges').checked = hbs.badges;
+    $('#hsSym').value = hbs.symbols; $('#hsBasis').value = hbs.basis; $('#hsTeams').value = hbs.teams; $('#hsLocs').value = hbs.locations;
+    hbSyncTf(); c.querySelectorAll('[data-lg]').forEach((b) => b.setAttribute('aria-pressed', String(hbs.leagues.includes(b.dataset.lg))));
+    c.querySelectorAll('[data-lean]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.lean === hbs.lean)));
+    c.querySelectorAll('[data-rg]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.rg === hbs.region)));
+  }
+  $('#hsCard').addEventListener('change', (e) => {
+    const t = e.target;
+    if (t.dataset.hsec) hbs.enabled[t.dataset.hsec] = t.checked; else if (t.id === 'hsPure') hbs.pure = t.checked; else if (t.id === 'hsPin') hbs.pinLive = t.checked; else if (t.id === 'hsBadges') hbs.badges = t.checked; else return;
+    hvSave(true);
+  });
+  $('#hsCard').addEventListener('input', (e) => {
+    const m = { hsSym: 'symbols', hsBasis: 'basis', hsTeams: 'teams', hsLocs: 'locations' }[e.target.id]; if (!m) return;
+    hbs[m] = e.target.value.slice(0, 160); hvSave(false);
+  });
+  $('#hsCard').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.tf) hbs.tf = b.dataset.tf;
+    else if (b.dataset.lg) { const on = hbs.leagues.includes(b.dataset.lg); if (on && hbs.leagues.length === 1) return; hbs.leagues = on ? hbs.leagues.filter((x) => x !== b.dataset.lg) : hbs.leagues.concat(b.dataset.lg); hbGames = []; }
+    else if (b.dataset.lean) hbs.lean = b.dataset.lean; else if (b.dataset.rg) hbs.region = b.dataset.rg; else return;
+    hsRender(); hvSave(true);
+  });
+
   $('#hdAdd').addEventListener('click', () => openDirForm(null));
   $('#tcHabit').addEventListener('click', () => openHabits());
   $('#tcTimer').addEventListener('click', () => openTimerDrawer());
@@ -4251,7 +4680,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       $('#kcGrocS').textContent = g ? g + ' list' + (g === 1 ? '' : 's') + ' · sorted by aisle' : 'Your sorted shopping list';
     } catch { /* cards are decorative */ }
   }
-  setInterval(() => { if (state.view === 'tools' || (state.view === 'cookbook' && state.ks === 'tools')) syncToolCards(); }, 1500);
+  setInterval(() => { if (state.view === 'tools' || (state.view === 'cookbook' && state.ks === 'meat')) syncToolCards(); }, 1500);
   function filterToolCards() {
     const q = toolQ.trim().toLowerCase(); let n = 0;
     $('#toolGrid').querySelectorAll('.tcard').forEach((c) => { const ok = !q || (c.textContent + ' ' + (c.dataset.kw || '')).toLowerCase().includes(q); c.hidden = !ok; if (ok) n++; });
@@ -4261,7 +4690,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#recipeClose').innerHTML = I.x;
   $('#tabNotes').addEventListener('click', () => setView('notes'));
   $('#tabCook').addEventListener('click', () => { if (state.view === 'cookbook' && state.ks !== 'recipes') setKitchenSeg('recipes'); else setView('cookbook'); });
-  $('#tabWatch').addEventListener('click', () => setView('watch'));
   $('#tabHub').addEventListener('click', () => setView('hub'));
   $('#tabTools').addEventListener('click', () => setView('tools'));
   $('#importForm').addEventListener('submit', (e) => { e.preventDefault(); importRecipe(); });
@@ -4906,15 +5334,14 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   $('#q').addEventListener('input', (e) => {
     if (state.view === 'cookbook') { if (state.ks !== 'recipes') setKitchenSeg('recipes'); state.rq = e.target.value; renderRecipes(); }
-    else if (state.view === 'watch') { state.wq = e.target.value; wLinger.clear(); renderWatch(); }
-    else if (state.view === 'hub') { drv.q = e.target.value; $('#drQ').value = drv.q; renderDir(); }
+    else if (state.view === 'hub') { state.wq = e.target.value; hbOpen('movies', true); wLinger.clear(); renderWatch(); }
     else if (state.view === 'tools') { toolQ = e.target.value; filterToolCards(); }
     else { state.q = e.target.value; render(); }
     $('#clearQ').hidden = !e.target.value;
   });
   $('#clearQ').addEventListener('click', () => {
     $('#q').value = '';
-    if (state.view === 'cookbook') { state.rq = ''; renderRecipes(); } else if (state.view === 'watch') { state.wq = ''; wLinger.clear(); renderWatch(); } else if (state.view === 'hub') { drv.q = ''; $('#drQ').value = ''; renderDir(); } else if (state.view === 'tools') { toolQ = ''; filterToolCards(); } else { state.q = ''; render(); }
+    if (state.view === 'cookbook') { state.rq = ''; renderRecipes(); } else if (state.view === 'hub') { state.wq = ''; wLinger.clear(); renderWatch(); } else if (state.view === 'tools') { toolQ = ''; filterToolCards(); } else { state.q = ''; render(); }
     $('#clearQ').hidden = true;
     $('#q').focus();
   });
@@ -5092,7 +5519,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
               : f === 'unwatched' ? ['All caught up', "You've watched everything on your list."] : ['Nothing here', 'No titles match this filter.'];
       wGrid.replaceChildren(h('div', { class: 'empty', style: 'grid-column:1/-1' }, h('div', { class: 'big-ico', html: I.film }), h('h3', { text: t }), h('p', { text: p })));
     } else wGrid.replaceChildren(...list.map(watchCardEl));
-    $('#clearQ').hidden = state.view === 'watch' ? !state.wq : $('#clearQ').hidden;
+    $('#clearQ').hidden = state.view === 'hub' ? !state.wq : $('#clearQ').hidden;
   }
 
   function setRating(w, v) {
@@ -6288,6 +6715,42 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   function pantryLoad() { try { pantry = normPantry(JSON.parse(store.get(KEY_PANTRY) || '[]')); } catch { pantry = []; } }
   const pantrySave = () => store.set(KEY_PANTRY, JSON.stringify(pantry));
+  function pantryRender() {
+    const need = pantry.filter((x) => x.need), have = pantry.filter((x) => !x.need);
+    const row = (x) => h('div', { class: 'hh-row' }, h('span', { class: 'nm', text: x.name }),
+      h('div', { class: 'hh-seg', role: 'group', 'aria-label': x.name + ' status' },
+        h('button', { type: 'button', class: 'need', 'data-hp': x.id, 'data-v': 'need', 'aria-pressed': String(x.need), text: 'Need' }),
+        h('button', { type: 'button', class: 'have', 'data-hp': x.id, 'data-v': 'have', 'aria-pressed': String(!x.need), text: 'Have' })),
+      h('button', { type: 'button', class: 'x', 'data-hpx': x.id, 'aria-label': 'Delete ' + x.name, text: '×' }));
+    const kids = () => (pantry.length ? [
+      need.length ? h('div', { class: 'hh-grp', text: 'Need to buy (' + need.length + ')' }) : null, ...need.map(row),
+      have.length ? h('div', { class: 'hh-grp', text: 'Have (' + have.length + ')' }) : null, ...have.map(row)].filter(Boolean)
+      : [h('p', { class: 'tm-empty', text: 'Nothing here yet. Add staples and groceries above.' })]);
+    $('#hhPantry').replaceChildren(...kids()); $('#fpList').replaceChildren(...kids());
+    $('#fpCount').textContent = need.length;
+    $('#fpGroc').innerHTML = I.cart + '<span>Export grocery list' + (need.length ? ' (' + need.length + ')' : '') + '</span>';
+  }
+  function pantryToGroceries() {
+    const items = pantry.filter((x) => x.need).map((x) => x.name);
+    if (!items.length) { toast('Nothing marked Need: add items or flip some to Need'); return; }
+    const notes = state.notes.filter((n) => !n.archived && n.tags.includes('groceries')).sort((a, b) => (b.editedAt || b.createdAt) - (a.editedAt || a.createdAt));
+    const target = notes[0], have = new Set(target ? target.text.split('\n').map(grKey) : []), add = [];
+    for (const t of items) { const k = grKey(t); if (!k || have.has(k)) continue; have.add(k); add.push(t); }
+    if (!add.length) { toast('Nothing new: those items are already on your list'); return; }
+    add.sort((a, b) => aisleRank(a) - aisleRank(b));
+    const lines = add.map((t) => '- [ ] ' + t);
+    if (target) {
+      const before = { text: target.text, editedAt: target.editedAt }, ls = target.text.replace(/\s+$/, '').split('\n'), ti = ls.length - 1;
+      if (ls[ti].trim().toLowerCase() === '#groceries') { ls.splice(ti, 0, ...lines); target.text = ls.join('\n') + (target.text.endsWith('\n') ? '\n' : ''); } else target.text = ls.join('\n') + '\n' + lines.join('\n');
+      target.editedAt = Date.now();
+      if (!persist(true)) { target.text = before.text; target.editedAt = before.editedAt; toast('Storage is full: could not update your groceries'); return; }
+    } else {
+      state.notes.unshift({ id: uid(), text: ['[Grocery] Pantry', ...lines, '', '#groceries'].join('\n'), tags: ['groceries'], createdAt: Date.now(), pinned: false, archived: false });
+      if (!persist(true)) { state.notes.shift(); toast('Storage is full: could not add the grocery list'); return; }
+    }
+    render(); updateGauge();
+    toast('Added ' + add.length + ' item' + (add.length === 1 ? '' : 's') + ' to Groceries!', 'View Notes', () => { state.archived = false; state.tag = 'groceries'; state.q = ''; setView('notes'); render(); });
+  }
   function hhRender() {
     const members = circle.filter((c) => c.isHousehold), others = circle.filter((c) => !c.isHousehold);
     $('#hhMCount').textContent = members.length ? '(' + members.length + ')' : '';
@@ -6296,16 +6759,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       h('button', { type: 'button', class: 'del', 'data-hmx': c.id, 'aria-label': 'Remove ' + c.name + ' from My Household', text: 'Remove' })))
       : [h('p', { class: 'tm-empty', text: circle.length ? 'No one in your household yet. Add people from your Circle below.' : 'Add people to My Circle first, then mark them as household.' })]));
     $('#hhAddM').replaceChildren(...others.map((c) => h('button', { type: 'button', 'data-hma': c.id, 'aria-label': 'Add ' + c.name + ' to My Household', text: '+ ' + c.name })));
-    const need = pantry.filter((x) => x.need), have = pantry.filter((x) => !x.need);
-    const row = (x) => h('div', { class: 'hh-row' }, h('span', { class: 'nm', text: x.name }),
-      h('div', { class: 'hh-seg', role: 'group', 'aria-label': x.name + ' status' },
-        h('button', { type: 'button', class: 'need', 'data-hp': x.id, 'data-v': 'need', 'aria-pressed': String(x.need), text: 'Need' }),
-        h('button', { type: 'button', class: 'have', 'data-hp': x.id, 'data-v': 'have', 'aria-pressed': String(!x.need), text: 'Have' })),
-      h('button', { type: 'button', class: 'x', 'data-hpx': x.id, 'aria-label': 'Delete ' + x.name, text: '×' }));
-    $('#hhPantry').replaceChildren(...(pantry.length ? [
-      need.length ? h('div', { class: 'hh-grp', text: 'Need to buy (' + need.length + ')' }) : null, ...need.map(row),
-      have.length ? h('div', { class: 'hh-grp', text: 'Have (' + have.length + ')' }) : null, ...have.map(row)].filter(Boolean)
-      : [h('p', { class: 'tm-empty', text: 'Nothing here yet. Add staples and groceries above.' })]));
+    pantryRender();
+    const need = pantry.filter((x) => x.need);
     // weekly menu summary (the same menu as the Kitchen tab)
     const meals = MN_MEALS.filter(([m]) => menu.show[m]), today = mnTodayIdx();
     $('#hhMenu').replaceChildren(...MN_DAYS.map((d, di) => {
@@ -6335,7 +6790,21 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     else if (hm) { const c = circle.find((y) => y.id === hm.dataset.hmx); if (c) { c.isHousehold = false; circSave(); hhRender(); cirRender(); } }
     else if (ha) { const c = circle.find((y) => y.id === ha.dataset.hma); if (c) { c.isHousehold = true; circSave(); hhRender(); cirRender(); } }
   });
-  pantryLoad();
+  $('#kPantry').addEventListener('click', (e) => {
+    const hp = e.target.closest('[data-hp]'), hx = e.target.closest('[data-hpx]');
+    if (hp) { const x = pantry.find((y) => y.id === hp.dataset.hp); if (x) { x.need = hp.dataset.v === 'need'; pantrySave(); hhRender(); } }
+    else if (hx) { const x = pantry.find((y) => y.id === hx.dataset.hpx); if (x) { pantry = pantry.filter((y) => y !== x); pantrySave(); hhRender(); toast('Deleted ' + x.name, 'Undo', () => { pantry.unshift(x); pantrySave(); hhRender(); }); } }
+  });
+  $('#fpForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = cleanName($('#fpAdd').value).slice(0, 60); if (!name) { $('#fpAdd').focus(); return; }
+    const ex = pantry.find((x) => x.name.toLowerCase() === name.toLowerCase());
+    if (ex) { ex.need = true; toast(ex.name + ' is already listed: marked as Need'); } else pantry.unshift({ id: uid(), name, need: true, at: Date.now() });
+    pantrySave(); $('#fpAdd').value = ''; hhRender(); $('#fpAdd').focus();
+  });
+  $('#fpGroc').addEventListener('click', () => pantryToGroceries());
+  $('#fpShare').addEventListener('click', () => shareHousehold());
+  pantryLoad(); pantryRender();
 
 
   /* ---------- Chat: Firebase Firestore rooms, Gemini, voice, GIFs ---------- */
@@ -6439,7 +6908,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   function dockSync() {
     const i = VIEWS.indexOf(state.view), open = chatIsOpen();
-    ['#tabNotes', '#tabCook', '#tabWatch', '#tabHub', '#tabTools'].forEach((sel, j) => { const b = $(sel), on = !open && j === i; b.setAttribute('aria-selected', String(on)); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    ['#tabNotes', '#tabCook', '#tabHub', '#tabTools'].forEach((sel, j) => { const b = $(sel), on = !open && j === i; b.setAttribute('aria-selected', String(on)); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     $('#tabChat').setAttribute('aria-selected', String(open));
   }
   function openChat() {
@@ -7528,7 +7997,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const WHEEL_COL = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#14b8a6', '#3b82f6', '#8b5cf6', '#ec4899'];
   let rests = [];
   const rsv = { q: '', cuisine: 'all', editing: null, prevOverflow: '', prevOverflowForm: '' };
-  const restOv = $('#restOv'), rfmOv = $('#rsFormOv'), eatOv = $('#eatOv');
+  const rfmOv = $('#rsFormOv'), eatOv = $('#eatOv');
   const cuisCol = (c) => CUIS_COL[c] || WHEEL_COL[[...String(c)].reduce((a, ch) => a + ch.charCodeAt(0), 0) % WHEEL_COL.length].replace('#eab308', '#a16207');
   const normRest = (r) => {
     const orders = {};
@@ -7570,6 +8039,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   function renderRests() {
     pillRow($('#rsFilters'), rsv.cuisine, null, rests.length);
+    { const bd = $('#hdRc'); if (bd) bd.textContent = rests.length; }
     const q = rsv.q.trim().toLowerCase();
     const list = sortedRests().filter((r) => (rsv.cuisine === 'all' || cuisOf(r) === rsv.cuisine) &&
       (!q || [r.name, r.cuisine, r.city, r.notes, myOrder(r)].some((t) => String(t || '').toLowerCase().includes(q))));
@@ -7587,17 +8057,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         h('button', { type: 'button', 'data-ra': 'del', 'aria-label': 'Delete ' + r.name, html: I.trash })))));
   }
   const copyOrder = (r) => { const o = myOrder(r); if (!o) { toast('No order saved for ' + r.name); return; } copyText(o).then((ok) => toast(ok ? 'Copied your order for ' + r.name : 'Copy failed')); };
-  function openHub() {
-    if (restOv.hidden) rsv.prevOverflow = document.body.style.overflow;
-    restOv.hidden = false; document.body.style.overflow = 'hidden';
-    renderRests(); restOv.querySelector('.sheet').scrollTop = 0;
-  }
-  function closeHub() { if (restOv.hidden) return; restOv.hidden = true; document.body.style.overflow = rsv.prevOverflow; }
-  $('#rsClose').innerHTML = I.x; $('#rsSearchIco').innerHTML = I.search;
+  function openHub() { if (state.view !== 'cookbook') setView('cookbook'); setKitchenSeg('rest'); }
+  function closeHub() { /* Restaurants is now a Food sub-view, nothing to close */ }
+  $('#rsSearchIco').innerHTML = I.search;
   $('#rsEat').innerHTML = I.dice + 'Where to Eat?'; $('#rsAdd').innerHTML = I.plus + 'Add';
   $('#foodBtn').addEventListener('click', openHub);
-  $('#rsClose').addEventListener('click', closeHub);
-  restOv.addEventListener('mousedown', (e) => { if (e.target === restOv) closeHub(); });
   $('#rsQ').addEventListener('input', (e) => { rsv.q = e.target.value; renderRests(); });
   $('#rsFilters').addEventListener('click', (e) => { const b = e.target.closest('[data-cu]'); if (b) { rsv.cuisine = b.dataset.cu; renderRests(); } });
   $('#rsAdd').addEventListener('click', () => openRsForm(null));
@@ -7723,22 +8187,22 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     $('#eatHint').textContent = !rests.length ? 'Save a couple of restaurants first, then come back to spin.' : ok ? 'Tap SPIN and let the wheel decide.' : 'Select at least 2 restaurants to spin.';
     if (!eat.spinning) drawWheel(eat.theta);
   }
-  function sizeWheel() { const w = eatOv.querySelector('.sheet').clientWidth - 32; eat.size = Math.max(240, Math.min(320, w)); }
+  function sizeWheel() { const w = eatOv.querySelector('.eat-sheet').clientWidth - 24; eat.size = Math.max(240, Math.min(320, w)); }
   function openEat() {
     if (!rests.length) { toast('Add a restaurant first'); return; }
+    if (state.view !== 'cookbook' || state.ks !== 'rest') { if (state.view !== 'cookbook') setView('cookbook'); setKitchenSeg('rest', true); }
     const first = eatOv.hidden;
-    if (first) eat.prevOverflow = document.body.style.overflow;
-    eatOv.hidden = false; document.body.style.overflow = 'hidden';
+    eatOv.hidden = false;
     $('#eatWin').hidden = true;
     const ids = new Set(rests.map((r) => r.id));
     eat.sel = new Set([...eat.sel].filter((id) => ids.has(id)));
     if (first && eat.sel.size < 2) eat.sel = new Set(ids);
-    eatOv.querySelector('.sheet').scrollTop = 0; sizeWheel(); eatPaint();
+    sizeWheel(); eatPaint(); eatOv.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
   function closeEat() {
     if (eatOv.hidden) return;
     cancelAnimationFrame(eat.raf); cancelAnimationFrame(eat.confRaf); eat.spinning = false;
-    $('#eatWin').hidden = true; eatOv.hidden = true; document.body.style.overflow = eat.prevOverflow;
+    $('#eatWin').hidden = true; eatOv.hidden = true;
   }
   function eatSetCuisine(c) {
     eat.cuisine = c;
@@ -8845,7 +9309,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#dirBtn').addEventListener('click', openDir);
   $('#dirClose').addEventListener('click', closeDir);
   dirOv.addEventListener('mousedown', (e) => { if (e.target === dirOv) closeDir(); });
-  $('#drQ').addEventListener('input', (e) => { drv.q = e.target.value; if (state.view === 'hub') { $('#q').value = drv.q; $('#clearQ').hidden = !drv.q; } renderDir(); });
+  $('#drQ').addEventListener('input', (e) => { drv.q = e.target.value; renderDir(); });
   [$('#drFilters'), $('#hdFilters')].forEach((el) => el.addEventListener('click', (e) => { const b = e.target.closest('[data-rf]'); if (b) { drv.rel = b.dataset.rf; renderDir(); } }));
   $('#drAdd').addEventListener('click', () => openDirForm(null));
   [$('#drStrip'), $('#hdStrip')].forEach((el) => el.addEventListener('click', (e) => { const b = e.target.closest('[data-cid]'), c = b && contacts.find((x) => x.id === b.dataset.cid); if (c) openDirForm(c); }));
@@ -8993,7 +9457,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     m.hidden = !text; m.textContent = text || ''; m.classList.toggle('err', !!err);
   }
   function openBackup() {
-    updateGauge(); bkMessage(''); cfgRender();
+    updateGauge(); bkMessage(''); cfgRender(); hsRender();
     const notes = state.notes.filter((n) => !n.archived).length;
     $('#bkExpSub').textContent = notes + ' note' + (notes === 1 ? '' : 's') + ', ' + (state.notes.length - notes) + ' archived, ' + recipes.length + ' recipe' + (recipes.length === 1 ? '' : 's') + ', ' + watch.length + ' title' + (watch.length === 1 ? '' : 's');
     bOv.hidden = false;
@@ -9208,7 +9672,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       else if (!hbOv.hidden) closeHabits();
       else if (!eatOv.hidden) { if (!$('#eatWin').hidden) { $('#eatWin').hidden = true; cancelAnimationFrame(eat.confRaf); } else closeEat(); }
       else if (!rfmOv.hidden) closeRsForm();
-      else if (!restOv.hidden) closeHub();
       else if (!pkOv.hidden) closePick();
       else if (!pOv.hidden) closePaste();
       else if (!rfOv.hidden) requestCloseForm();
@@ -9218,7 +9681,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       return;
     }
     const typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
-    if (typing || e.ctrlKey || e.metaKey || e.altKey || !ov.hidden || !dwOv.hidden || !dfOv.hidden || !dirOv.hidden || !cOv.hidden || !lb.hidden || !rOv.hidden || !rfOv.hidden || !pOv.hidden || !bOv.hidden || !cookOv.hidden || !grOv.hidden || !wxOv.hidden || !tmOv.hidden || !calcOv.hidden || !pkOv.hidden || !mnOv.hidden || !mpOv.hidden || !cvOv.hidden || !prOv.hidden || !hbOv.hidden || !restOv.hidden || !rfmOv.hidden || !eatOv.hidden) return;
+    if (typing || e.ctrlKey || e.metaKey || e.altKey || !ov.hidden || !dwOv.hidden || !dfOv.hidden || !dirOv.hidden || !cOv.hidden || !lb.hidden || !rOv.hidden || !rfOv.hidden || !pOv.hidden || !bOv.hidden || !cookOv.hidden || !grOv.hidden || !wxOv.hidden || !tmOv.hidden || !calcOv.hidden || !pkOv.hidden || !mnOv.hidden || !mpOv.hidden || !cvOv.hidden || !prOv.hidden || !hbOv.hidden || !rfmOv.hidden || !eatOv.hidden) return;
     if (e.key === 'n' && state.view === 'notes') { e.preventDefault(); openSheet(); }
     else if (e.key === '/') { e.preventDefault(); $('#q').focus(); }
   });
@@ -9330,7 +9793,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   I_init: {
     $('#tcCircleI').innerHTML = I.users; $('#tcHouseI').innerHTML = I.home; $('#hhShareI').innerHTML = I.share; $('#hhClose').innerHTML = I.x; $('#shClose').innerHTML = I.x; $('#cirHouseI').innerHTML = I.home; $('#cirShareI').innerHTML = I.share; $('#cirClose').innerHTML = I.x; $('#cirPickClose').innerHTML = I.x; $('#tcHabitI').innerHTML = I.target; $('#tcTimerI').innerHTML = I.hourglass; $('#tcCalcI').innerHTML = I.calc; $('#tcWxI').innerHTML = I.cloudsun;
     $('#kcConvI').innerHTML = I.convert; $('#kcTimersI').innerHTML = I.hourglass; $('#kcRestI').innerHTML = I.clock; $('#kcGrocI').innerHTML = I.cart;
-    $('#hcFoodI').innerHTML = I.utensils; $('#hcEatI').innerHTML = I.dice;
   }
   render(); renderRecipes(); renderWatch(); renderDir(); renderKMenu(); syncToolCards(); dirBadge();
   setView(state.view, { instant: true });
