@@ -2000,6 +2000,9 @@ window.QC_THEMES = [
   .hs-games { display: grid; grid-template-columns: 1fr; gap: 4px; } .hs-games label { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 600; cursor: pointer; } .hs-games input { width: 22px; height: 22px; accent-color: var(--accent-primary); flex: none; }
   .arc-pick { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); } .arc-pick label { font-weight: 700; font-size: .9rem; }
   .arc-pickr { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto; gap: 8px; margin-top: 8px; } .arc-pickr select, .arc-pickr input { min-height: 44px; min-width: 0; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; padding: 0 10px; } .arc-pickr .btn { min-height: 44px; }
+  .sub-h { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--text); font: inherit; font-weight: 700; font-size: .92rem; cursor: pointer; text-align: left; }
+  .sc-body { max-height: 260px; overflow-y: auto; margin-top: 6px; overscroll-behavior: contain; } .sc-body[hidden] { display: none; } .sc-body .hb-pin { margin-bottom: 6px; }
+  .sp-nh { margin-top: 14px; } #hbSpNews .nw:last-child { border-bottom: 0; }
 </style>
 </head>
 <body>
@@ -2201,8 +2204,16 @@ window.QC_THEMES = [
   </section>
   <section class="acc" data-sec="sports" id="acc-sports">
     <button class="acc-h" type="button" id="acc-sports-h" aria-expanded="false" aria-controls="acc-sports-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">🏈</span> Sports Ticker</span><span class="ac-b" id="hbB-sports">Tap to load</span></button>
-    <div class="acc-bd" id="acc-sports-b" role="region" aria-labelledby="acc-sports-h" hidden><div class="led" id="hbSp" aria-live="polite"></div><div class="hb-row"><button class="btn" id="hbSpAll" type="button" hidden></button></div><p class="hb-note" id="hbSpNote"></p></div>
-    <div class="hb-pin" id="hbPin" aria-label="Live games"></div>
+    <div class="acc-bd" id="acc-sports-b" role="region" aria-labelledby="acc-sports-h" hidden>
+      <button class="sub-h" type="button" id="hbScH" aria-expanded="true" aria-controls="hbScB"><span id="hbScC" aria-hidden="true">▾</span> 📊 Live Scores &amp; Results</button>
+      <div class="sc-body" id="hbScB" role="region" aria-labelledby="hbScH">
+        <div class="hb-pin" id="hbPin" aria-label="Live games"></div>
+        <div class="led" id="hbSp" aria-live="polite"></div><div class="hb-row"><button class="btn" id="hbSpAll" type="button" hidden></button></div><p class="hb-note" id="hbSpNote"></p>
+      </div>
+      <div class="nw-h sp-nh">📰 Sports News</div>
+      <div id="hbSpNews" aria-live="polite"></div>
+      <div class="hb-row"><button class="btn" id="hbSpNewsRef" type="button">↻ Refresh News</button></div>
+    </div>
   </section>
   <section class="acc" data-sec="local" id="acc-local">
     <button class="acc-h" type="button" id="acc-local-h" aria-expanded="false" aria-controls="acc-local-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">📰</span> Local News</span><span class="ac-b" id="hbB-local">Tap to load</span></button>
@@ -4693,16 +4704,17 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       h('span', { class: 'led-t' + (live ? ' live' : ''), text: g.tag }));
   }
   function hbSpPaint() {
-    const el = $('#hbSp'); if (!el) return; const fav = hbSelAll().length > 0, favG = hbGames.filter(hbFav), list = hbSorted(fav && !hbSpAll ? favG : hbGames).slice(0, 24);
+    const el = $('#hbSp'); if (!el) return; const fav = hbSelAll().length > 0, favG = hbGames.filter(hbFav), pinned = new Set(hbPinGames().map((g) => g.id)), list = hbSorted(fav && !hbSpAll ? favG : hbGames).filter((g) => !pinned.has(g.id)).slice(0, 24);
     const btn = $('#hbSpAll'); btn.hidden = !fav; btn.textContent = hbSpAll ? 'Favorites only' : 'Show all games';
-    el.replaceChildren(...(list.length ? list.map(hbGameRow) : [h('div', { class: 'led-e', text: hbSpErr && !hbGames.length ? 'Scores unavailable right now.' : fav && !hbSpAll ? 'No games for your favorite teams today.' : 'No games scheduled right now.' })]));
+    el.replaceChildren(...(list.length ? list.map(hbGameRow) : pinned.size ? [] : [h('div', { class: 'led-e', text: hbSpErr && !hbGames.length ? 'Scores unavailable right now.' : fav && !hbSpAll ? 'No games for your favorite teams today.' : 'No games scheduled right now.' })]));
     const best = hbSorted(hbGames).find((g) => hbFav(g) && g.state === 'in') || hbSorted(hbGames).find(hbFav) || hbSorted(hbGames).find((g) => g.state === 'in') || hbSorted(hbGames)[0];
     hbBadge('sports', best ? hbScore(best) + (best.state === 'pre' ? ' · ' : ' ') + best.tag : hbSpErr ? 'Scores unavailable' : 'No games · ' + hbs.leagues.join('/'));
     $('#hbSpNote').textContent = hbSpErr ? 'Some leagues couldn’t be reached; showing the last saved scores.' : 'Scores from ESPN, refreshed while this tab is open.';
   }
+  const hbPinGames = () => (hbs.enabled.sports && hbs.pinLive ? hbSorted(hbGames.filter((g) => g.state === 'in' && (!hbSelAll().length || hbFav(g)))).slice(0, 6) : []);
   function hbPinPaint() {
     const host = $('#hbPin'); if (!host) return;
-    const live = hbs.enabled.sports && hbs.pinLive ? hbSorted(hbGames.filter((g) => g.state === 'in' && (!hbSelAll().length || hbFav(g)))).slice(0, 6) : [];
+    const live = hbPinGames();
     host.replaceChildren(...(live.length ? [h('div', { class: 'led', role: 'status', 'aria-label': 'Live games' }, ...live.map(hbGameRow))] : []));
   }
 
@@ -4818,6 +4830,36 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   });
 
   /* Accordion + page */
+  /* Sports news (ESPN public news API, with a GDELT fallback) */
+  let hbSpnSeq = 0;
+  const KEY_SCOPEN = 'quickcapture_hub_scores_open';
+  function hbScSet(open) { $('#hbScH').setAttribute('aria-expanded', String(open)); $('#hbScB').hidden = !open; $('#hbScC').textContent = open ? '▾' : '▸'; try { localStorage.setItem(KEY_SCOPEN, open ? '1' : '0'); } catch { /* storage blocked */ } }
+  $('#hbScH').addEventListener('click', () => hbScSet($('#hbScH').getAttribute('aria-expanded') !== 'true'));
+  { let o = true; try { o = localStorage.getItem(KEY_SCOPEN) !== '0'; } catch { /* default open */ } hbScSet(o); }
+  const hbIso = (t) => { const d = new Date(t); if (isNaN(d)) return ''; return d.toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z'); };
+  async function hbSportsNews(force) {
+    const host = $('#hbSpNews'), seq = ++hbSpnSeq, lgs = hbs.leagues.slice(0, 4), ck = 'spn:' + lgs.join();
+    if (!force) { const c = hbGet(ck, 10 * 60000); if (c && c.length) { hbSpnPaint(c); return; } }
+    host.replaceChildren(h('p', { class: 'hb-none', text: 'Loading sports headlines…' }));
+    const lists = await Promise.all(lgs.map(async (lg) => {
+      try {
+        const j = await hbJson('https://site.api.espn.com/apis/site/v2/sports/' + HB_LG[lg][0] + '/news?limit=8');
+        const a = (j.articles || []).map((x) => ({ t: String(x.headline || '').replace(/\s+/g, ' ').trim().slice(0, 170), u: safeHttp(x.links && x.links.web && x.links.web.href), d: 'espn.com', at: hbIso(x.published || x.lastModified || ''), lg })).filter((x) => x.t && x.u);
+        if (a.length) return a;
+      } catch { /* try the fallback */ }
+      try { return (await gdelt('(' + lg + ' OR "' + lg + ' game") sourcelang:english', 6, '2d', 'datedesc')).map((x) => Object.assign({ lg }, x)); } catch { return null; }
+    }));
+    if (seq !== hbSpnSeq) return;
+    const seen = new Set(), all = lists.filter(Boolean).flat().filter((x) => !seen.has(x.u) && seen.add(x.u)).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 12);
+    if (all.length) { hbPut(ck, all); hbSpnPaint(all); return; }
+    const old = hbOld(ck);
+    if (old && old.length) { hbSpnPaint(old, true); return; }
+    host.replaceChildren(h('p', { class: 'hb-none', text: lists.every((x) => x === null) ? hbOffline : 'No sports stories right now. Tap Refresh News to try again.' }));
+  }
+  function hbSpnPaint(list, stale) {
+    $('#hbSpNews').replaceChildren(...list.map(hbNewsEl), ...(stale ? [h('p', { class: 'hb-note', text: 'Showing saved headlines. Tap Refresh News when you’re online.' })] : []));
+  }
+  $('#hbSpNewsRef').addEventListener('click', () => hbSportsNews(true));
   const hbLoaded = {};
   function hbLoad(id, force) {
     if (!hbs.enabled[id]) return; if (id === 'local' && hbs.pure) return; if (id === 'politics' && hbs.pure) return;
@@ -4825,7 +4867,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (id === 'arcade') { arcRender(); arcTools(); return; }
     if (!force && hbLoaded[id] && Date.now() - hbLoaded[id] < 60000) return;
     hbLoaded[id] = Date.now();
-    if (id === 'economy') hbEco(); else if (id === 'sports') hbLoadGames(); else if (id === 'local') hbLocal(); else if (id === 'politics') hbPolitics(); else if (id === 'hope') hbHope(false);
+    if (id === 'economy') hbEco(); else if (id === 'sports') { hbLoadGames(); hbSportsNews(!!force); } else if (id === 'local') hbLocal(); else if (id === 'politics') hbPolitics(); else if (id === 'hope') hbHope(false);
   }
   function hbOpen(id, on) {
     const hd = $('#acc-' + id + '-h'), bd = $('#acc-' + id + '-b'); if (!hd) return;
