@@ -1869,6 +1869,133 @@ window.QC_THEMES = [
   .hs-ck input { width: 20px; height: 20px; flex: none; accent-color: var(--accent-primary); }
   .hs-ck span { font-size: .88rem; } .hs-ck small { display: block; color: var(--text-muted); font-weight: 500; }
   .hs-sw { align-items: flex-start; } .hs-sw input { margin-top: 2px; }
+  .sacc { margin: 0 0 8px; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--surface-card); overflow: hidden; }
+  .sacc-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 56px; padding: 8px 14px; text-align: left; background: none; border: 0; color: var(--text-primary); font: inherit; touch-action: manipulation; }
+  .sacc-t { display: grid; gap: 1px; min-width: 0; } .sacc-t b { font-size: 1rem; } .sacc-t small { color: var(--text-muted); font-weight: 500; }
+  .sacc-c { flex: none; font-size: .8rem; color: var(--text-muted); transition: transform .2s; }
+  .sacc-h[aria-expanded="true"] .sacc-c { transform: rotate(90deg); }
+  .sacc-b { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .24s ease, visibility 0s .24s; }
+  .sacc.open > .sacc-b { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .24s ease, visibility 0s; }
+  .sacc-in { min-height: 0; overflow: hidden; padding: 0 14px; }
+  .sacc.open .sacc-in { padding-bottom: 12px; border-top: 1px solid var(--border-subtle); }
+  @media (prefers-reduced-motion: reduce) { .sacc-b, .sacc.open > .sacc-b, .sacc-c { transition: none; } }
+  .sacc-in > .th-sec > b, .sacc-in #hsT, .sacc-in .hs-card > small { display: none; }
+  .sacc-in .th-sec, .sacc-in .hs-card { border-bottom: 0; }
+  .hs-cap { margin-left: 6px; padding: 1px 8px; border-radius: 6px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-muted); font-size: .74rem; font-variant-numeric: tabular-nums; }
+  .hs-cap.max { border-color: var(--accent-primary); color: var(--accent-text, var(--accent-primary)); }
+  .tm-field:disabled { opacity: .5; }
+  .hs-order { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .hs-or { display: grid; grid-template-columns: 28px minmax(0, 1fr) 44px 44px; gap: 6px; align-items: center; }
+  .hs-n { display: grid; place-items: center; width: 28px; letter-spacing: -.02em; height: 28px; border-radius: 6px; background: var(--surface-raised); border: 1px solid var(--border-subtle); font-weight: 800; font-size: .8rem; font-variant-numeric: tabular-nums; }
+  .hs-mv { min-width: 44px; min-height: 44px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--surface-card); color: var(--text-primary); font: inherit; font-size: .9rem; }
+  .hs-mv:disabled { opacity: .35; }
+  .hs-sug { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; padding: 2px 0; }
+  .hs-sug::-webkit-scrollbar { display: none; }
+  .hs-sug button, .hs-tag { flex: none; min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--surface-card); color: var(--text-primary); font: inherit; font-size: .88rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hs-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 20px; }
+  .hs-tag { border-color: var(--accent-primary); background: var(--accent-soft); color: var(--accent-text, var(--accent-primary)); font-weight: 700; }
+  .hs-tags small, .hs-sug small { color: var(--text-muted); font-weight: 500; align-self: center; }
+  .hs-teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 6px; }
+  .hs-teams button { min-height: 44px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--surface-card); color: var(--text-primary); font: inherit; font-size: .84rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .hs-teams button[aria-pressed="true"] { border-color: var(--accent-primary); background: var(--accent-fill, var(--accent-primary)); color: var(--on-accent, #fff); font-weight: 800; }
+  .hs-chips button[data-on="1"]:not([aria-checked="true"]) { border-color: var(--accent-primary); }
+
+  .seg.s6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .seg.s6 button { grid-column: auto; line-height: 1.15; padding: 4px 6px; font-size: .88rem; min-height: 48px; }
+  .gm-sec { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+  .gm-sec h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .gm-sec > p, .gm-note, .gm-meta { color: var(--muted); font-size: .88rem; margin: 4px 0 8px; }
+  .gm-sec textarea { width: 100%; min-height: 110px; box-sizing: border-box; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; padding: 10px; resize: vertical; }
+  .gm-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .gm-row .btn { min-height: 44px; }
+  .gm-idea { display: flex; flex-direction: column; gap: 3px; text-align: left; width: 100%; margin-top: 8px; min-height: 44px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; cursor: pointer; }
+  .gm-idea span { color: var(--muted); font-size: .9rem; } .gm-idea small { color: var(--muted); font-size: .78rem; }
+  .gm-recipe, .gm-tie { margin-top: 10px; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); }
+  .gm-recipe h3, .gm-tie h3 { margin: 0 0 6px; } .gm-recipe h4 { margin: 12px 0 4px; } .gm-recipe ul, .gm-recipe ol { margin: 0; padding-left: 22px; } .gm-recipe li { margin: 3px 0; }
+  .gm-recipe .btn { width: 100%; margin-top: 12px; }
+  .gm-slots { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .gm-slots label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer; font-weight: 600; }
+  .gm-slots input { width: 20px; height: 20px; accent-color: var(--accent-primary); }
+  .gm-warn { margin: 8px 0; padding: 10px 12px; border-radius: 10px; border: 1px solid #d97706; background: rgba(217, 119, 6, .14); font-weight: 600; font-size: .9rem; }
+  .gm-busy { display: flex; align-items: center; gap: 10px; color: var(--muted); padding: 10px 2px; }
+  .gm-none { color: var(--muted); text-align: center; padding: 10px 0; margin: 0; }
+  .gm-tie small { color: var(--accent); font-weight: 700; }
+  .gm-bul { margin: 0 0 6px; padding-left: 20px; } .gm-bul li { margin: 6px 0; line-height: 1.4; }
+  .hb-brief, .vb-card-wrap { margin: 0 0 12px; }
+  .hb-brief { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .hb-brief h2 { font-size: 1.02rem; margin: 0 0 6px; }
+  .hb-brief .btn { min-height: 44px; width: 100%; }
+  .vibe { margin-bottom: 14px; }
+  .vibe-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none; } .vibe-chips::-webkit-scrollbar { display: none; }
+  .vibe-chips button { flex: none; min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  .vibe-chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .vb-card { display: flex; gap: 10px; margin-top: 8px; padding: 8px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); }
+  .vb-card img, .vb-ph { width: 64px; height: 96px; border-radius: 6px; object-fit: cover; flex: none; background: var(--surface); display: grid; place-items: center; font-size: 1.6rem; }
+  .vb-tx { min-width: 0; flex: 1; } .vb-tx b { display: block; } .vb-tx small { color: var(--muted); } .vb-tx p { margin: 4px 0 0; font-size: .82rem; color: var(--muted); }
+  .vb-tx .gm-row .btn { padding: 0 10px; font-size: .84rem; }
+  .md-h { font-weight: 800; margin: 10px 0 2px; line-height: 1.25; } .md-h.l1 { font-size: 1.2rem; } .md-h.l2 { font-size: 1.08rem; } .md-h.l3 { font-size: 1rem; color: var(--muted); }
+  .rs-top-acts.t3 { grid-template-columns: 1fr auto; } .rs-tie { width: 100%; min-height: 44px; margin: 0 0 10px; }
+
+  .arc { margin: 18px 0 8px; } .arc-h { font-size: 1.15rem; margin: 0 0 10px; }
+  .arc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .arc-t { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 76px; padding: 10px 12px; text-align: left; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+  .arc-t .ai { font-size: 1.4rem; line-height: 1; } .arc-t b { font-size: .95rem; } .arc-t small { color: var(--muted); font-size: .78rem; }
+  .arc-lb, .arc-arch { margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .arc-lbh { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .arc-lbh button { min-height: 44px; min-width: 44px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; cursor: pointer; }
+  #arcLbList { list-style: none; margin: 6px 0 0; padding: 0; } #arcLbList li { padding: 6px 0; border-top: 1px solid var(--border); font-size: .9rem; } #arcLbList li:first-child { border-top: 0; } #arcLbList li.me b { color: var(--accent); } #arcLbList span { color: var(--muted); }
+  #arcLbNote { color: var(--muted); font-size: .8rem; margin: 6px 0 0; }
+  .arc-ah { width: 100%; min-height: 44px; display: flex; align-items: center; gap: 8px; border: 0; background: none; color: var(--text); font: inherit; font-weight: 700; cursor: pointer; padding: 0; text-align: left; }
+  .arc-ah::after { content: '▾'; margin-left: auto; transition: transform .2s; } .arc-ah[aria-expanded="true"]::after { transform: rotate(180deg); }
+  #arcArcB { display: grid; gap: 6px; margin-top: 8px; }
+  .arc-r { min-height: 44px; text-align: left; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-size: .86rem; cursor: pointer; }
+  .arc-sheet { padding: 8px 8px calc(18px + env(safe-area-inset-bottom)); }
+  .arc-sheet .sheet-head h2 { font-size: 1.05rem; margin: 0; min-width: 0; } #arcTimer { margin-left: auto; margin-right: 8px; font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 700; }
+  .arc-msg { min-height: 1.3em; margin: 8px 0; text-align: center; color: var(--muted); font-size: .9rem; } .arc-msg.bad { color: #ef4444; font-weight: 600; }
+  .arc-act { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 10px 0; } .arc-act .btn { min-height: 44px; flex: 1 1 auto; }
+  .arc-act .btn.on, .arc-act .btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .arc-win { margin-top: 12px; padding: 12px; text-align: center; border-radius: 12px; border: 2px solid #22c55e; background: rgba(34, 197, 94, .12); }
+  .ak { margin: 8px 0; } .ak-r { display: flex; justify-content: center; gap: 4px; margin-bottom: 6px; }
+  .ak-k { flex: 1 1 0; min-width: 0; max-width: 40px; min-height: 48px; padding: 0; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+  .ak-k.w { flex: 1.6 1 0; max-width: 56px; }
+  .ak-k.g, .wd-c.g { background: #16a34a; border-color: #16a34a; color: #fff; } .ak-k.y, .wd-c.y { background: #ca8a04; border-color: #ca8a04; color: #fff; } .ak-k.x, .wd-c.x { background: #52525b; border-color: #52525b; color: #fff; }
+  .wd { display: grid; gap: 6px; max-width: 300px; margin: 0 auto; } .wd-r { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .wd-c { aspect-ratio: 1; display: grid; place-items: center; border: 2px solid var(--border); border-radius: 6px; font-weight: 800; font-size: 1.5rem; text-transform: uppercase; } .wd-c.f { border-color: var(--text); }
+  .cw { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; max-width: 320px; margin: 8px auto; }
+  .cw-c { aspect-ratio: 1; position: relative; border: 1px solid var(--border); border-radius: 4px; background: var(--surface-2); color: var(--text); font: inherit; font-weight: 800; font-size: 1.3rem; padding: 0; min-width: 0; cursor: pointer; display: grid; place-items: center; }
+  .cw-c.blk { background: var(--text); opacity: .85; border-color: transparent; } .cw-c.w { background: color-mix(in srgb, var(--accent-primary) 22%, var(--surface-2)); } .cw-c.s { outline: 3px solid var(--accent-primary); z-index: 1; } .cw-c.x { background: rgba(239, 68, 68, .35); }
+  .cw-c i { position: absolute; top: 2px; left: 4px; font-size: .62rem; font-style: normal; font-weight: 700; color: var(--muted); }
+  .cw-bar { text-align: center; font-weight: 700; min-height: 2.6em; padding: 6px 4px; background: var(--surface-2); border-radius: 8px; font-size: .92rem; }
+  .cw-cl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; } .cw-cl b { display: block; margin-bottom: 4px; }
+  .cw-q { display: block; width: 100%; min-height: 44px; text-align: left; padding: 6px 8px; margin-bottom: 4px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-size: .82rem; cursor: pointer; } .cw-q.on { border-color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary) 20%, var(--surface-2)); }
+  .cn { display: grid; gap: 6px; } .cn.g { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cn-w { min-height: 56px; border-radius: 8px; border: 2px solid transparent; background: var(--surface-2); color: var(--text); font: inherit; font-weight: 800; font-size: .74rem; padding: 2px; word-break: break-word; cursor: pointer; } .cn-w.on { background: var(--text); color: var(--bg-base); }
+  .cn-s { grid-column: 1 / -1; padding: 10px; border-radius: 8px; text-align: center; color: #1c1917; } .cn-s b { display: block; text-transform: uppercase; font-size: .8rem; } .cn-s span { font-size: .85rem; }
+  .cn-s.c0 { background: #fde047; } .cn-s.c1 { background: #86efac; } .cn-s.c2 { background: #93c5fd; } .cn-s.c3 { background: #c4b5fd; }
+  .cn-d { text-align: center; margin: 8px 0; color: var(--muted); letter-spacing: 2px; }
+  .bee-in { text-align: center; font-size: 1.7rem; font-weight: 800; letter-spacing: 2px; min-height: 2.2rem; margin: 6px 0; }
+  .bee-p { text-align: center; color: var(--muted); font-size: .88rem; }
+  .bee-h { position: relative; width: 260px; height: 250px; margin: 6px auto; }
+  .bee-l { position: absolute; transform: translate(-50%, -50%); width: 76px; height: 70px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); border: 0; background: var(--surface-2); color: var(--text); font: inherit; font-weight: 800; font-size: 1.5rem; cursor: pointer; } .bee-l.c { background: #facc15; color: #1c1917; }
+  .bee-f { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; } .bee-f span { padding: 4px 8px; border-radius: 6px; background: var(--surface-2); font-size: .82rem; font-weight: 600; } .bee-f .pg { background: #facc15; color: #1c1917; }
+  .ld { display: grid; gap: 6px; justify-content: center; margin: 8px 0; } .ld-w, .ld-t { display: flex; gap: 6px; justify-content: center; align-items: center; } .ld-w span, .ld-t span { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 6px; border: 2px solid var(--border); font-weight: 800; font-size: 1.3rem; }
+  .ld-w.st span { background: var(--surface-2); } .ld-w span.ch { background: #16a34a; border-color: #16a34a; color: #fff; } .ld-w.in span { border-color: var(--text); } .ld-t span { background: #ca8a04; border-color: #ca8a04; color: #fff; } .ld-t small { color: var(--muted); margin-right: 8px; }
+  .sd { display: grid; grid-template-columns: repeat(6, 1fr); max-width: 320px; margin: 8px auto; border: 2px solid var(--text); border-radius: 6px; overflow: hidden; }
+  .sd-c { aspect-ratio: 1; min-width: 0; padding: 0; border: 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); color: var(--accent-primary); font: inherit; font-weight: 700; font-size: 1.4rem; cursor: pointer; } .sd-c.g { color: var(--text); background: var(--surface-2); font-weight: 800; } .sd-c.br { border-right: 2px solid var(--text); } .sd-c.bb { border-bottom: 2px solid var(--text); } .sd-c.s { background: color-mix(in srgb, var(--accent-primary) 30%, var(--surface)); } .sd-c.x { color: #ef4444; background: rgba(239, 68, 68, .18); }
+  .sd-pad { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; max-width: 360px; margin: 10px auto; } .sd-pad.k9 { grid-template-columns: repeat(5, 1fr); }
+  .sd-k { min-height: 48px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-weight: 800; font-size: 1.3rem; cursor: pointer; padding: 0; }
+  .pc { display: grid; grid-template-columns: 54px repeat(5, 1fr); max-width: 330px; margin: 8px auto; gap: 3px; } .pc-cc, .pc-rc { display: flex; font-size: .8rem; font-weight: 700; color: var(--muted); } .pc-cc { flex-direction: column; justify-content: flex-end; align-items: center; } .pc-rc { justify-content: flex-end; align-items: center; gap: 4px; padding-right: 4px; } .pc-cc.ok, .pc-rc.ok { color: #16a34a; }
+  .pc-c { aspect-ratio: 1; min-width: 0; padding: 0; border-radius: 4px; border: 1px solid var(--border); background: var(--surface-2); color: var(--muted); font: inherit; cursor: pointer; } .pc-c.f { background: var(--text); border-color: var(--text); }
+  .qn { display: grid; grid-template-columns: repeat(7, 1fr); max-width: 340px; margin: 8px auto; border: 2px solid #1c1917; }
+  .qn-c { aspect-ratio: 1; min-width: 0; padding: 0; border: 1px solid rgba(0, 0, 0, .25); font: inherit; font-size: 1.1rem; color: #1c1917; cursor: pointer; } .qn-c.br { border-right: 2px solid #1c1917; } .qn-c.bb { border-bottom: 2px solid #1c1917; } .qn-c.x { box-shadow: inset 0 0 0 3px #ef4444; }
+  .z0 { background: #fca5a5; } .z1 { background: #fdba74; } .z2 { background: #fde047; } .z3 { background: #86efac; } .z4 { background: #93c5fd; } .z5 { background: #c4b5fd; } .z6 { background: #f9a8d4; }
+  .tg { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; max-width: 330px; margin: 8px auto; } .tg-w { position: relative; } .tg-c { width: 100%; aspect-ratio: 1; padding: 0; min-width: 0; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); font-size: 1.4rem; cursor: pointer; } .tg-c.g { background: var(--surface); border-color: var(--muted); } .tg-c.x { box-shadow: inset 0 0 0 3px #ef4444; }
+  .tg-l { position: absolute; z-index: 2; font-style: normal; font-weight: 800; font-size: .9rem; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: var(--bg-base); border: 1px solid var(--border); pointer-events: none; } .tg-l.r { right: -11px; top: calc(50% - 9px); } .tg-l.d { bottom: -11px; left: calc(50% - 9px); }
+  .kk { display: grid; grid-template-columns: repeat(5, 1fr); max-width: 320px; margin: 8px auto; gap: 2px; } .kk-b { aspect-ratio: 1; position: relative; background: var(--text); opacity: .9; border-radius: 3px; } .kk-b i { position: absolute; font-style: normal; font-size: .72rem; font-weight: 700; color: var(--bg-base); } .kk-b i.a { top: 3px; right: 5px; } .kk-b i.d { bottom: 3px; left: 5px; }
+  .kk-c { aspect-ratio: 1; min-width: 0; padding: 0; border-radius: 3px; border: 1px solid var(--border); background: var(--surface-2); color: var(--accent-primary); font: inherit; font-weight: 800; font-size: 1.4rem; cursor: pointer; } .kk-c.s { background: color-mix(in srgb, var(--accent-primary) 30%, var(--surface-2)); } .kk-c.x { background: rgba(239, 68, 68, .25); }
+  .mm { display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 5px; max-width: 340px; margin: 8px auto; } .mm-c { aspect-ratio: 1; min-width: 0; padding: 0; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer; } .mm-c.f { background: var(--accent-primary); } .mm-c.ok { background: #16a34a; } .mm-c.no { background: #ef4444; }
+  .cw-c:not(.blk) { background: #fafaf9; color: #1c1917; } .cw-c.blk { background: #3f3f46; opacity: 1; } .cw-c.w { background: #fde68a; } .cw-c.s { background: #fbbf24; } .cw-c.x { background: #fecaca; } .cw-c i { color: #52525b; }
+  .kk-c { background: #fafaf9; color: #1c1917; } .kk-c.s { background: #fde68a; } .kk-c.x { background: #fecaca; } .kk-b { background: #3f3f46; opacity: 1; } .kk-b i { color: #fafaf9; }
 </style>
 </head>
 <body>
@@ -1918,12 +2045,13 @@ window.QC_THEMES = [
 </div></section>
 
 <section class="page" id="pgCook" data-page="cookbook" aria-label="Food"><div class="wrap">
-  <div class="seg s5" id="kSeg" role="tablist" aria-label="Food sections">
+  <div class="seg s6" id="kSeg" role="tablist" aria-label="Food sections">
     <button id="ksRecipes" type="button" role="tab" aria-selected="true" data-ks="recipes">📖 Cookbook</button>
-    <button id="ksMenu" type="button" role="tab" aria-selected="false" data-ks="menu">📅 Weekly Menu</button>
+    <button id="ksMenu" type="button" role="tab" aria-selected="false" data-ks="menu">📅 Menu</button>
     <button id="ksPantry" type="button" role="tab" aria-selected="false" data-ks="pantry">🥫 Pantry</button>
     <button id="ksRest" type="button" role="tab" aria-selected="false" data-ks="rest">🍽️ Restaurants</button>
-    <button id="ksMeat" type="button" role="tab" aria-selected="false" data-ks="meat">🥩 Defrost &amp; Timers</button>
+    <button id="ksMeat" type="button" role="tab" aria-selected="false" data-ks="meat">🥩 Timers</button>
+    <button id="ksGem" type="button" role="tab" aria-selected="false" data-ks="gem">✨ Meals with Gemini</button>
   </div>
   <div id="kRecipes">
   <section id="cookbook">
@@ -1980,6 +2108,8 @@ window.QC_THEMES = [
       <button class="btn primary big" id="rsEat" type="button"></button>
       <button class="btn big" id="rsAdd" type="button"></button>
     </div>
+    <button class="btn big rs-tie" id="rsTie" type="button">✨ Break the Tie</button>
+    <div id="rsTieRes" hidden aria-live="polite"></div>
     <section class="eat-inline" id="eatOv" hidden aria-labelledby="eatTitle">
       <div class="eat-sheet">
         <div class="cb-head"><h2 id="eatTitle">Where Should We Eat?</h2><button class="icon-btn" id="eatClose" type="button" aria-label="Close the wheel"></button></div>
@@ -1998,6 +2128,28 @@ window.QC_THEMES = [
     <label class="rs-search"><span id="rsSearchIco"></span><input id="rsQ" type="search" placeholder="Search name, cuisine, city or order…" autocomplete="off" aria-label="Search restaurants"></label>
     <nav class="rs-filters" id="rsFilters" aria-label="Filter by cuisine"></nav>
     <div class="rs-list" id="rsList"></div>
+  </div>
+  <div id="kGem" hidden>
+    <div class="cb-head"><h2>✨ Meals with Gemini</h2></div>
+    <section class="gm-sec" aria-labelledby="gmT1">
+      <h3 id="gmT1">What Can I Make?</h3>
+      <p>Pulled from your Pantry items marked “Have”. Edit freely, one item per line.</p>
+      <textarea id="gmHave" aria-label="Ingredients I have" placeholder="chicken&#10;rice&#10;broccoli" maxlength="3000"></textarea>
+      <div class="gm-row"><button class="btn primary big" id="gmGo" type="button">✨ Generate Ideas</button><button class="btn big" id="gmSync" type="button">↻ Reload Pantry</button></div>
+      <div id="gmIdeas" aria-live="polite"></div>
+      <div id="gmRecipe" aria-live="polite"></div>
+    </section>
+    <section class="gm-sec" aria-labelledby="gmT2">
+      <h3 id="gmT2">Make My Menu</h3>
+      <p>Fills Monday to Sunday from the recipes saved in your Cookbook.</p>
+      <div class="gm-slots" role="group" aria-label="Meal slots to fill">
+        <label><input type="checkbox" data-gm-meal="breakfast" checked> Breakfast</label>
+        <label><input type="checkbox" data-gm-meal="lunch" checked> Lunch</label>
+        <label><input type="checkbox" data-gm-meal="dinner" checked> Dinner</label>
+      </div>
+      <button class="btn primary big" id="gmMenu" type="button" style="width:100%">📅 Make My Menu</button>
+      <div id="gmMenuMsg" aria-live="polite"></div>
+    </section>
   </div>
   <div id="kMeat" hidden>
     <div class="cb-head"><h2>Meat Rest &amp; Defrost</h2></div>
@@ -2034,6 +2186,9 @@ window.QC_THEMES = [
 <section class="page" id="pgHub" data-page="hub" aria-label="Hub"><div class="wrap">
   <div class="hb-top"><button class="btn primary big" id="hbBright" type="button" aria-expanded="false" aria-controls="hbCard">✨ Brighten My Day</button>
     <div class="hb-card" id="hbCard" role="region" aria-live="polite" aria-label="A bit of good news" hidden></div></div>
+  <section class="hb-brief" id="hbBrief" aria-labelledby="hbBriefT"><h2 id="hbBriefT">☀️ Today’s 60-Second Briefing</h2>
+    <div id="hbBriefBody" aria-live="polite"><p class="gm-note">Markets, your next game, local weather and one good headline in three bullets.</p></div>
+    <button class="btn primary" id="hbBriefGo" type="button">☀️ Get my briefing</button></section>
   <div class="hb-pin" id="hbPin" aria-label="Live games"></div>
   <p class="hb-none" id="hbEmpty" hidden>All Hub sections are switched off. Turn some on in Settings → Hub &amp; News Configuration.</p>
   <div id="hbAccs">
@@ -2055,7 +2210,12 @@ window.QC_THEMES = [
   </section>
   <section class="acc" data-sec="movies" id="acc-movies">
     <button class="acc-h" type="button" id="acc-movies-h" aria-expanded="false" aria-controls="acc-movies-b"><span class="ac-c" aria-hidden="true">▶</span><span class="ac-t"><span aria-hidden="true">🍿</span> Movies &amp; TV</span><span class="ac-b" id="hbB-movies">Watchlist • Top News</span></button>
-    <div class="acc-bd" id="acc-movies-b" role="region" aria-labelledby="acc-movies-h" hidden><section id="watch">
+    <div class="acc-bd" id="acc-movies-b" role="region" aria-labelledby="acc-movies-h" hidden>
+    <section class="vibe import-card" id="vibeCard" aria-labelledby="vibeT"><div class="imp-title" id="vibeT">✨ Vibe Search</div>
+      <p class="gm-note">Pick a mood and Gemini finds four titles to match.</p>
+      <div class="vibe-chips" id="vibeChips" role="group" aria-label="Pick a vibe"></div>
+      <div id="vibeRes" aria-live="polite"></div></section>
+    <section id="watch">
     <form class="import-card" id="mediaForm" role="search" novalidate>
       <label for="mediaQ" class="imp-title">Add a movie or show</label>
       <div class="msearch">
@@ -2088,6 +2248,13 @@ window.QC_THEMES = [
     <button class="tcard" id="tcWx" type="button" data-kw="weather forecast temperature"><span class="ti" id="tcWxI"></span><b>Weather</b><small id="tcWxS">Tap to set a city</small></button>
   </div>
   <p class="tg-none" id="toolNone" hidden>No tools match that search.</p>
+  <section class="arc" id="arcade" aria-labelledby="arcT">
+    <h2 class="arc-h" id="arcT">🧩 Word &amp; Logic Arcade</h2>
+    <div class="arc-grid" id="arcGrid"></div>
+    <section class="arc-lb" id="arcLb" aria-labelledby="arcLbT"><div class="arc-lbh"><b id="arcLbT">🏅 Circle Leaderboard</b><button type="button" id="arcLbRef" aria-label="Refresh leaderboard">↻</button></div>
+      <ol id="arcLbList"></ol><p id="arcLbNote"></p></section>
+    <section class="arc-arch" id="arcArch"><button class="arc-ah" type="button" id="arcArcH" aria-expanded="false" aria-controls="arcArcB">🏆 Beaten Games Archive <span id="arcArcN"></span></button><div id="arcArcB" hidden></div></section>
+  </section>
   <section class="dr-up hd-up" aria-labelledby="hdUpT">
     <div class="dr-uph"><b id="hdUpT">Upcoming Dates</b><small id="hdUpSub"></small></div>
     <div class="dr-strip" id="hdStrip" role="list"></div>
@@ -2653,46 +2820,64 @@ window.QC_THEMES = [
       <h2 id="bkTitle">Settings &amp; storage</h2>
       <button class="icon-btn" id="bkClose" type="button" aria-label="Close"></button>
     </div>
+    <section class="sacc" id="sa-themes">
+      <button class="sacc-h" type="button" id="sa-themes-h" aria-expanded="false" aria-controls="sa-themes-b"><span class="sacc-t"><b>Appearance &amp; Themes</b><small>Pick a look</small></span><span class="sacc-c" aria-hidden="true">▶</span></button>
+      <div class="sacc-b" id="sa-themes-b" role="region" aria-labelledby="sa-themes-h" inert><div class="sacc-in">
     <div class="th-sec" id="themeSec"><b id="themeLbl">Appearance &amp; Themes</b><small>Pick a look. It applies instantly and is remembered on this device.</small>
       <div class="th-grid" id="themeGrid" role="radiogroup" aria-labelledby="themeLbl"></div></div>
+      </div></div>
+    </section>
+    <section class="sacc" id="sa-hub">
+      <button class="sacc-h" type="button" id="sa-hub-h" aria-expanded="false" aria-controls="sa-hub-b"><span class="sacc-t"><b>Hub &amp; News Configuration</b><small>Sections, tickers, teams, news</small></span><span class="sacc-c" aria-hidden="true">▶</span></button>
+      <div class="sacc-b" id="sa-hub-b" role="region" aria-labelledby="sa-hub-h" inert><div class="sacc-in">
     <section class="hs-card" id="hsCard" aria-labelledby="hsT"><b id="hsT">Hub &amp; News Configuration</b><small>Choose what shows in the Hub. Saved on this device.</small>
-      <div class="hs-l">Sections</div>
-      <div class="hs-checks" id="hsSecs">
-        <label class="hs-ck"><input type="checkbox" data-hsec="economy"><span>📈 Economy &amp; Rates</span></label>
-        <label class="hs-ck"><input type="checkbox" data-hsec="sports"><span>🏈 Sports Ticker</span></label>
-        <label class="hs-ck"><input type="checkbox" data-hsec="local"><span>📰 Local News</span></label>
-        <label class="hs-ck"><input type="checkbox" data-hsec="politics"><span>🏛️ Politics</span></label>
-        <label class="hs-ck"><input type="checkbox" data-hsec="movies"><span>🍿 Movies &amp; TV</span></label>
-        <label class="hs-ck"><input type="checkbox" data-hsec="hope"><span>✨ Hope-Scrolling</span></label>
-      </div>
+      <div class="hs-l">Sections <em>order &amp; visibility</em></div>
+      <ol class="hs-order" id="hsOrder" aria-label="Hub section order"></ol>
       <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsPure"><span><b>Pure Hope-Scrolling Mode</b><small>Merge all enabled news feeds into one stream of only positive news</small></span></label>
       <div class="hs-l">Economy</div>
-      <label class="hs-f"><span>Watchlist symbols (comma-separated)</span><input class="tm-field" id="hsSym" type="text" maxlength="160" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="AAPL, BTC-USD, ETH-USD, ^TNX"></label>
+      <div class="hs-f"><span>Stocks &amp; crypto <b class="hs-cap" id="hsSymCap"></b></span>
+        <input class="tm-field" id="hsSymIn" type="text" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Type a ticker, e.g. AAPL or BTC" aria-label="Search or add a ticker">
+        <div class="hs-sug" id="hsSymSug" aria-label="Ticker suggestions"></div>
+        <div class="hs-tags" id="hsSymAct" aria-label="Active tickers"></div></div>
       <label class="hs-f"><span>My Cost Basis <em>optional</em></span><input class="tm-field" id="hsBasis" type="text" maxlength="160" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ETH-USD:3200, AAPL:210"></label>
       <div class="hs-f"><span>Default timeframe</span><div class="hs-chips" id="hsTf" role="radiogroup" aria-label="Default timeframe"><button type="button" role="radio" aria-checked="false" data-tf="24H">24H</button><button type="button" role="radio" aria-checked="false" data-tf="1W">1W</button><button type="button" role="radio" aria-checked="false" data-tf="1M">1M</button><button type="button" role="radio" aria-checked="false" data-tf="YTD">YTD</button><button type="button" role="radio" aria-checked="false" data-tf="ALL">ALL</button></div></div>
       <div class="hs-l">Sports</div>
-      <div class="hs-f"><span>Leagues</span><div class="hs-chips" id="hsLg" role="group" aria-label="Leagues"><button type="button" aria-pressed="false" data-lg="NFL">NFL</button><button type="button" aria-pressed="false" data-lg="NBA">NBA</button><button type="button" aria-pressed="false" data-lg="MLB">MLB</button><button type="button" aria-pressed="false" data-lg="NHL">NHL</button><button type="button" aria-pressed="false" data-lg="MLS">MLS</button></div></div>
-      <label class="hs-f"><span>Favorite Teams</span><input class="tm-field" id="hsTeams" type="text" maxlength="160" autocomplete="off" spellcheck="false" placeholder="Bengals, Browns, Astros"></label>
+      <div class="hs-f"><span>League</span><div class="hs-chips" id="hsLg" role="radiogroup" aria-label="League"><button type="button" role="radio" aria-checked="false" data-lg="NFL">NFL</button><button type="button" role="radio" aria-checked="false" data-lg="NBA">NBA</button><button type="button" role="radio" aria-checked="false" data-lg="MLB">MLB</button><button type="button" role="radio" aria-checked="false" data-lg="NHL">NHL</button><button type="button" role="radio" aria-checked="false" data-lg="MLS">MLS</button></div></div>
+      <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsLgOn"><span id="hsLgOnT"><b>Show this league</b><small>Include its games in the Sports Ticker</small></span></label>
+      <div class="hs-f"><span id="hsTeamsT">Favorite teams</span><div class="hs-teams" id="hsTeamGrid" role="group" aria-labelledby="hsTeamsT"></div></div>
       <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsPin"><span><b>Pin Live In-Game Games</b><small>Live games stay at the top of the Hub</small></span></label>
       <div class="hs-l">Politics</div>
-      <div class="hs-f"><span>Lean</span><div class="hs-chips" id="hsLean" role="radiogroup" aria-label="Lean"><button type="button" role="radio" aria-checked="false" data-lean="left">Left-leaning</button><button type="button" role="radio" aria-checked="false" data-lean="right">Right-leaning</button><button type="button" role="radio" aria-checked="false" data-lean="both">Both (Balanced)</button></div></div>
+      <div class="hs-f"><span>Lean</span><div class="hs-chips" id="hsLean" role="radiogroup" aria-label="Lean"><button type="button" role="radio" aria-checked="false" data-lean="left">Left</button><button type="button" role="radio" aria-checked="false" data-lean="both">Both</button><button type="button" role="radio" aria-checked="false" data-lean="right">Right</button></div></div>
       <div class="hs-f"><span>Region</span><div class="hs-chips" id="hsRg" role="radiogroup" aria-label="Region"><button type="button" role="radio" aria-checked="false" data-rg="us">American</button><button type="button" role="radio" aria-checked="false" data-rg="ca">Canadian</button><button type="button" role="radio" aria-checked="false" data-rg="both">Both</button></div></div>
       <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsBadges"><span><b>Source badges</b><small>Show [AP], [Reuters], [CBC], [The Hill] on stories</small></span></label>
+      <div class="hs-l">Movies &amp; TV</div>
+      <label class="hs-ck hs-sw"><input type="checkbox" role="switch" id="hsVibe"><span><b>Vibe Search</b><small>Show the Gemini mood-based picks card at the top of Movies &amp; TV</small></span></label>
       <div class="hs-l">Local News</div>
-      <label class="hs-f"><span>Locations (separate with semicolons)</span><input class="tm-field" id="hsLocs" type="text" maxlength="160" autocomplete="off" spellcheck="false" placeholder="Houston, TX; Calgary, AB"></label>
+      <div class="hs-f"><span>Local news locations <b class="hs-cap" id="hsLocCap"></b></span>
+        <input class="tm-field" id="hsLocIn" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Type a city or state, e.g. Houston" aria-label="Search or add a location">
+        <div class="hs-sug" id="hsLocSug" aria-label="Location suggestions"></div>
+        <div class="hs-tags" id="hsLocAct" aria-label="Active locations"></div></div>
     </section>
-    <div class="set-row"><div><b>My Circle</b><small>Friends &amp; family, share via QR or text</small></div><button class="btn" id="bkCircle" type="button">Open</button></div>
-    <div class="set-key"><label for="tmdbKey"><b>TMDB API Key</b><small>Used for Watchlist search. Leave empty to use the built-in key.</small></label>
-      <input id="tmdbKey" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="64" aria-label="TMDB API key">
-      <div class="set-key-btns"><button class="btn" id="tmdbSave" type="button">Save key</button><button class="btn" id="tmdbReset" type="button">Use default</button></div></div>
-    <div class="set-key"><label for="actProf"><b>Active Profile</b><small>Who you post as in Chat on this device</small></label>
-      <select id="actProf" aria-label="Active profile"></select></div>
-    <div class="set-key"><label for="gemKey"><b>Gemini API Key</b><small>For @Gemini in Chat. Stored only on this device.</small></label>
-      <input id="gemKey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="100" aria-label="Gemini API key">
+      </div></div>
+    </section>
+    <section class="sacc" id="sa-keys">
+      <button class="sacc-h" type="button" id="sa-keys-h" aria-expanded="false" aria-controls="sa-keys-b"><span class="sacc-t"><b>API Keys &amp; Integrations</b><small>Gemini and Giphy</small></span><span class="sacc-c" aria-hidden="true">▶</span></button>
+      <div class="sacc-b" id="sa-keys-b" role="region" aria-labelledby="sa-keys-h" inert><div class="sacc-in">
+    <div class="set-key"><label for="gemKey"><b>Gemini API Key</b><small>Paste your own key (starts with AQ. or AIzaSy). Powers Meals with Gemini, Tidy Up, Transcribe, Vibe Search, Break the Tie and the briefing. Stored only in this browser.</small></label>
+      <input id="gemKey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="120" aria-label="Gemini API key">
       <div class="set-key-btns"><button class="btn" id="gemSave" type="button">Save key</button><button class="btn" id="gemClear" type="button">Remove key</button></div></div>
-    <div class="set-key"><label for="gifKey"><b>GIF search key (Giphy)</b><small>Optional. Leave empty to use Giphy's public demo key.</small></label>
+    <div class="set-key"><label for="gifKey"><b>GIF search key (Giphy)</b><small>Built in and ready to use. Paste your own key to override it.</small></label>
       <input id="gifKey" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="64" aria-label="Giphy API key">
       <div class="set-key-btns"><button class="btn" id="gifSave" type="button">Save key</button><button class="btn" id="gifReset" type="button">Use default</button></div></div>
+      </div></div>
+    </section>
+    <section class="sacc" id="sa-prof">
+      <button class="sacc-h" type="button" id="sa-prof-h" aria-expanded="false" aria-controls="sa-prof-b"><span class="sacc-t"><b>Profile &amp; Storage Management</b><small>Circle, profile, backup</small></span><span class="sacc-c" aria-hidden="true">▶</span></button>
+      <div class="sacc-b" id="sa-prof-b" role="region" aria-labelledby="sa-prof-h" inert><div class="sacc-in">
+    <div class="set-row"><div><b>Puzzle Progress</b><small>Restore every beaten puzzle to the Arcade rotation</small></div><button class="btn" id="arcReset" type="button">🔄 Reset Puzzle Progress</button></div>
+    <div class="set-row"><div><b>My Circle</b><small>Friends &amp; family, share via QR or text</small></div><button class="btn" id="bkCircle" type="button">Open</button></div>
+    <div class="set-key"><label for="actProf"><b>Active Profile</b><small>Who you post as in Chat on this device</small></label>
+      <select id="actProf" aria-label="Active profile"></select></div>
     <div class="gauge" id="gauge">
       <div class="gauge-top"><b id="gaugeText">Storage: ~0 KB used</b><span id="gaugePct"></span></div>
       <div class="gauge-bar" role="meter" aria-label="Storage used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="gaugeBar"><i id="gaugeFill"></i></div>
@@ -2706,12 +2891,21 @@ window.QC_THEMES = [
       <input type="file" id="bkFile" accept=".json,application/json" hidden>
     </div>
     <p class="bk-msg" id="bkMsg" role="status" hidden></p>
+      </div></div>
+    </section>
     <p class="bk-foot tmdb-credit">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
     <p class="bk-foot">Everything is stored only in this browser. Export a backup now and then, and before clearing browser data. Photos take the most space.</p>
   </div>
 </div>
 
 <!-- My Circle -->
+<div class="overlay" id="arcOv" hidden>
+  <div class="sheet arc-sheet" role="dialog" aria-modal="true" aria-labelledby="arcOvT">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="arcOvT"></h2><span id="arcTimer" aria-label="Elapsed time"></span><button class="icon-btn" id="arcClose" type="button" aria-label="Close puzzle"></button></div>
+    <div id="arcBody"></div>
+  </div>
+</div>
 <div class="overlay" id="cirOv" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cirTitle">
     <div class="grab"></div>
@@ -3130,7 +3324,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     id: n.id || uid(), column: n.column, due: /^\d{4}-\d{2}-\d{2}$/.test(n.due) ? n.due : undefined, text: n.text, tags: Array.isArray(n.tags) ? n.tags.map(String) : extractTags(n.text),
     createdAt: Number(n.createdAt) || Date.now(), editedAt: n.editedAt, pinned: !!n.pinned, archived: !!n.archived,
     image: typeof n.image === 'string' && n.image.startsWith('data:image/') ? n.image : undefined,
-    audio: n.audio && typeof n.audio.url === 'string' && /^data:audio\//.test(n.audio.url) && n.audio.url.length < 3e6 ? { url: n.audio.url, dur: Math.max(0, Math.min(3600, Number(n.audio.dur) || 0)) } : undefined,
+    audio: n.audio && typeof n.audio.url === 'string' && /^data:audio\//.test(n.audio.url) ? { url: n.audio.url, dur: Math.max(0, Math.min(86400, Number(n.audio.dur) || 0)) } : undefined,
     drawing: typeof n.drawing === 'string' && /^data:image\/(png|jpeg|webp);/.test(n.drawing) && n.drawing.length < 3e6 ? n.drawing : undefined,
     trip: n.trip && typeof n.trip === 'object' ? { dest: String(n.trip.dest || '').slice(0, 60), when: String(n.trip.when || '').slice(0, 40) } : undefined,
     collapsed: Array.isArray(n.collapsed) && n.collapsed.length ? n.collapsed.filter((k) => typeof k === 'string').slice(0, 10) : undefined
@@ -3195,7 +3389,18 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   // "- [ ] item" lines become tappable checkboxes (grocery lists); everything else renders as before.
   const CL_RE = /^\s*[-*]\s\[([ xX])\]\s?(.*)$/;
+  const MD_H = /^(#{1,3})[ \t]+(\S.*)$/;
   function bodyContent(text, note) {
+    const lines = text.split('\n');
+    if (!(note && note.tags.includes('groceries')) && lines.some((l) => MD_H.test(l))) {
+      const frag = document.createDocumentFragment(); let st = 0;
+      const seg = (a, b) => { if (b > a && lines.slice(a, b).join('').trim()) frag.append(bodyContent0(lines.slice(a, b).join('\n'), note, a)); };
+      lines.forEach((l, i) => { const m = l.match(MD_H); if (!m) return; seg(st, i); frag.append(h('div', { class: 'md-h l' + m[1].length, role: 'heading', 'aria-level': String(m[1].length + 1) }, bodyNodes(m[2]))); st = i + 1; });
+      seg(st, lines.length); return frag;
+    }
+    return bodyContent0(text, note, 0);
+  }
+  function bodyContent0(text, note, off) {
     const lines = text.split('\n');
     if (!lines.some((l) => CL_RE.test(l))) return bodyNodes(text);
     if (note && note.tags.includes('groceries')) return groceryContent(lines, note);
@@ -3211,7 +3416,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       flush();
       if (!list) { list = h('ul', { class: 'checklist' }); frag.append(list); }
       const on = m[1] !== ' ';
-      list.append(h('li', {}, h('button', { class: 'cl-item', type: 'button', role: 'checkbox', 'aria-checked': String(on), 'data-act': 'cl', 'data-line': String(i) },
+      list.append(h('li', {}, h('button', { class: 'cl-item', type: 'button', role: 'checkbox', 'aria-checked': String(on), 'data-act': 'cl', 'data-line': String(i + off) },
         h('span', { class: 'cbox', html: I.check }), h('span', { class: 'txt', text: m[2] }))));
     });
     flush();
@@ -3367,6 +3572,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         act('share', I.share, 'Share'),
         act('edit', I.edit, 'Edit'),
         act('voice', I.wave, n.audio ? 'Re-record' : 'Voice Memo'),
+        n.audio ? act('transcribe', '✨', 'Transcribe & Extract') : null,
+        n.text && !n.trip ? act('tidy', '✨', 'Tidy Up Note') : null,
         act('archive', n.archived ? I.unarch : I.archive, n.archived ? 'Restore' : 'Archive'),
         act('delete', I.trash, 'Delete', 'del')));
   }
@@ -4291,7 +4498,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const q = $('#q');
     q.value = curQ(); q.placeholder = PH[v][0]; q.setAttribute('aria-label', PH[v][1]);
     $('#clearQ').hidden = !q.value;
-    if (v === 'cookbook') setKitchenSeg(state.ks || 'recipes', true); else if (v === 'notes') render(); else if (v === 'hub') renderHubPage(); else { syncToolCards(); renderDir(); }
+    if (v === 'cookbook') setKitchenSeg(state.ks || 'recipes', true); else if (v === 'notes') render(); else if (v === 'hub') renderHubPage(); else { syncToolCards(); renderDir(); arcTools(); }
     if (o.fromScroll) return;
     if (prev === v && !o.instant) { pageTop(true); return; }
     const w = pagerEl.clientWidth, instant = o.instant || matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4314,12 +4521,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   /* Kitchen sub-navigation */
   function setKitchenSeg(seg, keep) {
     if (seg === 'tools') seg = 'meat';
-    if (!['recipes', 'menu', 'pantry', 'rest', 'meat'].includes(seg)) seg = 'recipes';
+    if (!['recipes', 'menu', 'pantry', 'rest', 'meat', 'gem'].includes(seg)) seg = 'recipes';
     state.ks = seg;
-    $('#kRecipes').hidden = seg !== 'recipes'; $('#kMenu').hidden = seg !== 'menu'; $('#kPantry').hidden = seg !== 'pantry'; $('#kRest').hidden = seg !== 'rest'; if (seg !== 'rest' && typeof closeEat === 'function') closeEat(); $('#kMeat').hidden = seg !== 'meat'; $('#kTools').hidden = seg !== 'meat';
+    $('#kRecipes').hidden = seg !== 'recipes'; $('#kMenu').hidden = seg !== 'menu'; $('#kPantry').hidden = seg !== 'pantry'; $('#kRest').hidden = seg !== 'rest'; if (seg !== 'rest' && typeof closeEat === 'function') closeEat(); $('#kMeat').hidden = seg !== 'meat'; $('#kTools').hidden = seg !== 'meat'; $('#kGem').hidden = seg !== 'gem'; if (seg === 'gem') gmSyncHave();
     $('#kSeg').querySelectorAll('[data-ks]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.ks === seg)));
     tagBar.hidden = !(state.view === 'cookbook' && seg === 'recipes');
-    if (seg === 'recipes') renderRecipes(); else if (seg === 'menu') renderKMenu(); else if (seg === 'pantry') { pantryLoad(); pantryRender(); } else if (seg === 'rest') renderRests(); else { mtRender(); syncToolCards(); }
+    if (seg === 'recipes') renderRecipes(); else if (seg === 'menu') renderKMenu(); else if (seg === 'pantry') { pantryLoad(); pantryRender(); } else if (seg === 'rest') renderRests(); else if (seg === 'gem') { pantryLoad(); gmSyncHave(); } else { mtRender(); syncToolCards(); }
     if (!keep) pageTop();
   }
   $('#kSeg').addEventListener('click', (e) => { const b = e.target.closest('[data-ks]'); if (b) setKitchenSeg(b.dataset.ks); });
@@ -4355,15 +4562,20 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const HB_TFS = { '24H': ['1d', '5m', 1], '1W': ['5d', '30m', 7], '1M': ['1mo', '1d', 30], YTD: ['ytd', '1d', 365], ALL: ['max', '1mo', 'max'] };
   const CG_IDS = { 'BTC-USD': 'bitcoin', 'ETH-USD': 'ethereum', 'SOL-USD': 'solana', 'DOGE-USD': 'dogecoin', 'XRP-USD': 'ripple', 'ADA-USD': 'cardano', 'LTC-USD': 'litecoin' };
   const RATE_LBL = { '^TNX': '10Y', '^FVX': '5Y', '^TYX': '30Y', '^IRX': '13W' };
-  const HB_DEF = { enabled: { economy: true, sports: true, local: true, politics: true, movies: true, hope: true }, pure: false, symbols: 'AAPL, BTC-USD, ETH-USD, ^TNX', basis: '', tf: '24H', leagues: ['NFL'], teams: '', pinLive: true, lean: 'both', region: 'both', badges: true, locations: 'Houston, TX; Calgary, AB' };
+  const HB_DEF = { enabled: { economy: true, sports: true, local: true, politics: true, movies: true, hope: true }, pure: false, symbols: 'AAPL, BTC-USD, ETH-USD, ^TNX', basis: '', tf: '24H', leagues: ['NFL'], sel: {}, pinLive: true, vibe: true, lean: 'both', region: 'both', badges: true, locations: 'Houston, TX; Calgary, AB' };
   const strOr = (v, d, n) => (typeof v === 'string' ? v.slice(0, n || 160) : d);
+  function normSel(o) {
+    const out = {}; o = o && typeof o === 'object' ? o : {};
+    Object.keys(HB_LG).forEach((lg) => { out[lg] = [...new Set((Array.isArray(o[lg]) ? o[lg] : []).map((x) => String(x).toUpperCase()).filter((x) => /^[A-Z0-9]{1,5}$/.test(x)))].slice(0, 40); });
+    return out;
+  }
   function normHub(j) {
     j = j && typeof j === 'object' ? j : {};
     const en = {}; HB_IDS.forEach((k) => { en[k] = j.enabled && typeof j.enabled[k] === 'boolean' ? j.enabled[k] : true; });
     const lg = (Array.isArray(j.leagues) ? j.leagues : HB_DEF.leagues).filter((x) => HB_LG[x]);
     return {
       enabled: en, pure: j.pure === true, symbols: strOr(j.symbols, HB_DEF.symbols), basis: strOr(j.basis, ''), tf: HB_TFS[j.tf] ? j.tf : '24H',
-      leagues: lg.length ? lg : ['NFL'], teams: strOr(j.teams, ''), pinLive: j.pinLive !== false, lean: ['left', 'right', 'both'].includes(j.lean) ? j.lean : 'both',
+      leagues: lg.length ? lg : ['NFL'], sel: normSel(j.sel), pinLive: j.pinLive !== false, vibe: j.vibe !== false, lean: ['left', 'right', 'both'].includes(j.lean) ? j.lean : 'both',
       region: ['us', 'ca', 'both'].includes(j.region) ? j.region : 'both', badges: j.badges !== false, locations: strOr(j.locations, HB_DEF.locations)
     };
   }
@@ -4375,7 +4587,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const hbOld = (k) => (hbCache[k] ? hbCache[k].v : null);
   const hbSyms = () => [...new Set(hbs.symbols.split(/[\s,;]+/).map((x) => x.trim().toUpperCase().replace(/[^A-Z0-9.^=\-]/g, '')).filter(Boolean))].slice(0, 12);
   const hbBasisMap = () => { const o = {}; hbs.basis.split(/[,;]+/).forEach((x) => { const m = x.trim().toUpperCase().match(/^([A-Z0-9.^=\-]+)\s*[:=]\s*\$?([0-9]*\.?[0-9]+)$/); if (m && +m[2] > 0) o[m[1]] = +m[2]; }); return o; };
-  const hbTeams = () => hbs.teams.split(/[,;]+/).map((x) => x.trim().toLowerCase()).filter(Boolean).slice(0, 12);
+  const HB_ALIAS = { WAS: 'WSH', OAK: 'ATH', CHW: 'CWS', GSW: 'GS' };
+  const hbSelAll = () => hbs.leagues.flatMap((lg) => hbs.sel[lg] || []);
   const hbLocs = () => hbs.locations.split(/;/).map((x) => x.trim()).filter(Boolean).slice(0, 3);
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   async function hbJson(url, ms) {
@@ -4435,7 +4648,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   /* Sports (ESPN public scoreboards) */
   let hbGames = [], hbSpAll = false, hbSpSeq = 0, hbSpErr = false;
-  const hbFav = (g) => { const t = hbTeams(); return t.length && [g.a, g.h].some((x) => t.some((f) => x.ab.toLowerCase() === f || x.nm.includes(f))); };
+  const hbFav = (g) => (hbs.sel[g.lg] || []).some((f) => [g.a, g.h].some((x) => { const ab = x.ab.toUpperCase(); return ab === f || ab === HB_ALIAS[f]; }));
   function hbParseGame(lg, e) {
     const c = (e.competitions || [])[0]; if (!c) return null;
     const cs = c.competitors || [], H = cs.find((x) => x.homeAway === 'home'), A = cs.find((x) => x.homeAway === 'away'); if (!H || !A) return null;
@@ -4466,7 +4679,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       h('span', { class: 'led-t' + (live ? ' live' : ''), text: g.tag }));
   }
   function hbSpPaint() {
-    const el = $('#hbSp'); if (!el) return; const fav = hbTeams().length > 0, favG = hbGames.filter(hbFav), list = hbSorted(fav && !hbSpAll ? favG : hbGames).slice(0, 24);
+    const el = $('#hbSp'); if (!el) return; const fav = hbSelAll().length > 0, favG = hbGames.filter(hbFav), list = hbSorted(fav && !hbSpAll ? favG : hbGames).slice(0, 24);
     const btn = $('#hbSpAll'); btn.hidden = !fav; btn.textContent = hbSpAll ? 'Favorites only' : 'Show all games';
     el.replaceChildren(...(list.length ? list.map(hbGameRow) : [h('div', { class: 'led-e', text: hbSpErr && !hbGames.length ? 'Scores unavailable right now.' : fav && !hbSpAll ? 'No games for your favorite teams today.' : 'No games scheduled right now.' })]));
     const best = hbSorted(hbGames).find((g) => hbFav(g) && g.state === 'in') || hbSorted(hbGames).find(hbFav) || hbSorted(hbGames).find((g) => g.state === 'in') || hbSorted(hbGames)[0];
@@ -4475,7 +4688,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   function hbPinPaint() {
     const host = $('#hbPin'); if (!host) return;
-    const live = hbs.enabled.sports && hbs.pinLive ? hbSorted(hbGames.filter((g) => g.state === 'in' && (!hbTeams().length || hbFav(g)))).slice(0, 6) : [];
+    const live = hbs.enabled.sports && hbs.pinLive ? hbSorted(hbGames.filter((g) => g.state === 'in' && (!hbSelAll().length || hbFav(g)))).slice(0, 6) : [];
     host.replaceChildren(...(live.length ? [h('div', { class: 'led', role: 'status', 'aria-label': 'Live games' }, ...live.map(hbGameRow))] : []));
   }
 
@@ -4610,8 +4823,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#hbHopeMore').addEventListener('click', () => { if (hbHopeShown < hbNews.hope.length) { hbHopeShown += 10; hbHopePaint(); } else hbHope(true); });
   function hbSyncTf() { document.querySelectorAll('#hbTf [data-tf], #hsTf [data-tf]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.tf === hbs.tf))); }
   $('#hbTf').addEventListener('click', (e) => { const b = e.target.closest('[data-tf]'); if (!b) return; hbs.tf = b.dataset.tf; hvSave(true); hbSyncTf(); hbEco(); });
+  const HB_SECS = { economy: ['📈', 'Economy & Rates'], sports: ['🏈', 'Sports Ticker'], local: ['📰', 'Local News'], politics: ['🏛️', 'Politics'], movies: ['🍿', 'Movies & TV'], hope: ['✨', 'Hope-Scrolling'] };
+  const KEY_HUBORD = 'quickcapture_hub_order';
+  const normOrder = (a) => { const o = [...new Set((Array.isArray(a) ? a : []).filter((x) => HB_IDS.includes(x)))]; HB_IDS.forEach((x) => { if (!o.includes(x)) o.push(x); }); return o; };
+  let hbOrder; try { hbOrder = normOrder(JSON.parse(localStorage.getItem(KEY_HUBORD) || '[]')); } catch { hbOrder = normOrder([]); }
   function hbApply() {
     let any = false;
+    hbOrder.forEach((id) => $('#hbAccs').appendChild($('#acc-' + id)));
     HB_IDS.forEach((id) => { const on = hbs.enabled[id] && !(hbs.pure && (id === 'local' || id === 'politics')); $('#acc-' + id).hidden = !on; if (on) any = true; if (!on) { const hd = $('#acc-' + id + '-h'); hd.setAttribute('aria-expanded', 'false'); $('#acc-' + id + '-b').hidden = true; } });
     $('#hbEmpty').hidden = any; hbSyncTf();
   }
@@ -4630,33 +4848,116 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }, 30000);
 
   /* Settings card */
-  let hbSaveT = 0;
+  const HB_TICK = [['AAPL', 'Apple'], ['MSFT', 'Microsoft'], ['GOOGL', 'Alphabet Google'], ['AMZN', 'Amazon'], ['TSLA', 'Tesla'], ['NVDA', 'Nvidia'], ['SPY', 'SPDR S&P 500 ETF'], ['QQQ', 'Invesco QQQ Nasdaq 100'], ['^TNX', '10-year Treasury yield'], ['^IRX', '13-week T-bill yield'], ['BTC-USD', 'Bitcoin'], ['ETH-USD', 'Ethereum'], ['SOL-USD', 'Solana'], ['DOGE-USD', 'Dogecoin'], ['XRP-USD', 'XRP Ripple'], ['ADA-USD', 'Cardano']];
+  const HB_PLACES = ['Houston, TX', 'Austin, TX', 'Dallas, TX', 'San Antonio, TX', 'New York, NY', 'Los Angeles, CA', 'San Francisco, CA', 'Chicago, IL', 'Miami, FL', 'Atlanta, GA', 'Boston, MA', 'Seattle, WA', 'Denver, CO', 'Phoenix, AZ', 'Toronto, ON', 'Ottawa, ON', 'Calgary, AB', 'Edmonton, AB', 'Vancouver, BC', 'Montreal, QC', 'Winnipeg, MB', 'Texas', 'California', 'New York State', 'Florida', 'Ontario', 'Alberta', 'British Columbia', 'Quebec'];
+  const HB_TEAMS = {
+    NFL: 'ARI ATL BAL BUF CAR CHI CIN CLE DAL DEN DET GB HOU IND JAX KC LV LAC LAR MIA MIN NE NO NYG NYJ PHI PIT SF SEA TB TEN WAS',
+    NBA: 'ATL BOS BKN CHA CHI CLE DAL DEN DET GS HOU IND LAC LAL MEM MIA MIL MIN NO NY OKC ORL PHI PHX POR SAC SA TOR UTAH WSH',
+    MLB: 'ARI ATH ATL BAL BOS CHC CWS CIN CLE COL DET HOU KC LAA LAD MIA MIL MIN NYM NYY PHI PIT SD SF SEA STL TB TEX TOR WSH',
+    NHL: 'ANA BOS BUF CGY CAR CHI COL CBJ DAL DET EDM FLA LA MIN MTL NSH NJ NYI NYR OTT PHI PIT SJ SEA STL TB TOR UTAH VAN VGK WPG WSH',
+    MLS: 'ATL ATX CHI CIN CLB CLT COL DAL DC HOU LAFC LA MIA MIN MTL NSH NE NYC RBNY ORL PHI POR RSL SD SJ SEA SKC STL TOR VAN'
+  };
+  function saSet(sec, open) { sec.classList.toggle('open', open); sec.querySelector('.sacc-h').setAttribute('aria-expanded', String(open)); sec.querySelector('.sacc-b').inert = !open; }
+  function saSetAll(open) { document.querySelectorAll('#backupOv .sacc').forEach((x) => saSet(x, open)); }
+  $('#backupOv').addEventListener('click', (e) => { const b = e.target.closest('.sacc-h'); if (b) { const sec = b.closest('.sacc'); saSet(sec, !sec.classList.contains('open')); } });
+  let hsLgView = hbs.leagues[0] || 'NFL', hbSaveT = 0;
   function hvSave(now) {
     try { localStorage.setItem(KEY_HUBSET, JSON.stringify(hbs)); } catch { /* storage full or blocked */ }
     clearTimeout(hbSaveT); hbSaveT = setTimeout(() => { hbEcoRows = []; Object.keys(hbLoaded).forEach((k) => delete hbLoaded[k]); hbNews.local = hbNews.politics = null; hbBri.list = null; if (state.view === 'hub') renderHubPage(true); else hbApply(); }, now ? 0 : 500);
   }
+  const hsBtn = (cls, attrs, text) => h('button', Object.assign({ type: 'button', class: cls, text }, attrs));
+  function hsOrderRender() {
+    $('#hsOrder').replaceChildren(...hbOrder.map((id, i) => {
+      const [ico, title] = HB_SECS[id], cb = h('input', { type: 'checkbox', 'data-hsec': id });
+      cb.checked = !!hbs.enabled[id];
+      const up = hsBtn('hs-mv', { 'data-mv': 'up', 'data-id': id, 'aria-label': 'Move ' + title + ' up' }, '▲'), dn = hsBtn('hs-mv', { 'data-mv': 'down', 'data-id': id, 'aria-label': 'Move ' + title + ' down' }, '▼');
+      up.disabled = i === 0; dn.disabled = i === hbOrder.length - 1;
+      return h('li', { class: 'hs-or' }, h('span', { class: 'hs-n', 'aria-label': 'Position ' + (i + 1), text: (i + 1) + '.' }), h('label', { class: 'hs-ck' }, cb, h('span', { text: ico + ' ' + title })), up, dn);
+    }));
+  }
+  function hsSymRender() {
+    const act = hbSyms(), q = $('#hsSymIn').value.trim().toUpperCase().replace(/[^A-Z0-9.^=\-]/g, ''), ql = $('#hsSymIn').value.trim().toLowerCase();
+    $('#hsSymAct').replaceChildren(...(act.length ? act.map((x) => hsBtn('hs-tag', { 'data-rmsym': x, 'aria-label': 'Remove ' + x, 'aria-pressed': 'true' }, x + ' ✕')) : [h('small', { text: 'No tickers yet. Tap a suggestion above.' })]));
+    const full = act.length >= 12, cap = $('#hsSymCap'); cap.textContent = full ? '12/12 (Max reached)' : act.length + '/12'; cap.classList.toggle('max', full);
+    $('#hsSymIn').disabled = full; $('#hsSymIn').placeholder = full ? 'Max reached: remove one to add more' : 'Type a ticker, e.g. AAPL or BTC';
+    if (full) { $('#hsSymSug').replaceChildren(h('small', { text: 'Remove a ticker to add another.' })); return; }
+    const m = HB_TICK.filter(([x, n]) => !act.includes(x) && (!q || x.includes(q) || n.toLowerCase().includes(ql)));
+    const kids = m.map(([x]) => hsBtn('', { 'data-sgsym': x, 'aria-label': 'Add ' + x }, '+ ' + x));
+    if (q && !kids.length && !act.includes(q)) kids.unshift(hsBtn('', { 'data-sgsym': q, 'aria-label': 'Add ' + q }, '+ ' + q));
+    $('#hsSymSug').replaceChildren(...(kids.length ? kids : [h('small', { text: 'No matches.' })]));
+  }
+  const hbLocList = () => hbLocs();
+  function hsLocRender() {
+    const act = hbLocList(), ql = $('#hsLocIn').value.trim().toLowerCase(), has = (x) => act.some((a) => a.toLowerCase() === x.toLowerCase());
+    $('#hsLocAct').replaceChildren(...(act.length ? act.map((x) => hsBtn('hs-tag', { 'data-rmloc': x, 'aria-label': 'Remove ' + x, 'aria-pressed': 'true' }, x + ' ✕')) : [h('small', { text: 'No locations yet. Tap a suggestion above.' })]));
+    const full = act.length >= 3, cap = $('#hsLocCap'); cap.textContent = full ? '3/3 (Max locations selected)' : act.length + '/3'; cap.classList.toggle('max', full);
+    $('#hsLocIn').disabled = full; $('#hsLocIn').placeholder = full ? 'Max locations selected' : 'Type a city or state, e.g. Houston';
+    if (full) { $('#hsLocSug').replaceChildren(h('small', { text: 'Remove a location to add another.' })); return; }
+    const m = HB_PLACES.filter((x) => !has(x) && (!ql || x.toLowerCase().includes(ql))).slice(0, 14);
+    const kids = m.map((x) => hsBtn('', { 'data-sgloc': x, 'aria-label': 'Add ' + x }, '+ ' + x));
+    const raw = $('#hsLocIn').value.replace(/;/g, ' ').trim();
+    if (raw && !kids.length && !has(raw)) kids.unshift(hsBtn('', { 'data-sgloc': raw, 'aria-label': 'Add ' + raw }, '+ ' + raw));
+    $('#hsLocSug').replaceChildren(...(kids.length ? kids : [h('small', { text: 'No matches.' })]));
+  }
+  function hsTeamsRender() {
+    document.querySelectorAll('#hsLg [data-lg]').forEach((b) => { b.setAttribute('aria-checked', String(b.dataset.lg === hsLgView)); b.dataset.on = hbs.leagues.includes(b.dataset.lg) ? '1' : '0'; });
+    $('#hsLgOn').checked = hbs.leagues.includes(hsLgView);
+    $('#hsLgOnT').firstChild.textContent = 'Show ' + hsLgView + ' games';
+    const sel = hbs.sel[hsLgView] || [];
+    $('#hsTeamsT').textContent = 'Favorite ' + hsLgView + ' teams' + (sel.length ? ' (' + sel.length + ')' : '');
+    $('#hsTeamGrid').replaceChildren(...HB_TEAMS[hsLgView].split(' ').map((t) => hsBtn('', { 'data-team': t, 'aria-pressed': String(sel.includes(t)), 'aria-label': t + (sel.includes(t) ? ', selected' : '') }, t)));
+  }
   function hsRender() {
-    const c = $('#hsCard'); c.querySelectorAll('[data-hsec]').forEach((i) => { i.checked = !!hbs.enabled[i.dataset.hsec]; });
-    $('#hsPure').checked = hbs.pure; $('#hsPin').checked = hbs.pinLive; $('#hsBadges').checked = hbs.badges;
-    $('#hsSym').value = hbs.symbols; $('#hsBasis').value = hbs.basis; $('#hsTeams').value = hbs.teams; $('#hsLocs').value = hbs.locations;
-    hbSyncTf(); c.querySelectorAll('[data-lg]').forEach((b) => b.setAttribute('aria-pressed', String(hbs.leagues.includes(b.dataset.lg))));
+    const c = $('#hsCard'); hsOrderRender();
+    $('#hsPure').checked = hbs.pure; $('#hsVibe').checked = hbs.vibe !== false; $('#hsPin').checked = hbs.pinLive; $('#hsBadges').checked = hbs.badges;
+    $('#hsBasis').value = hbs.basis; hbSyncTf(); hsSymRender(); hsLocRender(); hsTeamsRender();
     c.querySelectorAll('[data-lean]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.lean === hbs.lean)));
     c.querySelectorAll('[data-rg]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.rg === hbs.region)));
   }
+  function hsAddSym(x) { const l = hbSyms(); if (!x || l.includes(x)) return; if (l.length >= 12) { toast('Up to 12 tickers'); return; } l.push(x); hbs.symbols = l.join(', '); $('#hsSymIn').value = ''; hsSymRender(); hvSave(false); }
+  function hsAddLoc(x) { x = x.replace(/;/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40); const l = hbLocs(); if (!x || l.some((a) => a.toLowerCase() === x.toLowerCase())) return; if (l.length >= 3) { toast('Up to 3 locations'); return; } l.push(x); hbs.locations = l.join('; '); $('#hsLocIn').value = ''; hsLocRender(); hvSave(false); }
   $('#hsCard').addEventListener('change', (e) => {
     const t = e.target;
-    if (t.dataset.hsec) hbs.enabled[t.dataset.hsec] = t.checked; else if (t.id === 'hsPure') hbs.pure = t.checked; else if (t.id === 'hsPin') hbs.pinLive = t.checked; else if (t.id === 'hsBadges') hbs.badges = t.checked; else return;
+    if (t.dataset.hsec) hbs.enabled[t.dataset.hsec] = t.checked;
+    else if (t.id === 'hsLgOn') {
+      const on = hbs.leagues.includes(hsLgView);
+      if (!t.checked && on && hbs.leagues.length === 1) { t.checked = true; toast('Keep at least one league on'); return; }
+      hbs.leagues = t.checked ? (on ? hbs.leagues : hbs.leagues.concat(hsLgView)) : hbs.leagues.filter((x) => x !== hsLgView); hbGames = []; hsTeamsRender();
+    } else if (t.id === 'hsPure') hbs.pure = t.checked; else if (t.id === 'hsPin') hbs.pinLive = t.checked; else if (t.id === 'hsVibe') { hbs.vibe = t.checked; vbApply(); } else if (t.id === 'hsBadges') hbs.badges = t.checked; else return;
     hvSave(true);
   });
   $('#hsCard').addEventListener('input', (e) => {
-    const m = { hsSym: 'symbols', hsBasis: 'basis', hsTeams: 'teams', hsLocs: 'locations' }[e.target.id]; if (!m) return;
-    hbs[m] = e.target.value.slice(0, 160); hvSave(false);
+    if (e.target.id === 'hsBasis') { hbs.basis = e.target.value.slice(0, 160); hvSave(false); }
+    else if (e.target.id === 'hsSymIn') hsSymRender(); else if (e.target.id === 'hsLocIn') hsLocRender();
+  });
+  $('#hsCard').addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    if (e.target.id === 'hsSymIn') { e.preventDefault(); const q = e.target.value.trim().toUpperCase().replace(/[^A-Z0-9.^=\-]/g, ''); const first = $('#hsSymSug [data-sgsym]'), exact = HB_TICK.some(([x]) => x === q); hsAddSym(exact || !first ? q : first.dataset.sgsym); }
+    else if (e.target.id === 'hsLocIn') { e.preventDefault(); const first = $('#hsLocSug [data-sgloc]'); if (first) hsAddLoc(first.dataset.sgloc); }
   });
   $('#hsCard').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
-    if (b.dataset.tf) hbs.tf = b.dataset.tf;
-    else if (b.dataset.lg) { const on = hbs.leagues.includes(b.dataset.lg); if (on && hbs.leagues.length === 1) return; hbs.leagues = on ? hbs.leagues.filter((x) => x !== b.dataset.lg) : hbs.leagues.concat(b.dataset.lg); hbGames = []; }
-    else if (b.dataset.lean) hbs.lean = b.dataset.lean; else if (b.dataset.rg) hbs.region = b.dataset.rg; else return;
+    const d = b.dataset;
+    if (d.mv) {
+      const i = hbOrder.indexOf(d.id), j = d.mv === 'up' ? i - 1 : i + 1; if (i < 0 || j < 0 || j >= hbOrder.length) return;
+      [hbOrder[i], hbOrder[j]] = [hbOrder[j], hbOrder[i]];
+      try { localStorage.setItem(KEY_HUBORD, JSON.stringify(hbOrder)); } catch { /* storage blocked */ }
+      hsOrderRender(); hbApply();
+      const nb = document.querySelector('#hsOrder [data-id="' + d.id + '"][data-mv="' + d.mv + '"]:not(:disabled)') || document.querySelector('#hsOrder [data-id="' + d.id + '"]:not(:disabled)'); if (nb) nb.focus();
+      return;
+    }
+    if (d.sgsym) { hsAddSym(d.sgsym); return; }
+    if (d.rmsym) { hbs.symbols = hbSyms().filter((x) => x !== d.rmsym).join(', '); hsSymRender(); hvSave(false); return; }
+    if (d.sgloc) { hsAddLoc(d.sgloc); return; }
+    if (d.rmloc) { hbs.locations = hbLocs().filter((x) => x !== d.rmloc).join('; '); hsLocRender(); hvSave(false); return; }
+    if (d.team) {
+      const l = hbs.sel[hsLgView] || (hbs.sel[hsLgView] = []), on = l.includes(d.team);
+      hbs.sel[hsLgView] = on ? l.filter((x) => x !== d.team) : l.concat(d.team);
+      if (!on && !hbs.leagues.includes(hsLgView)) { hbs.leagues.push(hsLgView); hbGames = []; }
+      hsTeamsRender(); hvSave(false); return;
+    }
+    if (d.lg) { hsLgView = d.lg; hsTeamsRender(); return; }
+    if (d.tf) hbs.tf = d.tf; else if (d.lean) hbs.lean = d.lean; else if (d.rg) hbs.region = d.rg; else return;
     hsRender(); hvSave(true);
   });
 
@@ -5281,6 +5582,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         askDelete(n); break;
       case 'new': openSheet(); break;
       case 'voice': openSheet(n); vmStart(); break;
+      case 'tidy': ntTidy(n); break;
+      case 'transcribe': ntTranscribe(n); break;
       case 'reset': state.q = ''; state.tag = 'all'; $('#q').value = ''; render(); break;
     }
   }
@@ -5593,8 +5896,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   /* --- search --- */
   let mToken = 0, mTimer = 0, mItems = [];
   const resizeArt = (u, w, hgt) => String(u || '').replace(/\/\d+x\d+(?:bb|sr)?\.(jpg|png|webp)(\?.*)?$/i, '/' + w + 'x' + hgt + 'bb.$1');
-  const TMDB_DEFAULT = '31d94e7c10ccfdcfed3df07e5f80194c', KEY_TMDB = 'quickcapture_tmdb_key';
-  const tmdbKey = () => { const k = (store.get(KEY_TMDB) || '').trim(); return k || TMDB_DEFAULT; };
+  const TMDB_DEFAULT = '31d94e7c10ccfdcfed3df07e5f80194c';
+  const tmdbKey = () => TMDB_DEFAULT;
   function mapTmdb(r) {
     if (!r || typeof r !== 'object' || (r.media_type !== 'movie' && r.media_type !== 'tv')) return null;
     const tv = r.media_type === 'tv', title = String(r.title || r.name || '').trim();
@@ -5703,15 +6006,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     wLinger.clear(); renderWatch(); syncResultRows();
     toast('Added “' + it.title.slice(0, 40) + '” to your Watchlist');
   }
-  const tmdbIn = $('#tmdbKey');
-  tmdbIn.value = tmdbKey();
-  $('#tmdbSave').addEventListener('click', () => {
-    const v = tmdbIn.value.trim();
-    if (v && !/^[A-Za-z0-9]{16,64}$/.test(v)) { toast('That does not look like a TMDB v3 API key'); return; }
-    if (!v || v === TMDB_DEFAULT) store.set(KEY_TMDB, ''); else store.set(KEY_TMDB, v);
-    tmdbIn.value = tmdbKey(); toast('TMDB key saved');
-  });
-  $('#tmdbReset').addEventListener('click', () => { store.set(KEY_TMDB, ''); tmdbIn.value = TMDB_DEFAULT; toast('Using the default TMDB key'); });
   $('#mediaIco').innerHTML = I.search; $('#mediaGo').innerHTML = I.search;
   $('#mediaForm').addEventListener('submit', (e) => { e.preventDefault(); searchMedia(mQ.value); });
   mQ.addEventListener('input', () => { clearTimeout(mTimer); const q = mQ.value.trim(); if (q.length < 2) { mToken++; mRes.hidden = true; return; } mTimer = setTimeout(() => searchMedia(q), 400); });
@@ -6815,7 +7109,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const FB_APP_URL = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js', FB_FS_URL = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
   const KEY_ACTIVE = 'quickcapture_active_profile', KEY_GEMINI = 'quickcapture_gemini_key', KEY_GIPHY = 'quickcapture_giphy_key';
   const KEY_GROUPS = 'quickcapture_chat_groups', KEY_GCHAT = 'quickcapture_gemini_chat', KEY_CCACHE = 'quickcapture_chatcache_';
-  const GIPHY_DEFAULT = 'dc6zaTOxFJmzC';
+  const GIPHY_DEFAULT = 'XubbtoeseewwLgOANMcFg7X6kZZwVrYC', GEMINI_DEFAULT = '';
   const chatOv = $('#chatOv');
   let fb = null, fbP = null, groups = [], room = null, unsub = null, chMsgsData = [], chFilter = 'all', chQuery = '', chSpoilerOn = false, chRevealed = new Set(), gemChat = [], gemBusy = false;
   const chRec = { mr: null, stream: null, chunks: [], t0: 0, tick: 0, cancel: false };
@@ -6851,13 +7145,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const sel = $('#actProf'), cur = store.get(KEY_ACTIVE) || '';
     sel.replaceChildren(h('option', { value: '', text: 'Me' + (profile.name ? ' (' + profile.name + ')' : '') }), ...circle.map((c) => h('option', { value: c.id, text: c.name })));
     sel.value = circle.some((c) => c.id === cur) ? cur : '';
-    $('#gemKey').value = store.get(KEY_GEMINI) || ''; $('#gifKey').value = store.get(KEY_GIPHY) || '';
+    $('#gemKey').value = geminiKey(); $('#gifKey').value = gifKey();
   }
   $('#actProf').addEventListener('change', (e) => { store.set(KEY_ACTIVE, e.target.value); toast('Posting as ' + who().name); if (chatIsOpen()) { if (room) closeRoom(); chListRender(); } });
   $('#gemSave').addEventListener('click', () => {
     const v = $('#gemKey').value.trim();
     if (!v) { toast('Paste your Gemini API key first'); return; }
-    if (!/^[\w-]{20,100}$/.test(v)) { toast('That does not look like a Gemini API key'); return; }
+    if (!validGeminiKey(v)) { toast('Gemini keys are at least 20 characters with no spaces'); return; }
     store.set(KEY_GEMINI, v); toast('Gemini key saved');
   });
   $('#gemClear').addEventListener('click', () => { store.set(KEY_GEMINI, ''); $('#gemKey').value = ''; toast('Gemini key removed'); });
@@ -6866,8 +7160,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (v && !/^[\w-]{8,64}$/.test(v)) { toast('That does not look like a Giphy key'); return; }
     store.set(KEY_GIPHY, v === GIPHY_DEFAULT ? '' : v); toast('GIF key saved');
   });
-  $('#gifReset').addEventListener('click', () => { store.set(KEY_GIPHY, ''); $('#gifKey').value = ''; toast('Using the default GIF key'); });
-  const geminiKey = () => (store.get(KEY_GEMINI) || '').trim();
+  $('#gifReset').addEventListener('click', () => { store.set(KEY_GIPHY, ''); $('#gifKey').value = GIPHY_DEFAULT; toast('Using the default GIF key'); });
+  const geminiKey = () => (store.get(KEY_GEMINI) || '').trim() || GEMINI_DEFAULT;
+  const NOKEY_MSG = 'Please add your Gemini API key in Settings -> API Keys & Integrations to enable AI features.';
+  const needKey = () => { if (geminiKey()) return false; toast(NOKEY_MSG); return true; };
+  const validGeminiKey = (v) => { v = String(v).trim(); return v.length >= 20 && !/\s/.test(v); };
   // ----- Gemini REST
   async function geminiAsk(history) {
     const key = geminiKey(); if (!key) throw new Error('nokey');
@@ -6875,7 +7172,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       contents: history.map((m) => ({ role: m.role === 'model' ? 'model' : 'user', parts: [{ text: String(m.text).slice(0, 4000) }] })) };
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
     try {
-      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(key), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: ctl.signal });
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body), signal: ctl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const j = await res.json();
       const txt = ((j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || []).map((p) => p.text || '').join('').trim();
@@ -6885,7 +7182,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   function geminiErr(e) {
     const m = String((e && e.message) || '');
-    if (m === 'nokey') return 'Add your Gemini API key in Settings first.';
+    if (m === 'nokey') return NOKEY_MSG;
     if (/HTTP (400|401|403)/.test(m)) return 'Gemini rejected the API key. Check it in Settings.';
     if (/HTTP 429/.test(m)) return 'Gemini is rate-limited right now. Try again in a minute.';
     if (e && e.name === 'AbortError') return 'Gemini took too long to answer.';
@@ -6897,7 +7194,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     $('#chAs').textContent = 'Posting as ' + me.name;
     $('#chNeed').hidden = !!profile.name;
     const row = (cls, av, title, sub, data) => h('button', Object.assign({ class: 'ch-row-b ' + cls, type: 'button' }, data), h('span', { class: 'av', text: av }), h('span', { class: 'tx' }, h('b', { text: title }), h('small', { text: sub })));
-    const rows = [row('ai', '✦', 'Gemini', geminiKey() ? 'Ask anything. Your chat stays on this device.' : 'Add your API key in Settings to chat', { 'data-room': 'gemini' })];
+    const rows = [];
     rows.push(row('', '⚡', '📝 Quick Drop (Me)', 'Your private scratchpad · syncs across your devices', { 'data-room': 'quickdrop' }));
     groups.forEach((g) => rows.push(row('', '👥', g.name, 'Group chat · tap to open', { 'data-room': 'g:' + g.id })));
     const targets = circle.filter((c) => c.id !== me.id);
@@ -6936,7 +7233,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const b = e.target.closest('[data-room]'); if (!b) return;
     if (b.dataset.room === 'quickdrop') return openRoom(quickDropRoom());
     const [k, id] = b.dataset.room === 'gemini' ? ['gemini', ''] : [b.dataset.room.slice(0, 1), b.dataset.room.slice(2)];
-    if (k === 'gemini') return openRoom({ kind: 'gemini', id: 'gemini', title: 'Gemini' });
     if (!profile.name) { toast('Pick a display name first'); $('#chNeedName').focus(); return; }
     if (k === 'g') { const g = groups.find((x) => x.id === id); if (g) openRoom({ kind: 'group', id: g.id, title: g.name }); }
     else { const c = id === profile.id ? { id, name: profile.name, linked: true } : circle.find((x) => x.id === id); if (c) openRoom({ kind: 'dm', id: dmId(who().id, c.id), title: c.name, linked: c.linked !== false }); }
@@ -7016,7 +7312,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const list = chMsgsData.filter(msgMatches); let lastDay = '';
     const kids = [];
     list.forEach((m) => { const d = alDay(m.ts); if (d !== lastDay) { lastDay = d; kids.push(h('div', { class: 'ch-day', text: d })); } kids.push(msgEl(m, me)); });
-    if (!kids.length) kids.push(h('p', { class: 'ch-empty', text: chMsgsData.length ? 'No messages match.' : room && room.kind === 'gemini' ? 'Say hi to Gemini.' : room && room.kind === 'quickdrop' ? 'Jot a thought, snap a photo or record a voice note. It syncs to all your devices.' : 'No messages yet. Say hello.' }));
+    if (!kids.length) kids.push(h('p', { class: 'ch-empty', text: chMsgsData.length ? 'No messages match.' : room && room.kind === 'quickdrop' ? 'Jot a thought, snap a photo or record a voice note. It syncs to all your devices.' : 'No messages yet. Say hello.' }));
     box.replaceChildren(...kids);
     if (stick || near) box.scrollTop = box.scrollHeight;
   }
@@ -7036,7 +7332,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const qd = r.kind === 'quickdrop';
     $('#chImgBtn').hidden = !qd; if (qd) $('#chSub').textContent = 'Personal scratchpad · syncs across your devices';
     $('#chSpoiler').hidden = gem || qd; $('#chGifBtn').hidden = gem; $('#chMic').hidden = gem; $('#chTools').style.display = gem ? 'none' : '';
-    $('#chText').placeholder = gem ? 'Ask Gemini…' : r.kind === 'group' ? 'Message (type @gemini to ask the AI)' : qd ? 'Jot something down…' : 'Message';
+    $('#chText').placeholder = gem ? 'Ask Gemini…' : qd ? 'Jot something down…' : 'Message';
     if (gem) {
       try { const a = JSON.parse(store.get(KEY_GCHAT) || '[]'); gemChat = (Array.isArray(a) ? a : []).filter((m) => m && (m.role === 'user' || m.role === 'model') && typeof m.text === 'string').slice(-100); } catch { gemChat = []; }
       chMsgsData = gemChat.map((m, i) => ({ id: 'gm' + i, senderId: m.role === 'model' ? 'gemini' : who().id, senderName: m.role === 'model' ? 'Gemini' : who().name, text: m.text, type: 'text', mediaUrl: '', ts: m.ts || Date.now(), isSpoiler: false, starred: m.starred === true }));
@@ -7124,38 +7420,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       return true;
     } catch { toast("Couldn't send. You may be offline."); return false; }
   }
-  async function postGemini(cur, text, db, f) {
-    try {
-      const ans = await geminiAsk([{ role: 'user', text }]);
-      await f.addDoc(f.collection(db, 'chats', cur.id, 'messages'), { senderId: 'gemini', senderName: 'Gemini', text: ans, type: 'text', mediaUrl: '', timestamp: f.serverTimestamp(), isSpoiler: false, starred: false });
-    } catch (e) { toast(geminiErr(e)); }
-  }
   $('#chTray').addEventListener('submit', async (e) => {
     e.preventDefault(); if (!room) return;
     const inp = $('#chText'), text = inp.value.trim().slice(0, 2000); if (!text) return;
-    if (room.kind === 'gemini') {
-      if (gemBusy) return;
-      inp.value = ''; gemBusy = true; const now = Date.now();
-      gemChat.push({ role: 'user', text, ts: now }); chMsgsData.push({ id: 'gm' + (gemChat.length - 1), senderId: who().id, senderName: who().name, text, type: 'text', mediaUrl: '', ts: now, isSpoiler: false, starred: false });
-      msgsRender(true); chStatus('Gemini is thinking…');
-      try {
-        const ans = await geminiAsk(gemChat.slice(-20).map((m) => ({ role: m.role, text: m.text })));
-        gemChat.push({ role: 'model', text: ans, ts: Date.now() }); chStatus('');
-      } catch (er) { gemChat.pop(); inp.value = text; chStatus(geminiErr(er)); }
-      gemChat = gemChat.slice(-100); store.set(KEY_GCHAT, JSON.stringify(gemChat)); gemBusy = false;
-      if (room && room.kind === 'gemini') { chMsgsData = gemChat.map((m, i) => ({ id: 'gm' + i, senderId: m.role === 'model' ? 'gemini' : who().id, senderName: m.role === 'model' ? 'Gemini' : who().name, text: m.text, type: 'text', mediaUrl: '', ts: m.ts || Date.now(), isSpoiler: false, starred: m.starred === true })); msgsRender(true); }
-      return;
-    }
     const spo = chSpoilerOn, cur = room; inp.value = '';
     const ok = await postMessage({ text, isSpoiler: spo });
     if (!ok) { inp.value = text; return; }
     chSpoilerOn = false; $('#chSpoiler').setAttribute('aria-pressed', 'false');
-    if (cur.kind === 'group' && /(^|\s)@gemini\b/i.test(text)) {
-      const prompt = text.replace(/@gemini\b/gi, '').trim() || 'Say hello to the group.';
-      if (!geminiKey()) { toast('Add your Gemini API key in Settings to use @gemini'); return; }
-      chStatus('Gemini is thinking…');
-      try { const { db, f } = await fbLoad(); await postGemini(cur, prompt, db, f); } finally { if (room === cur) chStatus(''); }
-    }
   });
   $('#chSpoiler').addEventListener('click', () => { chSpoilerOn = !chSpoilerOn; $('#chSpoiler').setAttribute('aria-pressed', String(chSpoilerOn)); toast(chSpoilerOn ? 'Next message will be a spoiler' : 'Spoiler off'); });
   // ----- voice notes
@@ -8892,7 +9163,6 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
 
   /* ---------- Voice memo recording (MediaRecorder) ---------- */
-  const VM_MAX = 90;                                   // seconds: keeps a memo around 300 KB so notes stay light
   const vm = { mr: null, stream: null, chunks: [], t0: 0, tick: 0, done: null, discard: false, paused: false, pAt: 0, pMs: 0 };
   const recBtn = $('#recBtn');
   const vmMime = () => (window.MediaRecorder && ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find((t) => MediaRecorder.isTypeSupported(t))) || '';
@@ -8942,8 +9212,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         if (!drop && chunks.length) {
           try {
             const url = await blobToDataUrl(new Blob(chunks, { type }));
-            if (url.length > 2.4e6) toast('That memo is too long to store');
-            else if (!ov.hidden) { draftAudio = { url, dur: Math.min(secs, VM_MAX) }; renderVmAtt(); }
+            if (!ov.hidden) { draftAudio = { url, dur: secs }; renderVmAtt(); }
           } catch { toast("Couldn't save that recording"); }
         }
         vmUI(false); resolve();
@@ -8952,7 +9221,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     mr.onerror = () => { toast('Recording stopped unexpectedly'); vmStop(true); };
     mr.start(1000);
     vmUI(true, 0);
-    vm.tick = setInterval(() => { if (vm.paused) return; const sec = vmElapsed(); vmUI(true, sec); if (sec >= VM_MAX) { toast('Reached the ' + VM_MAX + '-second limit'); vmStop(false); } }, 250);
+    vm.tick = setInterval(() => { if (vm.paused) return; const sec = vmElapsed(); vmUI(true, sec); }, 250);
   }
   function vmStop(discard) {
     if (!vm.mr) return Promise.resolve();
@@ -9457,7 +9726,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     m.hidden = !text; m.textContent = text || ''; m.classList.toggle('err', !!err);
   }
   function openBackup() {
-    updateGauge(); bkMessage(''); cfgRender(); hsRender();
+    updateGauge(); bkMessage(''); cfgRender(); hsRender(); saSetAll(false);
     const notes = state.notes.filter((n) => !n.archived).length;
     $('#bkExpSub').textContent = notes + ' note' + (notes === 1 ? '' : 's') + ', ' + (state.notes.length - notes) + ' archived, ' + recipes.length + ' recipe' + (recipes.length === 1 ? '' : 's') + ', ' + watch.length + ' title' + (watch.length === 1 ? '' : 's');
     bOv.hidden = false;
@@ -9795,6 +10064,605 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     $('#kcConvI').innerHTML = I.convert; $('#kcTimersI').innerHTML = I.hourglass; $('#kcRestI').innerHTML = I.clock; $('#kcGrocI').innerHTML = I.cart;
   }
   render(); renderRecipes(); renderWatch(); renderDir(); renderKMenu(); syncToolCards(); dirBadge();
+  const ARC_DATA = {"cross":[{"w":["MAGIC","SHAME","CANON","MUSIC","GRAIN","CLEAN"],"cl":["Abracadabra stuff","Feeling of disgrace","Church law or a camera brand","Notes put together","Wheat or rice","Free of dirt"]},{"w":["FLEET","ARGUE","HORSE","FLASH","EAGER","THERE"],"cl":["Group of ships","Quarrel","Stable animal","Quick burst of light","Keen and enthusiastic","Not here"]},{"w":["LATER","ALIEN","THEME","LEAST","TRIBE","RANGE"],"cl":["Not now","Visitor from space","Central idea","Smallest amount","Close-knit group","Stove or mountain series"]},{"w":["STRIP","AUDIT","EARLY","SCARE","RIDER","PETTY"],"cl":["Narrow band","Tax inspection","Ahead of schedule","Give a fright","Horseback person","Trivial"]},{"w":["SMALL","TREND","PHASE","SETUP","ARENA","LODGE"],"cl":["Not big","Fashion direction","Stage of the moon","Arrangement","Stadium","Mountain cabin"]},{"w":["ALARM","OCEAN","TODAY","ADOPT","AHEAD","MONEY"],"cl":["Wake-up device","Atlantic or Pacific","This very day","Take in as one's own","In front","Cash"]},{"w":["FRAUD","REALM","EATEN","FORCE","APART","DEMON"],"cl":["Con job","Kingdom","Consumed","Strength","Separated","Evil spirit"]},{"w":["NORTH","BEGUN","ENTRY","NOBLE","RIGHT","HONEY"],"cl":["Compass direction","Started","Way in","Aristocrat","Opposite of left","Bee product"]},{"w":["GAUGE","EXIST","TIGER","GUEST","USING","ENTER"],"cl":["Measuring dial","Be","Striped big cat","Hotel patron","Employing","Go in"]},{"w":["FALSE","VOICE","RUGBY","FAVOR","LYING","EVERY"],"cl":["Untrue","Singer's instrument","Sport with scrums","Kind act","Telling fibs","Each one"]}],"conn":[[{"n":"Planets","w":["MARS","VENUS","SATURN","EARTH"]},{"n":"Card games","w":["POKER","BRIDGE","HEARTS","RUMMY"]},{"n":"Metals","w":["IRON","TIN","COPPER","ZINC"]},{"n":"Things with keys","w":["PIANO","KEYBOARD","LOCK","MAP"]}],[{"n":"Shades of blue","w":["NAVY","TEAL","AZURE","COBALT"]},{"n":"Dog breeds","w":["BEAGLE","BOXER","POODLE","HUSKY"]},{"n":"Breads","w":["RYE","NAAN","PITA","BAGEL"]},{"n":"Kitchen tools","w":["WHISK","LADLE","GRATER","TONGS"]}],[{"n":"Bodies of water","w":["LAKE","RIVER","POND","STREAM"]},{"n":"___BALL","w":["SNOW","FOOT","BASKET","EYE"]},{"n":"Chess pieces","w":["KING","QUEEN","ROOK","BISHOP"]},{"n":"Woodwinds and strings","w":["FLUTE","OBOE","HARP","TUBA"]}],[{"n":"Months","w":["MAY","MARCH","AUGUST","JUNE"]},{"n":"Pets","w":["CAT","HAMSTER","PARROT","GOLDFISH"]},{"n":"Ways to walk","w":["STROLL","HIKE","PACE","TREK"]},{"n":"Greek letters","w":["ALPHA","BETA","DELTA","SIGMA"]}],[{"n":"Coffee drinks","w":["LATTE","MOCHA","ESPRESSO","CORTADO"]},{"n":"___FLY","w":["BUTTER","DRAGON","FIRE","HOUSE"]},{"n":"Gems","w":["RUBY","OPAL","PEARL","JADE"]},{"n":"Shapes","w":["CIRCLE","SQUARE","OVAL","TRIANGLE"]}],[{"n":"Citrus and kin","w":["LIME","ORANGE","YUZU","POMELO"]},{"n":"Flowers","w":["ROSE","TULIP","DAISY","LILY"]},{"n":"Weather","w":["SNOW","HAIL","SLEET","FOG"]},{"n":"___BOARD","w":["SURF","SKATE","DASH","CARD"]}],[{"n":"Dances","w":["WALTZ","TANGO","SALSA","SWING"]},{"n":"Currencies","w":["DOLLAR","EURO","YEN","PESO"]},{"n":"Trees","w":["OAK","MAPLE","BIRCH","PINE"]},{"n":"Reptiles","w":["SNAKE","GECKO","IGUANA","TURTLE"]}],[{"n":"Pasta","w":["PENNE","ORZO","RIGATONI","FUSILLI"]},{"n":"Cheeses","w":["BRIE","GOUDA","FETA","CHEDDAR"]},{"n":"Pizza toppings","w":["OLIVE","PEPPERONI","MUSHROOM","ONION"]},{"n":"Soups","w":["BROTH","CHOWDER","BISQUE","STEW"]}],[{"n":"Car makers","w":["FORD","HONDA","TESLA","AUDI"]},{"n":"Sports","w":["TENNIS","GOLF","RUGBY","CRICKET"]},{"n":"Birds","w":["ROBIN","EAGLE","FALCON","CROW"]},{"n":"Mountains","w":["EVEREST","DENALI","FUJI","ELBRUS"]}],[{"n":"Greek gods","w":["ZEUS","HERA","APOLLO","ARES"]},{"n":"Capital cities","w":["PARIS","ROME","LIMA","OSLO"]},{"n":"Units of time","w":["HOUR","WEEK","DECADE","MINUTE"]},{"n":"Fabrics","w":["SILK","WOOL","LINEN","DENIM"]}]],"bee":[{"l":"dgmnpu","c":"i","w":["didi","didn","digging","ding","dining","dipping","dumping","gigi","guiding","gunning","inning","midi","mimi","mind","minding","ming","mini","minimum","mining","minn","pimp","ping","pinning","piping","pudding","puig","pumping"]},{"l":"cdeiln","c":"g","w":["ceiling","clegg","cling","clinging","deciding","declining","deng","digging","diligence","ding","dining","edge","edged","edging","elgin","ending","engel","engine","gene","genie","giggle","giggling","gigi","gilded","gill","glee","glen","glenn","glide","gliding","icing","inning","ledge","legend","legged","lending","liege","ling","lining","needing","negligence","nigel"]},{"l":"efnort","c":"u","w":["euro","forerunner","fortune","four","fourteen","future","neuro","neuron","neutron","noun","nurture","outer","outrun","refute","return","rout","route","router","ruff","rune","runner","runoff","tenure","tofu","torture","tour","tout","trout","true","truer","tuff","tune","turf","turn","turner","turnout","turret","tutor","tutu","unto","untrue","utter"]},{"l":"enortw","c":"p","w":["newport","open","opener","opponent","peep","peer","penn","pent","pepe","pepper","pete","poet","pont","poop","poor","poorer","pope","popper","pore","porn","port","porte","porter","porto","potent","potter","power","prep","prone","prop","proper","proponent","proto","proton","reopen","repent","repo","report","reporter","rope","roper","topper","troop","trooper","trope","weep","wept"]},{"l":"chirvw","c":"e","w":["cheer","cher","chew","cree","crew","crewe","eerie","eric","erich","erie","ever","hehe","heir","here","herr","hire","hive","ieee","receive","receiver","reece","reich","revere","review","reviewer","revive","rice","richer","richie","river","veer","vice","view","viewer","weir","were","where","wherever","whew","whichever","wire"]},{"l":"adenpr","c":"u","w":["arun","aura","duane","dude","dundee","dune","dunn","dunne","duped","duran","endure","endured","nadu","nude","papua","peru","prune","pune","purdue","pure","rudd","rudder","rude","rune","runner","rupee","undead","under","undue","unprepared","upped","upper","urdu"]},{"l":"abeklr","c":"y","w":["abbey","abby","alley","ally","array","arya","baby","bakery","barely","barkley","barley","bayer","bayley","belly","berkeley","berry","bray","early","ebay","eyeball","eyre","kaya","kayak","kaye","kayla","kelley","kelly","kerry","kyle","larry","layer","leaky","lyle","rally","rarely","really","relay","rely","yale","yaya","year","yearly","yell"]},{"l":"deilnr","c":"u","w":["deluded","druid","dude","duel","dull","dundee","dune","dunedin","dunn","dunne","endure","endured","lieu","lull","lulu","lund","lure","lured","nude","null","rudd","rudder","rude","ruin","ruined","rule","ruled","ruler","rune","runner","runnin","under","underline","underlined","undue","urdu","urine"]},{"l":"deilmo","c":"c","w":["cecil","ceded","cell","cello","clem","cleo","coco","code","coded","coil","cold","cole","coli","coll","collide","collided","collie","colo","come","comedic","comic","comm","como","cool","cooled","decide","decided","deco","decode","dice","diced","dolce","iced","lice","loco","mcleod","medic","medici","melodic","mice","mimic","oecd"]},{"l":"aklnop","c":"t","w":["alot","alta","alto","alton","anton","atlanta","atop","atta","kant","kato","knot","kolkata","laptop","loot","lotta","lotto","natal","nato","onto","otto","pant","patton","plankton","plant","plat","plato","platoon","platt","plot","pont","potato","talk","tall","talon","tanaka","tank","tata","tattoo","toll","tonal","took","tool","toon","toot","total","toto"]}],"ladder":[{"s":"cold","e":"warm","p":["cold","cord","word","ward","warm"]},{"s":"head","e":"tail","p":["head","read","reid","raid","rail","tail"]},{"s":"love","e":"hate","p":["love","cove","cave","have","hate"]},{"s":"lake","e":"sand","p":["lake","sake","sane","sand"]},{"s":"rice","e":"corn","p":["rice","race","rare","care","core","corn"]},{"s":"hand","e":"foot","p":["hand","band","bond","fond","food","foot"]},{"s":"dust","e":"rate","p":["dust","must","muse","mute","mate","rate"]},{"s":"kiss","e":"army","p":["kiss","kids","aids","aims","arms","army"]},{"s":"room","e":"four","p":["room","doom","door","poor","pour","four"]},{"s":"game","e":"main","p":["game","gale","male","mall","mail","main"]}],"v4":"abby able acid acne acre acts adam adds aged ages aide aids aims akin alan alas alec alex ally alma alot alps also amen amid andy anna anne anti ants apex apps arab arch area arms army arse arts asap asia asks atom atop audi aunt auto aviv away axis baba babe baby bach back bags bail bait bake bald bale bali ball band bang bank bans bare bark barn bars bart base bash bass bath bats beam bean bear beat beau beck beds beef been beer bees bell belt bend bent benz best beta beth bets bias bids bike bill bind bing bird bite bits blah blew bloc blog blow blue blur blvd boat body boil bold bolt bomb bond bone book boom boot bore born boss both bout bowl boyd boys brad bred brew brit bros brow buck buds buff bugs bulb bulk bull bump burn bury bush bust busy butt buys buzz cafe cage cain cake calf call calm came camp cane cans cape caps capt card care carl carr cars cart casa case cash cast cats cave cell cent chad chan chap chat chef chen chew chic chin chip chop cite city clad clan clap claw clay clip club clue coal coat coca cock code cody coil coin coke cola cold cole colt coma come comp cone cons cook cool cope cops copy cord core cork corn corp cory cost coup cove cows cozy crab crap crew crop crow cruz cuba cube cubs cues cult cunt cups curb cure cute cuts dads dale dame damp dana dang dare dark darn dash data date dave dawn days dead deaf deal dean dear debt deck deed deep deer dell demo dems dent deny dept desk dial diaz dice dick died dies diet dime ding dire dirt disc dish disk dive dock does dogs doin doll dome done dong doom door dope dorm dose dots doug dove down drag draw drew drip drop drug drum dual duck duct dude duel duke dull dumb dump dunk dunn dust duty each earl earn ears ease east easy eats ebay echo eden edge edit eggs ella else emma emmy ends envy epic eric erie erik erin espn euro evan even ever evil exam exit expo eyed eyes face fact fade fail fair fake fall fame fans fare farm fart fast fate fats faux fear feat feed feel fees feet fell felt fest feud fiat fifa fiji file fill film find fine finn fire firm fish fist fits five flag flat flaw fled flee flew flex flip flop flow flux foam foil fold folk fond font food fool foot ford fork form fort foul four fred free frog from fuel full fund funk fury fuse fuss gaga gain gala gale game gang gaps gary gate gave gays gaza gaze gear geek gems gene gets gift gigs gill gina girl give glad glen glow glue goal goat gods goes goin gold golf gone good gore gosh govt gown grab grad gram gray greg grew grey grid grim grin grip grow gulf guns guru guts guys hack hail hair hale half hall halo halt hand hang hank hans hard hare harm hart hash hate hath hats haul have hawk head heal heap hear heat heck heel heir held hell helm help herb herd here hero hers hide high hike hill hint hips hire hits hmmm hoax hold hole holt holy home homo hong hood hook hope horn hose host hour html http huge hugh hugo hugs hulk hull hung hunt hurt hyde hymn hype icon idea idle idol inch indy info into iowa ipad ipod iran iraq iris iron isis isle item ivan jack jade jail jake jane java jaws jazz jean jedi jeep jeff jerk jess jets jews jill joan jobs joel joey john join joke jong jose josh juan judy july jump june jung junk jury just kane kang kara karl kate katy keen keep kent kept kerr keys khan kick kids kill kind king kirk kiss kite kits knee knew knit knot know knox kobe koch kong kris kung kurt kyle labs lace lack lads lady laid lake lamb lame lamp lana land lane lang laps lara last late lava lawn laws lays lazy lead leaf leak lean leap left lego legs lena lend lens lent leon less lest levi levy lgbt liam liar lick lied lies life lift like lily lima limb lime line link lion lips lisa list lite live load loan lock logo logs lone long look loop lord lore lose loss lost lots loud love lowe luck lucy luis luke lump luna lung lure lush lust lynn lyon mack made maid mail main make male mali mall mama mann mans many maps marc mare mark mars mart marx mary mash mask mass mate math mats matt maya mayo maze meal mean meat meds meet mega melt meme memo menu mere mesh mess meta meth mets mice mick mike mild mile milk mill milo mind mine ming mini mins mint miss mist mock mode modi mold mole moms mona monk mono mood moon more moss most move much muse must mute myth nail name nana nasa nash nate nato navy nazi ncaa neal near neat neck need neil neon nerd ness nest nets news next nice nick nike nile nina nine noah node noel none noon norm nose note noun nova nsfw nude null numb nuts oaks oath obey odds offs ohio oils olds omar once ones only onto oops open oral otto ouch ours outs oval oven over owed owen owes owns pace pack pact pads page paid pain pair pale palm pals papa para park part pass past path paul pawn pays peak peas peek peel peer penn pens peru pest pete pets phil pick pics pier pies pigs pike pile pill pine ping pink pins pint pipe piss pits pitt pity plan play plea plot plug plum plus poem poet poke pole poll polo poly pond pony pool poop poor pope pops pork porn port pose post pots pour pray prep pres prey prix prof prom prop pros ptsd pubs puck puff pull pulp pump punk pure push puts quad quit quiz race rack rage raid rail rain ramp rams rand rang rank rant rare rash rate rats rays read real reap rear reds reed reef reel refs reid rely rent reps rest ribs rica rice rich rick rico ride rift ring riot ripe rise risk rita rite road roar rock rode rods role roll roma rome roof room root rope rory rosa rose ross roth rows ruby rude rudy ruin rule runs rush russ rust ryan sack safe saga sage said sail sake sale salt same sand sane sang sank sans sara saul save says scam scan scar scum seal sean seas seat sect seed seek seem seen sees self sell semi send sent sept seth sets sexy shah shaw shed shes shin ship shoe shop shot show shri shut sick side sigh sign silk sims sing sink sins site sits size skin skip slam slap slid slim slip slot slow snap snow soak soap sock soda sofa soft soil sold sole solo some song sons sony soon sore sort soul soup sour spam span spec spin spit spot spun spur stab stan star stat stay stem step stir stop stud subs such suck sued suit sums sung sunk suns sure surf swan swap sway swim sync tabs taco tags tail take tale talk tall tame tang tank tape taps tara task tate taxi team tear tech teen tell temp tend tens tent term test text thai than that thee them then theo they thin this thor thou thru thus tick tide tied tier ties tile till tilt time tina tiny tips tire toby todd toes told toll tomb tone toni tons tony took tool tops tore torn tory toss tour town toys trap tray tree trek trim trio trip true tube tuck tuna tune turf turn twin type uber ucla ukip undo unit unto upon urge used user uses ussr utah vain vale vans vary vase vast veil vein vent vera verb very vest veto vibe vice view viii vile vine visa void vote vows wade wage wait wake walk wall walt wang want ward ware warm warn warp wars wary wash watt wave ways weak wear webb weed week well went were west what when whip whoa whom wide wife wifi wiki wild will wind wine wing wins wipe wire wise wish with woah woke wolf womb wong wood wool word wore work worm worn wrap wwii xbox yale yang yard yarn year yell yoga york your yuan yuri zach zack zero zeus zinc zone zoom","sudoku":[{"p":"000605600040040003236001410000000020","s":"324615651342145263236451412536563124"},{"p":"406000005040601032030600000010140205","s":"416523325146651432234651562314143265"},{"p":"001304050000203041000063030012400000","s":"621354354126263541145263536412412635"},{"p":"000300013050201000630502005003306020","s":"562341413256251634634512125463346125"},{"p":"000010102046023401001325040000000004","s":"654213132546523461461325346152215634"},{"p":"040530205060060453050000000000300200","s":"641532235164162453453621524316316245"},{"p":"001000003150406500205030060000104200","s":"521346643152436521215634362415154263"},{"p":"004000630000200034306001001203023050","s":"154362632415215634346521561243423156"},{"p":"504000060035605003000000050040403206","s":"534612162435645123321564256341413256"},{"p":"605000000030500402206005051003000104","s":"635241124536513462246315451623362154"}],"pic":[[".#.#.","#####","#####",".###.","..#.."],["..#..",".###.","#####","#.#.#","#####"],[".#.#.",".#.#.",".....","#...#",".###."],["..#..","...#.","#####","...#.","..#.."],["#####","#...#","#...#",".###.","..#.."],["..#..","..#..","#####","..#..","..#.."],["#...#",".#.#.","..#..",".#.#.","#...#"],["..#..",".###.","#####","..#..","..#.."],["..#..",".###.","#####",".###.","..#.."],["#.#.#","#####","#####",".....","#####"]],"queens":[{"r":["0000111","0000111","2200001","4334011","4444445","4464445","4466455"],"s":[1,5,0,2,4,6,3]},{"r":["3111110","3311122","3311222","3331244","3331244","5366244","3366664"],"s":[6,2,4,1,5,0,3]},{"r":["2011113","2222133","2222335","2444635","2446665","2466655","2266655"],"s":[1,4,0,5,2,6,3]},{"r":["1112220","5112222","5222232","5242333","5542333","5555366","5555666"],"s":[6,1,3,5,2,0,4]},{"r":["0011111","2011133","2111133","1114333","1144466","1154666","1144666"],"s":[1,3,0,6,4,2,5]},{"r":["0021111","3321111","3322111","3321111","3345551","5555555","5555556"],"s":[1,5,3,0,2,4,6]},{"r":["0000000","2111000","2413000","2413055","4433355","4666555","4666665"],"s":[5,2,0,3,1,6,4]},{"r":["0111222","1111222","1113222","1133322","1433322","4433566","4433366"],"s":[0,2,5,3,1,4,6]},{"r":["1133002","1133002","1133322","5533324","5533334","5553334","6553334"],"s":[4,1,5,3,6,2,0]},{"r":["0011133","5111133","5112233","5554433","5664463","5566666","5666666"],"s":[0,2,4,6,3,1,5]}],"tango":[{"g":"SS....M.S....M.......S.M.MS...S..M..","s":"SSMSMMMMSSMSMMSMSSSSMSMMMMSMSSSSMMSM","c":[[4,3,5,3,"="],[3,3,3,4,"x"],[1,1,2,1,"="],[2,3,2,4,"x"],[3,2,4,2,"x"],[4,1,5,1,"x"],[2,4,2,5,"="]]},{"g":".SM..M...S....S....MMSS....SM..SS..M","s":"SSMMSMMMSSMSMSSMMSSMMSSMSMMSMSMSSMSM","c":[[3,1,3,2,"="],[5,0,5,1,"x"],[1,2,2,2,"="],[4,3,4,4,"x"],[2,3,2,4,"="],[1,4,2,4,"="],[2,4,2,5,"x"]]},{"g":"..MMSM..S.MSM.SSM.S..MSMS.M.S.MMSS.S","s":"SSMMSMMSSMMSMMSSMSSSMMSMSMMSSMMMSSMS","c":[[3,2,4,2,"="],[0,0,0,1,"="],[1,3,2,3,"x"],[4,3,5,3,"="],[4,2,4,3,"x"],[3,4,4,4,"="],[5,2,5,3,"="]]},{"g":".................MSMM.M.M..........M","s":"MMSMSSMSSMSMSSMSMMSMMSMSMMSMSSSSMSMM","c":[[1,1,1,2,"="],[1,0,2,0,"x"],[2,4,2,5,"="],[2,3,2,4,"x"],[0,4,1,4,"="],[0,0,1,0,"="],[1,1,2,1,"="]]},{"g":"M.....S.......MM..MS.M.MS.....M.S...","s":"MMSSMSSMMSMSSSMMSMMSSMSMSMMSMSMSSMSM","c":[[4,3,4,4,"x"],[4,2,5,2,"x"],[3,0,3,1,"x"],[4,5,5,5,"x"],[0,3,0,4,"x"],[1,4,1,5,"x"],[2,0,2,1,"="]]},{"g":"M..M.......M....M.MM..M.............","s":"MSSMMSSSMMSMSMSSMMMMSSMSMSMMSSSMMSSM","c":[[2,3,3,3,"="],[5,1,5,2,"="],[1,2,2,2,"x"],[4,0,4,1,"x"],[2,0,2,1,"x"],[2,0,3,0,"x"],[5,0,5,1,"x"]]},{"g":"S..M.MM....S......SS.........S.S...S","s":"SMSMSMMMSMSSSSMSMMSSMSMMMMSMSSMSMSMS","c":[[1,1,1,2,"x"],[1,2,1,3,"x"],[5,3,5,4,"x"],[4,3,5,3,"x"],[0,4,0,5,"x"],[4,3,4,4,"x"],[2,2,3,2,"="]]},{"g":"SS.S..S.S.M...MM...........S.M....S.","s":"SSMSMMSMSMMSMSMMSSMSMSSMSMSSMMMMSMSS","c":[[5,4,5,5,"="],[2,0,2,1,"x"],[5,0,5,1,"="],[2,5,3,5,"x"],[3,0,4,0,"x"],[0,3,0,4,"x"],[4,0,5,0,"x"]]},{"g":".MSSM.MSSMSMS....SSM.M..MS..MSSSM...","s":"MMSSMSMSSMSMSMMSMSSMSMSMMSMSMSSSMMSM","c":[[0,4,1,4,"x"],[3,3,3,4,"x"],[1,2,1,3,"x"],[0,1,1,1,"x"],[3,2,4,2,"x"],[3,4,3,5,"x"],[2,5,3,5,"x"]]},{"g":"...M.SM.S.....S..M.S.MS...M.........","s":"MSMMSSMMSMSSSMSSMMMSMMSSSSMSMMSMSSMM","c":[[2,3,2,4,"x"],[5,3,5,4,"x"],[0,3,1,3,"="],[4,0,4,1,"="],[5,1,5,2,"x"],[1,1,2,1,"="],[5,2,5,3,"="]]}],"kakuro":[{"g":["#####","###..","##...","#...#","#..##"],"c":{"1,2":{"a":14,"d":11},"2,1":{"a":13,"d":10},"3,0":{"a":19},"4,0":{"a":4},"0,3":{"d":14},"0,4":{"d":15}},"s":"0000000068001570973001300"},{"g":["#####","###..","##...","#..##","#..##"],"c":{"1,2":{"a":8,"d":11},"2,1":{"a":19,"d":14},"3,0":{"a":9},"4,0":{"a":8},"0,3":{"d":3},"0,4":{"d":16}},"s":"0000000017008290810006200"},{"g":["#####","#..##","#...#","##...","###.."],"c":{"1,0":{"a":6},"2,0":{"a":13},"3,1":{"a":7},"4,2":{"a":13},"0,1":{"d":11},"0,2":{"d":9},"1,3":{"d":12},"2,4":{"d":7}},"s":"0000002400093100024100076"},{"g":["#####","###..","##...","#..##","#..##"],"c":{"1,2":{"a":14,"d":10},"2,1":{"a":15,"d":15},"3,0":{"a":14},"4,0":{"a":9},"0,3":{"d":16},"0,4":{"d":11}},"s":"0000000095002760950006300"},{"g":["#####","#..##","#..##","##...","###.."],"c":{"1,0":{"a":10},"2,0":{"a":17},"3,1":{"a":22},"4,2":{"a":11},"0,1":{"d":14},"0,2":{"d":20},"2,3":{"d":16},"2,4":{"d":10}},"s":"0000006400089000079600074"},{"g":["#####","#..##","#...#","###..","###.."],"c":{"1,0":{"a":7},"2,0":{"a":15},"3,2":{"a":6},"4,2":{"a":11},"0,1":{"d":15},"0,2":{"d":6},"1,3":{"d":15},"2,4":{"d":3}},"s":"0000006100095100005100092"},{"g":["#####","###..","##...","#...#","#..##"],"c":{"1,2":{"a":14,"d":9},"2,1":{"a":15,"d":7},"3,0":{"a":7},"4,0":{"a":10},"0,3":{"d":16},"0,4":{"d":14}},"s":"0000000059003750124006400"},{"g":["#####","#..##","#..##","##...","###.."],"c":{"1,0":{"a":8},"2,0":{"a":14},"3,1":{"a":8},"4,2":{"a":9},"0,1":{"d":16},"0,2":{"d":10},"2,3":{"d":3},"2,4":{"d":10}},"s":"0000007100095000041300027"},{"g":["#####","#..##","#...#","##...","###.."],"c":{"1,0":{"a":13},"2,0":{"a":17},"3,1":{"a":10},"4,2":{"a":6},"0,1":{"d":14},"0,2":{"d":14},"1,3":{"d":8},"2,4":{"d":10}},"s":"0000006700084500031600024"},{"g":["#####","###..","##...","#..##","#..##"],"c":{"1,2":{"a":9,"d":17},"2,1":{"a":22,"d":6},"3,0":{"a":4},"4,0":{"a":11},"0,3":{"d":15},"0,4":{"d":8}},"s":"0000000063008950130005600"}],"mem":[[3,3],[3,4],[4,4],[4,5],[4,6],[5,5],[5,6],[5,7],[5,8],[6,8]],"wordle":["plant","brick","grape","shark","train","mouse","cloud","lemon","stone","river"]};
+  /* ---------- Word & Logic Arcade ---------- */
+  const KEY_PUZ = 'quickcapture_puzzles_completed';
+  const ARC = [
+    { id: 'wordle', name: 'Wordle', ico: '🟩' }, { id: 'cross', name: 'Mini-Crossword', ico: '✏️' }, { id: 'conn', name: 'Connections', ico: '🔗' },
+    { id: 'bee', name: 'Spelling Bee', ico: '🐝' }, { id: 'ladder', name: 'Word Ladder', ico: '🪜' }, { id: 'sudoku', name: 'Mini Sudoku', ico: '🔢' },
+    { id: 'pic', name: 'Picross', ico: '🖼️' }, { id: 'queens', name: 'Queens', ico: '👑' }, { id: 'tango', name: 'Tango', ico: '☀️' },
+    { id: 'kakuro', name: 'Kakuro Mini', ico: '➕' }, { id: 'mem', name: 'Memory Tiles', ico: '🧠' }
+  ];
+  const arcName = (g) => (ARC.find((x) => x.id === g) || { name: g }).name;
+  const arcCount = (g) => (ARC_DATA[g] || []).length;
+  const arcNum = (n) => '#' + String(n).padStart(3, '0');
+  // Extra puzzles can be appended later: QC_ARCADE.add('sudoku', [{ p, s }, ...]) keeps the same shapes as ARC_DATA.
+  window.QC_ARCADE = { add(g, arr) { if (ARC_DATA[g] && Array.isArray(arr)) { ARC_DATA[g].push(...arr); arcRender(); } }, data: ARC_DATA };
+  let arcDone = [];
+  function arcLoad() {
+    try { const a = JSON.parse(store.get(KEY_PUZ) || '[]'); arcDone = (Array.isArray(a) ? a : []).filter((r) => r && ARC.some((x) => x.id === r.g) && r.n >= 1).map((r) => ({ g: r.g, n: Math.floor(r.n), at: +r.at || Date.now(), secs: Math.max(0, +r.secs || 0), snap: r.snap == null ? null : r.snap })); } catch { arcDone = []; }
+  }
+  const arcSave = () => store.set(KEY_PUZ, JSON.stringify(arcDone));
+  const arcIsDone = (g, n) => arcDone.some((r) => r.g === g && r.n === n);
+  const arcFmt = (s) => { s = Math.max(0, Math.round(s)); return s < 60 ? s + 's' : Math.floor(s / 60) + 'm ' + String(s % 60).padStart(2, '0') + 's'; };
+  const arcDay = (t) => { const d = new Date(t); return d.getFullYear() * 400 + d.getMonth() * 32 + d.getDate(); };
+  function arcStats() {
+    const best = {}; arcDone.forEach((r) => { if (r.secs > 0 && (!best[r.g] || r.secs < best[r.g])) best[r.g] = Math.round(r.secs); });
+    const days = new Set(arcDone.map((r) => dkey(new Date(r.at)))); let streak = 0, d = new Date();
+    if (!days.has(dkey(d))) d.setDate(d.getDate() - 1);
+    while (days.has(dkey(d))) { streak++; d.setDate(d.getDate() - 1); }
+    const vals = Object.values(best);
+    return { solved: arcDone.length, streak, bestSecs: vals.length ? Math.min(...vals) : 0, best };
+  }
+  const rngSeed = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const shuf = (a, r) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const ab = (cls, text, attrs) => h('button', Object.assign({ class: cls, type: 'button', text }, attrs || {}));
+
+  /* shared on-screen keyboard */
+  function akb(onKey, withEnter) {
+    const rows = ['QWERTYUIOP', 'ASDFGHJKL', (withEnter ? '↵' : '') + 'ZXCVBNM⌫'];
+    const el = h('div', { class: 'ak', role: 'group', 'aria-label': 'Keyboard' }, rows.map((r) => h('div', { class: 'ak-r' }, [...r].map((c) => h('button', { type: 'button', class: 'ak-k' + (c === '↵' || c === '⌫' ? ' w' : ''), 'data-k': c, 'aria-label': c === '↵' ? 'Enter' : c === '⌫' ? 'Delete' : c, text: c })))));
+    el.addEventListener('click', (e) => { const b = e.target.closest('[data-k]'); if (b) onKey(b.dataset.k === '↵' ? 'Enter' : b.dataset.k === '⌫' ? 'Backspace' : b.dataset.k); });
+    return el;
+  }
+  const arcMsg = (box, t, bad) => { box.textContent = t || ''; box.classList.toggle('bad', !!bad); };
+
+  /* each game: (body, puzzle, number, ro, snap, done) -> { snap(), key(k) } */
+  const G = {};
+  G.wordle = (body, ans, n, ro, snap, done) => {
+    ans = ans.toUpperCase(); let guesses = snap ? snap.guesses.slice() : [], cur = '', over = !!snap, won = !!snap;
+    const grid = h('div', { class: 'wd', role: 'grid', 'aria-label': 'Wordle board' }), msg = h('p', { class: 'arc-msg', role: 'status' }), st = {};
+    const score = (g) => { const r = Array(5).fill('x'), pool = {}; for (let i = 0; i < 5; i++) { if (g[i] === ans[i]) r[i] = 'g'; else pool[ans[i]] = (pool[ans[i]] || 0) + 1; } for (let i = 0; i < 5; i++) if (r[i] === 'x' && pool[g[i]] > 0) { r[i] = 'y'; pool[g[i]]--; } return r; };
+    const kb = akb((k) => key(k), true);
+    function paint() {
+      grid.replaceChildren(...Array.from({ length: 6 }, (_, ri) => { const g = guesses[ri], sc = g && score(g); return h('div', { class: 'wd-r', role: 'row' }, Array.from({ length: 5 }, (_, c) => h('div', { class: 'wd-c' + (g ? ' ' + sc[c] : ri === guesses.length && cur[c] ? ' f' : ''), role: 'gridcell', 'aria-label': g ? g[c] + ' ' + ({ g: 'correct', y: 'present', x: 'absent' })[sc[c]] : '', text: g ? g[c] : ri === guesses.length ? cur[c] || '' : '' }))); }));
+      const ord = { g: 3, y: 2, x: 1 }; st.v = {}; guesses.forEach((g) => score(g).forEach((s, i) => { if ((ord[s] || 0) > (ord[st.v[g[i]]] || 0)) st.v[g[i]] = s; }));
+      kb.querySelectorAll('[data-k]').forEach((b) => { b.classList.remove('g', 'y', 'x'); if (st.v[b.dataset.k]) b.classList.add(st.v[b.dataset.k]); });
+    }
+    function key(k) {
+      if (ro || over) return;
+      if (k === 'Backspace') cur = cur.slice(0, -1); else if (/^[A-Za-z]$/.test(k) && cur.length < 5) cur += k.toUpperCase();
+      else if (k === 'Enter') {
+        if (cur.length < 5) { arcMsg(msg, 'Not enough letters', true); return; }
+        guesses.push(cur); cur = ''; paint();
+        if (guesses[guesses.length - 1] === ans) { over = won = true; arcMsg(msg, 'You got it in ' + guesses.length + '!'); done(); return; }
+        if (guesses.length >= 6) { over = true; arcMsg(msg, 'The word was ' + ans + '.', true); body.append(ab('btn big', 'Try again', { onclick: () => { guesses = []; cur = ''; over = false; arcMsg(msg, ''); paint(); } })); }
+        else arcMsg(msg, '');
+        return;
+      }
+      arcMsg(msg, ''); paint();
+    }
+    paint(); body.append(grid, msg, ro ? h('p', { class: 'arc-msg', text: 'Answer: ' + ans }) : kb);
+    return { key, snap: () => ({ guesses }) };
+  };
+
+  G.cross = (body, p, n, ro, snap, done) => {
+    const W = p.w, sol = Array.from({ length: 5 }, () => Array(5).fill(null));
+    [0, 2, 4].forEach((r, i) => [...W[i]].forEach((ch, c) => { sol[r][c] = ch; })); [0, 2, 4].forEach((c, i) => [...W[3 + i]].forEach((ch, r) => { sol[r][c] = ch; }));
+    const num = { '0,0': 1, '0,2': 2, '0,4': 3, '2,0': 4, '4,0': 5 };
+    const ent = Array.from({ length: 5 }, (_, r) => Array.from({ length: 5 }, (_, c) => (snap && snap.g[r][c]) || '')), wrong = new Set();
+    let sel = [0, 0], dir = 'a'; const cells = {}, grid = h('div', { class: 'cw', role: 'grid', 'aria-label': 'Crossword grid' }), bar = h('div', { class: 'cw-bar', 'aria-live': 'polite' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    const white = (r, c) => r % 2 === 0 || c % 2 === 0, hasA = (r) => r % 2 === 0, hasD = (c) => c % 2 === 0;
+    const clues = { a: [[0, 1, p.cl[0]], [2, 4, p.cl[1]], [4, 5, p.cl[2]]], d: [[0, 1, p.cl[3]], [2, 2, p.cl[4]], [4, 3, p.cl[5]]] };
+    const wordCells = () => dir === 'a' ? Array.from({ length: 5 }, (_, c) => [sel[0], c]) : Array.from({ length: 5 }, (_, r) => [r, sel[1]]);
+    function clueFor() { if (dir === 'a') { const k = clues.a.find((x) => x[0] === sel[0]); return k ? k[1] + ' Across: ' + k[2] : ''; } const k = clues.d.find((x) => x[0] === sel[1]); return k ? (k[0] / 2 + 1) + ' Down: ' + k[2] : ''; }
+    function paint() {
+      const wc = new Set(wordCells().map((x) => x.join())); bar.textContent = clueFor();
+      for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) { const el = cells[r + ',' + c]; if (!el) continue; el.className = 'cw-c' + (wc.has(r + ',' + c) ? ' w' : '') + (sel[0] === r && sel[1] === c ? ' s' : '') + (wrong.has(r + ',' + c) ? ' x' : ''); el.querySelector('.v').textContent = ent[r][c]; el.setAttribute('aria-label', (num[r + ',' + c] ? 'Clue ' + num[r + ',' + c] + ', ' : '') + 'row ' + (r + 1) + ' column ' + (c + 1) + ', ' + (ent[r][c] || 'empty')); }
+      list.querySelectorAll('[data-cl]').forEach((b) => b.classList.toggle('on', b.dataset.cl === (dir === 'a' ? 'a' + sel[0] : 'd' + sel[1])));
+    }
+    for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) {
+      if (!white(r, c)) { grid.append(h('div', { class: 'cw-c blk', 'aria-hidden': 'true' })); continue; }
+      const b = h('button', { type: 'button', class: 'cw-c', role: 'gridcell' }, num[r + ',' + c] ? h('i', { text: String(num[r + ',' + c]) }) : null, h('span', { class: 'v' }));
+      b.addEventListener('click', () => { if (ro) return; if (sel[0] === r && sel[1] === c && hasA(r) && hasD(c)) dir = dir === 'a' ? 'd' : 'a'; else { sel = [r, c]; if (dir === 'a' && !hasA(r)) dir = 'd'; else if (dir === 'd' && !hasD(c)) dir = 'a'; } paint(); });
+      cells[r + ',' + c] = b; grid.append(b);
+    }
+    const list = h('div', { class: 'cw-cl' }, ['a', 'd'].map((d) => h('div', {}, h('b', { text: d === 'a' ? 'Across' : 'Down' }), clues[d].map((k) => h('button', { type: 'button', class: 'cw-q', 'data-cl': d + k[0], text: (d === 'a' ? k[1] : k[0] / 2 + 1) + '. ' + k[2], onclick: () => { if (ro) return; dir = d; sel = d === 'a' ? [k[0], 0] : [0, k[0]]; paint(); } })))));
+    function check() { wrong.clear(); let full = true; for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) if (white(r, c)) { if (!ent[r][c]) full = false; else if (ent[r][c] !== sol[r][c]) wrong.add(r + ',' + c); } return { full, ok: full && !wrong.size }; }
+    function key(k) {
+      if (ro) return;
+      const wc = wordCells(), i = wc.findIndex((x) => x[0] === sel[0] && x[1] === sel[1]);
+      if (k === 'Backspace') { if (ent[sel[0]][sel[1]]) ent[sel[0]][sel[1]] = ''; else if (i > 0) { sel = wc[i - 1]; ent[sel[0]][sel[1]] = ''; } }
+      else if (/^[A-Za-z]$/.test(k)) { ent[sel[0]][sel[1]] = k.toUpperCase(); if (i < 4) sel = wc[i + 1]; }
+      else if (k === 'Enter' || k === 'Tab') { dir = dir === 'a' ? 'd' : 'a'; }
+      wrong.clear(); arcMsg(msg, ''); paint();
+      const r = check(); wrong.clear();
+      if (r.ok) { paint(); arcMsg(msg, 'Solved!'); done(); } else if (r.full) arcMsg(msg, 'Every square is filled, but something is off. Tap Check.', true);
+    }
+    paint();
+    body.append(bar, grid, msg, ro ? list : h('div', {}, akb(key, false), h('div', { class: 'arc-act' }, ab('btn', 'Check', { onclick: () => { const r = check(); paint(); arcMsg(msg, r.ok ? 'All correct!' : wrong.size ? wrong.size + ' wrong square' + (wrong.size > 1 ? 's' : '') + ' (in red)' : 'No mistakes so far', !!wrong.size); } }), ab('btn', 'Switch direction', { onclick: () => { key('Enter'); } })), list));
+    return { key, snap: () => ({ g: ent.map((r) => r.slice()) }) };
+  };
+
+  G.conn = (body, groups, n, ro, snap, done) => {
+    const rnd = rngSeed(n * 977 + 13), words = shuf(groups.flatMap((g, i) => g.w.map((w) => ({ w, i }))), rnd);
+    let order = words.map((x) => x.w), sel = new Set(), solved = snap ? snap.solved.slice() : [], miss = snap ? snap.miss : 0, over = !!snap;
+    const board = h('div', { class: 'cn' }), dots = h('div', { class: 'cn-d', 'aria-live': 'polite' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    const gi = (w) => words.find((x) => x.w === w).i;
+    function paint() {
+      const rows = solved.map((i) => h('div', { class: 'cn-s c' + i }, h('b', { text: groups[i].n }), h('span', { text: groups[i].w.join(', ') })));
+      const left = order.filter((w) => !solved.includes(gi(w)));
+      board.replaceChildren(...rows, ...(over && solved.length < 4 ? groups.map((g, i) => solved.includes(i) ? null : h('div', { class: 'cn-s c' + i }, h('b', { text: g.n }), h('span', { text: g.w.join(', ') }))) : left.map((w) => h('button', { type: 'button', class: 'cn-w' + (sel.has(w) ? ' on' : ''), 'aria-pressed': String(sel.has(w)), text: w, onclick: () => { if (ro || over) return; if (sel.has(w)) sel.delete(w); else if (sel.size < 4) sel.add(w); paint(); } }))));
+      board.classList.toggle('g', !(over && solved.length < 4) && left.length > 0);
+      dots.textContent = 'Mistakes left: ' + '●'.repeat(Math.max(0, 4 - miss)) + '○'.repeat(Math.min(4, miss)); dots.setAttribute('aria-label', Math.max(0, 4 - miss) + ' mistakes left');
+      if (sub) sub.disabled = sel.size !== 4;
+    }
+    const sub = ro ? null : ab('btn primary', 'Submit', { onclick: () => {
+      if (sel.size !== 4 || over) return; const ids = [...sel].map(gi), cnt = {}; ids.forEach((i) => { cnt[i] = (cnt[i] || 0) + 1; });
+      const hit = Object.keys(cnt).find((k) => cnt[k] === 4);
+      if (hit !== undefined) { solved.push(+hit); sel.clear(); arcMsg(msg, groups[+hit].n + '!'); paint(); if (solved.length === 4) done(); return; }
+      miss++; arcMsg(msg, Object.values(cnt).some((v) => v === 3) ? 'One away!' : 'Not a group', true);
+      if (miss >= 4) { over = true; arcMsg(msg, 'Out of mistakes. Here are the groups.', true); body.append(ab('btn big', 'Try again', { onclick: () => { miss = 0; solved = []; sel.clear(); over = false; arcMsg(msg, ''); tryB.remove(); paint(); } })); }
+      sel.clear(); paint();
+    } });
+    const tryB = { remove() { const b = [...body.querySelectorAll('button')].find((x) => x.textContent === 'Try again'); if (b) b.remove(); } };
+    body.append(board, msg, dots, ro ? h('span') : h('div', { class: 'arc-act' }, ab('btn', 'Shuffle', { onclick: () => { order = shuf(order, Math.random); paint(); } }), ab('btn', 'Deselect all', { onclick: () => { sel.clear(); paint(); } }), sub));
+    paint(); return { snap: () => ({ solved, miss }) };
+  };
+
+  G.bee = (body, p, n, ro, snap, done) => {
+    const C = p.c.toUpperCase(); let outer = [...p.l.toUpperCase()], cur = '', found = snap ? snap.found.slice() : [], finished = !!snap;
+    const words = new Set(p.w.map((w) => w.toUpperCase())), need = Math.ceil(words.size * 0.4);
+    const disp = h('div', { class: 'bee-in', 'aria-live': 'polite' }), msg = h('p', { class: 'arc-msg', role: 'status' }), hive = h('div', { class: 'bee-h', role: 'group', 'aria-label': 'Letters' }), fl = h('div', { class: 'bee-f' }), prog = h('div', { class: 'bee-p' });
+    const all = new Set([C, ...outer]), pang = (w) => [...all].every((c) => w.includes(c));
+    const pos = [[50, 50], [50, 12], [83, 31], [83, 69], [50, 88], [17, 69], [17, 31]];
+    function paint() {
+      hive.replaceChildren(...[C, ...outer].map((c, i) => h('button', { type: 'button', class: 'bee-l' + (i === 0 ? ' c' : ''), style: 'left:' + pos[i][0] + '%;top:' + pos[i][1] + '%', 'aria-label': c + (i === 0 ? ' (required)' : ''), text: c, onclick: () => key(c) })));
+      disp.textContent = cur || ' '; disp.querySelectorAll; 
+      fl.replaceChildren(...found.slice().reverse().map((w) => h('span', { class: pang(w) ? 'pg' : '', text: w })));
+      prog.textContent = found.length + ' found · ' + Math.max(0, need - found.length) + ' to go' + (pang(found.join('')) ? '' : '');
+    }
+    function key(k) {
+      if (ro || finished) return;
+      if (k === 'Backspace') cur = cur.slice(0, -1);
+      else if (/^[A-Za-z]$/.test(k)) { k = k.toUpperCase(); if (all.has(k) && cur.length < 19) cur += k; }
+      else if (k === 'Enter') {
+        const w = cur; cur = '';
+        if (w.length < 4) arcMsg(msg, 'Too short (4+ letters)', true); else if (!w.includes(C)) arcMsg(msg, 'Missing the center letter', true);
+        else if (found.includes(w)) arcMsg(msg, 'Already found', true); else if (!words.has(w)) arcMsg(msg, 'Not in the word list', true);
+        else { found.push(w); arcMsg(msg, pang(w) ? 'Pangram! 🎉' : 'Nice!'); if (found.length >= need) { finished = true; arcMsg(msg, 'You found enough words to win! 🐝'); paint(); done(); return; } }
+      }
+      paint();
+    }
+    paint(); body.append(prog, disp, hive, msg, ro ? h('span') : h('div', { class: 'arc-act' }, ab('btn', 'Delete', { onclick: () => key('Backspace') }), ab('btn', 'Shuffle', { onclick: () => { outer = shuf(outer, Math.random); paint(); } }), ab('btn primary', 'Enter', { onclick: () => key('Enter') })), fl);
+    return { key, snap: () => ({ found }) };
+  };
+
+  G.ladder = (body, p, n, ro, snap, done) => {
+    const valid = new Set(ARC_DATA.v4.split(' ').concat(p.p)); let chain = snap ? snap.chain.slice() : [p.s], cur = '', over = !!snap;
+    const list = h('div', { class: 'ld' }), msg = h('p', { class: 'arc-msg', role: 'status' }), kb = akb((k) => key(k), true);
+    const last = () => chain[chain.length - 1];
+    function paint() {
+      const word = (w, cls) => h('div', { class: 'ld-w ' + (cls || '') }, [...w.toUpperCase()].map((c, i) => h('span', { class: w === p.e || (chain.length > 1 && w === last()) ? '' : '', text: c })));
+      list.replaceChildren(...chain.map((w, i) => h('div', { class: 'ld-w' + (i === 0 ? ' st' : '') }, [...w.toUpperCase()].map((c, k) => h('span', { class: i > 0 && chain[i - 1][k] !== w[k] ? 'ch' : '', text: c })))),
+        ...(over ? [] : [h('div', { class: 'ld-w in' }, Array.from({ length: 4 }, (_, i) => h('span', { text: (cur[i] || '').toUpperCase() || '·' })))]),
+        ...(over ? [] : [h('div', { class: 'ld-t' }, h('small', { text: 'Target' }), [...p.e.toUpperCase()].map((c) => h('span', { text: c })))]));
+    }
+    function key(k) {
+      if (ro || over) return;
+      if (k === 'Backspace') cur = cur.slice(0, -1); else if (/^[A-Za-z]$/.test(k) && cur.length < 4) cur += k.toLowerCase();
+      else if (k === 'Enter') {
+        if (cur.length < 4) arcMsg(msg, 'Four letters, please', true);
+        else { const L = last(); let d = 0; for (let i = 0; i < 4; i++) if (cur[i] !== L[i]) d++;
+          if (d !== 1) arcMsg(msg, 'Change exactly one letter', true); else if (!valid.has(cur)) arcMsg(msg, 'Not in the word list', true);
+          else { chain.push(cur); cur = ''; arcMsg(msg, ''); if (last() === p.e) { over = true; paint(); arcMsg(msg, 'Solved in ' + (chain.length - 1) + ' steps (best is ' + (p.p.length - 1) + ').'); done(); return; } } }
+      }
+      paint();
+    }
+    paint(); body.append(h('p', { class: 'arc-msg', text: 'Turn ' + p.s.toUpperCase() + ' into ' + p.e.toUpperCase() + ', one letter at a time.' }), list, msg, ro ? h('span') : h('div', {}, kb, h('div', { class: 'arc-act' }, ab('btn', 'Undo step', { onclick: () => { if (chain.length > 1 && !over) { chain.pop(); cur = ''; arcMsg(msg, ''); paint(); } } }))));
+    return { key, snap: () => ({ chain }) };
+  };
+
+  G.sudoku = (body, p, n, ro, snap, done) => {
+    const giv = [...p.p].map(Number), cell = snap ? snap.v.slice() : giv.slice(); let sel = -1, over = !!snap;
+    const grid = h('div', { class: 'sd', role: 'grid', 'aria-label': 'Mini Sudoku board' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    const conflicts = () => { const bad = new Set(); const grp = []; for (let i = 0; i < 6; i++) { grp.push([0, 1, 2, 3, 4, 5].map((c) => i * 6 + c), [0, 1, 2, 3, 4, 5].map((r) => r * 6 + i)); } for (let br = 0; br < 3; br++) for (let bc = 0; bc < 2; bc++) { const g = []; for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) g.push((br * 2 + r) * 6 + bc * 3 + c); grp.push(g); }
+      grp.forEach((g) => { const seen = {}; g.forEach((i) => { if (cell[i]) (seen[cell[i]] = seen[cell[i]] || []).push(i); }); Object.values(seen).forEach((l) => { if (l.length > 1) l.forEach((i) => bad.add(i)); }); }); return bad; };
+    function paint() {
+      const bad = conflicts();
+      grid.replaceChildren(...cell.map((v, i) => { const r = Math.floor(i / 6), c = i % 6; return h('button', { type: 'button', role: 'gridcell', class: 'sd-c' + (giv[i] ? ' g' : '') + (i === sel ? ' s' : '') + (bad.has(i) ? ' x' : '') + (c === 2 ? ' br' : '') + (r === 1 || r === 3 ? ' bb' : ''), 'aria-label': 'Row ' + (r + 1) + ' column ' + (c + 1) + ', ' + (v ? v + (giv[i] ? ' given' : '') : 'empty'), text: v ? String(v) : '', onclick: () => { if (!ro && !over && !giv[i]) { sel = i; paint(); } } }); }));
+      if (!over && !ro && !bad.size && cell.every(Boolean) && cell.join('') === p.s) { over = true; arcMsg(msg, 'Solved!'); done(); }
+      else if (!bad.size && cell.every(Boolean) && cell.join('') !== p.s && !over) arcMsg(msg, 'Full board, but not the solution. Check the numbers.', true); else if (!over) arcMsg(msg, bad.size ? 'Duplicates are shown in red' : '', !!bad.size);
+    }
+    function key(k) { if (ro || over || sel < 0) return; if (/^[1-6]$/.test(k)) cell[sel] = +k; else if (k === 'Backspace' || k === '0') cell[sel] = 0; paint(); }
+    paint(); body.append(grid, msg, ro ? h('span') : h('div', { class: 'sd-pad' }, [1, 2, 3, 4, 5, 6].map((d) => ab('sd-k', String(d), { 'aria-label': 'Enter ' + d, onclick: () => key(String(d)) })), ab('sd-k e', '⌫', { 'aria-label': 'Erase', onclick: () => key('Backspace') })));
+    return { key, snap: () => ({ v: cell }) };
+  };
+
+  G.pic = (body, bm, n, ro, snap, done) => {
+    const T = bm.map((r) => [...r].map((c) => c === '#' ? 1 : 0)), cell = snap ? snap.v.map((r) => r.slice()) : Array.from({ length: 5 }, () => Array(5).fill(0)); let mode = 1, over = !!snap;
+    const runs = (a) => { const o = []; let k = 0; a.forEach((v) => { if (v) k++; else if (k) { o.push(k); k = 0; } }); if (k) o.push(k); return o.length ? o : [0]; };
+    const rc = T.map(runs), cc = [0, 1, 2, 3, 4].map((c) => runs(T.map((r) => r[c])));
+    const grid = h('div', { class: 'pc', role: 'grid', 'aria-label': 'Picross board' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    const rowOk = (r) => { return runs(cell[r].map((v) => v === 1 ? 1 : 0)).join() === rc[r].join(); }, colOk = (c) => runs(cell.map((r) => r[c] === 1 ? 1 : 0)).join() === cc[c].join();
+    function paint() {
+      const els = [h('div', { class: 'pc-k', 'aria-hidden': 'true' })];
+      cc.forEach((l, c) => els.push(h('div', { class: 'pc-cc' + (colOk(c) ? ' ok' : ''), 'aria-label': 'Column ' + (c + 1) + ' clue ' + l.join(' ') }, l.map((x) => h('span', { text: String(x) })))));
+      for (let r = 0; r < 5; r++) { els.push(h('div', { class: 'pc-rc' + (rowOk(r) ? ' ok' : ''), 'aria-label': 'Row ' + (r + 1) + ' clue ' + rc[r].join(' ') }, rc[r].map((x) => h('span', { text: String(x) }))));
+        for (let c = 0; c < 5; c++) els.push(h('button', { type: 'button', role: 'gridcell', class: 'pc-c' + (cell[r][c] === 1 ? ' f' : cell[r][c] === 2 ? ' m' : ''), 'aria-label': 'Row ' + (r + 1) + ' column ' + (c + 1) + ', ' + ['empty', 'filled', 'marked empty'][cell[r][c]], text: cell[r][c] === 2 ? '✕' : '', onclick: () => { if (ro || over) return; cell[r][c] = cell[r][c] === mode ? 0 : mode; paint(); } })); }
+      grid.replaceChildren(...els);
+      if (!over && !ro && T.every((row, r) => row.every((v, c) => (cell[r][c] === 1) === (v === 1)))) { over = true; arcMsg(msg, 'Picture complete!'); done(); }
+    }
+    const mb = ro ? null : h('div', { class: 'arc-act' }, ab('btn on', '■ Fill', { 'aria-pressed': 'true', onclick: () => { mode = 1; mb.children[0].setAttribute('aria-pressed', 'true'); mb.children[1].setAttribute('aria-pressed', 'false'); } }), ab('btn', '✕ Mark empty', { 'aria-pressed': 'false', onclick: () => { mode = 2; mb.children[1].setAttribute('aria-pressed', 'true'); mb.children[0].setAttribute('aria-pressed', 'false'); } }));
+    paint(); body.append(grid, msg, mb || h('span')); return { snap: () => ({ v: cell }) };
+  };
+
+  G.queens = (body, p, n, ro, snap, done) => {
+    const N = 7, reg = p.r.map((r) => [...r].map(Number)), cell = snap ? snap.v.map((r) => r.slice()) : Array.from({ length: N }, () => Array(N).fill(0)); let over = !!snap;
+    const grid = h('div', { class: 'qn', role: 'grid', 'aria-label': 'Queens board' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    const qs = () => { const o = []; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (cell[r][c] === 2) o.push([r, c]); return o; };
+    function bad() { const q = qs(), b = new Set(); q.forEach(([r, c], i) => q.forEach(([r2, c2], j) => { if (i < j && (r === r2 || c === c2 || reg[r][c] === reg[r2][c2] || (Math.abs(r - r2) <= 1 && Math.abs(c - c2) <= 1))) { b.add(r + ',' + c); b.add(r2 + ',' + c2); } })); return b; }
+    function paint() {
+      const b = bad();
+      grid.replaceChildren(...cell.flatMap((row, r) => row.map((v, c) => h('button', { type: 'button', role: 'gridcell', class: 'qn-c z' + reg[r][c] + (b.has(r + ',' + c) ? ' x' : '') + (c < N - 1 && reg[r][c] !== reg[r][c + 1] ? ' br' : '') + (r < N - 1 && reg[r][c] !== reg[r + 1][c] ? ' bb' : ''), 'aria-label': 'Row ' + (r + 1) + ' column ' + (c + 1) + ', zone ' + (reg[r][c] + 1) + ', ' + ['empty', 'marked', 'queen'][v], text: v === 2 ? '👑' : v === 1 ? '✕' : '', onclick: () => { if (ro || over) return; cell[r][c] = (v + 1) % 3; paint(); } }))));
+      const q = qs(); arcMsg(msg, b.size ? 'Queens in red clash (row, column, zone or touching)' : q.length + ' of ' + N + ' queens placed', !!b.size);
+      if (!over && !ro && q.length === N && !b.size) { over = true; arcMsg(msg, 'Every zone has its queen!'); done(); }
+    }
+    paint(); body.append(h('p', { class: 'arc-msg', text: 'One queen per row, column and color zone. Queens can’t touch, even diagonally. Tap: ✕ then 👑.' }), grid, msg); return { snap: () => ({ v: cell }) };
+  };
+
+  G.tango = (body, p, n, ro, snap, done) => {
+    const giv = [...p.g].map((c) => c === 'S' ? 1 : c === 'M' ? 2 : 0), cell = snap ? snap.v.slice() : giv.slice(); let over = !!snap;
+    const grid = h('div', { class: 'tg', role: 'grid', 'aria-label': 'Tango board' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    const ico = ['', '☀️', '🌙'];
+    function bad() {
+      const b = new Set(), lines = []; for (let i = 0; i < 6; i++) { lines.push([0, 1, 2, 3, 4, 5].map((c) => i * 6 + c), [0, 1, 2, 3, 4, 5].map((r) => r * 6 + i)); }
+      lines.forEach((l) => { for (let i = 0; i + 2 < 6; i++) if (cell[l[i]] && cell[l[i]] === cell[l[i + 1]] && cell[l[i]] === cell[l[i + 2]]) { b.add(l[i]); b.add(l[i + 1]); b.add(l[i + 2]); } [1, 2].forEach((s) => { if (l.filter((i) => cell[i] === s).length > 3) l.forEach((i) => { if (cell[i] === s) b.add(i); }); }); });
+      p.c.forEach(([r1, c1, r2, c2, t]) => { const a = r1 * 6 + c1, d = r2 * 6 + c2; if (cell[a] && cell[d] && ((t === '=') !== (cell[a] === cell[d]))) { b.add(a); b.add(d); } });
+      return b;
+    }
+    const link = (i) => { const o = []; p.c.forEach(([r1, c1, r2, c2, t]) => { if (r1 * 6 + c1 === i) o.push([r2 === r1 ? 'r' : 'd', t]); }); return o; };
+    function paint() {
+      const b = bad();
+      grid.replaceChildren(...cell.map((v, i) => h('div', { class: 'tg-w' }, h('button', { type: 'button', role: 'gridcell', class: 'tg-c' + (giv[i] ? ' g' : '') + (b.has(i) ? ' x' : ''), 'aria-label': 'Row ' + (Math.floor(i / 6) + 1) + ' column ' + (i % 6 + 1) + ', ' + ['empty', 'sun', 'moon'][v] + (giv[i] ? ', fixed' : ''), text: ico[v], onclick: () => { if (ro || over || giv[i]) return; cell[i] = (v + 1) % 3; paint(); } }),
+        ...link(i).map(([d, t]) => h('i', { class: 'tg-l ' + d, 'aria-label': t === '=' ? 'must match' : 'must differ', text: t === '=' ? '=' : '×' })))));
+      const full = cell.every(Boolean); arcMsg(msg, b.size ? 'Clashes are shown in red' : '', !!b.size);
+      if (!over && !ro && full && !b.size) { over = true; arcMsg(msg, 'Balanced!'); done(); }
+    }
+    paint(); body.append(h('p', { class: 'arc-msg', text: 'Fill every square with ☀️ or 🌙: three of each per row and column, never three in a row, and obey = and ×.' }), grid, msg); return { snap: () => ({ v: cell }) };
+  };
+
+  G.kakuro = (body, p, n, ro, snap, done) => {
+    const white = (r, c) => p.g[r][c] === '.', cell = snap ? snap.v.slice() : Array(25).fill(0), runs = []; let sel = -1, over = !!snap;
+    Object.keys(p.c).forEach((k) => { const [r, c] = k.split(',').map(Number), o = p.c[k];
+      if (o.a) { const l = []; for (let x = c + 1; x < 5 && white(r, x); x++) l.push(r * 5 + x); runs.push({ s: o.a, l }); }
+      if (o.d) { const l = []; for (let y = r + 1; y < 5 && white(y, c); y++) l.push(y * 5 + c); runs.push({ s: o.d, l }); } });
+    const grid = h('div', { class: 'kk', role: 'grid', 'aria-label': 'Kakuro board' }), msg = h('p', { class: 'arc-msg', role: 'status' });
+    function bad() { const b = new Set(); runs.forEach((ru) => { const seen = {}; let sum = 0, full = true; ru.l.forEach((i) => { if (cell[i]) { sum += cell[i]; (seen[cell[i]] = seen[cell[i]] || []).push(i); } else full = false; }); Object.values(seen).forEach((l) => { if (l.length > 1) l.forEach((i) => b.add(i)); }); if (sum > ru.s || (full && sum !== ru.s)) ru.l.forEach((i) => b.add(i)); }); return b; }
+    function paint() {
+      const b = bad();
+      grid.replaceChildren(...Array.from({ length: 25 }, (_, i) => { const r = Math.floor(i / 5), c = i % 5;
+        if (!white(r, c)) { const o = p.c[r + ',' + c]; return h('div', { class: 'kk-b', 'aria-label': o ? 'Clue' + (o.a ? ', across ' + o.a : '') + (o.d ? ', down ' + o.d : '') : 'Block' }, o && o.d ? h('i', { class: 'd', text: String(o.d) }) : null, o && o.a ? h('i', { class: 'a', text: String(o.a) }) : null); }
+        return h('button', { type: 'button', role: 'gridcell', class: 'kk-c' + (i === sel ? ' s' : '') + (b.has(i) ? ' x' : ''), 'aria-label': 'Row ' + (r + 1) + ' column ' + (c + 1) + ', ' + (cell[i] || 'empty'), text: cell[i] ? String(cell[i]) : '', onclick: () => { if (!ro && !over) { sel = i; paint(); } } }); }));
+      const whites = Array.from({ length: 25 }, (_, i) => i).filter((i) => white(Math.floor(i / 5), i % 5));
+      arcMsg(msg, b.size ? 'Red: a repeat or a wrong total' : '', !!b.size);
+      if (!over && !ro && whites.every((i) => cell[i]) && !b.size) { over = true; arcMsg(msg, 'Every total matches!'); done(); }
+    }
+    function key(k) { if (ro || over || sel < 0) return; if (/^[1-9]$/.test(k)) cell[sel] = +k; else if (k === 'Backspace' || k === '0') cell[sel] = 0; paint(); }
+    paint(); body.append(h('p', { class: 'arc-msg', text: 'Digits 1-9. Each run adds up to its clue, with no repeats inside a run.' }), grid, msg, ro ? h('span') : h('div', { class: 'sd-pad k9' }, [1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => ab('sd-k', String(d), { 'aria-label': 'Enter ' + d, onclick: () => key(String(d)) })), ab('sd-k e', '⌫', { 'aria-label': 'Erase', onclick: () => key('Backspace') })));
+    return { key, snap: () => ({ v: cell }) };
+  };
+
+  G.mem = (body, p, n, ro, snap, done) => {
+    const [N, K] = p, rnd = rngSeed(n * 7919 + N), pat = snap ? snap.pat.slice() : shuf(Array.from({ length: N * N }, (_, i) => i), rnd).slice(0, K), set = new Set(pat);
+    let hit = new Set(snap ? snap.pat : []), miss = new Set(), lives = 3, phase = snap ? 'end' : 'idle', over = !!snap;
+    const grid = h('div', { class: 'mm', role: 'grid', 'aria-label': 'Memory grid', style: '--n:' + N }), msg = h('p', { class: 'arc-msg', role: 'status' }), go = h('div', { class: 'arc-act' });
+    function paint(show) {
+      grid.replaceChildren(...Array.from({ length: N * N }, (_, i) => h('button', { type: 'button', role: 'gridcell', class: 'mm-c' + ((show || phase === 'end') && set.has(i) ? ' f' : '') + (hit.has(i) && phase !== 'show' ? ' ok' : '') + (miss.has(i) ? ' no' : ''), 'aria-label': 'Tile ' + (i + 1) + ((show && set.has(i)) ? ', lit' : hit.has(i) ? ', correct' : miss.has(i) ? ', wrong' : ''), onclick: () => tap(i) })));
+      go.replaceChildren(...(phase === 'idle' ? [ab('btn primary big', 'Show the pattern', { onclick: start })] : phase === 'fail' ? [ab('btn big', 'Try again', { onclick: start })] : []));
+    }
+    function start() { hit = new Set(); miss = new Set(); lives = 3; phase = 'show'; arcMsg(msg, 'Memorize the ' + K + ' lit tiles…'); paint(true); setTimeout(() => { if (phase !== 'show') return; phase = 'play'; arcMsg(msg, 'Tap the ' + K + ' tiles you saw. Lives: ' + '♥'.repeat(lives)); paint(false); }, 1400 + K * 250); }
+    function tap(i) {
+      if (ro || phase !== 'play' || hit.has(i) || miss.has(i)) return;
+      if (set.has(i)) { hit.add(i); if (hit.size === K) { phase = 'end'; over = true; paint(false); arcMsg(msg, 'All ' + K + ' found!'); done(); return; } }
+      else { miss.add(i); lives--; if (lives <= 0) { phase = 'fail'; paint(true); arcMsg(msg, 'Out of lives. That was the pattern.', true); return; } }
+      arcMsg(msg, 'Found ' + hit.size + ' of ' + K + '. Lives: ' + '♥'.repeat(lives) + '♡'.repeat(3 - lives), !!miss.size && false); paint(false);
+    }
+    paint(false); if (ro) arcMsg(msg, 'Pattern: ' + K + ' tiles on a ' + N + '×' + N + ' grid.'); body.append(grid, msg, go); return { snap: () => ({ pat }) };
+  };
+
+  /* overlay controller */
+  const arcOv = $('#arcOv'), arcBody = $('#arcBody');
+  const A = { g: '', n: 0, ro: false, t0: 0, tick: 0, inst: null, finished: false };
+  const arcSecs = () => Math.round((Date.now() - A.t0) / 1000);
+  function arcOpen(g, n, rec) {
+    const data = ARC_DATA[g] && ARC_DATA[g][n - 1]; if (!data) return;
+    clearInterval(A.tick); A.g = g; A.n = n; A.ro = !!rec; A.t0 = Date.now(); A.finished = false;
+    $('#arcOvT').textContent = arcNum(n) + ' · ' + arcName(g); $('#arcTimer').textContent = rec ? 'Solved ' + arcFmt(rec.secs) : '0:00';
+    arcBody.replaceChildren(); A.inst = G[g](arcBody, data, n, !!rec, rec ? rec.snap : null, () => arcWin());
+    if (!rec) A.tick = setInterval(() => { if (!A.finished) $('#arcTimer').textContent = fmtSec(arcSecs()); }, 500);
+    cirOpen(arcOv); const sh = arcOv.querySelector('.sheet'); sh.scrollTop = 0; sh.tabIndex = -1; sh.focus({ preventScroll: true });
+  }
+  function arcClose() { clearInterval(A.tick); A.inst = null; cirClose(arcOv); }
+  function arcWin() {
+    if (A.finished || A.ro) return; A.finished = true; clearInterval(A.tick);
+    const secs = Math.max(1, arcSecs()); $('#arcTimer').textContent = 'Solved ' + arcFmt(secs);
+    arcDone = arcDone.filter((r) => !(r.g === A.g && r.n === A.n)); arcDone.push({ g: A.g, n: A.n, at: Date.now(), secs, snap: A.inst.snap() });
+    if (!arcSave()) toast('Storage is full: that win may not be saved');
+    const g = A.g, left = arcPool(g).length;
+    arcBody.append(h('div', { class: 'arc-win', role: 'status' }, h('b', { text: '🏆 Solved ' + arcNum(A.n) + ' in ' + arcFmt(secs) }),
+      h('div', { class: 'arc-act' }, left ? ab('btn primary', 'Next puzzle', { onclick: () => { const nx = arcPool(g); if (nx.length) arcOpen(g, nx[Math.floor(Math.random() * nx.length)]); } }) : h('span', { text: 'All ' + arcCount(g) + ' beaten! Reset in Settings to replay.' }), ab('btn', 'Close', { onclick: arcClose }))));
+    arcRender(); arcSync();
+  }
+  const arcPool = (g) => Array.from({ length: arcCount(g) }, (_, i) => i + 1).filter((n) => !arcIsDone(g, n));
+  $('#arcClose').innerHTML = I.x; $('#arcClose').addEventListener('click', arcClose);
+  arcOv.addEventListener('click', (e) => { if (e.target === arcOv) arcClose(); const b = e.target.closest('button'); if (b && b.closest('#arcBody') && !b.closest('.arc-act, .arc-win, .cw-q')) setTimeout(() => b.blur(), 0); });
+  document.addEventListener('keydown', (e) => {
+    if (arcOv.hidden) return;
+    if (e.key === 'Escape') { e.stopImmediatePropagation(); e.preventDefault(); arcClose(); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey || !A.inst || !A.inst.key || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) return;
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('#arcClose, .arc-act, .arc-win, .cw-q')) return;
+    if (/^([a-zA-Z0-9]|Backspace|Enter|Tab)$/.test(e.key)) { if (e.key === 'Tab') return; A.inst.key(e.key); if (e.key === 'Backspace' || e.key === 'Enter') e.preventDefault(); }
+  }, true);
+
+  /* tools-tab section: tiles, archive, leaderboard */
+  function arcRender() {
+    $('#arcGrid').replaceChildren(...ARC.map((x) => { const tot = arcCount(x.id), d = tot - arcPool(x.id).length;
+      return h('button', { type: 'button', class: 'arc-t', 'data-arc': x.id, 'aria-label': x.name + ', ' + d + ' of ' + tot + ' solved' }, h('span', { class: 'ai', 'aria-hidden': 'true', text: x.ico }), h('b', { text: x.name }), h('small', { text: d >= tot ? 'All ' + tot + ' beaten 🏆' : d + ' / ' + tot + ' solved' })); }));
+    const arch = arcDone.slice().sort((a, b) => b.at - a.at);
+    $('#arcArcN').textContent = arch.length ? '(' + arch.length + ')' : '';
+    $('#arcArcB').replaceChildren(...(arch.length ? arch.map((r) => h('button', { type: 'button', class: 'arc-r', 'data-rg': r.g, 'data-rn': String(r.n), text: arcNum(r.n) + ' - ' + arcName(r.g) + ' • Solved: ' + new Date(r.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + arcFmt(r.secs) })) : [h('p', { class: 'gm-none', text: 'Solve a puzzle and it lands here.' })]));
+    arcLbPaint();
+  }
+  $('#arcGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-arc]'); if (!b) return; const g = b.dataset.arc, p = arcPool(g);
+    if (!p.length) { toast('All ' + arcCount(g) + ' puzzles beaten. Reset in Settings → Profile & Storage Management.'); return; }
+    arcOpen(g, p[Math.floor(Math.random() * p.length)]);
+  });
+  $('#arcArcB').addEventListener('click', (e) => { const b = e.target.closest('[data-rg]'); if (!b) return; const r = arcDone.find((x) => x.g === b.dataset.rg && x.n === +b.dataset.rn); if (r && r.snap) arcOpen(r.g, r.n, r); else toast('No saved board for that one'); });
+  $('#arcArcH').addEventListener('click', () => { const o = $('#arcArcH').getAttribute('aria-expanded') !== 'true'; $('#arcArcH').setAttribute('aria-expanded', String(o)); $('#arcArcB').hidden = !o; });
+
+  /* circle leaderboard (Firestore: arcade/{profileId}) */
+  let arcBoard = [], arcLbBusy = false, arcSyncT = 0;
+  function arcMe() { circleLoad(); const w = who(), s = arcStats(); return { id: w.id, name: w.name, solved: s.solved, streak: s.streak, bestSecs: s.bestSecs, best: s.best }; }
+  async function arcSync(readOnly) {
+    clearTimeout(arcSyncT);
+    if (arcLbBusy) { arcSyncT = setTimeout(() => arcSync(readOnly), 1500); return; }
+    arcLbBusy = true; const me = arcMe(); let rows = [Object.assign({ me: true }, me)], note = '';
+    try {
+      const { db, f } = await fbLoad();
+      if (!readOnly && me.solved > 0) await f.setDoc(f.doc(db, 'arcade', me.id), { name: me.name, solved: me.solved, streak: me.streak, bestSecs: me.bestSecs, best: me.best, updatedAt: Date.now() });
+      const ids = circle.filter((c) => c.linked && CID_RE.test(c.id) && c.id !== me.id);
+      const snaps = await Promise.all(ids.map((c) => f.getDoc(f.doc(db, 'arcade', c.id)).then((d) => ({ c, d })).catch(() => null)));
+      snaps.forEach((x) => { if (x && x.d && x.d.exists()) { const v = x.d.data(); rows.push({ id: x.c.id, name: x.c.name, solved: Math.max(0, +v.solved || 0), streak: Math.max(0, +v.streak || 0), bestSecs: Math.max(0, +v.bestSecs || 0), best: v.best || {} }); } });
+    } catch { note = 'Circle scores will appear when you’re online.'; }
+    arcBoard = rows.sort((a, b) => b.solved - a.solved || (a.bestSecs || 9e9) - (b.bestSecs || 9e9)); arcLbBusy = false; arcLbPaint(note);
+  }
+  function arcLbPaint(note) {
+    const rows = arcBoard.length ? arcBoard : [Object.assign({ me: true }, arcMe())];
+    rows.forEach((r) => { if (r.me) Object.assign(r, arcMe()); });
+    $('#arcLbList').replaceChildren(...rows.slice(0, 8).map((r, i) => h('li', { class: r.me ? 'me' : '' }, h('b', { text: (i + 1) + '. ' + r.name + (r.me ? ' (you)' : '') }), h('span', { text: ' — ' + r.solved + ' solved' + (r.streak ? ' • ' + r.streak + '-day streak' : '') + (r.bestSecs ? ' • best ' + arcFmt(r.bestSecs) : '') }))));
+    $('#arcLbNote').textContent = note || (rows.length < 2 ? 'Link friends in My Circle to compete. Scores sync automatically.' : '');
+  }
+  $('#arcLbRef').addEventListener('click', () => { arcSync(false); toast('Refreshing the leaderboard…'); });
+
+  /* settings: reset */
+  let arcResetT = 0;
+  $('#arcReset').addEventListener('click', () => {
+    const b = $('#arcReset');
+    if (!b.dataset.armed) { b.dataset.armed = '1'; b.textContent = 'Tap again to confirm'; arcResetT = setTimeout(() => { delete b.dataset.armed; b.textContent = '🔄 Reset Puzzle Progress'; }, 4000); return; }
+    clearTimeout(arcResetT); delete b.dataset.armed; b.textContent = '🔄 Reset Puzzle Progress';
+    const prev = JSON.stringify(arcDone); arcDone = []; arcSave(); arcRender(); arcSync(false);
+    toast('Puzzle progress reset', 'Undo', () => { try { arcDone = JSON.parse(prev); } catch { /* keep */ } arcSave(); arcRender(); arcSync(false); });
+  });
+  arcLoad(); arcRender();
+  let arcSeen = false; function arcTools() { if (!arcSeen) { arcSeen = true; arcSync(true); } }
+
+  /* ---------- Gemini automations (Meals, Notes, Vibe Search, Tie-breaker, Briefing) ---------- */
+  async function geminiGen(parts, o) {
+    o = o || {};
+    const key = geminiKey(); if (!key) throw new Error('nokey');
+    const body = { contents: [{ role: 'user', parts }], generationConfig: Object.assign({ temperature: o.temp == null ? 0.7 : o.temp }, o.json ? { responseMimeType: 'application/json' } : {}) };
+    if (o.system) body.systemInstruction = { parts: [{ text: o.system }] };
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), o.ms || 60000);
+    try {
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body), signal: ctl.signal });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const j = await res.json();
+      const txt = ((j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || []).map((p) => p.text || '').join('').trim();
+      if (!txt) throw new Error('empty');
+      return txt;
+    } finally { clearTimeout(t); }
+  }
+  async function geminiJSON(parts, o) {
+    const t = await geminiGen(parts, Object.assign({ json: true }, o));
+    try { return JSON.parse(t); } catch { const m = t.match(/[\[{][\s\S]*[\]}]/); if (m) { try { return JSON.parse(m[0]); } catch { /* fall through */ } } throw new Error('badjson'); }
+  }
+  const gmFail = (e) => { const m = String((e && e.message) || ''); return m === 'badjson' || m === 'empty' ? 'Gemini sent back something unreadable. Try again.' : geminiErr(e); };
+  async function withBusy(btn, label, fn) {
+    if (!btn || btn.disabled || needKey()) return;
+    const old = btn.innerHTML; btn.disabled = true; btn.textContent = label;
+    try { return await fn(); } finally { btn.disabled = false; btn.innerHTML = old; }
+  }
+  const gmSpin = (t) => h('div', { class: 'gm-busy' }, h('span', { class: 'spin' }), t);
+
+  /* Meals with Gemini */
+  let gmCur = null;
+  function gmSyncHave() { $('#gmHave').value = pantry.filter((x) => !x.need).map((x) => x.name).join('\n'); }
+  $('#gmSync').addEventListener('click', () => { pantryLoad(); gmSyncHave(); toast('Reloaded from your Pantry'); });
+  $('#gmGo').addEventListener('click', () => withBusy($('#gmGo'), 'Thinking…', async () => {
+    const items = $('#gmHave').value.split(/[\n,;]+/).map((x) => x.trim()).filter(Boolean).slice(0, 60);
+    if (!items.length) { toast('Mark Pantry items as Have, or type what you have'); return; }
+    $('#gmRecipe').replaceChildren(); $('#gmIdeas').replaceChildren(gmSpin('Looking for ideas…'));
+    try {
+      const j = await geminiJSON([{ text: 'I have these ingredients: ' + items.join(', ') + '. Suggest exactly 3 distinct, realistic home-cooked meals I could make mostly from them (assume salt, pepper, cooking oil and water are available). Return JSON: {"meals":[{"title":"","blurb":"one short sentence","ingredients":["every ingredient needed"]}]}' }]);
+      const meals = (Array.isArray(j.meals) ? j.meals : []).filter((m) => m && m.title).slice(0, 3).map((m) => ({ title: clip(m.title, 80), blurb: clip(m.blurb, 160), ingredients: (Array.isArray(m.ingredients) ? m.ingredients : []).map((x) => clip(x, 60)).slice(0, 16) }));
+      if (!meals.length) throw new Error('badjson');
+      $('#gmIdeas').replaceChildren(h('p', { class: 'gm-note', text: 'Tap a meal for the full recipe.' }), ...meals.map((m, i) => h('button', { class: 'gm-idea', type: 'button', 'data-gi': String(i) }, h('b', { text: m.title }), h('span', { text: m.blurb }), h('small', { text: m.ingredients.join(' · ') }))));
+      $('#gmIdeas')._m = meals;
+    } catch (e) { $('#gmIdeas').replaceChildren(h('p', { class: 'gm-none', text: gmFail(e) })); }
+  }));
+  $('#gmIdeas').addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-gi]'); if (!b) return;
+    const m = $('#gmIdeas')._m && $('#gmIdeas')._m[+b.dataset.gi]; if (!m || needKey()) return;
+    const out = $('#gmRecipe'); out.replaceChildren(gmSpin('Writing the full recipe…'));
+    try {
+      const j = await geminiJSON([{ text: 'Write a complete home recipe for "' + m.title + '" using mostly: ' + m.ingredients.join(', ') + '. Return JSON: {"title":"","description":"one sentence","prep":"e.g. 10 min","cook":"e.g. 25 min","servings":"e.g. 4","meal":"one of breakfast, lunch, dinner, sides, desserts, snacks","ingredients":["quantity + ingredient"],"steps":["one instruction per item, no numbering"]}' }]);
+      const ing = (Array.isArray(j.ingredients) ? j.ingredients : []).map((x) => clip(x, 120)).filter(Boolean).slice(0, 40), st = (Array.isArray(j.steps) ? j.steps : []).map((x) => clip(x, 400).replace(/^\s*\d+[.)]\s*/, '')).filter(Boolean).slice(0, 30);
+      if (!ing.length || !st.length) throw new Error('badjson');
+      gmCur = { title: clip(j.title || m.title, 120), description: clip(j.description, 300), prep: clip(j.prep, 30), cook: clip(j.cook, 30), yield: clip(j.servings, 30), meal: String(j.meal || '').toLowerCase(), ingredients: ing, steps: st };
+      out.replaceChildren(h('article', { class: 'gm-recipe' }, h('h3', { text: gmCur.title }), gmCur.description ? h('p', { text: gmCur.description }) : null,
+        h('p', { class: 'gm-meta', text: ['Prep ' + (gmCur.prep || '—'), 'Cook ' + (gmCur.cook || '—'), gmCur.yield ? 'Serves ' + gmCur.yield : ''].filter(Boolean).join(' • ') }),
+        h('h4', { text: 'Ingredients' }), h('ul', {}, ing.map((x) => h('li', { text: x }))), h('h4', { text: 'Instructions' }), h('ol', {}, st.map((x) => h('li', { text: x }))),
+        h('button', { class: 'btn primary big', type: 'button', id: 'gmSaveBtn', text: '📖 Save to Cookbook' })));
+      out.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    } catch (er) { out.replaceChildren(h('p', { class: 'gm-none', text: gmFail(er) })); }
+  });
+  $('#gmRecipe').addEventListener('click', (e) => {
+    if (!e.target.closest('#gmSaveBtn') || !gmCur) return;
+    if (recipes.some((r) => r.title.toLowerCase() === gmCur.title.toLowerCase() && r.source === 'Gemini')) { toast('That recipe is already in your Cookbook'); return; }
+    const tags = ['ai-recipe']; if (RECIPE_STARTERS.includes(gmCur.meal)) tags.push(gmCur.meal);
+    const r = normRecipe({ id: uid(), title: gmCur.title, description: gmCur.description, prep: gmCur.prep, cook: gmCur.cook, total: '', yield: gmCur.yield, source: 'Gemini', url: '', ingredients: gmCur.ingredients, steps: gmCur.steps, createdAt: Date.now(), tags });
+    recipes.unshift(r);
+    if (!persistRecipes(true)) { recipes.shift(); toast('Storage is full: could not save that recipe'); return; }
+    toast('Saved to Cookbook with #ai-recipe', 'View', () => setKitchenSeg('recipes'));
+    $('#gmSaveBtn').textContent = '✓ Saved'; $('#gmSaveBtn').disabled = true;
+  });
+  $('#gmMenu').addEventListener('click', () => {
+    const meals = [...document.querySelectorAll('[data-gm-meal]')].filter((i) => i.checked).map((i) => i.dataset.gmMeal);
+    if (!meals.length) { toast('Pick at least one meal slot'); return; }
+    const pool = recipes.slice(); const note = $('#gmMenuMsg');
+    if (!pool.length) { note.replaceChildren(h('p', { class: 'gm-none', text: 'Your Cookbook is empty. Save a recipe first (try What Can I Make?).' })); return; }
+    const prev = JSON.stringify(menu), order = pool.map((r) => r).sort(() => Math.random() - 0.5), total = 7 * meals.length;
+    let k = 0;
+    for (let d = 0; d < 7; d++) meals.forEach((m) => { const r = order[k++ % order.length]; menu.slots[d + '-' + m] = { t: 'r', id: r.id, title: r.title.slice(0, 120) }; menu.show[m] = true; });
+    persistMenu(true); try { renderKMenu(); mnRender(); } catch { /* menu sheet not open */ }
+    note.replaceChildren(pool.length < total ? h('p', { class: 'gm-warn', text: '⚠️ Limited recipes found: Some meals were repeated to complete your week.' }) : h('p', { class: 'gm-note', text: 'Week filled with ' + total + ' different-day meals from your Cookbook.' }),
+      h('button', { class: 'btn big', type: 'button', id: 'gmSeeMenu', text: '📅 See the menu' }));
+    toast('Weekly Menu filled', 'Undo', () => { menu = normMenu(JSON.parse(prev)); persistMenu(true); try { renderKMenu(); mnRender(); } catch { /* ignore */ } note.replaceChildren(); });
+  });
+  $('#gmMenuMsg').addEventListener('click', (e) => { if (e.target.closest('#gmSeeMenu')) setKitchenSeg('menu'); });
+
+  /* Notes: Tidy Up, Transcribe & Extract */
+  const ntBtn = (n, a) => document.querySelector('.card[data-id="' + n.id + '"] [data-act="' + a + '"]');
+  async function ntTidy(n) {
+    const old = n.text;
+    await withBusy(ntBtn(n, 'tidy'), '…', async () => {
+      try {
+        const t = await geminiGen([{ text: 'Tidy up this note. Fix typos and grammar, organize messy thoughts under short Markdown headers (## Header), and format lists as "- " bullets. Keep checklist lines exactly in "- [ ]" or "- [x]" form, keep every #hashtag and URL, and never change the meaning or add new information. Return only the cleaned note text.\n\n---\n' + old.slice(0, 12000) }], { temp: 0.2, system: 'You are a careful copy editor.' });
+        const clean = t.replace(/^```(?:markdown|md|text)?\n?/i, '').replace(/\n?```\s*$/, '').trim();
+        if (!clean) throw new Error('empty');
+        n.text = clean; n.tags = uniq([...n.tags.filter((x) => !extractTags(old).includes(x)), ...extractTags(clean)]); n.editedAt = Date.now();
+        if (!persist(true)) { n.text = old; toast('Storage is full: could not save the tidy version'); return; }
+        render(); toast('Note tidied', 'Undo', () => { n.text = old; n.tags = uniq([...n.tags, ...extractTags(old)]); n.editedAt = Date.now(); persist(true); render(); });
+      } catch (e) { toast(gmFail(e)); }
+    });
+  }
+  async function audioToWav(dataUrl) {
+    const buf = await (await fetch(dataUrl)).arrayBuffer();
+    const AC = window.AudioContext || window.webkitAudioContext, ctx = new AC();
+    let ab; try { ab = await ctx.decodeAudioData(buf.slice(0)); } finally { if (ctx.close) ctx.close(); }
+    if (ab.duration > 19 * 60) throw new Error('toolong');
+    const rate = ab.duration > 9 * 60 ? 8000 : 16000, off = new OfflineAudioContext(1, Math.max(1, Math.ceil(ab.duration * rate)), rate), src = off.createBufferSource();
+    src.buffer = ab; src.connect(off.destination); src.start();
+    const pcm = (await off.startRendering()).getChannelData(0), bytes = new Uint8Array(44 + pcm.length * 2), v = new DataView(bytes.buffer);
+    const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    w(0, 'RIFF'); v.setUint32(4, 36 + pcm.length * 2, true); w(8, 'WAVEfmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, 'data'); v.setUint32(40, pcm.length * 2, true);
+    for (let i = 0; i < pcm.length; i++) v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, pcm[i])) * 0x7fff, true);
+    let bin = ''; for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return { mime_type: 'audio/wav', data: btoa(bin) };
+  }
+  async function ntTranscribe(n) {
+    if (!n.audio) return;
+    const old = n.text;
+    await withBusy(ntBtn(n, 'transcribe'), '…', async () => {
+      try {
+        let part;
+        try { part = await audioToWav(n.audio.url); }
+        catch (e) { if (String(e.message) === 'toolong') { toast('That memo is too long to transcribe (about 19 minutes at most)'); return; } const m = n.audio.url.match(/^data:(audio\/[\w.+-]+)(?:;codecs=[\w.,-]+)?;base64,(.+)$/); if (!m) throw e; part = { mime_type: m[1], data: m[2] }; }
+        const j = await geminiJSON([{ text: 'Listen to this voice memo. Return JSON: {"title":"a clean title of at most 8 words","summary":"exactly two sentences","tasks":["each action item as a short imperative; empty array if there are none"]}. Use only what is actually said.' }, { inline_data: part }], { temp: 0.2, ms: 120000 });
+        const title = clip(j.title, 80).trim(), sum = clip(j.summary, 500).trim(), tasks = (Array.isArray(j.tasks) ? j.tasks : []).map((x) => clip(x, 140).replace(/^\s*[-*]\s*(\[[ xX]\])?\s*/, '').trim()).filter(Boolean).slice(0, 20);
+        if (!title && !sum && !tasks.length) throw new Error('empty');
+        const block = [title ? '## ✨ ' + title : '', sum, ...tasks.map((t) => '- [ ] ' + t)].filter(Boolean).join('\n');
+        n.text = (old ? old.replace(/\s+$/, '') + '\n\n' : '') + block; n.tags = uniq([...n.tags, ...extractTags(n.text)]); n.editedAt = Date.now();
+        if (!persist(true)) { n.text = old; toast('Storage is full: could not add the transcript'); return; }
+        render(); toast('Added a title, summary and ' + tasks.length + ' task' + (tasks.length === 1 ? '' : 's'), 'Undo', () => { n.text = old; n.editedAt = Date.now(); persist(true); render(); });
+      } catch (e) { toast(gmFail(e)); }
+    });
+  }
+
+  /* Hub: Vibe Search, Morning Briefing */
+  const VIBES = ['90s Rainy Thriller', 'Cozy Sunday Morning', 'Mind-Bending Sci-Fi', 'Fast-Paced Heist', 'Feel-Good Nostalgia'];
+  $('#vibeChips').replaceChildren(...VIBES.map((v) => h('button', { type: 'button', 'data-vibe': v, text: v })));
+  function vbAdd(it) {
+    if (inList(it)) { toast('Already on your watchlist'); return false; }
+    const now = Date.now();
+    watch.unshift(normWatch({ id: uid(), itunesId: it.itunesId, title: it.title, year: it.year, type: it.type, poster: it.poster, summary: it.summary, genre: it.genre, addedAt: now, updatedAt: now }));
+    if (!persistWatch(true)) { watch.shift(); toast('Storage is full: could not save that title'); return false; }
+    wLinger.clear(); renderWatch(); hbBadge('movies', 'Watchlist (' + watch.length + ') • Top News'); toast('Added “' + it.title.slice(0, 40) + '” to your Watchlist'); return true;
+  }
+  let vbItems = [], vbSeq = 0;
+  async function vbSearch(vibe) {
+    if (needKey()) return;
+    const seq = ++vbSeq, box = $('#vibeRes');
+    document.querySelectorAll('#vibeChips [data-vibe]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.vibe === vibe)));
+    box.replaceChildren(gmSpin('Finding “' + vibe + '” picks…'));
+    try {
+      const j = await geminiJSON([{ text: 'Recommend exactly 4 real, well-known movies or TV shows that fit this vibe: "' + vibe + '". Return JSON: {"titles":[{"title":"exact official title","year":1999,"type":"movie or tv"}]}' }]);
+      const want = (Array.isArray(j.titles) ? j.titles : []).filter((t) => t && t.title).slice(0, 4);
+      if (!want.length) throw new Error('badjson');
+      const items = await Promise.all(want.map(async (w) => {
+        try {
+          const d = await itunesGet('https://api.themoviedb.org/3/search/multi?api_key=' + encodeURIComponent(tmdbKey()) + '&query=' + encodeURIComponent(clip(w.title, 100)) + '&include_adult=false');
+          const c = ((d && d.results) || []).map(mapTmdb).filter(Boolean), y = +w.year || 0;
+          return c.sort((a, b) => (Math.abs((a.year || 0) - y) - Math.abs((b.year || 0) - y)))[0] || null;
+        } catch { return null; }
+      }));
+      if (seq !== vbSeq) return;
+      vbItems = items.map((it, i) => it || { itunesId: '', type: want[i].type === 'tv' ? 'tv' : 'movie', title: clip(want[i].title, 120), year: +want[i].year > 1800 ? +want[i].year : '', poster: '', thumb: '', summary: '', genre: '' });
+      box.replaceChildren(...vbItems.map((it, i) => h('article', { class: 'vb-card' },
+        it.thumb ? h('img', { src: it.thumb, alt: 'Poster for ' + it.title, loading: 'lazy' }) : h('div', { class: 'vb-ph', 'aria-hidden': 'true', text: '🎬' }),
+        h('div', { class: 'vb-tx' }, h('b', { text: it.title }), h('small', { text: [it.year, it.type === 'tv' ? 'TV' : 'Movie'].filter(Boolean).join(' · ') }), it.summary ? h('p', { text: clip(it.summary, 120) + (it.summary.length > 120 ? '…' : '') }) : null,
+          h('div', { class: 'gm-row' }, h('a', { class: 'btn', href: whereUrl(it.title), target: '_blank', rel: 'noopener noreferrer', text: 'Where to watch' }), h('button', { class: 'btn primary', type: 'button', 'data-vbadd': String(i), text: '+ Watchlist' }))))));
+    } catch (e) { if (seq === vbSeq) box.replaceChildren(h('p', { class: 'gm-none', text: gmFail(e) })); }
+  }
+  $('#vibeCard').addEventListener('click', (e) => {
+    const v = e.target.closest('[data-vibe]'), a = e.target.closest('[data-vbadd]');
+    if (v) vbSearch(v.dataset.vibe); else if (a && vbItems[+a.dataset.vbadd] && vbAdd(vbItems[+a.dataset.vbadd])) { a.textContent = '✓ Added'; a.disabled = true; }
+  });
+  let hbBriefAt = 0;
+  async function hbBriefGo(force) {
+    const btn = $('#hbBriefGo'), box = $('#hbBriefBody');
+    if (!force && Date.now() - hbBriefAt < 30 * 60000 && box.children.length) return;
+    await withBusy(btn, 'Gathering…', async () => {
+      box.replaceChildren(gmSpin('Pulling your markets, games, weather and a good headline…'));
+      try {
+        const [,, head] = await Promise.all([hbEco().catch(() => {}), hbLoadGames().catch(() => {}), Promise.race([sleep(12000).then(() => null), (async () => { try { const l = await gdelt('(heartwarming OR inspiring OR rescued OR breakthrough OR volunteers OR donated OR recovery OR reunited) tone>6 sourcelang:english (' + TRUST.map((d) => 'domain:' + d).join(' OR ') + ')', 10, '3d', 'hybridrel'); return l[0] || null; } catch { return null; } })()])]);
+        const mk = hbEcoRows.filter((r) => r.q).map((r) => (RATE_LBL[r.s] ? RATE_LBL[r.s] + ' yield ' + hvFmt(r.q.p, 2) + '%' : r.s + ' ' + hbPrice(r.q.p) + ' (' + hvFmt(r.q.ch, 1) + '% ' + hbs.tf + ')'));
+        const gs = hbSorted(hbGames), g = gs.find((x) => hbFav(x) && x.state === 'in') || gs.find((x) => x.state === 'in') || gs.find((x) => hbFav(x) && x.state === 'pre') || gs.find((x) => x.state === 'pre') || gs[0];
+        const wt = $('#wxChipT'), wx = wt && !wt.hidden ? wt.textContent + ' ' + ($('#wxChip').title || '') : '';
+        const facts = 'Markets: ' + (mk.join('; ') || 'unavailable') + '\nSports: ' + (g ? (g.state === 'pre' ? g.a.ab + ' at ' + g.h.ab + ' (' + g.tag + ')' : hbScore(g) + ' (' + g.tag + ')') + ' in ' + g.lg : 'unavailable') + '\nLocal weather: ' + (wx || 'unavailable') + '\nPositive headline: ' + (head ? head.t + ' (' + head.d + ')' : 'unavailable');
+        const j = await geminiJSON([{ text: 'Write a 60-second morning briefing as exactly 3 concise bullets (at most 24 words each): 1) markets, 2) sports and weather, 3) the positive headline. Use only the facts below; if a fact says unavailable, say so briefly and never guess.\n\n' + facts + '\n\nReturn JSON: {"bullets":["","",""]}' }], { temp: 0.4 });
+        const bl = (Array.isArray(j.bullets) ? j.bullets : []).map((x) => clip(x, 220).replace(/^\s*[-•*]\s*/, '')).filter(Boolean).slice(0, 3);
+        if (!bl.length) throw new Error('badjson');
+        hbBriefAt = Date.now();
+        box.replaceChildren(...[h('ul', { class: 'gm-bul' }, bl.map((x) => h('li', { text: x }))), head ? h('a', { class: 'gm-note', href: head.u, target: '_blank', rel: 'noopener noreferrer', text: 'Read: ' + head.t }) : null].filter(Boolean));
+        btn.dataset.again = '1';
+      } catch (e) { box.replaceChildren(h('p', { class: 'gm-none', text: gmFail(e) })); }
+    });
+    btn.textContent = box.querySelector('ul') ? '↻ Refresh briefing' : '☀️ Get my briefing';
+  }
+  $('#hbBriefGo').addEventListener('click', () => hbBriefGo(true));
+
+  /* Restaurants: Break the Tie */
+  $('#rsTie').addEventListener('click', () => withBusy($('#rsTie'), 'Deciding…', async () => {
+    if (rests.length < 2) { toast('Save at least two restaurants first'); return; }
+    const box = $('#rsTieRes'); box.hidden = false; box.replaceChildren(gmSpin('Weighing the options…'));
+    const list = rests.slice(0, 40).map((r, i) => (i + 1) + '. ' + r.name + ' (' + cuisOf(r) + (r.city ? ', ' + r.city : '') + ')' + (Object.values(r.orders)[0] ? ' - usual order: ' + clip(Object.values(r.orders)[0], 60) : ''));
+    try {
+      const j = await geminiJSON([{ text: 'We cannot decide where to eat. Pick exactly one winner from this list and defend it with one witty sentence (at most 25 words).\n' + list.join('\n') + '\n\nReturn JSON: {"winner":"exact restaurant name from the list","why":"the witty sentence"}' }], { temp: 1 });
+      const w = rests.find((r) => r.name.toLowerCase() === String(j.winner || '').trim().toLowerCase()) || rests.find((r) => String(j.winner || '').toLowerCase().includes(r.name.toLowerCase()));
+      if (!w) throw new Error('badjson');
+      const ord = Object.values(w.orders)[0];
+      box.replaceChildren(h('article', { class: 'gm-tie' }, h('small', { text: '✨ Gemini’s ruling' }), h('h3', { text: w.name }), h('p', { class: 'gm-meta', text: [cuisOf(w), w.city].filter(Boolean).join(' · ') }), h('p', { text: clip(j.why, 220) }), ord ? h('p', { class: 'gm-note', text: 'Your usual: ' + clip(ord, 120) }) : null,
+        h('div', { class: 'gm-row' }, h('button', { class: 'btn', type: 'button', id: 'rsTieAgain', text: 'Break it again' }), h('button', { class: 'btn', type: 'button', id: 'rsTieClose', text: 'Close' }))));
+    } catch (e) { box.replaceChildren(h('p', { class: 'gm-none', text: gmFail(e) })); }
+  }));
+  $('#rsTieRes').addEventListener('click', (e) => { if (e.target.closest('#rsTieAgain')) $('#rsTie').click(); else if (e.target.closest('#rsTieClose')) $('#rsTieRes').hidden = true; });
+
+  function vbApply() { $('#vibeCard').hidden = hbs.vibe === false; }
+  vbApply();
+
   setView(state.view, { instant: true });
   shareCheck();
   initWeather();
