@@ -1805,6 +1805,7 @@ window.QC_THEMES = [
   html[data-theme="retro-eink"] .btn.primary, html[data-theme="retro-eink"] .fab { border-radius: 2px; }
   html[data-theme="retro-eink"] .dock .dl { font-size: 9px; letter-spacing: 0; }
   html[data-theme="retro-eink"] .ct { --ct-bg: hsl(var(--ct-h) calc(var(--ct-s) * .45) 78%); --ct-fg: #141a12; }
+  html[data-theme="retro-eink"] .dd-sun-night { fill: #3a4a35; } html[data-theme="retro-eink"] .dd-sun-dawn, html[data-theme="retro-eink"] .dd-sun-dusk { fill: #7e9076; } html[data-theme="retro-eink"] .dd-sun-day { fill: #bccdb3; } html[data-theme="retro-eink"] .dd-tick { stroke: #141a12; }
   html[data-theme="retro-eink"] .dd-ev.ct { stroke: hsl(var(--ct-h) calc(var(--ct-s) * .6) 28%); }
   html[data-theme="wabi-sabi"] .btn.primary, html[data-theme="wabi-sabi"] .fab { border-radius: 4px; }
 
@@ -2093,11 +2094,13 @@ window.QC_THEMES = [
   .goals-f { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; } .goals-f .btn, .goals-f .tm-field { min-height: 44px; }
   .dd { margin: 0 0 10px; padding: 8px 6px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); text-align: center; }
   .dd svg { width: 100%; max-width: 340px; height: auto; display: block; margin: 0 auto; overflow: visible; touch-action: manipulation; }
-  .dd-trk { fill: none; stroke: var(--surface); stroke-width: 22; } .dd-trkb { fill: none; stroke: var(--border); stroke-width: 1.5; }
-  .dd-tick { stroke: var(--muted); stroke-width: 1.5; } .dd-lab { fill: var(--muted); font-size: 11px; text-anchor: middle; dominant-baseline: middle; font-family: inherit; }
+  .dd-ring { fill: none; stroke: var(--text); stroke-opacity: .55; stroke-width: 2; } .dd-sun { stroke: none; }
+  .dd-midbg { fill: var(--surface-2); fill-opacity: .9; }
+  .dd-hl { fill: none; stroke: transparent; } .dd-evg.on .dd-hl, .dd-evg:focus-visible .dd-hl { stroke: var(--text); } .dd-bl { fill: var(--on-accent); font-weight: 800; pointer-events: none; font-family: inherit; text-anchor: middle; dominant-baseline: central; } .dd-bl.ct { fill: var(--ct-bg); } .dd-evg.hh .dd-ev { stroke-dasharray: 5 2; }
+  .dd-tick { stroke: #fff; stroke-opacity: .7; stroke-width: 1.5; } .dd-lab { fill: var(--muted); font-size: 11px; text-anchor: middle; dominant-baseline: middle; font-family: inherit; }
   .dd-ev { fill: none; stroke: var(--accent); stroke-width: 16; stroke-linecap: butt; } .dd-ev.ct { stroke: var(--ct-fg); }
-  .dd-evg { cursor: pointer; outline: none; } .dd-evg:focus-visible .dd-ev, .dd-evg.on .dd-ev { stroke-width: 22; }
-  .dd-hit { fill: none; stroke: transparent; stroke-width: 40; }
+  .dd-evg { cursor: pointer; outline: none; }
+  .dd-hit { fill: none; stroke: transparent; }
   .dd-hand { stroke: var(--text); stroke-width: 2.5; stroke-linecap: round; } .dd-dot { fill: var(--text); stroke: var(--surface-2); stroke-width: 2; }
   .dd-wx { cursor: pointer; font-size: 15px; text-anchor: middle; dominant-baseline: middle; } .dd-wxh { fill: transparent; cursor: pointer; }
   .dd-mid { fill: var(--text); font-size: 18px; font-weight: 800; text-anchor: middle; font-family: inherit; } .dd-sub { fill: var(--muted); font-size: 11px; text-anchor: middle; font-family: inherit; }
@@ -2152,6 +2155,14 @@ window.QC_THEMES = [
   .pf-sw button { width: 44px; height: 44px; border-radius: 50%; border: 3px solid transparent; background-clip: padding-box; cursor: pointer; padding: 0; } .pf-sw button[aria-checked="true"] { border-color: var(--text); box-shadow: inset 0 0 0 2px var(--surface); }
   .pf-msg { margin: 0; min-height: 0; font-size: .9rem; font-weight: 700; } .pf-msg:empty { display: none; } .pf-msg.err { color: var(--danger); }
   .pf-res { padding: 12px; border: 1.5px solid var(--accent); border-radius: 8px; background: var(--surface); display: grid; gap: 10px; } .pf-res .row { display: flex; align-items: center; gap: 10px; } .pf-res b { overflow-wrap: anywhere; } .pf-res small { display: block; color: var(--muted); }
+  .sync-row { display: flex; justify-content: flex-end; margin: 0 0 6px; }
+  .sync-pill { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-size: .82rem; font-weight: 700; cursor: pointer; white-space: nowrap; max-width: 100%; }
+  span.sync-pill { min-height: 36px; cursor: default; padding: 0 10px; font-size: .78rem; }
+  .sync-pill[data-s="synced"] { border-color: var(--accent); } .sync-pill[data-s="offline"], .sync-pill[data-s="blocked"] { border-color: var(--danger); } .sync-pill[data-s="syncing"] { border-style: dashed; }
+  .ct-chip.ct-add { border-style: dashed; background: none; color: var(--text); border-color: var(--border); }
+  .ct-chip[data-ctf="all"] { position: sticky; left: 0; z-index: 1; }
+  .hh-card { padding: 10px 12px; border-style: dashed; } .hh-top { display: flex; justify-content: space-between; gap: 8px; font-size: .82rem; color: var(--muted); font-weight: 700; } .hh-b { margin: 4px 0 6px; overflow-wrap: anywhere; font-weight: 600; }
+  .sy-set { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; } .sy-set small { display: block; overflow-wrap: anywhere; }
 </style>
 </head>
 <body>
@@ -2371,11 +2382,6 @@ window.QC_THEMES = [
 </div></section>
 
 <section class="page" id="pgHub" data-page="hub" aria-label="Hub"><div class="wrap">
-  <div class="hb-top"><button class="btn primary big" id="hbBright" type="button" aria-expanded="false" aria-controls="hbCard">✨ Brighten My Day</button>
-    <div class="hb-card" id="hbCard" role="region" aria-live="polite" aria-label="A bit of good news" hidden></div></div>
-  <section class="hb-brief" id="hbBrief" aria-labelledby="hbBriefT"><h2 id="hbBriefT">☀️ Today’s 60-Second Briefing</h2>
-    <div id="hbBriefBody" aria-live="polite"><p class="gm-note">Markets, your next game, local weather and one good headline in three bullets.</p></div>
-    <button class="btn primary" id="hbBriefGo" type="button">☀️ Get my briefing</button></section>
   <p class="hb-none" id="hbEmpty" hidden>All Hub sections are switched off. Turn some on in Settings → Hub &amp; News Configuration.</p>
   <div id="hbAccs">
   <section class="acc" data-sec="economy" id="acc-economy">
@@ -2460,6 +2466,11 @@ window.QC_THEMES = [
     </div>
   </section>
   </div>
+  <div class="hb-top"><button class="btn primary big" id="hbBright" type="button" aria-expanded="false" aria-controls="hbCard">✨ Brighten My Day</button>
+    <div class="hb-card" id="hbCard" role="region" aria-live="polite" aria-label="A bit of good news" hidden></div></div>
+  <section class="hb-brief" id="hbBrief" aria-labelledby="hbBriefT"><h2 id="hbBriefT">☀️ Today’s 60-Second Briefing</h2>
+    <div id="hbBriefBody" aria-live="polite"><p class="gm-note">Markets, your next game, local weather and one good headline in three bullets.</p></div>
+    <button class="btn primary" id="hbBriefGo" type="button">☀️ Get my briefing</button></section>
 </div></section>
 
 <section class="page" id="pgTools" data-page="tools" aria-label="Tools"><div class="wrap">
@@ -3154,6 +3165,10 @@ window.QC_THEMES = [
     <div class="set-row"><div><b>Home Screen App</b><small>Fullscreen, offline-ready app icon</small></div><button class="btn" id="pwaInstallBtn" type="button">Install App to Home Screen</button></div>
     <div class="set-row"><div><b>Puzzle Progress</b><small>Restore every beaten puzzle to the Arcade rotation</small></div><button class="btn" id="arcReset" type="button">🔄 Reset Puzzle Progress</button></div>
     <div class="set-row pf-set"><span class="pf-badge" id="pfSetB" aria-hidden="true"></span><div><b>My Profile</b><small id="pfSetS">Create or restore with email or phone</small></div><button class="btn" id="pfOpenBtn" type="button">Open</button></div>
+    <div class="set-row sy-set"><div><b>Cloud Sync</b><small id="syncDetail">Add an email or phone to your profile to sync your notes and calendar.</small></div><span class="sync-pill" id="syncPillS" data-s="local">💾 Local only</span></div>
+    <div class="switch-row"><div><b id="syOnLab">Sync notes &amp; calendar</b><small id="syOnSt">ON</small></div><button class="switch" id="syOn" type="button" role="switch" aria-checked="true" aria-labelledby="syOnLab"><i></i></button></div>
+    <div class="switch-row"><div><b id="syHhLab">Share dated entries with My Household</b><small id="syHhSt">OFF · anything tagged #private is never shared</small></div><button class="switch" id="syHh" type="button" role="switch" aria-checked="false" aria-labelledby="syHhLab"><i></i></button></div>
+    <div class="cir-btns"><button class="btn" id="syncNow" type="button">↻ Force Sync Now</button></div>
     <div class="set-row"><div><b>My Circle</b><small>Friends &amp; family, share via QR or text</small></div><button class="btn" id="bkCircle" type="button">Open</button></div>
     <div class="set-key"><label for="actProf"><b>Active Profile</b><small>Who you post as in Chat on this device</small></label>
       <select id="actProf" aria-label="Active profile"></select></div>
@@ -3734,7 +3749,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   const normNote = (n) => ({
     id: n.id || uid(), column: n.column, due: /^\d{4}-\d{2}-\d{2}$/.test(n.due) ? n.due : undefined, text: n.text, tags: Array.isArray(n.tags) ? n.tags.map(String) : extractTags(n.text),
-    createdAt: Number(n.createdAt) || Date.now(), editedAt: n.editedAt, pinned: !!n.pinned, archived: !!n.archived,
+    createdAt: Number(n.createdAt) || Date.now(), editedAt: n.editedAt, updatedAt: Number(n.updatedAt) > 0 ? Number(n.updatedAt) : undefined, pinned: !!n.pinned, archived: !!n.archived,
     ctag: typeof n.ctag === 'string' && n.ctag ? n.ctag.slice(0, 64) : undefined,
     dueTime: /^([01]\d|2[0-3]):[0-5]\d$/.test(n.dueTime) ? n.dueTime : undefined, dur: Number.isFinite(+n.dur) && +n.dur >= 5 && +n.dur <= 600 ? Math.round(+n.dur) : undefined, score: Number.isFinite(+n.score) && n.score !== null && n.score !== '' ? Math.max(0, Math.min(100, Math.round(+n.score))) : undefined,
     image: typeof n.image === 'string' && n.image.startsWith('data:image/') ? n.image : undefined,
@@ -3745,7 +3760,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   });
   function loadNotes() {
     const raw = store.get(KEY_NOTES);
-    if (raw === null) { state.notes = seed(); persist(); return; }
+    if (raw === null) { state.notes = seed(); try { localStorage.setItem('quickcapture_seed_ids', JSON.stringify(state.notes.map((n) => n.id))); } catch { /* storage blocked */ } persist(); return; }
     try {
       const arr = JSON.parse(raw);
       state.notes = Array.isArray(arr) ? arr.filter((n) => n && typeof n.text === 'string').map(normNote) : [];
@@ -3754,6 +3769,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const persist = (quiet) => {
     const ok = store.set(KEY_NOTES, JSON.stringify(state.notes));
     if (!ok && !quiet) toast('Storage is full: recent changes may not be saved');
+    syncSoon();
     return ok;
   };
 
@@ -4064,52 +4080,105 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (inW) { const [x, y] = ddGeo.pt(m, ddGeo.R + 4); hand.setAttribute('x2', x.toFixed(1)); hand.setAttribute('y2', y.toFixed(1)); dot.setAttribute('cx', x.toFixed(1)); dot.setAttribute('cy', y.toFixed(1)); }
   }
   setInterval(ddTick, 30000);
+  /* sunrise / sunset for the dial: the city's forecast when it covers the day, else the standard solar formula from the city's lat/lon, else 6:45 AM / 6:00 PM */
+  const SUN_DEF = { sr: 405, ss: 1080, src: 'default' };
+  function sunCalc(lat, lon, y, mo, d, rising) {
+    const R = Math.PI / 180, sn = (x) => Math.sin(x * R), cs = (x) => Math.cos(x * R), N = Math.floor(275 * mo / 9) - Math.floor((mo + 9) / 12) * (1 + Math.floor((y - 4 * Math.floor(y / 4) + 2) / 3)) + d - 30, lh = lon / 15;
+    const t = N + ((rising ? 6 : 18) - lh) / 24, M = 0.9856 * t - 3.289, L = (((M + 1.916 * sn(M) + 0.020 * sn(2 * M) + 282.634) % 360) + 360) % 360;
+    let RA = (((Math.atan(0.91764 * Math.tan(L * R)) / R) % 360) + 360) % 360; RA += Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90; RA /= 15;
+    const sd = 0.39782 * sn(L), cd = Math.cos(Math.asin(sd)), ch = (cs(90.833) - sd * sn(lat)) / (cd * cs(lat));
+    if (ch > 1) return { polar: 'night' }; if (ch < -1) return { polar: 'day' };
+    const H = (rising ? 360 - Math.acos(ch) / R : Math.acos(ch) / R) / 15, T = H + RA - 0.06571 * t - 6.622;
+    return { ut: ((((T - lh) % 24) + 24) % 24) * 60 };
+  }
+  function tzOffMin(tz, date) {
+    try { const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }).formatToParts(date).map((x) => [x.type, x.value])); return Math.round((Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute) - date.getTime()) / 60000); } catch { return null; }
+  }
+  function ddSun(day) {
+    const W = window.__qcWx && window.__qcWx(); if (!W || !W.loc) return SUN_DEF;
+    const D = W.data && W.data.daily, hm = (v) => { const x = /T(\d\d):(\d\d)/.exec(String(v || '')); return x ? +x[1] * 60 + +x[2] : null; };
+    if (D && Array.isArray(D.time) && Array.isArray(D.sunrise) && Array.isArray(D.sunset)) { const i = D.time.indexOf(day), a = hm(D.sunrise[i]), b = hm(D.sunset[i]); if (i >= 0 && a != null && b != null && b > a) return { sr: a, ss: b, src: 'city' }; }
+    const lat = +W.loc.lat, lon = +W.loc.lon; if (!isFinite(lat) || !isFinite(lon)) return SUN_DEF;
+    const [y, mo, d] = day.split('-').map(Number), a = sunCalc(lat, lon, y, mo, d, true), b = sunCalc(lat, lon, y, mo, d, false);
+    if (a.polar) return { polar: a.polar, src: 'city' };
+    let off = W.data && W.data.tz ? tzOffMin(W.data.tz, new Date(Date.UTC(y, mo - 1, d, 12))) : null; if (off == null) off = W.data && Number.isFinite(W.data.utc) ? W.data.utc / 60 : -new Date().getTimezoneOffset();
+    const sr = ((Math.round(a.ut + off) % 1440) + 1440) % 1440, se = ((Math.round(b.ut + off) % 1440) + 1440) % 1440;
+    return se > sr ? { sr, ss: se, src: 'city' } : SUN_DEF;
+  }
+  let ddUid = 0;
   function ddEl(day, items) {
     const mode = ddMode(); if (mode === 'off') return null;
-    const full = mode === 'full24', isToday = dkey(new Date()) === day, now = new Date(), nowM = now.getHours() * 60 + now.getMinutes();
-    const timed = items.filter((n) => n.dueTime).map((n) => ({ n, s: hm2min(n.dueTime), d: Math.max(25, n.dur || 30) })).sort((a, b) => a.s - b.s);
+    const full = mode === 'full24', isToday = dkey(new Date()) === day, now = new Date(), nowM = now.getHours() * 60 + now.getMinutes(), uidn = ++ddUid;
+    const timed = items.filter((n) => n.dueTime).map((n) => ({ n, s: hm2min(n.dueTime), d: Math.max(15, n.dur || 60) })).sort((a, b) => a.s - b.s);
     if (ddHalf.day !== day) ddHalf = { day, p: isToday ? (nowM >= 720 ? 1 : 0) : (timed.length && timed[0].s >= 720 ? 1 : 0) };
-    const span = full ? 1440 : 720, w0 = full ? 0 : ddHalf.p * 720, cx = 160, cy = full ? 168 : 168, R = full ? 108 : 116;
+    const span = full ? 1440 : 720, w0 = full ? 0 : ddHalf.p * 720, cx = 160, cy = 168, R = full ? 104 : 104, BW = 24, B0 = R + 4;
     const pt = (m, r) => { const f = (m - w0) / span; if (full) { const a = 2 * Math.PI * f; return [cx + r * Math.sin(a), cy - r * Math.cos(a)]; } const a = Math.PI * (1 - f); return [cx + r * Math.cos(a), cy - r * Math.sin(a)]; };
-    const clamp = (m) => Math.max(w0, Math.min(w0 + span, m));
-    const arc = (m0, m1, r) => { m0 = clamp(m0); m1 = clamp(m1); if (m1 - m0 < 1) return ''; const [x0, y0] = pt(m0, r), [x1, y1] = pt(m1, r); return 'M' + x0.toFixed(1) + ' ' + y0.toFixed(1) + 'A' + r + ' ' + r + ' 0 ' + ((m1 - m0) / span > .5 ? 1 : 0) + ' 1 ' + x1.toFixed(1) + ' ' + y1.toFixed(1); };
+    const clamp = (m) => Math.max(w0, Math.min(w0 + span, m)), f1 = (x) => x.toFixed(1);
+    const arc = (m0, m1, r, rev) => { m0 = clamp(m0); m1 = clamp(m1); if (m1 - m0 < 1) return ''; const [x0, y0] = pt(rev ? m1 : m0, r), [x1, y1] = pt(rev ? m0 : m1, r); return 'M' + f1(x0) + ' ' + f1(y0) + 'A' + r + ' ' + r + ' 0 ' + (full && (m1 - m0) / span > .5 ? 1 : 0) + ' ' + (rev ? 0 : 1) + ' ' + f1(x1) + ' ' + f1(y1); };
+    const wedge = (m0, m1, r) => { m0 = clamp(m0); m1 = clamp(m1); if (m1 - m0 < 1) return ''; const [x0, y0] = pt(m0, r), [x1, y1] = pt(m1, r); return 'M' + cx + ' ' + cy + 'L' + f1(x0) + ' ' + f1(y0) + 'A' + r + ' ' + r + ' 0 ' + (full && (m1 - m0) / span > .5 ? 1 : 0) + ' 1 ' + f1(x1) + ' ' + f1(y1) + 'Z'; };
     const info = h('div', { class: 'dd-info', id: 'ddInfo', 'aria-live': 'polite' });
     const say = (t) => { info.textContent = t; };
     const svg = sv('svg', { viewBox: full ? '0 0 320 336' : '0 0 320 196', role: 'group', 'aria-label': (full ? '24-hour' : '12-hour') + ' day dial for ' + fmtDay(day) });
-    svg.append(full ? sv('circle', { class: 'dd-trk', cx, cy, r: R }) : sv('path', { class: 'dd-trk', d: arc(w0, w0 + span, R) }), full ? sv('circle', { class: 'dd-trkb', cx, cy, r: R + 11 }) : sv('path', { class: 'dd-trkb', d: arc(w0, w0 + span, R + 11) }), full ? sv('circle', { class: 'dd-trkb', cx, cy, r: R - 11 }) : sv('path', { class: 'dd-trkb', d: arc(w0, w0 + span, R - 11) }));
-    for (let m = w0; m <= w0 + span; m += 60) { if (full && m === 1440) break; const [x0, y0] = pt(m, R + 13), [x1, y1] = pt(m, R + 18); svg.append(sv('line', { class: 'dd-tick', x1: x0.toFixed(1), y1: y0.toFixed(1), x2: x1.toFixed(1), y2: y1.toFixed(1) })); }
-    for (let m = w0; m <= w0 + span; m += full ? 360 : 180) { if (full && m === 1440) break; const [x, y] = pt(m, R + 31); svg.append(sv('text', { class: 'dd-lab', x: x.toFixed(1), y: y.toFixed(1), text: min2lbl(m).replace(':00', '').replace(' AM', 'a').replace(' PM', 'p') })); }
-    // events (two lanes so overlapping blocks stay visible)
-    const laneEnd = [0, 0];
-    timed.forEach((t) => {
-      if (t.s + t.d <= w0 || t.s >= w0 + span) return;
-      const lane = t.s >= laneEnd[0] ? 0 : 1; laneEnd[lane] = t.s + t.d; const r = lane ? R - 8 : R, ct = ctById(t.n.ctag), dd = arc(t.s, t.s + t.d, r); if (!dd) return;
-      const g = sv('g', { class: 'dd-evg', tabindex: '0', role: 'button', 'data-id': t.n.id, 'aria-label': ctTitle(t.n) + ', ' + min2lbl(t.s) + ' to ' + min2lbl(t.s + t.d) + (ct ? ', ' + ct.l : '') },
-        sv('path', { class: 'dd-hit', d: dd }), sv('path', { class: 'dd-ev' + (ct ? ' ct' : ''), d: dd, style: ct ? ctStyle(ct) : null }));
-      const go = () => { svg.querySelectorAll('.dd-evg.on').forEach((x) => x.classList.remove('on')); g.classList.add('on'); say(min2lbl(t.s) + '–' + min2lbl(t.s + t.d) + ' · ' + ctTitle(t.n) + (ct ? ' · ' + ct.l : '')); const card = feed.querySelector('[data-id="' + t.n.id + '"]'); if (card) { card.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); card.classList.remove('dd-flash'); void card.offsetWidth; card.classList.add('dd-flash'); } };
-      g.addEventListener('click', go); g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
-      svg.append(g);
+    // ---- daylight under the curve
+    const sun = ddSun(day), tw = 22.5, g = (id, kind, stops, a) => sv(kind, Object.assign({ id: 'dd' + uidn + id, gradientUnits: 'userSpaceOnUse' }, a), ...stops.map(([o, c]) => sv('stop', { offset: o, 'stop-color': c })));
+    const defs = sv('defs', {},
+      g('n', 'radialGradient', [[0, '#2f3a86'], [1, '#0d1136']], { cx, cy, r: R }), g('d', 'radialGradient', [[0, '#ffe9a8'], [1, '#86c4f5']], { cx, cy, r: R }));
+    const segs = sun.polar ? [[0, 1440, sun.polar === 'day' ? 'day' : 'night']] : [[0, sun.sr - tw, 'night'], [sun.sr - tw, sun.sr + tw, 'dawn'], [sun.sr + tw, sun.ss - tw, 'day'], [sun.ss - tw, sun.ss + tw, 'dusk'], [sun.ss + tw, 1440, 'night']];
+    const sunG = sv('g', { class: 'dd-sunG', 'aria-hidden': 'true' }); let si = 0;
+    segs.forEach(([a, b, kind]) => {
+      a = Math.max(0, a); b = Math.min(1440, b); if (b <= a) return;
+      const parts = (clamp(b) - clamp(a)) >= span * .95 ? [[a, (a + b) / 2], [(a + b) / 2, b]] : [[a, b]];
+      parts.forEach(([p, q]) => {
+        const d = wedge(p, q, R); if (!d) return; let fill;
+        if (kind === 'night') fill = 'url(#dd' + uidn + 'n)'; else if (kind === 'day') fill = 'url(#dd' + uidn + 'd)';
+        else { const id = 'dd' + uidn + 't' + (si++), [xa, ya] = pt(clamp(p), R * .7), [xb, yb] = pt(clamp(q), R * .7), dawn = kind === 'dawn';
+          defs.append(sv('linearGradient', { id, gradientUnits: 'userSpaceOnUse', x1: f1(xa), y1: f1(ya), x2: f1(xb), y2: f1(yb) }, ...(dawn ? [[0, '#2f3a86'], [.5, '#ff8a65'], [1, '#ffd07a']] : [[0, '#ffd07a'], [.5, '#ff8a65'], [1, '#2f3a86']]).map(([o, c]) => sv('stop', { offset: o, 'stop-color': c })))); fill = 'url(#' + id + ')'; }
+        sunG.append(sv('path', { class: 'dd-sun dd-sun-' + kind, d, fill }));
+      });
     });
-    // weather shifts (hourly forecast from the app's weather data)
+    svg.append(defs, sunG);
+    svg.append(full ? sv('circle', { class: 'dd-ring', cx, cy, r: R }) : sv('path', { class: 'dd-ring', d: arc(w0, w0 + span, R) }));
+    for (let m = w0; m <= w0 + span; m += 60) { if (full && m === 1440) break; const [x0, y0] = pt(m, R - 9), [x1, y1] = pt(m, R); svg.append(sv('line', { class: 'dd-tick', x1: f1(x0), y1: f1(y0), x2: f1(x1), y2: f1(y1) })); }
+    for (let m = w0; m <= w0 + span; m += full ? 360 : 180) { if (full && m === 1440) break; const [x, y] = pt(m, B0 + BW + 12); svg.append(sv('text', { class: 'dd-lab', x: f1(x), y: f1(y), text: min2lbl(m).replace(':00', '').replace(' AM', 'a').replace(' PM', 'p') })); }
+    // ---- appointment blocks sit ABOVE the outer curve, labelled with the tag name (or a short title)
+    const laneEnd = []; timed.forEach((t) => { let l = laneEnd.findIndex((e) => e <= t.s); if (l < 0) l = laneEnd.length < 3 ? laneEnd.length : 2; laneEnd[l] = t.s + t.d; t.lane = l; });
+    const nl = Math.max(1, Math.min(3, laneEnd.length)), lw = BW / nl, fs = nl === 1 ? 10.5 : nl === 2 ? 8.5 : 7.5;
+    timed.forEach((t, i) => {
+      if (t.s + t.d <= w0 || t.s >= w0 + span) return;
+      const rm = B0 + lw * (t.lane + .5), ct = ctById(t.n.ctag), dd = arc(t.s, t.s + t.d, rm); if (!dd) return;
+      const m0 = clamp(t.s), m1 = clamp(t.s + t.d), len = rm * ((m1 - m0) / span) * (full ? 2 * Math.PI : Math.PI), raw = ct ? ct.l : ctTitle(t.n), mx = Math.floor((len - 6) / (fs * .62));
+      const lbl = mx >= 3 ? (raw.length > mx ? raw.slice(0, mx - 1) + '…' : raw) : '', mid = (m0 + m1) / 2, rev = full && mid > 360 && mid < 1080, pid = 'dd' + uidn + 'p' + i;
+      const gr = sv('g', { class: 'dd-evg' + (t.n.hh ? ' hh' : ''), tabindex: '0', role: 'button', 'data-id': t.n.id, 'aria-label': (t.n.hh ? t.n.who + ': ' : '') + ctTitle(t.n) + ', ' + min2lbl(t.s) + ' to ' + min2lbl(t.s + t.d) + (ct ? ', ' + ct.l : '') },
+        sv('path', { class: 'dd-hit', d: dd, 'stroke-width': BW + 10 }), sv('path', { class: 'dd-hl', d: dd, 'stroke-width': lw + 4 }), sv('path', { class: 'dd-ev' + (ct ? ' ct' : ''), d: dd, 'stroke-width': lw - 1.5, style: ct ? ctStyle(ct) : null }));
+      if (lbl) { defs.append(sv('path', { id: pid, d: arc(t.s, t.s + t.d, rm, rev), fill: 'none' })); gr.append(sv('text', { class: 'dd-bl' + (ct ? ' ct' : ''), 'font-size': fs, style: ct ? ctStyle(ct) : null }, sv('textPath', { href: '#' + pid, startOffset: '50%', text: lbl }))); }
+      const go = () => {
+        const was = gr.classList.contains('on'); if (was && !t.n.hh) { openSheet(t.n); return; }
+        svg.querySelectorAll('.dd-evg.on').forEach((x) => x.classList.remove('on')); gr.classList.add('on'); say((t.n.hh ? '👨‍👩‍👧 ' + t.n.who + ' · ' : '') + min2lbl(t.s) + '–' + min2lbl(t.s + t.d) + ' · ' + ctTitle(t.n) + (ct ? ' · ' + ct.l : '') + (t.n.hh ? '' : ' · tap again to open'));
+        const card = feed.querySelector('[data-id="' + t.n.id + '"]'); if (card) { card.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); card.classList.remove('dd-flash'); void card.offsetWidth; card.classList.add('dd-flash'); }
+      };
+      gr.addEventListener('click', go); gr.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      svg.append(gr);
+    });
+    // ---- weather shifts (hourly forecast from the app's weather data)
     const W = window.__qcWx && window.__qcWx();
     if (W && W.loc && W.data && !W.data.hourly && !W.loading && Date.now() - ddRefreshAt > 120000) { ddRefreshAt = Date.now(); refreshWeather(false); }
     const wxEnd = [-999, -999];
     ddWx(day).filter((w) => w.min >= w0 && w.min <= w0 + span).sort((p, q) => p.min - q.min).forEach((w) => {
       const lane = w.min - wxEnd[0] >= (full ? 80 : 110) ? 0 : 1; wxEnd[lane] = w.min;
       const [x, y] = pt(w.min, R - 30 - lane * 24), go = () => say(w.ico + ' ' + w.txt);
-      const g = sv('g', { tabindex: '0', role: 'button', 'aria-label': w.txt, class: 'dd-evg' }, sv('circle', { class: 'dd-wxh', cx: x.toFixed(1), cy: y.toFixed(1), r: 15 }), sv('text', { class: 'dd-wx', x: x.toFixed(1), y: y.toFixed(1), text: w.ico }));
-      g.addEventListener('click', go); g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); svg.append(g);
+      const gx = sv('g', { tabindex: '0', role: 'button', 'aria-label': w.txt, class: 'dd-evg' }, sv('circle', { class: 'dd-wxh', cx: f1(x), cy: f1(y), r: 15 }), sv('text', { class: 'dd-wx', x: f1(x), y: f1(y), text: w.ico }));
+      gx.addEventListener('click', go); gx.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); svg.append(gx);
     });
-    // now hand
+    // ---- now hand
     if (isToday) {
-      const [x, y] = pt(Math.max(w0, Math.min(w0 + span, nowM)), R + 4), inW = nowM >= w0 && nowM <= w0 + span;
-      svg.append(sv('line', { class: 'dd-hand', id: 'ddHand', x1: cx, y1: cy, x2: x.toFixed(1), y2: y.toFixed(1), style: inW ? null : 'display:none' }), sv('circle', { class: 'dd-dot', id: 'ddDot', cx: x.toFixed(1), cy: y.toFixed(1), r: 6, style: inW ? null : 'display:none' }));
-      ddGeo = { pt, w0, span, R };
+      const [x, y] = pt(Math.max(w0, Math.min(w0 + span, nowM)), R + 2), inW = nowM >= w0 && nowM <= w0 + span;
+      svg.append(sv('line', { class: 'dd-hand', id: 'ddHand', x1: cx, y1: cy, x2: f1(x), y2: f1(y), style: inW ? null : 'display:none' }), sv('circle', { class: 'dd-dot', id: 'ddDot', cx: f1(x), cy: f1(y), r: 6, style: inW ? null : 'display:none' }));
+      ddGeo = { pt, w0, span, R: R - 2 };
     } else ddGeo = null;
-    svg.append(sv('circle', { class: 'dd-dot', cx, cy, r: 5 }));
+    svg.append(sv('rect', { class: 'dd-midbg', x: cx - 62, y: cy - (full ? 46 : 42), width: 124, height: 48, rx: 10 }), sv('circle', { class: 'dd-dot', cx, cy, r: 5 }));
     svg.append(sv('text', { class: 'dd-mid', id: 'ddMid', x: cx, y: full ? cy - 26 : cy - 22, text: isToday ? min2lbl(nowM) : new Date(day + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }) }), sv('text', { class: 'dd-sub', x: cx, y: full ? cy - 10 : cy - 6, text: full ? '24 hours' : (ddHalf.p ? 'PM' : 'AM') + ' · 12 hours' }));
-    const untimed = items.length - timed.length, wxn = ddWx(day).length;
-    say(timed.length ? timed.length + (timed.length === 1 ? ' timed item' : ' timed items') + (untimed ? ' · ' + untimed + ' all-day' : '') + ' · tap an arc' : (items.length ? 'No times set yet. Add a time to a note to plot it here.' : 'Nothing scheduled.') + (W && W.loc ? '' : ' Set a city in Weather to see weather shifts.'));
+    const untimed = items.length - timed.length, sunTxt = sun.polar ? (sun.polar === 'day' ? ' · sun up all day' : ' · sun down all day') : ' · ☀️ ' + min2lbl(sun.sr) + ' – ' + min2lbl(sun.ss) + (sun.src === 'default' ? ' (typical)' : '');
+    say((timed.length ? timed.length + (timed.length === 1 ? ' timed item' : ' timed items') + (untimed ? ' · ' + untimed + ' all-day' : '') + ' · tap a block' : (items.length ? 'No times set yet. Add a time to a note to plot it here.' : 'Nothing scheduled.')) + sunTxt + (W && W.loc ? '' : ' · set a city in Weather for local sun and weather'));
     return h('div', { class: 'dd', role: 'region', 'aria-label': 'Day and weather dial' }, svg, info,
       full ? null : h('div', { class: 'dd-pm', role: 'group', 'aria-label': 'Half of day' }, ...[['AM', 0], ['PM', 1]].map(([l, p]) => h('button', { type: 'button', 'data-cal': 'ddp', 'data-p': String(p), 'aria-pressed': String(ddHalf.p === p), text: l }))));
   }
@@ -4383,7 +4452,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const byDay = new Map();
     if (state.ctf && state.ctf !== 'all' && !ctById(state.ctf)) state.ctf = 'all';
     const ctf = state.ctf || 'all';
-    list.filter((n) => ctf === 'all' || n.ctag === ctf).forEach((n) => { const k = noteDay(n); (byDay.get(k) || byDay.set(k, []).get(k)).push(n); });
+    list.concat(window.__qcHh ? window.__qcHh() : []).filter((n) => ctf === 'all' || n.ctag === ctf).forEach((n) => { const k = noteDay(n); (byDay.get(k) || byDay.set(k, []).get(k)).push(n); });
     const lead = (new Date(y, m, 1).getDay() + 6) % 7;                       // Monday-first, like the weekly menu
     const days = new Date(y, m + 1, 0).getDate();
     const cells = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => h('div', { class: 'cal-dow', text: d }));
@@ -4400,9 +4469,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     }
     const items = (byDay.get(state.calSel) || []).slice().sort((a, b) => (b.pinned - a.pinned) || (b.createdAt - a.createdAt));
     return h('div', { class: 'calendar' },
+      ddEl(state.calSel, items),
+      h('div', { class: 'sync-row' }, syncPillEl()),
       h('div', { class: 'ct-filter', role: 'group', 'aria-label': 'Filter calendar by tag' },
         h('button', { type: 'button', class: 'ct-chip', 'data-cal': 'ctf', 'data-ctf': 'all', 'aria-pressed': String(ctf === 'all'), text: 'All' }),
-        ...ctags.map((t) => h('button', { type: 'button', class: 'ct-chip ct', style: ctStyle(t), 'data-cal': 'ctf', 'data-ctf': t.id, 'aria-pressed': String(ctf === t.id), text: t.l }))),
+        ...ctags.map((t) => h('button', { type: 'button', class: 'ct-chip ct', style: ctStyle(t), 'data-cal': 'ctf', 'data-ctf': t.id, 'aria-pressed': String(ctf === t.id), text: t.l })),
+        ctags.length ? null : h('button', { type: 'button', class: 'ct-chip ct-add', 'data-cal': 'tags', text: '＋ New tag' })),
       h('div', { class: 'cal-head' },
         h('button', { type: 'button', 'data-cal': 'prev', 'aria-label': 'Previous month', text: '‹ Prev' }),
         h('h3', { text: state.calMonth.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }), 'aria-live': 'polite' }),
@@ -4411,12 +4483,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       h('div', { class: 'cal-grid', role: 'group', 'aria-label': 'Calendar' }, cells),
       h('div', { class: 'agenda' },
         h('h4', {}, h('b', { text: fmtDay(state.calSel) }), h('span', { text: items.length + (items.length === 1 ? ' note' : ' notes') })),
-        ddEl(state.calSel, items),
         h('button', { type: 'button', class: 'rp-btn', 'data-cal': 'replan', text: '✨ Replan / Prioritize My Day' }),
-        ...(items.length ? items.slice().sort((a, b) => (a.dueTime ? hm2min(a.dueTime) : 9999) - (b.dueTime ? hm2min(b.dueTime) : 9999)).map(cardEl) : [h('div', { class: 'kempty', text: 'No notes on this date' })]),
+        ...(items.length ? items.slice().sort((a, b) => (a.dueTime ? hm2min(a.dueTime) : 9999) - (b.dueTime ? hm2min(b.dueTime) : 9999)).map((n) => (n.hh ? hhCardEl(n) : cardEl(n))) : [h('div', { class: 'kempty', text: 'No notes on this date' })]),
         h('button', { type: 'button', class: 'cal-add', 'data-cal': 'add', text: '+ Add note for this date' })));
   }
 
+  function hhCardEl(n) {
+    const ct = ctById(n.ctag), t = n.dueTime ? min2lbl(hm2min(n.dueTime)) : 'All day';
+    return h('article', { class: 'card hh-card', 'data-id': n.id }, h('div', { class: 'hh-top' }, h('span', { class: 'hh-who', text: '👨‍👩‍👧 ' + n.who }), h('span', { class: 'hh-t', text: t })),
+      h('p', { class: 'hh-b', text: ctTitle(n) }), ct ? h('span', { class: 'cal-pill ct', style: ctStyle(ct), text: ct.l }) : null);
+  }
   function calClick(e) {
     const b = e.target.closest('[data-cal]');
     if (!b || !feed.contains(b)) return;
@@ -4427,6 +4503,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     else if (k === 'add') { openSheet(null, state.calSel); return; }
     else if (k === 'tags') { ctOpen(null); return; }
     else if (k === 'replan') { rpOpen(); return; }
+    else if (k === 'syncpill') { syncPillTap(); return; }
     else if (k === 'ddp') ddHalf = { day: state.calSel, p: +b.dataset.p };
     else if (k === 'ctf') state.ctf = b.dataset.ctf === state.ctf ? 'all' : b.dataset.ctf;
     render();
@@ -7534,13 +7611,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     try {
       const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + loc.lat + '&longitude=' + loc.lon +
         '&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,is_day' +
-        '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
+        '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset' +
         '&hourly=temperature_2m,precipitation_probability,precipitation,weather_code' +
         '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto';
       const j = await wxFetch(url);
       if (!j || !j.current || !j.daily || !Array.isArray(j.daily.time) || !j.daily.time.length || typeof j.current.temperature_2m !== 'number') throw new Error('bad data');
       if (token !== wx.token) return;
-      wx.data = { current: j.current, daily: j.daily, hourly: j.hourly && Array.isArray(j.hourly.time) ? j.hourly : undefined }; wx.at = Date.now();
+      wx.data = { current: j.current, daily: j.daily, hourly: j.hourly && Array.isArray(j.hourly.time) ? j.hourly : undefined, tz: typeof j.timezone === 'string' ? j.timezone : undefined, utc: Number.isFinite(j.utc_offset_seconds) ? j.utc_offset_seconds : undefined }; wx.at = Date.now();
       store.set(KEY_WCACHE, JSON.stringify({ key: loc.lat + ',' + loc.lon, at: wx.at, data: wx.data }));
       wxMessage('');
     } catch {
@@ -7732,8 +7809,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         email: String(c.email || '').trim().slice(0, 80), addedAt: +c.addedAt || Date.now(), isHousehold: c.isHousehold === true, linked: c.linked === true }));
     } catch { circle = []; }
   }
-  const profSave = () => { store.set(KEY_PROFILE, JSON.stringify(profile)); pfSyncSoon(); pfPaintSet(); };
-  const circSave = () => { store.set(KEY_CIRCLE, JSON.stringify(circle)); pfSyncSoon(); };
+  const profSave = () => { store.set(KEY_PROFILE, JSON.stringify(profile)); pfSyncSoon(); pfPaintSet(); syncReconfigure(); };
+  const circSave = () => { store.set(KEY_CIRCLE, JSON.stringify(circle)); pfSyncSoon(); syncHhSoon(); };
   function inviteUrl() {
     if (!profile.id) { profile.id = uid(); profSave(); }
     return CIRCLE_BASE + '?circle_add=1&name=' + encodeURIComponent(profile.name) + '&id=' + encodeURIComponent(profile.id);
@@ -7956,7 +8033,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         let tagMsg = '';
         try { const t = await r.f.getDoc(r.f.doc(r.db, 'ctags', r.pid)); if (t && t.exists() && ctMerge(t.data())) { ctSaveAll(true); ctChanged(); tagMsg = ' and calendar tags'; } } catch { /* tags will sync later */ }
         pfSyncSoon(); setTimeout(() => ctSync(true), 1500);
-        cfgRender(); pfPaintSet(); if (!$('#cirOv').hidden) cirRender(); if (!$('#hhOv').hidden) hhRender();
+        cfgRender(); pfPaintSet(); syncReconfigure(); if (!$('#cirOv').hidden) cirRender(); if (!$('#hhOv').hidden) hhRender();
         pfMsg(msg, 'Restored ' + profile.name + ' with ' + (added ? added + ' Circle contact' + (added === 1 ? '' : 's') : 'your Circle') + tagMsg + '.');
         toast('Profile restored: ' + profile.name); $('#pfFRes').replaceChildren();
       } catch { pfMsg(msg, 'Restore failed. Try again.', true); $('#pfDo') && ($('#pfDo').disabled = false); }
@@ -7980,6 +8057,175 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     });
   });
   pfPaintSet();
+
+  /* ---------- Cloud sync: IndexedDB stays the instant local copy, Firestore mirrors notes and dated entries ---------- */
+  const KEY_SQ = 'quickcapture_sync_queue', KEY_SFP = 'quickcapture_sync_fp', KEY_STB = 'quickcapture_sync_tombs', KEY_SON = 'quickcapture_sync_on', KEY_SHH = 'quickcapture_sync_hh', KEY_SOWN = 'quickcapture_sync_owner', KEY_SMIR = 'quickcapture_sync_hhmir';
+  const lsObj = (k) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch { return {}; } };
+  const ss = { q: lsObj(KEY_SQ), fp: lsObj(KEY_SFP), tomb: lsObj(KEY_STB), mir: lsObj(KEY_SMIR), unsub: [], hhUnsub: [], hh: new Map(), status: 'local', busy: false, again: false, attach: 0, blocked: false, blockedAt: 0, last: 0 };
+  let seedIds = new Set();
+  const seedRead = () => { try { seedIds = new Set(JSON.parse(localStorage.getItem('quickcapture_seed_ids') || '[]')); } catch { seedIds = new Set(); } };
+  const sOn = () => { try { return localStorage.getItem(KEY_SON) !== '0'; } catch { return true; } };
+  const sHh = () => { try { return localStorage.getItem(KEY_SHH) === '1'; } catch { return false; } };
+  const sActive = () => sOn() && !!profile.id && !!(profile.email || profile.phone);
+  function syncSave() {
+    const ids = Object.keys(ss.tomb); if (ids.length > 3000) ids.sort((a, b) => ss.tomb[a] - ss.tomb[b]).slice(0, ids.length - 3000).forEach((k) => delete ss.tomb[k]);
+    try { localStorage.setItem(KEY_SQ, JSON.stringify(ss.q)); localStorage.setItem(KEY_SFP, JSON.stringify(ss.fp)); localStorage.setItem(KEY_STB, JSON.stringify(ss.tomb)); localStorage.setItem(KEY_SMIR, JSON.stringify(ss.mir)); } catch { /* storage blocked: sync state is rebuilt from notes */ }
+  }
+  const fnv = (str) => { let x = 0x811c9dc5; for (let i = 0; i < str.length; i++) { x ^= str.charCodeAt(i); x = Math.imul(x, 16777619); } return (x >>> 0).toString(36); };
+  const blobStamp = (v) => (v ? v.length + ':' + v.slice(-24) : '');
+  const noteHash = (n) => fnv(JSON.stringify([n.text, n.tags, n.due, n.dueTime, n.dur, n.ctag, n.pinned, n.archived, n.createdAt, n.editedAt, n.score, n.column, n.trip, n.collapsed, blobStamp(n.image), n.audio ? blobStamp(n.audio.url) + ':' + n.audio.dur : '', blobStamp(n.drawing)]));
+  const SY_BLOB = 500000, SY_TOTAL = 850000;               // keep every document well under Firestore's 1 MB limit
+  function noteDoc(n, withBlobs) {
+    const lines = String(n.text || '').split('\n'), cl = lines.map((l) => CL_RE.exec(l)).filter(Boolean), t0 = n.dueTime ? hm2min(n.dueTime) : 0;
+    const d = { id: n.id, text: n.text, title: (lines.find((l) => l.trim()) || '').replace(/#\w+/g, '').trim().slice(0, 80), hashtags: n.tags || [], date: n.due || '', time: n.dueTime || '', endTime: n.dueTime ? min2hm(Math.min(1439, t0 + (n.dur || 60))) : '', dur: n.dur || 0,
+      customTagId: n.ctag || '', pinned: !!n.pinned, archived: !!n.archived, completed: cl.length > 0 && cl.every((x) => x[1] !== ' '), createdAt: n.createdAt, editedAt: n.editedAt || 0, score: n.score == null ? -1 : n.score, column: n.column || '', trip: n.trip || null, collapsed: n.collapsed || [],
+      updatedAt: new Date(n.updatedAt || Date.now()).toISOString(), deleted: false };
+    if (withBlobs) { let tot = 0, skipped = false; [['image', n.image], ['drawing', n.drawing], ['audio', n.audio]].forEach(([k, v]) => { if (!v) return; const z = typeof v === 'string' ? v.length : v.url.length; if (z <= SY_BLOB && tot + z <= SY_TOTAL) { d[k] = v; tot += z; } else skipped = true; }); if (skipped) d.blobSkipped = true; }
+    return JSON.parse(JSON.stringify(d));
+  }
+  function docToNote(id, d, local) {
+    const o = Object.assign({}, local || {}, { id, text: String(d.text == null ? d.title || '' : d.text).slice(0, 20000), tags: Array.isArray(d.hashtags) ? d.hashtags.map(String).slice(0, 50) : undefined, due: d.date || undefined, dueTime: d.time || undefined,
+      dur: +d.dur > 0 ? +d.dur : (d.time && d.endTime ? hm2min(d.endTime) - hm2min(d.time) : undefined), ctag: d.customTagId || undefined, pinned: !!d.pinned, archived: !!d.archived, createdAt: +d.createdAt || (local && local.createdAt) || Date.now(),
+      editedAt: +d.editedAt || undefined, score: +d.score >= 0 ? +d.score : undefined, column: d.column || undefined, trip: d.trip || undefined, collapsed: Array.isArray(d.collapsed) && d.collapsed.length ? d.collapsed : undefined, updatedAt: Date.parse(d.updatedAt) || 0 });
+    ['image', 'drawing', 'audio'].forEach((k) => { if (d[k]) o[k] = d[k]; });         // a missing blob keeps the local copy
+    return normNote(o);
+  }
+  /* any change made anywhere in the app goes through persist(); diff it against what was last seen */
+  function syncSoon() { clearTimeout(window.__syT); window.__syT = setTimeout(syncScan, 350); }
+  function syncScan() {
+    seedRead(); let dirty = false; const now = Date.now(), ids = new Set();
+    state.notes.forEach((n) => {
+      ids.add(n.id); const hs = noteHash(n); if (ss.fp[n.id] === hs) return;
+      if (seedIds.has(n.id)) { if (ss.fp[n.id] === undefined) { ss.fp[n.id] = hs; dirty = true; return; } seedIds.delete(n.id); try { localStorage.setItem('quickcapture_seed_ids', JSON.stringify([...seedIds])); } catch { /* storage blocked */ } }   // the welcome notes are never uploaded unless you edit them
+      const seen = ss.fp[n.id] !== undefined; n.updatedAt = seen ? now : (n.updatedAt || n.editedAt || n.createdAt || now);
+      ss.fp[n.id] = hs; ss.q[n.id] = { op: 'set', ts: n.updatedAt }; delete ss.tomb[n.id]; dirty = true;
+    });
+    Object.keys(ss.fp).forEach((id) => { if (!ids.has(id)) { delete ss.fp[id]; ss.tomb[id] = now; ss.q[id] = { op: 'del', ts: now }; dirty = true; } });
+    if (!dirty) return; syncSave(); store.set(KEY_NOTES, JSON.stringify(state.notes)); syncPaint(); syncFlush();
+  }
+  const syTO = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error('timeout'), { code: 'timeout' })), ms))]);
+  const isDenied = (e) => !!e && (e.code === 'permission-denied' || /permission|insufficient/i.test(String(e.message || '')));
+  const SY_LBL = { local: '💾 Local only', syncing: '🔄 Syncing…', synced: '☁️ Synced', offline: '📴 Offline (queued)', blocked: '⚠️ Cloud blocked · local only' };
+  function setStatus(st) { ss.status = st; syncPaint(); }
+  function syncPaint() {
+    const nq = Object.keys(ss.q).length, txt = SY_LBL[ss.status] + (ss.status === 'offline' && nq ? ' · ' + nq : '');
+    document.querySelectorAll('.sync-pill').forEach((p) => { p.dataset.s = ss.status; p.textContent = txt; });
+    const dt = $('#syncDetail'); if (!dt) return;
+    dt.textContent = !profile.id || !(profile.email || profile.phone) ? 'Add an email or phone to your profile to sync your notes and calendar across devices.' : !sOn() ? 'Sync is off. Notes stay on this device.'
+      : ss.status === 'blocked' ? 'The cloud database refused access, so everything stays on this device. Check your Firestore rules, then tap Force Sync Now.'
+      : (ss.last ? 'Last synced ' + new Date(ss.last).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }) + '. ' : '') + (nq ? nq + ' change' + (nq === 1 ? '' : 's') + ' waiting to upload.' : 'Everything is up to date.');
+    $('#syOn').setAttribute('aria-checked', String(sOn())); $('#syOnSt').textContent = sOn() ? 'ON' : 'OFF';
+    $('#syHh').setAttribute('aria-checked', String(sHh())); $('#syHhSt').textContent = sHh() ? 'ON · household members you have linked can see your dated entries' : 'OFF · anything tagged #private is never shared';
+  }
+  const syncPillEl = () => { const b = h('button', { type: 'button', class: 'sync-pill', 'data-cal': 'syncpill', 'data-s': ss.status, 'aria-label': 'Sync status. Tap to sync now.' }); b.textContent = SY_LBL[ss.status] + (ss.status === 'offline' && Object.keys(ss.q).length ? ' · ' + Object.keys(ss.q).length : ''); return b; };
+  function syncPillTap() { if (!profile.id || !(profile.email || profile.phone)) { toast('Add an email or phone to your profile to sync'); pfOpen('make'); return; } syncForce(); }
+  async function syncFlush() {
+    if (ss.busy) { ss.again = true; return; }
+    if (!sActive()) { setStatus('local'); return; }
+    const ids = Object.keys(ss.q);
+    if (!navigator.onLine) { setStatus('offline'); return; }
+    if (ss.blocked && Date.now() - ss.blockedAt < 300000) { setStatus('blocked'); return; }
+    if (!ids.length) { if (ss.unsub.length && ss.status !== 'blocked') { ss.last = ss.last || Date.now(); setStatus('synced'); } return; }
+    ss.busy = true; setStatus('syncing'); let fail = null;
+    try {
+      const { db, f } = await syTO(fbLoad(), 15000), pid = profile.id, share = sHh(); let i = 0;
+      const one = async (id) => {
+        const q = ss.q[id]; if (!q) return; const n = state.notes.find((x) => x.id === id);
+        if (q.op === 'set' && n) await syTO(f.setDoc(f.doc(db, 'user_notes', pid, 'items', id), noteDoc(n, true)), 20000);
+        else await syTO(f.setDoc(f.doc(db, 'user_notes', pid, 'items', id), { id, deleted: true, updatedAt: new Date(ss.tomb[id] || q.ts || Date.now()).toISOString() }), 20000);
+        if (share && n && q.op === 'set' && n.due && !n.archived && !(n.tags || []).includes('private')) { await syTO(f.setDoc(f.doc(db, 'household_calendar', pid, 'items', id), noteDoc(n, false)), 20000); ss.mir[id] = 1; }
+        else if (ss.mir[id]) { await syTO(f.setDoc(f.doc(db, 'household_calendar', pid, 'items', id), { id, deleted: true, updatedAt: new Date().toISOString() }), 20000); delete ss.mir[id]; }
+        if (ss.q[id] === q) delete ss.q[id];
+      };
+      await Promise.all(Array.from({ length: Math.min(6, ids.length) }, async () => { while (!fail && i < ids.length) { const id = ids[i++]; try { await one(id); } catch (e) { fail = e; } } }));
+    } catch (e) { fail = e; }
+    ss.busy = false; syncSave();
+    if (fail) { if (isDenied(fail)) { ss.blocked = true; ss.blockedAt = Date.now(); setStatus('blocked'); } else setStatus('offline'); }
+    else { ss.blocked = false; ss.last = Date.now(); setStatus('synced'); }
+    if (ss.again) { ss.again = false; setTimeout(syncFlush, 80); } else if (!fail && Object.keys(ss.q).length) setTimeout(syncFlush, 80);
+  }
+  /* remote -> local: newest updatedAt wins, deletes arrive as tombstones */
+  function syncApply(docs) {
+    let changed = false; const byId = new Map(state.notes.map((n) => [n.id, n]));
+    docs.forEach((dc) => {
+      const id = dc.id, d = dc.data(); if (!/^[\w-]{1,64}$/.test(id) || !d || typeof d !== 'object') return;
+      const ts = Date.parse(d.updatedAt) || 0, local = byId.get(id), lt = ss.tomb[id] || 0;
+      if (d.deleted) {
+        if (local && ts >= (local.updatedAt || 0)) { state.notes = state.notes.filter((n) => n.id !== id); byId.delete(id); delete ss.fp[id]; delete ss.q[id]; ss.tomb[id] = ts; changed = true; }
+        else if (!local) ss.tomb[id] = Math.max(lt, ts);
+        return;
+      }
+      if (lt && lt >= ts) { ss.q[id] = { op: 'del', ts: lt }; return; }               // we deleted it after that version
+      if (!local || ts > (local.updatedAt || 0)) {
+        const n = docToNote(id, d, local); n.updatedAt = ts || Date.now(); ss.fp[id] = noteHash(n); delete ss.q[id]; delete ss.tomb[id];
+        if (local) state.notes[state.notes.indexOf(local)] = n; else state.notes.push(n);
+        byId.set(id, n); changed = true;
+      } else if (ts < (local.updatedAt || 0)) ss.q[id] = ss.q[id] || { op: 'set', ts: local.updatedAt };     // ours is newer: push it
+    });
+    if (!changed) { syncSave(); return; }
+    state.notes.sort((a, b) => b.createdAt - a.createdAt); syncSave(); store.set(KEY_NOTES, JSON.stringify(state.notes)); render(); if (typeof updateGauge === 'function') updateGauge();
+  }
+  function syncErr(e) { if (isDenied(e)) { ss.blocked = true; ss.blockedAt = Date.now(); setStatus('blocked'); } else setStatus(navigator.onLine ? 'syncing' : 'offline'); }
+  function syncDetach() { ss.unsub.forEach((u) => { try { u(); } catch { /* already closed */ } }); ss.unsub = []; }
+  async function syncAttach() {
+    const my = ++ss.attach; syncDetach();
+    if (!sActive()) { setStatus('local'); syncHhAttach(); return; }
+    setStatus(navigator.onLine ? 'syncing' : 'offline');
+    let fx; try { fx = await syTO(fbLoad(), 15000); } catch { setStatus('offline'); return; }
+    if (my !== ss.attach) return; const { db, f } = fx;
+    try {
+      ss.unsub.push(f.onSnapshot(f.collection(db, 'user_notes', profile.id, 'items'), (snap) => {
+        if (my !== ss.attach) return; ss.blocked = false;
+        syncApply(typeof snap.docChanges === 'function' ? snap.docChanges().filter((c) => c.type !== 'removed').map((c) => c.doc) : snap.docs);
+        syncFlush();
+      }, syncErr));
+    } catch (e) { syncErr(e); }
+    syncHhAttach(); return syncFlush();
+  }
+  /* household: each member publishes dated entries under household_calendar/{their profile id}/items; we subscribe to the linked household members' feeds */
+  const hhList = () => [...ss.hh.values()].flatMap((m) => [...m.values()]);
+  window.__qcHh = hhList;
+  let hhRaf = 0; const hhRefresh = () => { cancelAnimationFrame(hhRaf); hhRaf = requestAnimationFrame(() => { if (state.view === 'notes' && state.layout === 'calendar') render(); }); };
+  function syncHhSoon() { clearTimeout(window.__syH); window.__syH = setTimeout(syncHhAttach, 1500); }
+  async function syncHhAttach() {
+    ss.hhUnsub.forEach((u) => { try { u(); } catch { /* closed */ } }); ss.hhUnsub = []; const had = ss.hh.size; ss.hh = new Map();
+    const members = sActive() ? circle.filter((c) => c.isHousehold && c.linked && CID_RE.test(c.id) && c.id !== profile.id).slice(0, 10) : [];
+    if (!members.length) { if (had) hhRefresh(); return; }
+    let fx; try { fx = await syTO(fbLoad(), 15000); } catch { return; } const { db, f } = fx;
+    members.forEach((m) => { try { ss.hhUnsub.push(f.onSnapshot(f.collection(db, 'household_calendar', m.id, 'items'), (snap) => {
+      const map = new Map(); (snap.docs || []).forEach((dc) => { const x = dc.data(); if (!x || x.deleted || !/^\d{4}-\d{2}-\d{2}$/.test(x.date || '')) return;
+        map.set(dc.id, { id: 'hh_' + m.id + '_' + dc.id, hh: true, who: m.name, text: String(x.text || x.title || '').slice(0, 2000), due: x.date, dueTime: /^([01]\d|2[0-3]):[0-5]\d$/.test(x.time || '') ? x.time : undefined, dur: +x.dur >= 5 && +x.dur <= 600 ? Math.round(+x.dur) : undefined, ctag: typeof x.customTagId === 'string' ? x.customTagId.slice(0, 64) : undefined, tags: [], pinned: false, archived: false, createdAt: +x.createdAt || Date.now() }); });
+      ss.hh.set(m.id, map); hhRefresh();
+    }, () => { /* that member's feed is unavailable */ })); } catch { /* ignore */ } });
+  }
+  function syncReconfigure() {
+    clearTimeout(window.__syR); window.__syR = setTimeout(() => {
+      seedRead();
+      if (sActive() && localStorage.getItem(KEY_SOWN) !== profile.id) {               // new or restored account: upload what this device has
+        try { localStorage.setItem(KEY_SOWN, profile.id); } catch { /* storage blocked */ } ss.tomb = {}; state.notes.forEach((n) => { if (!seedIds.has(n.id)) ss.q[n.id] = { op: 'set', ts: n.updatedAt || n.editedAt || n.createdAt }; }); syncSave();
+      }
+      syncAttach();
+    }, 300);
+  }
+  async function syncForce() {
+    seedRead();
+    ss.blocked = false; ss.blockedAt = 0; state.notes.forEach((n) => { if (seedIds.has(n.id)) return; ss.q[n.id] = { op: 'set', ts: n.updatedAt || n.editedAt || n.createdAt }; }); syncSave(); setStatus(sActive() ? 'syncing' : 'local');
+    await syncAttach(); toast(!sActive() ? 'Add an email or phone to your profile to sync' : ss.status === 'synced' ? 'Everything is synced' : ss.status === 'blocked' ? 'Cloud sync is blocked by the database rules. Notes stay on this device.' : ss.status === 'offline' ? 'Offline. Changes are queued.' : 'Syncing…');
+  }
+  $('#syncNow').addEventListener('click', syncForce);
+  $('#syOn').addEventListener('click', () => { try { localStorage.setItem(KEY_SON, sOn() ? '0' : '1'); } catch { /* storage blocked */ } syncPaint(); syncReconfigure(); });
+  $('#syHh').addEventListener('click', () => {
+    seedRead(); const on = !sHh(); try { localStorage.setItem(KEY_SHH, on ? '1' : '0'); } catch { /* storage blocked */ }
+    if (on) state.notes.forEach((n) => { if (n.due && !seedIds.has(n.id)) ss.q[n.id] = { op: 'set', ts: n.updatedAt || n.editedAt || n.createdAt }; }); else Object.keys(ss.mir).forEach((id) => { ss.q[id] = { op: 'set', ts: Date.now() }; });
+    syncSave(); syncPaint(); syncFlush();
+  });
+  window.addEventListener('online', () => { ss.blocked = false; syncAttach(); });
+  window.addEventListener('offline', () => { if (sActive()) setStatus('offline'); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && sActive()) syncFlush(); });
+  window.__qcSync = () => ({ status: ss.status, queue: Object.keys(ss.q).length, hh: hhList().length, tombs: Object.keys(ss.tomb).length });
+  (function syncInit() {
+    syncPaint(); setTimeout(() => { syncScan(); syncReconfigure(); }, 1200);
+  })();
 
   // sharing a note or list with someone in the circle
   function noteShareText(n) {
